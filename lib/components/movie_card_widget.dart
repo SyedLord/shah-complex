@@ -58,7 +58,10 @@ class _MovieCardWidgetState extends State<MovieCardWidget> {
               CachedNetworkImage(
                 fadeInDuration: Duration(milliseconds: 0),
                 fadeOutDuration: Duration(milliseconds: 0),
-                imageUrl: widget.movieDoc!.posterImage,
+                imageUrl: valueOrDefault<String>(
+                  widget.movieDoc?.posterImage,
+                  'https://image.tmdb.org/t/p/w1280/bRBeSHfGHwkEpImlhxPmOcUsaeg.jpg',
+                ),
                 fit: BoxFit.cover,
               ),
             ],
