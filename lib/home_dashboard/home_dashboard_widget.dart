@@ -75,6 +75,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                           'is_trending',
                           isEqualTo: true,
                         ),
+                        limit: 10,
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
