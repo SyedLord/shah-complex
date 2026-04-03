@@ -143,7 +143,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                             updateCallback: () => safeSetState(() {}),
                             child: MovieCardWidget(
                               img:
-                                  'https://dimg.dreamflow.cloud/v1/image/Cyberpunk%20Edgerunners',
+                                  'image.tmdb.org/t/p/w500/xA7N41glw17MBQtcWSm2eBlBRuG.jpg',
                             ),
                           ),
                         ],
