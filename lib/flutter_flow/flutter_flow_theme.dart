@@ -58,6 +58,7 @@ abstract class FlutterFlowTheme {
 
   late Color hint;
   late Color divider;
+  late Color outline;
 
   FFDesignTokens get designToken => FFDesignTokens(this);
 
@@ -166,6 +167,7 @@ class LightModeTheme extends FlutterFlowTheme {
 
   late Color hint = const Color(0xFF808080);
   late Color divider = const Color(0xFF2F2F2F);
+  late Color outline = const Color(0xFF2F2F2F);
 }
 
 abstract class Typography {
@@ -242,19 +244,21 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Poppins';
+  String get headlineLargeFamily => 'Inter';
   bool get headlineLargeIsCustom => false;
-  TextStyle get headlineLarge => GoogleFonts.poppins(
+  TextStyle get headlineLarge => GoogleFonts.inter(
         color: theme.primaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w800,
         fontSize: 32.0,
+        height: 1.1,
       );
-  String get headlineMediumFamily => 'Poppins';
+  String get headlineMediumFamily => 'Inter';
   bool get headlineMediumIsCustom => false;
-  TextStyle get headlineMedium => GoogleFonts.poppins(
+  TextStyle get headlineMedium => GoogleFonts.inter(
         color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 28.0,
+        fontWeight: FontWeight.bold,
+        fontSize: 26.0,
+        height: 1.2,
       );
   String get headlineSmallFamily => 'Poppins';
   bool get headlineSmallIsCustom => false;
@@ -263,19 +267,21 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'Poppins';
+  String get titleLargeFamily => 'Inter';
   bool get titleLargeIsCustom => false;
-  TextStyle get titleLarge => GoogleFonts.poppins(
+  TextStyle get titleLarge => GoogleFonts.inter(
         color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+        fontSize: 22.0,
+        height: 1.2,
       );
-  String get titleMediumFamily => 'Poppins';
+  String get titleMediumFamily => 'Inter';
   bool get titleMediumIsCustom => false;
-  TextStyle get titleMedium => GoogleFonts.poppins(
+  TextStyle get titleMedium => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 18.0,
+        fontSize: 17.0,
+        height: 1.3,
       );
   String get titleSmallFamily => 'Poppins';
   bool get titleSmallIsCustom => false;
@@ -284,47 +290,53 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Poppins';
+  String get labelLargeFamily => 'Inter';
   bool get labelLargeIsCustom => false;
-  TextStyle get labelLarge => GoogleFonts.poppins(
-        color: theme.secondaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 16.0,
+  TextStyle get labelLarge => GoogleFonts.inter(
+        color: theme.primaryText,
+        fontWeight: FontWeight.w600,
+        fontSize: 14.0,
+        height: 1.3,
       );
-  String get labelMediumFamily => 'Poppins';
+  String get labelMediumFamily => 'Inter';
   bool get labelMediumIsCustom => false;
-  TextStyle get labelMedium => GoogleFonts.poppins(
-        color: theme.secondaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 14.0,
-      );
-  String get labelSmallFamily => 'Poppins';
-  bool get labelSmallIsCustom => false;
-  TextStyle get labelSmall => GoogleFonts.poppins(
-        color: theme.secondaryText,
-        fontWeight: FontWeight.normal,
+  TextStyle get labelMedium => GoogleFonts.inter(
+        color: theme.primaryText,
+        fontWeight: FontWeight.w600,
         fontSize: 12.0,
+        height: 1.3,
       );
-  String get bodyLargeFamily => 'Poppins';
+  String get labelSmallFamily => 'Inter';
+  bool get labelSmallIsCustom => false;
+  TextStyle get labelSmall => GoogleFonts.inter(
+        color: theme.primaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 10.0,
+        height: 1.2,
+      );
+  String get bodyLargeFamily => 'Inter';
   bool get bodyLargeIsCustom => false;
-  TextStyle get bodyLarge => GoogleFonts.poppins(
+  TextStyle get bodyLarge => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
+        height: 1.5,
       );
-  String get bodyMediumFamily => 'Poppins';
+  String get bodyMediumFamily => 'Inter';
   bool get bodyMediumIsCustom => false;
-  TextStyle get bodyMedium => GoogleFonts.poppins(
+  TextStyle get bodyMedium => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
+        height: 1.4,
       );
-  String get bodySmallFamily => 'Poppins';
+  String get bodySmallFamily => 'Inter';
   bool get bodySmallIsCustom => false;
-  TextStyle get bodySmall => GoogleFonts.poppins(
+  TextStyle get bodySmall => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
+        height: 1.4,
       );
 }
 
@@ -355,6 +367,7 @@ class DarkModeTheme extends FlutterFlowTheme {
 
   late Color hint = const Color(0xFF808080);
   late Color divider = const Color(0xFF2F2F2F);
+  late Color outline = const Color(0xFF2F2F2F);
 }
 
 class FFDesignTokens {
@@ -376,9 +389,13 @@ class FFSpacing {
 
 class FFRadius {
   const FFRadius();
-  double get sm => 8.0;
-  double get md => 16.0;
-  double get lg => 24.0;
+  double get none => 0.0;
+  double get xs => 2.0;
+  double get sm => 4.0;
+  double get md => 8.0;
+  double get lg => 12.0;
+  double get xl => 24.0;
+  double get xxl => 32.0;
   double get full => 9999.0;
 }
 
@@ -386,24 +403,24 @@ class FFShadows {
   const FFShadows(this.theme);
   final FlutterFlowTheme theme;
   BoxShadow get sm => const BoxShadow(
-      blurRadius: 3.0,
-      color: const Color(0x1A000000),
-      offset: const Offset(0.0, 1.0),
+      blurRadius: 4.0,
+      color: const Color(0x66000000),
+      offset: const Offset(0.0, 2.0),
       spreadRadius: 0.0);
   BoxShadow get md => const BoxShadow(
-      blurRadius: 6.0,
-      color: const Color(0x1A000000),
-      offset: const Offset(0.0, 3.0),
+      blurRadius: 12.0,
+      color: const Color(0xAA000000),
+      offset: const Offset(0.0, 4.0),
       spreadRadius: 0.0);
   BoxShadow get lg => const BoxShadow(
-      blurRadius: 15.0,
-      color: const Color(0x1A000000),
+      blurRadius: 24.0,
+      color: const Color(0xFF000000),
       offset: const Offset(0.0, 8.0),
       spreadRadius: 0.0);
   BoxShadow get xl => const BoxShadow(
-      blurRadius: 25.0,
-      color: const Color(0x1A000000),
-      offset: const Offset(0.0, 16.0),
+      blurRadius: 32.0,
+      color: const Color(0xFF000000),
+      offset: const Offset(0.0, 12.0),
       spreadRadius: 0.0);
 }
 

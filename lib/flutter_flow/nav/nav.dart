@@ -59,6 +59,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: HomeDashboardCopyWidget.routeName,
           path: HomeDashboardCopyWidget.routePath,
           builder: (context, params) => HomeDashboardCopyWidget(),
+        ),
+        FFRoute(
+          name: NewScreen1Widget.routeName,
+          path: NewScreen1Widget.routePath,
+          builder: (context, params) => NewScreen1Widget(
+            categoryName: params.getParam(
+              'categoryName',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

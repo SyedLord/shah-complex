@@ -5,3 +5,4 @@ export '/profile_selection/profile_selection_widget.dart'
 export '/home_dashboard/home_dashboard_widget.dart' show HomeDashboardWidget;
 export '/home_dashboard_copy/home_dashboard_copy_widget.dart'
     show HomeDashboardCopyWidget;
+export '/new_screen1/new_screen1_widget.dart' show NewScreen1Widget;

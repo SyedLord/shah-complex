@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'section_header_model.dart';
@@ -69,22 +70,39 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
                     lineHeight: 1.3,
                   ),
             ),
-            Text(
-              'See All',
-              style: FlutterFlowTheme.of(context).labelMedium.override(
-                    font: GoogleFonts.inter(
+            InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.pushNamed(
+                  NewScreen1Widget.routeName,
+                  queryParameters: {
+                    'categoryName': serializeParam(
+                      widget.title,
+                      ParamType.String,
+                    ),
+                  }.withoutNulls,
+                );
+              },
+              child: Text(
+                'See All',
+                style: FlutterFlowTheme.of(context).labelMedium.override(
+                      font: GoogleFonts.inter(
+                        fontWeight: FontWeight.w600,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                      ),
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      fontSize: 12.0,
+                      letterSpacing: 0.0,
                       fontWeight: FontWeight.w600,
                       fontStyle:
                           FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                      lineHeight: 1.3,
                     ),
-                    color: FlutterFlowTheme.of(context).secondaryText,
-                    fontSize: 12.0,
-                    letterSpacing: 0.0,
-                    fontWeight: FontWeight.w600,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).labelMedium.fontStyle,
-                    lineHeight: 1.3,
-                  ),
+              ),
             ),
           ],
         ),
