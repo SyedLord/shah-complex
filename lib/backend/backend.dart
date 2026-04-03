@@ -6,6 +6,7 @@ import 'schema/movies_record.dart';
 import 'schema/series_record.dart';
 import 'schema/episodes_record.dart';
 import 'schema/user_progress_record.dart';
+import 'schema/categories_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -18,6 +19,7 @@ export 'schema/movies_record.dart';
 export 'schema/series_record.dart';
 export 'schema/episodes_record.dart';
 export 'schema/user_progress_record.dart';
+export 'schema/categories_record.dart';
 
 /// Functions to query MoviesRecords (as a Stream and as a Future).
 Future<int> queryMoviesRecordCount({
@@ -165,6 +167,43 @@ Future<List<UserProgressRecord>> queryUserProgressRecordOnce({
     queryCollectionOnce(
       UserProgressRecord.collection,
       UserProgressRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query CategoriesRecords (as a Stream and as a Future).
+Future<int> queryCategoriesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CategoriesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<CategoriesRecord>> queryCategoriesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CategoriesRecord.collection,
+      CategoriesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CategoriesRecord>> queryCategoriesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CategoriesRecord.collection,
+      CategoriesRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

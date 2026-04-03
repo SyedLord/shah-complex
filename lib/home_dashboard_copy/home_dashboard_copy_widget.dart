@@ -8,28 +8,29 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'home_dashboard_model.dart';
-export 'home_dashboard_model.dart';
+import 'home_dashboard_copy_model.dart';
+export 'home_dashboard_copy_model.dart';
 
-class HomeDashboardWidget extends StatefulWidget {
-  const HomeDashboardWidget({super.key});
+class HomeDashboardCopyWidget extends StatefulWidget {
+  const HomeDashboardCopyWidget({super.key});
 
-  static String routeName = 'HomeDashboard';
-  static String routePath = '/homeDashboard';
+  static String routeName = 'HomeDashboardCopy';
+  static String routePath = '/homeDashboardCopy';
 
   @override
-  State<HomeDashboardWidget> createState() => _HomeDashboardWidgetState();
+  State<HomeDashboardCopyWidget> createState() =>
+      _HomeDashboardCopyWidgetState();
 }
 
-class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
-  late HomeDashboardModel _model;
+class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
+  late HomeDashboardCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomeDashboardModel());
+    _model = createModel(context, () => HomeDashboardCopyModel());
   }
 
   @override
@@ -108,8 +109,8 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                   trendingRowMoviesRecordList[trendingRowIndex];
                               return MovieCardWidget(
                                 key: Key(
-                                    'Key2ky_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
-                                img: '',
+                                    'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
+                                img: trendingRowMoviesRecord.posterImage,
                                 movieDoc: trendingRowMoviesRecord,
                               );
                             }),
@@ -150,62 +151,42 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                     ),
                   ),
                 ),
-                wrapWithModel(
-                  model: _model.sectionHeaderModel3,
-                  updateCallback: () => safeSetState(() {}),
-                  child: SectionHeaderWidget(
-                    title: 'Movies',
-                  ),
-                ),
-                Container(
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 16.0),
-                    child: StreamBuilder<List<MoviesRecord>>(
-                      stream: queryMoviesRecord(
-                        limit: 10,
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
-                                ),
-                              ),
+                StreamBuilder<List<CategoriesRecord>>(
+                  stream: queryCategoriesRecord(),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
                             ),
-                          );
-                        }
-                        List<MoviesRecord> moviesRowMoviesRecordList =
-                            snapshot.data!;
-
-                        return SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children:
-                                List.generate(moviesRowMoviesRecordList.length,
-                                    (moviesRowIndex) {
-                              final moviesRowMoviesRecord =
-                                  moviesRowMoviesRecordList[moviesRowIndex];
-                              return MovieCardWidget(
-                                key: Key(
-                                    'Keypiu_${moviesRowIndex}_of_${moviesRowMoviesRecordList.length}'),
-                                img:
-                                    'https://dimg.dreamflow.cloud/v1/image/Jujutsu%20Kaisen%20poster',
-                              );
-                            }),
                           ),
+                        ),
+                      );
+                    }
+                    List<CategoriesRecord> listViewCategoriesRecordList =
+                        snapshot.data!;
+
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: listViewCategoriesRecordList.length,
+                      itemBuilder: (context, listViewIndex) {
+                        final listViewCategoriesRecord =
+                            listViewCategoriesRecordList[listViewIndex];
+                        return SectionHeaderWidget(
+                          key: Key(
+                              'Keyyvq_${listViewIndex}_of_${listViewCategoriesRecordList.length}'),
+                          title: listViewCategoriesRecord.name,
                         );
                       },
-                    ),
-                  ),
+                    );
+                  },
                 ),
                 Container(
                   height: 100.0,

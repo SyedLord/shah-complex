@@ -2,10 +2,10 @@ import '/components/hero_poster_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'home_dashboard_widget.dart' show HomeDashboardWidget;
+import 'home_dashboard_copy_widget.dart' show HomeDashboardCopyWidget;
 import 'package:flutter/material.dart';
 
-class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
+class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Model for HeroPoster component.
@@ -16,8 +16,6 @@ class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
   late SectionHeaderModel sectionHeaderModel2;
   // Model for movie_card component.
   late MovieCardModel movieCardModel2;
-  // Model for section_header component.
-  late SectionHeaderModel sectionHeaderModel3;
 
   @override
   void initState(BuildContext context) {
@@ -25,7 +23,6 @@ class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
     sectionHeaderModel1 = createModel(context, () => SectionHeaderModel());
     sectionHeaderModel2 = createModel(context, () => SectionHeaderModel());
     movieCardModel2 = createModel(context, () => MovieCardModel());
-    sectionHeaderModel3 = createModel(context, () => SectionHeaderModel());
   }
 
   @override
@@ -34,6 +31,5 @@ class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
     sectionHeaderModel1.dispose();
     sectionHeaderModel2.dispose();
     movieCardModel2.dispose();
-    sectionHeaderModel3.dispose();
   }
 }

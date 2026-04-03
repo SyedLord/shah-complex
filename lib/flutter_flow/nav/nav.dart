@@ -54,6 +54,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: HomeDashboardWidget.routeName,
           path: HomeDashboardWidget.routePath,
           builder: (context, params) => HomeDashboardWidget(),
+        ),
+        FFRoute(
+          name: HomeDashboardCopyWidget.routeName,
+          path: HomeDashboardCopyWidget.routePath,
+          builder: (context, params) => HomeDashboardCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -31,16 +31,6 @@ class MoviesRecord extends FirestoreRecord {
   String get description => _description ?? '';
   bool hasDescription() => _description != null;
 
-  // "poster_image" field.
-  String? _posterImage;
-  String get posterImage => _posterImage ?? '';
-  bool hasPosterImage() => _posterImage != null;
-
-  // "backdrop_image" field.
-  String? _backdropImage;
-  String get backdropImage => _backdropImage ?? '';
-  bool hasBackdropImage() => _backdropImage != null;
-
   // "genres" field.
   List<String>? _genres;
   List<String> get genres => _genres ?? const [];
@@ -66,17 +56,33 @@ class MoviesRecord extends FirestoreRecord {
   String get videoUrl => _videoUrl ?? '';
   bool hasVideoUrl() => _videoUrl != null;
 
+  // "category" field.
+  String? _category;
+  String get category => _category ?? '';
+  bool hasCategory() => _category != null;
+
+  // "poster_image" field.
+  String? _posterImage;
+  String get posterImage => _posterImage ?? '';
+  bool hasPosterImage() => _posterImage != null;
+
+  // "backdrop_image" field.
+  String? _backdropImage;
+  String get backdropImage => _backdropImage ?? '';
+  bool hasBackdropImage() => _backdropImage != null;
+
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _tmdbId = castToType<int>(snapshotData['tmdb_id']);
     _description = snapshotData['description'] as String?;
-    _posterImage = snapshotData['poster_image'] as String?;
-    _backdropImage = snapshotData['backdrop_image'] as String?;
     _genres = getDataList(snapshotData['genres']);
     _releaseYear = castToType<int>(snapshotData['release_year']);
     _isTrending = snapshotData['is_trending'] as bool?;
     _driveType = snapshotData['drive_type'] as String?;
     _videoUrl = snapshotData['video_url'] as String?;
+    _category = snapshotData['category'] as String?;
+    _posterImage = snapshotData['poster_image'] as String?;
+    _backdropImage = snapshotData['backdrop_image'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -116,24 +122,26 @@ Map<String, dynamic> createMoviesRecordData({
   String? title,
   int? tmdbId,
   String? description,
-  String? posterImage,
-  String? backdropImage,
   int? releaseYear,
   bool? isTrending,
   String? driveType,
   String? videoUrl,
+  String? category,
+  String? posterImage,
+  String? backdropImage,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'title': title,
       'tmdb_id': tmdbId,
       'description': description,
-      'poster_image': posterImage,
-      'backdrop_image': backdropImage,
       'release_year': releaseYear,
       'is_trending': isTrending,
       'drive_type': driveType,
       'video_url': videoUrl,
+      'category': category,
+      'poster_image': posterImage,
+      'backdrop_image': backdropImage,
     }.withoutNulls,
   );
 
@@ -149,13 +157,14 @@ class MoviesRecordDocumentEquality implements Equality<MoviesRecord> {
     return e1?.title == e2?.title &&
         e1?.tmdbId == e2?.tmdbId &&
         e1?.description == e2?.description &&
-        e1?.posterImage == e2?.posterImage &&
-        e1?.backdropImage == e2?.backdropImage &&
         listEquality.equals(e1?.genres, e2?.genres) &&
         e1?.releaseYear == e2?.releaseYear &&
         e1?.isTrending == e2?.isTrending &&
         e1?.driveType == e2?.driveType &&
-        e1?.videoUrl == e2?.videoUrl;
+        e1?.videoUrl == e2?.videoUrl &&
+        e1?.category == e2?.category &&
+        e1?.posterImage == e2?.posterImage &&
+        e1?.backdropImage == e2?.backdropImage;
   }
 
   @override
@@ -163,13 +172,14 @@ class MoviesRecordDocumentEquality implements Equality<MoviesRecord> {
         e?.title,
         e?.tmdbId,
         e?.description,
-        e?.posterImage,
-        e?.backdropImage,
         e?.genres,
         e?.releaseYear,
         e?.isTrending,
         e?.driveType,
-        e?.videoUrl
+        e?.videoUrl,
+        e?.category,
+        e?.posterImage,
+        e?.backdropImage
       ]);
 
   @override
