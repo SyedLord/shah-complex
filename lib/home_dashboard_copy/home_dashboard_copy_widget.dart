@@ -179,10 +179,68 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                       itemBuilder: (context, listViewIndex) {
                         final listViewCategoriesRecord =
                             listViewCategoriesRecordList[listViewIndex];
-                        return SectionHeaderWidget(
-                          key: Key(
-                              'Keyyvq_${listViewIndex}_of_${listViewCategoriesRecordList.length}'),
-                          title: listViewCategoriesRecord.name,
+                        return Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            SectionHeaderWidget(
+                              key: Key(
+                                  'Keyyvq_${listViewIndex}_of_${listViewCategoriesRecordList.length}'),
+                              title: listViewCategoriesRecord.name,
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 200.0,
+                              decoration: BoxDecoration(),
+                              child: StreamBuilder<List<MoviesRecord>>(
+                                stream: queryMoviesRecord(
+                                  queryBuilder: (moviesRecord) =>
+                                      moviesRecord.where(
+                                    'category',
+                                    isEqualTo: listViewCategoriesRecord.name,
+                                  ),
+                                  limit: 10,
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<MoviesRecord> listViewMoviesRecordList =
+                                      snapshot.data!;
+
+                                  return ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: listViewMoviesRecordList.length,
+                                    itemBuilder: (context, listViewIndex) {
+                                      final listViewMoviesRecord =
+                                          listViewMoviesRecordList[
+                                              listViewIndex];
+                                      return MovieCardWidget(
+                                        key: Key(
+                                            'Keyfes_${listViewIndex}_of_${listViewMoviesRecordList.length}'),
+                                        img: listViewMoviesRecord.posterImage,
+                                        movieDoc: listViewMoviesRecord,
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
                         );
                       },
                     );
