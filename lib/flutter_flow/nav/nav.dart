@@ -33,12 +33,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => HomeDashboardWidget(),
+      errorBuilder: (context, state) => HomeDashboardCopyWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => HomeDashboardWidget(),
+          builder: (context, _) => HomeDashboardCopyWidget(),
         ),
         FFRoute(
           name: LoginWidget.routeName,
