@@ -191,53 +191,59 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                               width: double.infinity,
                               height: 200.0,
                               decoration: BoxDecoration(),
-                              child: StreamBuilder<List<MoviesRecord>>(
-                                stream: queryMoviesRecord(
-                                  queryBuilder: (moviesRecord) =>
-                                      moviesRecord.where(
-                                    'category',
-                                    isEqualTo: listViewCategoriesRecord.name,
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                child: StreamBuilder<List<MoviesRecord>>(
+                                  stream: queryMoviesRecord(
+                                    queryBuilder: (moviesRecord) =>
+                                        moviesRecord.where(
+                                      'category',
+                                      isEqualTo: listViewCategoriesRecord.name,
+                                    ),
+                                    limit: 10,
                                   ),
-                                  limit: 10,
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  }
-                                  List<MoviesRecord> listViewMoviesRecordList =
-                                      snapshot.data!;
-
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: listViewMoviesRecordList.length,
-                                    itemBuilder: (context, listViewIndex) {
-                                      final listViewMoviesRecord =
-                                          listViewMoviesRecordList[
-                                              listViewIndex];
-                                      return MovieCardWidget(
-                                        key: Key(
-                                            'Keyfes_${listViewIndex}_of_${listViewMoviesRecordList.length}'),
-                                        img: listViewMoviesRecord.posterImage,
-                                        movieDoc: listViewMoviesRecord,
                                       );
-                                    },
-                                  );
-                                },
+                                    }
+                                    List<MoviesRecord>
+                                        listViewMoviesRecordList =
+                                        snapshot.data!;
+
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount:
+                                          listViewMoviesRecordList.length,
+                                      itemBuilder: (context, listViewIndex) {
+                                        final listViewMoviesRecord =
+                                            listViewMoviesRecordList[
+                                                listViewIndex];
+                                        return MovieCardWidget(
+                                          key: Key(
+                                              'Keyfes_${listViewIndex}_of_${listViewMoviesRecordList.length}'),
+                                          img: listViewMoviesRecord.posterImage,
+                                          movieDoc: listViewMoviesRecord,
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ],
