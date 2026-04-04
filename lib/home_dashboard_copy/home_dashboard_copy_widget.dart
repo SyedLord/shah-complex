@@ -227,7 +227,12 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                   ),
                 ),
                 StreamBuilder<List<CategoriesRecord>>(
-                  stream: queryCategoriesRecord(),
+                  stream: queryCategoriesRecord(
+                    queryBuilder: (categoriesRecord) => categoriesRecord.where(
+                      'type',
+                      isEqualTo: 'movie',
+                    ),
+                  ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
@@ -331,7 +336,12 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                   },
                 ),
                 StreamBuilder<List<CategoriesRecord>>(
-                  stream: queryCategoriesRecord(),
+                  stream: queryCategoriesRecord(
+                    queryBuilder: (categoriesRecord) => categoriesRecord.where(
+                      'type',
+                      isEqualTo: 'series',
+                    ),
+                  ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {

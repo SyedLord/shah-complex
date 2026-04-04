@@ -11,7 +11,7 @@ import 'uploaded_file.dart';
 import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-List<int> generateSeasonList(int totalSeasons) {
-  // Ye function 1 se le kar totalSeasons tak ek list banayega. Agar 4 diya to [1, 2, 3, 4]
-  return List<int>.generate(totalSeasons, (i) => i + 1);
+List<String> generateSeasonList(int totalSeasons) {
+  // Ye function 1 se le kar totalSeasons tak string list banayega. Agar 4 diya to ["1", "2", "3", "4"]
+  return List<String>.generate(totalSeasons, (i) => (i + 1).toString());
 }
