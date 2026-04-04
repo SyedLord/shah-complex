@@ -12,9 +12,15 @@ class AllItemsWidget extends StatefulWidget {
   const AllItemsWidget({
     super.key,
     required this.categoryName,
+    required this.categoryType,
+    required this.isTrending,
+    required this.isContinueWatching,
   });
 
   final String? categoryName;
+  final String? categoryType;
+  final bool? isTrending;
+  final bool? isContinueWatching;
 
   static String routeName = 'AllItems';
   static String routePath = '/allItems';
@@ -150,55 +156,210 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                 ),
               ),
             ),
-            Expanded(
-              child: StreamBuilder<List<MoviesRecord>>(
-                stream: queryMoviesRecord(
-                  queryBuilder: (moviesRecord) => moviesRecord.where(
-                    'category',
-                    isEqualTo: widget.categoryName,
+            if (widget.categoryType == 'movie')
+              Expanded(
+                child: StreamBuilder<List<MoviesRecord>>(
+                  stream: queryMoviesRecord(
+                    queryBuilder: (moviesRecord) => moviesRecord.where(
+                      'category',
+                      isEqualTo: widget.categoryName,
+                    ),
                   ),
-                ),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50.0,
-                        height: 50.0,
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            FlutterFlowTheme.of(context).primary,
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  }
-                  List<MoviesRecord> gridViewMoviesRecordList = snapshot.data!;
-
-                  return GridView.builder(
-                    padding: EdgeInsets.zero,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 10.0,
-                      mainAxisSpacing: 10.0,
-                      childAspectRatio: 1.0,
-                    ),
-                    scrollDirection: Axis.vertical,
-                    itemCount: gridViewMoviesRecordList.length,
-                    itemBuilder: (context, gridViewIndex) {
-                      final gridViewMoviesRecord =
-                          gridViewMoviesRecordList[gridViewIndex];
-                      return MovieCardWidget(
-                        key: Key(
-                            'Key0kt_${gridViewIndex}_of_${gridViewMoviesRecordList.length}'),
-                        img: gridViewMoviesRecord.posterImage,
-                        movieDoc: gridViewMoviesRecord,
                       );
-                    },
-                  );
-                },
+                    }
+                    List<MoviesRecord> moviesMoviesRecordList = snapshot.data!;
+
+                    return GridView.builder(
+                      padding: EdgeInsets.zero,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 10.0,
+                        childAspectRatio: 1.0,
+                      ),
+                      scrollDirection: Axis.vertical,
+                      itemCount: moviesMoviesRecordList.length,
+                      itemBuilder: (context, moviesIndex) {
+                        final moviesMoviesRecord =
+                            moviesMoviesRecordList[moviesIndex];
+                        return MovieCardWidget(
+                          key: Key(
+                              'Key0kt_${moviesIndex}_of_${moviesMoviesRecordList.length}'),
+                          img: moviesMoviesRecord.posterImage,
+                          movieDoc: moviesMoviesRecord,
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
-            ),
+            if ((widget.categoryType == 'movie') &&
+                (widget.isTrending == true))
+              Expanded(
+                child: StreamBuilder<List<MoviesRecord>>(
+                  stream: queryMoviesRecord(
+                    queryBuilder: (moviesRecord) => moviesRecord.where(
+                      'is_trending',
+                      isEqualTo: true,
+                    ),
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    List<MoviesRecord> trendingMoviesMoviesRecordList =
+                        snapshot.data!;
+
+                    return GridView.builder(
+                      padding: EdgeInsets.zero,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 10.0,
+                        childAspectRatio: 1.0,
+                      ),
+                      scrollDirection: Axis.vertical,
+                      itemCount: trendingMoviesMoviesRecordList.length,
+                      itemBuilder: (context, trendingMoviesIndex) {
+                        final trendingMoviesMoviesRecord =
+                            trendingMoviesMoviesRecordList[trendingMoviesIndex];
+                        return MovieCardWidget(
+                          key: Key(
+                              'Key3c9_${trendingMoviesIndex}_of_${trendingMoviesMoviesRecordList.length}'),
+                          img: trendingMoviesMoviesRecord.posterImage,
+                          movieDoc: trendingMoviesMoviesRecord,
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            if ((widget.categoryType == 'series') &&
+                (widget.isTrending == true))
+              Expanded(
+                child: StreamBuilder<List<SeriesRecord>>(
+                  stream: querySeriesRecord(
+                    queryBuilder: (seriesRecord) => seriesRecord.where(
+                      'is_trending',
+                      isEqualTo: true,
+                    ),
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    List<SeriesRecord> trendingSeriesSeriesRecordList =
+                        snapshot.data!;
+
+                    return GridView.builder(
+                      padding: EdgeInsets.zero,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 10.0,
+                        childAspectRatio: 1.0,
+                      ),
+                      scrollDirection: Axis.vertical,
+                      itemCount: trendingSeriesSeriesRecordList.length,
+                      itemBuilder: (context, trendingSeriesIndex) {
+                        final trendingSeriesSeriesRecord =
+                            trendingSeriesSeriesRecordList[trendingSeriesIndex];
+                        return MovieCardWidget(
+                          key: Key(
+                              'Keywo1_${trendingSeriesIndex}_of_${trendingSeriesSeriesRecordList.length}'),
+                          img: trendingSeriesSeriesRecord.posterImage,
+                          seriesDoc: trendingSeriesSeriesRecord,
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            if (widget.categoryType == 'series')
+              Expanded(
+                child: StreamBuilder<List<SeriesRecord>>(
+                  stream: querySeriesRecord(
+                    queryBuilder: (seriesRecord) => seriesRecord.where(
+                      'category',
+                      isEqualTo: widget.categoryName,
+                    ),
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    List<SeriesRecord> seriesSeriesRecordList = snapshot.data!;
+
+                    return GridView.builder(
+                      padding: EdgeInsets.zero,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 10.0,
+                        childAspectRatio: 1.0,
+                      ),
+                      scrollDirection: Axis.vertical,
+                      itemCount: seriesSeriesRecordList.length,
+                      itemBuilder: (context, seriesIndex) {
+                        final seriesSeriesRecord =
+                            seriesSeriesRecordList[seriesIndex];
+                        return MovieCardWidget(
+                          key: Key(
+                              'Key8no_${seriesIndex}_of_${seriesSeriesRecordList.length}'),
+                          img: seriesSeriesRecord.posterImage,
+                          seriesDoc: seriesSeriesRecord,
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
             Container(
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,

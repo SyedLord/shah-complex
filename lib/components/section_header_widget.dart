@@ -10,9 +10,15 @@ class SectionHeaderWidget extends StatefulWidget {
   const SectionHeaderWidget({
     super.key,
     this.title,
+    this.type,
+    required this.isTrending,
+    required this.isContinueWatching,
   });
 
   final String? title;
+  final String? type;
+  final bool? isTrending;
+  final bool? isContinueWatching;
 
   @override
   State<SectionHeaderWidget> createState() => _SectionHeaderWidgetState();
@@ -76,12 +82,24 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
-                context.pushNamed(
+                context.goNamed(
                   AllItemsWidget.routeName,
                   queryParameters: {
                     'categoryName': serializeParam(
                       widget.title,
                       ParamType.String,
+                    ),
+                    'categoryType': serializeParam(
+                      widget.type,
+                      ParamType.String,
+                    ),
+                    'isTrending': serializeParam(
+                      widget.isTrending,
+                      ParamType.bool,
+                    ),
+                    'isContinueWatching': serializeParam(
+                      widget.isContinueWatching,
+                      ParamType.bool,
                     ),
                   }.withoutNulls,
                 );

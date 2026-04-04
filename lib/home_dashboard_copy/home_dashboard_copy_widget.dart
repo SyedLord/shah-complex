@@ -67,6 +67,9 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                       updateCallback: () => safeSetState(() {}),
                       child: SectionHeaderWidget(
                         title: 'Trending Movies',
+                        type: 'movie',
+                        isTrending: true,
+                        isContinueWatching: false,
                       ),
                     ),
                     Container(
@@ -135,6 +138,9 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                       updateCallback: () => safeSetState(() {}),
                       child: SectionHeaderWidget(
                         title: 'Trending Series',
+                        type: 'series',
+                        isTrending: true,
+                        isContinueWatching: false,
                       ),
                     ),
                     Container(
@@ -200,6 +206,8 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                   updateCallback: () => safeSetState(() {}),
                   child: SectionHeaderWidget(
                     title: 'Continue Watching',
+                    isTrending: false,
+                    isContinueWatching: false,
                   ),
                 ),
                 Container(
@@ -267,6 +275,9 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                               key: Key(
                                   'Keyyvq_${listViewIndex}_of_${listViewCategoriesRecordList.length}'),
                               title: listViewCategoriesRecord.name,
+                              type: listViewCategoriesRecord.type,
+                              isTrending: false,
+                              isContinueWatching: false,
                             ),
                             Container(
                               width: double.infinity,
@@ -376,6 +387,9 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                               key: Key(
                                   'Keylq7_${listViewIndex}_of_${listViewCategoriesRecordList.length}'),
                               title: listViewCategoriesRecord.name,
+                              type: listViewCategoriesRecord.type,
+                              isTrending: false,
+                              isContinueWatching: false,
                             ),
                             Container(
                               width: double.infinity,

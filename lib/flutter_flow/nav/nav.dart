@@ -52,11 +52,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ProfileSelectionWidget(),
         ),
         FFRoute(
-          name: HomeDashboardWidget.routeName,
-          path: HomeDashboardWidget.routePath,
-          builder: (context, params) => HomeDashboardWidget(),
-        ),
-        FFRoute(
           name: HomeDashboardCopyWidget.routeName,
           path: HomeDashboardCopyWidget.routePath,
           builder: (context, params) => HomeDashboardCopyWidget(),
@@ -68,6 +63,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             categoryName: params.getParam(
               'categoryName',
               ParamType.String,
+            ),
+            categoryType: params.getParam(
+              'categoryType',
+              ParamType.String,
+            ),
+            isTrending: params.getParam(
+              'isTrending',
+              ParamType.bool,
+            ),
+            isContinueWatching: params.getParam(
+              'isContinueWatching',
+              ParamType.bool,
             ),
           ),
         ),
