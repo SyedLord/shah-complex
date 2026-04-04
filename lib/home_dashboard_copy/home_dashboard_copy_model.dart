@@ -14,15 +14,18 @@ class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
   late SectionHeaderModel sectionHeaderModel1;
   // Model for section_header component.
   late SectionHeaderModel sectionHeaderModel2;
+  // Model for section_header component.
+  late SectionHeaderModel sectionHeaderModel3;
   // Model for movie_card component.
-  late MovieCardModel movieCardModel2;
+  late MovieCardModel movieCardModel3;
 
   @override
   void initState(BuildContext context) {
     heroPosterModel = createModel(context, () => HeroPosterModel());
     sectionHeaderModel1 = createModel(context, () => SectionHeaderModel());
     sectionHeaderModel2 = createModel(context, () => SectionHeaderModel());
-    movieCardModel2 = createModel(context, () => MovieCardModel());
+    sectionHeaderModel3 = createModel(context, () => SectionHeaderModel());
+    movieCardModel3 = createModel(context, () => MovieCardModel());
   }
 
   @override
@@ -30,6 +33,7 @@ class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
     heroPosterModel.dispose();
     sectionHeaderModel1.dispose();
     sectionHeaderModel2.dispose();
-    movieCardModel2.dispose();
+    sectionHeaderModel3.dispose();
+    movieCardModel3.dispose();
   }
 }

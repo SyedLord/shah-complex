@@ -51,6 +51,11 @@ class SeriesRecord extends FirestoreRecord {
   bool get isTrending => _isTrending ?? false;
   bool hasIsTrending() => _isTrending != null;
 
+  // "category" field.
+  String? _category;
+  String get category => _category ?? '';
+  bool hasCategory() => _category != null;
+
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _tmdbId = castToType<int>(snapshotData['tmdb_id']);
@@ -59,6 +64,7 @@ class SeriesRecord extends FirestoreRecord {
     _backdropImage = snapshotData['backdrop_image'] as String?;
     _genres = getDataList(snapshotData['genres']);
     _isTrending = snapshotData['is_trending'] as bool?;
+    _category = snapshotData['category'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -101,6 +107,7 @@ Map<String, dynamic> createSeriesRecordData({
   String? posterImage,
   String? backdropImage,
   bool? isTrending,
+  String? category,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -110,6 +117,7 @@ Map<String, dynamic> createSeriesRecordData({
       'poster_image': posterImage,
       'backdrop_image': backdropImage,
       'is_trending': isTrending,
+      'category': category,
     }.withoutNulls,
   );
 
@@ -128,7 +136,8 @@ class SeriesRecordDocumentEquality implements Equality<SeriesRecord> {
         e1?.posterImage == e2?.posterImage &&
         e1?.backdropImage == e2?.backdropImage &&
         listEquality.equals(e1?.genres, e2?.genres) &&
-        e1?.isTrending == e2?.isTrending;
+        e1?.isTrending == e2?.isTrending &&
+        e1?.category == e2?.category;
   }
 
   @override
@@ -139,7 +148,8 @@ class SeriesRecordDocumentEquality implements Equality<SeriesRecord> {
         e?.posterImage,
         e?.backdropImage,
         e?.genres,
-        e?.isTrending
+        e?.isTrending,
+        e?.category
       ]);
 
   @override

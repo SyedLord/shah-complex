@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -61,12 +62,30 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => HomeDashboardCopyWidget(),
         ),
         FFRoute(
-          name: NewScreen1Widget.routeName,
-          path: NewScreen1Widget.routePath,
-          builder: (context, params) => NewScreen1Widget(
+          name: AllItemsWidget.routeName,
+          path: AllItemsWidget.routePath,
+          builder: (context, params) => AllItemsWidget(
             categoryName: params.getParam(
               'categoryName',
               ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: MovieDetailsWidget.routeName,
+          path: MovieDetailsWidget.routePath,
+          builder: (context, params) => MovieDetailsWidget(),
+        ),
+        FFRoute(
+          name: ContentDetailsWidget.routeName,
+          path: ContentDetailsWidget.routePath,
+          asyncParams: {
+            'seriesDoc': getDoc(['series'], SeriesRecord.fromSnapshot),
+          },
+          builder: (context, params) => ContentDetailsWidget(
+            seriesDoc: params.getParam(
+              'seriesDoc',
+              ParamType.Document,
             ),
           ),
         )

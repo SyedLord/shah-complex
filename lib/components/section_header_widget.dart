@@ -77,7 +77,7 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
               highlightColor: Colors.transparent,
               onTap: () async {
                 context.pushNamed(
-                  NewScreen1Widget.routeName,
+                  AllItemsWidget.routeName,
                   queryParameters: {
                     'categoryName': serializeParam(
                       widget.title,

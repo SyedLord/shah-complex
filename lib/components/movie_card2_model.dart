@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'new_screen1_widget.dart' show NewScreen1Widget;
+import 'movie_card2_widget.dart' show MovieCard2Widget;
 import 'package:flutter/material.dart';
 
-class NewScreen1Model extends FlutterFlowModel<NewScreen1Widget> {
+class MovieCard2Model extends FlutterFlowModel<MovieCard2Widget> {
   @override
   void initState(BuildContext context) {}
 

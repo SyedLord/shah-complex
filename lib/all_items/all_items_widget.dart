@@ -5,33 +5,33 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'new_screen1_model.dart';
-export 'new_screen1_model.dart';
+import 'all_items_model.dart';
+export 'all_items_model.dart';
 
-class NewScreen1Widget extends StatefulWidget {
-  const NewScreen1Widget({
+class AllItemsWidget extends StatefulWidget {
+  const AllItemsWidget({
     super.key,
     required this.categoryName,
   });
 
   final String? categoryName;
 
-  static String routeName = 'NewScreen1';
-  static String routePath = '/newScreen1';
+  static String routeName = 'AllItems';
+  static String routePath = '/allItems';
 
   @override
-  State<NewScreen1Widget> createState() => _NewScreen1WidgetState();
+  State<AllItemsWidget> createState() => _AllItemsWidgetState();
 }
 
-class _NewScreen1WidgetState extends State<NewScreen1Widget> {
-  late NewScreen1Model _model;
+class _AllItemsWidgetState extends State<AllItemsWidget> {
+  late AllItemsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => NewScreen1Model());
+    _model = createModel(context, () => AllItemsModel());
   }
 
   @override
@@ -77,8 +77,8 @@ class _NewScreen1WidgetState extends State<NewScreen1Widget> {
                             color: FlutterFlowTheme.of(context).primaryText,
                             size: 24.0,
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
+                          onPressed: () async {
+                            context.safePop();
                           },
                         ),
                         Text(
@@ -179,7 +179,7 @@ class _NewScreen1WidgetState extends State<NewScreen1Widget> {
                     padding: EdgeInsets.zero,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      crossAxisSpacing: 5.0,
+                      crossAxisSpacing: 10.0,
                       mainAxisSpacing: 10.0,
                       childAspectRatio: 1.0,
                     ),

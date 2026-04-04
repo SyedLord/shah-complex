@@ -10,10 +10,12 @@ class MovieCardWidget extends StatefulWidget {
     super.key,
     this.img,
     this.movieDoc,
+    this.seriesDoc,
   });
 
   final String? img;
   final MoviesRecord? movieDoc;
+  final SeriesRecord? seriesDoc;
 
   @override
   State<MovieCardWidget> createState() => _MovieCardWidgetState();
@@ -43,26 +45,23 @@ class _MovieCardWidgetState extends State<MovieCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Container(
-          width: 120.0,
-          height: 180.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          child: Stack(
-            children: [
-              CachedNetworkImage(
-                fadeInDuration: Duration(milliseconds: 0),
-                fadeOutDuration: Duration(milliseconds: 0),
-                imageUrl: widget.img!,
-                fit: BoxFit.cover,
-              ),
-            ],
-          ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8.0),
+      child: Container(
+        width: 120.0,
+        height: 180.0,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Stack(
+          children: [
+            CachedNetworkImage(
+              fadeInDuration: Duration(milliseconds: 0),
+              fadeOutDuration: Duration(milliseconds: 0),
+              imageUrl: widget.img!,
+              fit: BoxFit.cover,
+            ),
+          ],
         ),
       ),
     );

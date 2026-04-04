@@ -59,69 +59,144 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                   updateCallback: () => safeSetState(() {}),
                   child: HeroPosterWidget(),
                 ),
-                wrapWithModel(
-                  model: _model.sectionHeaderModel1,
-                  updateCallback: () => safeSetState(() {}),
-                  child: SectionHeaderWidget(
-                    title: 'Trending Now',
-                  ),
-                ),
-                Container(
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 16.0),
-                    child: StreamBuilder<List<MoviesRecord>>(
-                      stream: queryMoviesRecord(
-                        queryBuilder: (moviesRecord) => moviesRecord.where(
-                          'is_trending',
-                          isEqualTo: true,
-                        ),
-                        limit: 10,
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    wrapWithModel(
+                      model: _model.sectionHeaderModel1,
+                      updateCallback: () => safeSetState(() {}),
+                      child: SectionHeaderWidget(
+                        title: 'Trending Movies',
                       ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                        List<MoviesRecord> trendingRowMoviesRecordList =
-                            snapshot.data!;
-
-                        return SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: List.generate(
-                                trendingRowMoviesRecordList.length,
-                                (trendingRowIndex) {
-                              final trendingRowMoviesRecord =
-                                  trendingRowMoviesRecordList[trendingRowIndex];
-                              return MovieCardWidget(
-                                key: Key(
-                                    'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
-                                img: trendingRowMoviesRecord.posterImage,
-                                movieDoc: trendingRowMoviesRecord,
-                              );
-                            }),
-                          ),
-                        );
-                      },
                     ),
-                  ),
+                    Container(
+                      decoration: BoxDecoration(),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 16.0, 0.0, 16.0),
+                        child: StreamBuilder<List<MoviesRecord>>(
+                          stream: queryMoviesRecord(
+                            queryBuilder: (moviesRecord) => moviesRecord.where(
+                              'is_trending',
+                              isEqualTo: true,
+                            ),
+                            limit: 10,
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      FlutterFlowTheme.of(context).primary,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            List<MoviesRecord> trendingRowMoviesRecordList =
+                                snapshot.data!;
+
+                            return SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: List.generate(
+                                    trendingRowMoviesRecordList.length,
+                                    (trendingRowIndex) {
+                                  final trendingRowMoviesRecord =
+                                      trendingRowMoviesRecordList[
+                                          trendingRowIndex];
+                                  return MovieCardWidget(
+                                    key: Key(
+                                        'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
+                                    img: trendingRowMoviesRecord.posterImage,
+                                    movieDoc: trendingRowMoviesRecord,
+                                  );
+                                }).divide(SizedBox(width: 10.0)),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    wrapWithModel(
+                      model: _model.sectionHeaderModel2,
+                      updateCallback: () => safeSetState(() {}),
+                      child: SectionHeaderWidget(
+                        title: 'Trending Series',
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 16.0, 0.0, 16.0),
+                        child: StreamBuilder<List<SeriesRecord>>(
+                          stream: querySeriesRecord(
+                            queryBuilder: (seriesRecord) => seriesRecord.where(
+                              'is_trending',
+                              isEqualTo: true,
+                            ),
+                            limit: 10,
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      FlutterFlowTheme.of(context).primary,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            List<SeriesRecord> trendingRowSeriesRecordList =
+                                snapshot.data!;
+
+                            return SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: List.generate(
+                                    trendingRowSeriesRecordList.length,
+                                    (trendingRowIndex) {
+                                  final trendingRowSeriesRecord =
+                                      trendingRowSeriesRecordList[
+                                          trendingRowIndex];
+                                  return MovieCardWidget(
+                                    key: Key(
+                                        'Key4sb_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
+                                    img: trendingRowSeriesRecord.posterImage,
+                                    seriesDoc: trendingRowSeriesRecord,
+                                  );
+                                }).divide(SizedBox(width: 10.0)),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 wrapWithModel(
-                  model: _model.sectionHeaderModel2,
+                  model: _model.sectionHeaderModel3,
                   updateCallback: () => safeSetState(() {}),
                   child: SectionHeaderWidget(
                     title: 'Continue Watching',
@@ -139,7 +214,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           wrapWithModel(
-                            model: _model.movieCardModel2,
+                            model: _model.movieCardModel3,
                             updateCallback: () => safeSetState(() {}),
                             child: MovieCardWidget(
                               img:
@@ -173,6 +248,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
 
                     return ListView.builder(
                       padding: EdgeInsets.zero,
+                      primary: false,
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       itemCount: listViewCategoriesRecordList.length,
@@ -224,12 +300,14 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                                         listViewMoviesRecordList =
                                         snapshot.data!;
 
-                                    return ListView.builder(
+                                    return ListView.separated(
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,
                                       scrollDirection: Axis.horizontal,
                                       itemCount:
                                           listViewMoviesRecordList.length,
+                                      separatorBuilder: (_, __) =>
+                                          SizedBox(width: 10.0),
                                       itemBuilder: (context, listViewIndex) {
                                         final listViewMoviesRecord =
                                             listViewMoviesRecordList[
@@ -239,6 +317,110 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                                               'Keyfes_${listViewIndex}_of_${listViewMoviesRecordList.length}'),
                                           img: listViewMoviesRecord.posterImage,
                                           movieDoc: listViewMoviesRecord,
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+                StreamBuilder<List<CategoriesRecord>>(
+                  stream: queryCategoriesRecord(),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    List<CategoriesRecord> listViewCategoriesRecordList =
+                        snapshot.data!;
+
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      primary: false,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: listViewCategoriesRecordList.length,
+                      itemBuilder: (context, listViewIndex) {
+                        final listViewCategoriesRecord =
+                            listViewCategoriesRecordList[listViewIndex];
+                        return Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            SectionHeaderWidget(
+                              key: Key(
+                                  'Keylq7_${listViewIndex}_of_${listViewCategoriesRecordList.length}'),
+                              title: listViewCategoriesRecord.name,
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 200.0,
+                              decoration: BoxDecoration(),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                child: StreamBuilder<List<SeriesRecord>>(
+                                  stream: querySeriesRecord(
+                                    queryBuilder: (seriesRecord) =>
+                                        seriesRecord.where(
+                                      'category',
+                                      isEqualTo: listViewCategoriesRecord.name,
+                                    ),
+                                    limit: 10,
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<SeriesRecord>
+                                        listViewSeriesRecordList =
+                                        snapshot.data!;
+
+                                    return ListView.separated(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount:
+                                          listViewSeriesRecordList.length,
+                                      separatorBuilder: (_, __) =>
+                                          SizedBox(width: 10.0),
+                                      itemBuilder: (context, listViewIndex) {
+                                        final listViewSeriesRecord =
+                                            listViewSeriesRecordList[
+                                                listViewIndex];
+                                        return MovieCardWidget(
+                                          key: Key(
+                                              'Keyw42_${listViewIndex}_of_${listViewSeriesRecordList.length}'),
+                                          img: listViewSeriesRecord.posterImage,
+                                          seriesDoc: listViewSeriesRecord,
                                         );
                                       },
                                     );

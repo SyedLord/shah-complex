@@ -1,3 +1,18 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionGroup": "episodes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "season_number",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "episode_number",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
 }
