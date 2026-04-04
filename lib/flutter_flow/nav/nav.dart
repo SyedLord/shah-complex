@@ -79,17 +79,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: MovieDetailsWidget.routeName,
-          path: MovieDetailsWidget.routePath,
-          builder: (context, params) => MovieDetailsWidget(),
+          name: MoviePageWidget.routeName,
+          path: MoviePageWidget.routePath,
+          asyncParams: {
+            'movieDoc': getDoc(['movies'], MoviesRecord.fromSnapshot),
+          },
+          builder: (context, params) => MoviePageWidget(
+            movieDoc: params.getParam(
+              'movieDoc',
+              ParamType.Document,
+            ),
+          ),
         ),
         FFRoute(
-          name: ContentDetailsWidget.routeName,
-          path: ContentDetailsWidget.routePath,
+          name: SeasonPageWidget.routeName,
+          path: SeasonPageWidget.routePath,
           asyncParams: {
             'seriesDoc': getDoc(['series'], SeriesRecord.fromSnapshot),
           },
-          builder: (context, params) => ContentDetailsWidget(
+          builder: (context, params) => SeasonPageWidget(
             seriesDoc: params.getParam(
               'seriesDoc',
               ParamType.Document,

@@ -71,6 +71,11 @@ class MoviesRecord extends FirestoreRecord {
   String get backdropImage => _backdropImage ?? '';
   bool hasBackdropImage() => _backdropImage != null;
 
+  // "duration" field.
+  String? _duration;
+  String get duration => _duration ?? '';
+  bool hasDuration() => _duration != null;
+
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _tmdbId = castToType<int>(snapshotData['tmdb_id']);
@@ -83,6 +88,7 @@ class MoviesRecord extends FirestoreRecord {
     _category = snapshotData['category'] as String?;
     _posterImage = snapshotData['poster_image'] as String?;
     _backdropImage = snapshotData['backdrop_image'] as String?;
+    _duration = snapshotData['duration'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -129,6 +135,7 @@ Map<String, dynamic> createMoviesRecordData({
   String? category,
   String? posterImage,
   String? backdropImage,
+  String? duration,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -142,6 +149,7 @@ Map<String, dynamic> createMoviesRecordData({
       'category': category,
       'poster_image': posterImage,
       'backdrop_image': backdropImage,
+      'duration': duration,
     }.withoutNulls,
   );
 
@@ -164,7 +172,8 @@ class MoviesRecordDocumentEquality implements Equality<MoviesRecord> {
         e1?.videoUrl == e2?.videoUrl &&
         e1?.category == e2?.category &&
         e1?.posterImage == e2?.posterImage &&
-        e1?.backdropImage == e2?.backdropImage;
+        e1?.backdropImage == e2?.backdropImage &&
+        e1?.duration == e2?.duration;
   }
 
   @override
@@ -179,7 +188,8 @@ class MoviesRecordDocumentEquality implements Equality<MoviesRecord> {
         e?.videoUrl,
         e?.category,
         e?.posterImage,
-        e?.backdropImage
+        e?.backdropImage,
+        e?.duration
       ]);
 
   @override

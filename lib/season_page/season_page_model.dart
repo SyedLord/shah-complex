@@ -1,12 +1,12 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'content_details_widget.dart' show ContentDetailsWidget;
+import 'season_page_widget.dart' show SeasonPageWidget;
 import 'package:flutter/material.dart';
 
-class ContentDetailsModel extends FlutterFlowModel<ContentDetailsWidget> {
+class SeasonPageModel extends FlutterFlowModel<SeasonPageWidget> {
   ///  Local state fields for this page.
 
-  int currentSeason = 1;
+  int selectedSeason = 1;
 
   ///  State fields for stateful widgets in this page.
 

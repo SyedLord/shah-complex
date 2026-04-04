@@ -5,5 +5,5 @@ export '/profile_selection/profile_selection_widget.dart'
 export '/home_dashboard_copy/home_dashboard_copy_widget.dart'
     show HomeDashboardCopyWidget;
 export '/all_items/all_items_widget.dart' show AllItemsWidget;
-export '/movie_details/movie_details_widget.dart' show MovieDetailsWidget;
-export '/content_details/content_details_widget.dart' show ContentDetailsWidget;
+export '/movie_page/movie_page_widget.dart' show MoviePageWidget;
+export '/season_page/season_page_widget.dart' show SeasonPageWidget;

@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,14 +11,10 @@ export 'episode_item_model.dart';
 class EpisodeItemWidget extends StatefulWidget {
   const EpisodeItemWidget({
     super.key,
-    this.number,
-    this.name,
-    this.duration,
+    required this.episodeDoc,
   });
 
-  final double? number;
-  final String? name;
-  final String? duration;
+  final EpisodesRecord? episodeDoc;
 
   @override
   State<EpisodeItemWidget> createState() => _EpisodeItemWidgetState();
@@ -79,8 +76,7 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                       CachedNetworkImage(
                         fadeInDuration: Duration(milliseconds: 0),
                         fadeOutDuration: Duration(milliseconds: 0),
-                        imageUrl:
-                            'https://dimg.dreamflow.cloud/v1/image/cinematic%20scene%20from%20%24title%20episode%20%24number',
+                        imageUrl: widget.episodeDoc!.thumbnail,
                         fit: BoxFit.cover,
                       ),
                       Align(
@@ -120,7 +116,7 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${widget.number?.toString()}. ${widget.name}',
+                      '${widget.episodeDoc?.episodeNumber.toString()}. ${widget.episodeDoc?.title}',
                       maxLines: 1,
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             font: GoogleFonts.inter(
@@ -142,8 +138,8 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                     ),
                     Text(
                       valueOrDefault<String>(
-                        widget.duration,
-                        '1h 17m',
+                        widget.episodeDoc?.duration,
+                        '1h 10m',
                       ),
                       style: FlutterFlowTheme.of(context).labelSmall.override(
                             font: GoogleFonts.inter(

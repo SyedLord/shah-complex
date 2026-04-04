@@ -40,6 +40,26 @@ class EpisodesRecord extends FirestoreRecord {
   String get videoUrl => _videoUrl ?? '';
   bool hasVideoUrl() => _videoUrl != null;
 
+  // "category" field.
+  String? _category;
+  String get category => _category ?? '';
+  bool hasCategory() => _category != null;
+
+  // "description" field.
+  String? _description;
+  String get description => _description ?? '';
+  bool hasDescription() => _description != null;
+
+  // "duration" field.
+  String? _duration;
+  String get duration => _duration ?? '';
+  bool hasDuration() => _duration != null;
+
+  // "thumbnail" field.
+  String? _thumbnail;
+  String get thumbnail => _thumbnail ?? '';
+  bool hasThumbnail() => _thumbnail != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -48,6 +68,10 @@ class EpisodesRecord extends FirestoreRecord {
     _title = snapshotData['title'] as String?;
     _driveType = snapshotData['drive_type'] as String?;
     _videoUrl = snapshotData['video_url'] as String?;
+    _category = snapshotData['category'] as String?;
+    _description = snapshotData['description'] as String?;
+    _duration = snapshotData['duration'] as String?;
+    _thumbnail = snapshotData['thumbnail'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -95,6 +119,10 @@ Map<String, dynamic> createEpisodesRecordData({
   String? title,
   String? driveType,
   String? videoUrl,
+  String? category,
+  String? description,
+  String? duration,
+  String? thumbnail,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -103,6 +131,10 @@ Map<String, dynamic> createEpisodesRecordData({
       'title': title,
       'drive_type': driveType,
       'video_url': videoUrl,
+      'category': category,
+      'description': description,
+      'duration': duration,
+      'thumbnail': thumbnail,
     }.withoutNulls,
   );
 
@@ -118,12 +150,25 @@ class EpisodesRecordDocumentEquality implements Equality<EpisodesRecord> {
         e1?.episodeNumber == e2?.episodeNumber &&
         e1?.title == e2?.title &&
         e1?.driveType == e2?.driveType &&
-        e1?.videoUrl == e2?.videoUrl;
+        e1?.videoUrl == e2?.videoUrl &&
+        e1?.category == e2?.category &&
+        e1?.description == e2?.description &&
+        e1?.duration == e2?.duration &&
+        e1?.thumbnail == e2?.thumbnail;
   }
 
   @override
-  int hash(EpisodesRecord? e) => const ListEquality().hash(
-      [e?.seasonNumber, e?.episodeNumber, e?.title, e?.driveType, e?.videoUrl]);
+  int hash(EpisodesRecord? e) => const ListEquality().hash([
+        e?.seasonNumber,
+        e?.episodeNumber,
+        e?.title,
+        e?.driveType,
+        e?.videoUrl,
+        e?.category,
+        e?.description,
+        e?.duration,
+        e?.thumbnail
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is EpisodesRecord;

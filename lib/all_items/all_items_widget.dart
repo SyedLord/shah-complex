@@ -3,6 +3,7 @@ import '/components/movie_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'all_items_model.dart';
@@ -196,11 +197,31 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                       itemBuilder: (context, moviesIndex) {
                         final moviesMoviesRecord =
                             moviesMoviesRecordList[moviesIndex];
-                        return MovieCardWidget(
-                          key: Key(
-                              'Key0kt_${moviesIndex}_of_${moviesMoviesRecordList.length}'),
-                          img: moviesMoviesRecord.posterImage,
-                          movieDoc: moviesMoviesRecord,
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed(
+                              MoviePageWidget.routeName,
+                              queryParameters: {
+                                'movieDoc': serializeParam(
+                                  moviesMoviesRecord,
+                                  ParamType.Document,
+                                ),
+                              }.withoutNulls,
+                              extra: <String, dynamic>{
+                                'movieDoc': moviesMoviesRecord,
+                              },
+                            );
+                          },
+                          child: MovieCardWidget(
+                            key: Key(
+                                'Key0kt_${moviesIndex}_of_${moviesMoviesRecordList.length}'),
+                            img: moviesMoviesRecord.posterImage,
+                            movieDoc: moviesMoviesRecord,
+                          ),
                         );
                       },
                     );
@@ -249,11 +270,31 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                       itemBuilder: (context, trendingMoviesIndex) {
                         final trendingMoviesMoviesRecord =
                             trendingMoviesMoviesRecordList[trendingMoviesIndex];
-                        return MovieCardWidget(
-                          key: Key(
-                              'Key3c9_${trendingMoviesIndex}_of_${trendingMoviesMoviesRecordList.length}'),
-                          img: trendingMoviesMoviesRecord.posterImage,
-                          movieDoc: trendingMoviesMoviesRecord,
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed(
+                              MoviePageWidget.routeName,
+                              queryParameters: {
+                                'movieDoc': serializeParam(
+                                  trendingMoviesMoviesRecord,
+                                  ParamType.Document,
+                                ),
+                              }.withoutNulls,
+                              extra: <String, dynamic>{
+                                'movieDoc': trendingMoviesMoviesRecord,
+                              },
+                            );
+                          },
+                          child: MovieCardWidget(
+                            key: Key(
+                                'Key3c9_${trendingMoviesIndex}_of_${trendingMoviesMoviesRecordList.length}'),
+                            img: trendingMoviesMoviesRecord.posterImage,
+                            movieDoc: trendingMoviesMoviesRecord,
+                          ),
                         );
                       },
                     );
@@ -302,11 +343,31 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                       itemBuilder: (context, trendingSeriesIndex) {
                         final trendingSeriesSeriesRecord =
                             trendingSeriesSeriesRecordList[trendingSeriesIndex];
-                        return MovieCardWidget(
-                          key: Key(
-                              'Keywo1_${trendingSeriesIndex}_of_${trendingSeriesSeriesRecordList.length}'),
-                          img: trendingSeriesSeriesRecord.posterImage,
-                          seriesDoc: trendingSeriesSeriesRecord,
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed(
+                              SeasonPageWidget.routeName,
+                              queryParameters: {
+                                'seriesDoc': serializeParam(
+                                  trendingSeriesSeriesRecord,
+                                  ParamType.Document,
+                                ),
+                              }.withoutNulls,
+                              extra: <String, dynamic>{
+                                'seriesDoc': trendingSeriesSeriesRecord,
+                              },
+                            );
+                          },
+                          child: MovieCardWidget(
+                            key: Key(
+                                'Keywo1_${trendingSeriesIndex}_of_${trendingSeriesSeriesRecordList.length}'),
+                            img: trendingSeriesSeriesRecord.posterImage,
+                            seriesDoc: trendingSeriesSeriesRecord,
+                          ),
                         );
                       },
                     );
@@ -353,11 +414,31 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                       itemBuilder: (context, seriesIndex) {
                         final seriesSeriesRecord =
                             seriesSeriesRecordList[seriesIndex];
-                        return MovieCardWidget(
-                          key: Key(
-                              'Key8no_${seriesIndex}_of_${seriesSeriesRecordList.length}'),
-                          img: seriesSeriesRecord.posterImage,
-                          seriesDoc: seriesSeriesRecord,
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed(
+                              SeasonPageWidget.routeName,
+                              queryParameters: {
+                                'seriesDoc': serializeParam(
+                                  seriesSeriesRecord,
+                                  ParamType.Document,
+                                ),
+                              }.withoutNulls,
+                              extra: <String, dynamic>{
+                                'seriesDoc': seriesSeriesRecord,
+                              },
+                            );
+                          },
+                          child: MovieCardWidget(
+                            key: Key(
+                                'Key8no_${seriesIndex}_of_${seriesSeriesRecordList.length}'),
+                            img: seriesSeriesRecord.posterImage,
+                            seriesDoc: seriesSeriesRecord,
+                          ),
                         );
                       },
                     );

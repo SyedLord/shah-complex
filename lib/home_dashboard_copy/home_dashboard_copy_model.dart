@@ -2,6 +2,7 @@ import '/components/hero_poster_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'home_dashboard_copy_widget.dart' show HomeDashboardCopyWidget;
 import 'package:flutter/material.dart';
 

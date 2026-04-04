@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home_dashboard_copy_model.dart';
@@ -115,11 +116,31 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                                   final trendingRowMoviesRecord =
                                       trendingRowMoviesRecordList[
                                           trendingRowIndex];
-                                  return MovieCardWidget(
-                                    key: Key(
-                                        'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
-                                    img: trendingRowMoviesRecord.posterImage,
-                                    movieDoc: trendingRowMoviesRecord,
+                                  return InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        MoviePageWidget.routeName,
+                                        queryParameters: {
+                                          'movieDoc': serializeParam(
+                                            trendingRowMoviesRecord,
+                                            ParamType.Document,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'movieDoc': trendingRowMoviesRecord,
+                                        },
+                                      );
+                                    },
+                                    child: MovieCardWidget(
+                                      key: Key(
+                                          'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
+                                      img: trendingRowMoviesRecord.posterImage,
+                                      movieDoc: trendingRowMoviesRecord,
+                                    ),
                                   );
                                 }).divide(SizedBox(width: 10.0)),
                               ),
@@ -186,11 +207,31 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                                   final trendingRowSeriesRecord =
                                       trendingRowSeriesRecordList[
                                           trendingRowIndex];
-                                  return MovieCardWidget(
-                                    key: Key(
-                                        'Key4sb_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
-                                    img: trendingRowSeriesRecord.posterImage,
-                                    seriesDoc: trendingRowSeriesRecord,
+                                  return InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        SeasonPageWidget.routeName,
+                                        queryParameters: {
+                                          'seriesDoc': serializeParam(
+                                            trendingRowSeriesRecord,
+                                            ParamType.Document,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'seriesDoc': trendingRowSeriesRecord,
+                                        },
+                                      );
+                                    },
+                                    child: MovieCardWidget(
+                                      key: Key(
+                                          'Key4sb_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
+                                      img: trendingRowSeriesRecord.posterImage,
+                                      seriesDoc: trendingRowSeriesRecord,
+                                    ),
                                   );
                                 }).divide(SizedBox(width: 10.0)),
                               ),
@@ -256,7 +297,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                         ),
                       );
                     }
-                    List<CategoriesRecord> listViewCategoriesRecordList =
+                    List<CategoriesRecord> moviesCategoriesRecordList =
                         snapshot.data!;
 
                     return ListView.builder(
@@ -264,18 +305,18 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                       primary: false,
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount: listViewCategoriesRecordList.length,
-                      itemBuilder: (context, listViewIndex) {
-                        final listViewCategoriesRecord =
-                            listViewCategoriesRecordList[listViewIndex];
+                      itemCount: moviesCategoriesRecordList.length,
+                      itemBuilder: (context, moviesIndex) {
+                        final moviesCategoriesRecord =
+                            moviesCategoriesRecordList[moviesIndex];
                         return Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             SectionHeaderWidget(
                               key: Key(
-                                  'Keyyvq_${listViewIndex}_of_${listViewCategoriesRecordList.length}'),
-                              title: listViewCategoriesRecord.name,
-                              type: listViewCategoriesRecord.type,
+                                  'Keyyvq_${moviesIndex}_of_${moviesCategoriesRecordList.length}'),
+                              title: moviesCategoriesRecord.name,
+                              type: moviesCategoriesRecord.type,
                               isTrending: false,
                               isContinueWatching: false,
                             ),
@@ -291,7 +332,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                                     queryBuilder: (moviesRecord) =>
                                         moviesRecord.where(
                                       'category',
-                                      isEqualTo: listViewCategoriesRecord.name,
+                                      isEqualTo: moviesCategoriesRecord.name,
                                     ),
                                     limit: 10,
                                   ),
@@ -328,11 +369,33 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                                         final listViewMoviesRecord =
                                             listViewMoviesRecordList[
                                                 listViewIndex];
-                                        return MovieCardWidget(
-                                          key: Key(
-                                              'Keyfes_${listViewIndex}_of_${listViewMoviesRecordList.length}'),
-                                          img: listViewMoviesRecord.posterImage,
-                                          movieDoc: listViewMoviesRecord,
+                                        return InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            context.pushNamed(
+                                              MoviePageWidget.routeName,
+                                              queryParameters: {
+                                                'movieDoc': serializeParam(
+                                                  listViewMoviesRecord,
+                                                  ParamType.Document,
+                                                ),
+                                              }.withoutNulls,
+                                              extra: <String, dynamic>{
+                                                'movieDoc':
+                                                    listViewMoviesRecord,
+                                              },
+                                            );
+                                          },
+                                          child: MovieCardWidget(
+                                            key: Key(
+                                                'Keyfes_${listViewIndex}_of_${listViewMoviesRecordList.length}'),
+                                            img: listViewMoviesRecord
+                                                .posterImage,
+                                            movieDoc: listViewMoviesRecord,
+                                          ),
                                         );
                                       },
                                     );
@@ -368,7 +431,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                         ),
                       );
                     }
-                    List<CategoriesRecord> listViewCategoriesRecordList =
+                    List<CategoriesRecord> seasonsCategoriesRecordList =
                         snapshot.data!;
 
                     return ListView.builder(
@@ -376,18 +439,18 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                       primary: false,
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount: listViewCategoriesRecordList.length,
-                      itemBuilder: (context, listViewIndex) {
-                        final listViewCategoriesRecord =
-                            listViewCategoriesRecordList[listViewIndex];
+                      itemCount: seasonsCategoriesRecordList.length,
+                      itemBuilder: (context, seasonsIndex) {
+                        final seasonsCategoriesRecord =
+                            seasonsCategoriesRecordList[seasonsIndex];
                         return Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             SectionHeaderWidget(
                               key: Key(
-                                  'Keylq7_${listViewIndex}_of_${listViewCategoriesRecordList.length}'),
-                              title: listViewCategoriesRecord.name,
-                              type: listViewCategoriesRecord.type,
+                                  'Keylq7_${seasonsIndex}_of_${seasonsCategoriesRecordList.length}'),
+                              title: seasonsCategoriesRecord.name,
+                              type: seasonsCategoriesRecord.type,
                               isTrending: false,
                               isContinueWatching: false,
                             ),
@@ -403,7 +466,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                                     queryBuilder: (seriesRecord) =>
                                         seriesRecord.where(
                                       'category',
-                                      isEqualTo: listViewCategoriesRecord.name,
+                                      isEqualTo: seasonsCategoriesRecord.name,
                                     ),
                                     limit: 10,
                                   ),
@@ -440,11 +503,33 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                                         final listViewSeriesRecord =
                                             listViewSeriesRecordList[
                                                 listViewIndex];
-                                        return MovieCardWidget(
-                                          key: Key(
-                                              'Keyw42_${listViewIndex}_of_${listViewSeriesRecordList.length}'),
-                                          img: listViewSeriesRecord.posterImage,
-                                          seriesDoc: listViewSeriesRecord,
+                                        return InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            context.pushNamed(
+                                              SeasonPageWidget.routeName,
+                                              queryParameters: {
+                                                'seriesDoc': serializeParam(
+                                                  listViewSeriesRecord,
+                                                  ParamType.Document,
+                                                ),
+                                              }.withoutNulls,
+                                              extra: <String, dynamic>{
+                                                'seriesDoc':
+                                                    listViewSeriesRecord,
+                                              },
+                                            );
+                                          },
+                                          child: MovieCardWidget(
+                                            key: Key(
+                                                'Keyw42_${listViewIndex}_of_${listViewSeriesRecordList.length}'),
+                                            img: listViewSeriesRecord
+                                                .posterImage,
+                                            seriesDoc: listViewSeriesRecord,
+                                          ),
                                         );
                                       },
                                     );

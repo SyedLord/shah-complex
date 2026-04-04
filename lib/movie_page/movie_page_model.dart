@@ -1,9 +1,9 @@
 import '/components/movie_card2_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'movie_details_widget.dart' show MovieDetailsWidget;
+import 'movie_page_widget.dart' show MoviePageWidget;
 import 'package:flutter/material.dart';
 
-class MovieDetailsModel extends FlutterFlowModel<MovieDetailsWidget> {
+class MoviePageModel extends FlutterFlowModel<MoviePageWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Model for MovieCard2 component.

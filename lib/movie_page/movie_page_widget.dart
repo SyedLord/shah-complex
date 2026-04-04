@@ -1,42 +1,39 @@
 import '/backend/backend.dart';
-import '/components/episode_item_widget.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/components/movie_card2_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'dart:ui';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'content_details_model.dart';
-export 'content_details_model.dart';
+import 'movie_page_model.dart';
+export 'movie_page_model.dart';
 
-class ContentDetailsWidget extends StatefulWidget {
-  const ContentDetailsWidget({
+class MoviePageWidget extends StatefulWidget {
+  const MoviePageWidget({
     super.key,
-    required this.seriesDoc,
+    required this.movieDoc,
   });
 
-  final SeriesRecord? seriesDoc;
+  final MoviesRecord? movieDoc;
 
-  static String routeName = 'ContentDetails';
-  static String routePath = '/contentDetails';
+  static String routeName = 'MoviePage';
+  static String routePath = '/moviePage';
 
   @override
-  State<ContentDetailsWidget> createState() => _ContentDetailsWidgetState();
+  State<MoviePageWidget> createState() => _MoviePageWidgetState();
 }
 
-class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
-  late ContentDetailsModel _model;
+class _MoviePageWidgetState extends State<MoviePageWidget> {
+  late MoviePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ContentDetailsModel());
+    _model = createModel(context, () => MoviePageModel());
   }
 
   @override
@@ -61,28 +58,25 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  height: 240.0,
+                  height: 300.0,
                   child: Stack(
                     children: [
                       CachedNetworkImage(
                         fadeInDuration: Duration(milliseconds: 0),
                         fadeOutDuration: Duration(milliseconds: 0),
-                        imageUrl: valueOrDefault<String>(
-                          widget.seriesDoc?.backdropImage,
-                          'https://dimg.dreamflow.cloud/v1/image/Stranger%20Things%20season%204%20cinematic%20wide%20shot',
-                        ),
-                        height: 240.0,
+                        imageUrl: widget.movieDoc!.backdropImage,
+                        height: 300.0,
                         fit: BoxFit.cover,
                       ),
                       Container(
-                        height: 240.0,
+                        height: 300.0,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
                               FlutterFlowTheme.of(context).primaryBackground,
                               Colors.transparent
                             ],
-                            stops: [0.0, 1.0],
+                            stops: [0.0, 0.6],
                             begin: AlignmentDirectional(0.0, 1.0),
                             end: AlignmentDirectional(0, -1.0),
                           ),
@@ -102,8 +96,8 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                               sigmaY: 4.0,
                             ),
                             child: Container(
-                              width: 56.0,
-                              height: 56.0,
+                              width: 64.0,
+                              height: 64.0,
                               decoration: BoxDecoration(
                                 color: Color(0x44000000),
                                 borderRadius: BorderRadius.circular(
@@ -120,7 +114,7 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                               child: Icon(
                                 Icons.play_arrow_rounded,
                                 color: Colors.white,
-                                size: 40.0,
+                                size: 44.0,
                               ),
                             ),
                           ),
@@ -140,7 +134,7 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            widget.seriesDoc?.title,
+                            widget.movieDoc?.title,
                             'Title',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -168,7 +162,7 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              '98% Match',
+                              '99% Match',
                               style: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(
@@ -189,7 +183,10 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                                   ),
                             ),
                             Text(
-                              '2022',
+                              valueOrDefault<String>(
+                                widget.movieDoc?.releaseYear.toString(),
+                                '2000',
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(
@@ -227,7 +224,7 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     6.0, 2.0, 6.0, 2.0),
                                 child: Text(
-                                  'TV-MA',
+                                  'PG-13',
                                   style: FlutterFlowTheme.of(context)
                                       .labelSmall
                                       .override(
@@ -252,7 +249,10 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                               ),
                             ),
                             Text(
-                              '4 Seasons',
+                              valueOrDefault<String>(
+                                widget.movieDoc?.duration,
+                                '2h 3m',
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(
@@ -480,8 +480,11 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                                   .sm)),
                         ),
                         Text(
-                          'When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.',
-                          maxLines: 3,
+                          valueOrDefault<String>(
+                            widget.movieDoc?.description,
+                            'Description',
+                          ),
+                          maxLines: 4,
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
@@ -532,7 +535,7 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                'Winona Ryder, David Harbour, Millie Bobby Brown...',
+                                'Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page...',
                                 maxLines: 1,
                                 style: FlutterFlowTheme.of(context)
                                     .labelSmall
@@ -746,7 +749,7 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'EPISODES',
+                                      'MORE LIKE THIS',
                                       style: FlutterFlowTheme.of(context)
                                           .labelLarge
                                           .override(
@@ -789,7 +792,7 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                                           .xs)),
                                 ),
                                 Text(
-                                  'MORE LIKE THIS',
+                                  'TRAILERS & MORE',
                                   style: FlutterFlowTheme.of(context)
                                       .labelLarge
                                       .override(
@@ -812,7 +815,7 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                                       ),
                                 ),
                                 Text(
-                                  'TRAILERS',
+                                  'DETAILS',
                                   style: FlutterFlowTheme.of(context)
                                       .labelLarge
                                       .override(
@@ -842,108 +845,96 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                             ),
                           ),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
+                        GridView(
+                          padding: EdgeInsets.zero,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: FlutterFlowTheme.of(context)
+                                .designToken
+                                .spacing
+                                .md,
+                            mainAxisSpacing: FlutterFlowTheme.of(context)
+                                .designToken
+                                .spacing
+                                .md,
+                            childAspectRatio: 0.66,
+                          ),
+                          shrinkWrap: true,
                           children: [
-                            FlutterFlowDropDown<String>(
-                              controller:
-                                  _model.seasonSelectorValueController ??=
-                                      FormFieldController<String>(
-                                _model.seasonSelectorValue ??= '1',
+                            wrapWithModel(
+                              model: _model.movieCard2Model1,
+                              updateCallback: () => safeSetState(() {}),
+                              child: MovieCard2Widget(
+                                img:
+                                    'https://dimg.dreamflow.cloud/v1/image/Interstellar%20movie%20poster',
                               ),
-                              options: functions.generateSeasonList(
-                                  widget.seriesDoc!.totalSeasons),
-                              onChanged: (val) => safeSetState(
-                                  () => _model.seasonSelectorValue = val),
-                              width: 200.0,
-                              height: 40.0,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                              hintText: 'Season',
-                              icon: Icon(
-                                Icons.keyboard_arrow_down_rounded,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
+                            ),
+                            wrapWithModel(
+                              model: _model.movieCard2Model2,
+                              updateCallback: () => safeSetState(() {}),
+                              child: MovieCard2Widget(
+                                img:
+                                    'https://dimg.dreamflow.cloud/v1/image/The%20Dark%20Knight%20movie%20poster',
                               ),
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              elevation: 2.0,
-                              borderColor: Colors.transparent,
-                              borderWidth: 0.0,
-                              borderRadius: 8.0,
-                              margin: EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 12.0, 0.0),
-                              hidesUnderline: true,
-                              isOverButton: false,
-                              isSearchable: false,
-                              isMultiSelect: false,
+                            ),
+                            wrapWithModel(
+                              model: _model.movieCard2Model3,
+                              updateCallback: () => safeSetState(() {}),
+                              child: MovieCard2Widget(
+                                img:
+                                    'https://dimg.dreamflow.cloud/v1/image/Memento%20movie%20poster',
+                              ),
+                            ),
+                            wrapWithModel(
+                              model: _model.movieCard2Model4,
+                              updateCallback: () => safeSetState(() {}),
+                              child: MovieCard2Widget(
+                                img:
+                                    'https://dimg.dreamflow.cloud/v1/image/Tenet%20movie%20poster',
+                              ),
+                            ),
+                            wrapWithModel(
+                              model: _model.movieCard2Model5,
+                              updateCallback: () => safeSetState(() {}),
+                              child: MovieCard2Widget(
+                                img:
+                                    'https://dimg.dreamflow.cloud/v1/image/The%20Prestige%20movie%20poster',
+                              ),
+                            ),
+                            wrapWithModel(
+                              model: _model.movieCard2Model6,
+                              updateCallback: () => safeSetState(() {}),
+                              child: MovieCard2Widget(
+                                img:
+                                    'https://dimg.dreamflow.cloud/v1/image/Shutter%20Island%20movie%20poster',
+                              ),
+                            ),
+                            wrapWithModel(
+                              model: _model.movieCard2Model7,
+                              updateCallback: () => safeSetState(() {}),
+                              child: MovieCard2Widget(
+                                img:
+                                    'https://dimg.dreamflow.cloud/v1/image/The%20Matrix%20movie%20poster',
+                              ),
+                            ),
+                            wrapWithModel(
+                              model: _model.movieCard2Model8,
+                              updateCallback: () => safeSetState(() {}),
+                              child: MovieCard2Widget(
+                                img:
+                                    'https://dimg.dreamflow.cloud/v1/image/Blade%20Runner%202049%20movie%20poster',
+                              ),
+                            ),
+                            wrapWithModel(
+                              model: _model.movieCard2Model9,
+                              updateCallback: () => safeSetState(() {}),
+                              child: MovieCard2Widget(
+                                img:
+                                    'https://dimg.dreamflow.cloud/v1/image/Dunkirk%20movie%20poster',
+                              ),
                             ),
                           ],
-                        ),
-                        StreamBuilder<List<EpisodesRecord>>(
-                          stream: queryEpisodesRecord(
-                            parent: widget.seriesDoc?.reference,
-                            queryBuilder: (episodesRecord) => episodesRecord
-                                .where(
-                                  'season_number',
-                                  isEqualTo: _model.currentSeason,
-                                )
-                                .orderBy('episode_number'),
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                            List<EpisodesRecord> listViewEpisodesRecordList =
-                                snapshot.data!;
-
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemCount: listViewEpisodesRecordList.length,
-                              itemBuilder: (context, listViewIndex) {
-                                final listViewEpisodesRecord =
-                                    listViewEpisodesRecordList[listViewIndex];
-                                return EpisodeItemWidget(
-                                  key: Key(
-                                      'Keyuc6_${listViewIndex}_of_${listViewEpisodesRecordList.length}'),
-                                  number: 1.0,
-                                  name: 'The Hellfire Club',
-                                  duration: '1h 17m',
-                                );
-                              },
-                            );
-                          },
                         ),
                       ].divide(SizedBox(
                           height: FlutterFlowTheme.of(context)
@@ -954,7 +945,7 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                   ),
                 ),
                 Container(
-                  height: 80.0,
+                  height: 100.0,
                 ),
               ],
             ),
@@ -993,8 +984,8 @@ class _ContentDetailsWidgetState extends State<ContentDetailsWidget> {
                           color: FlutterFlowTheme.of(context).primaryText,
                           size: 24.0,
                         ),
-                        onPressed: () async {
-                          context.safePop();
+                        onPressed: () {
+                          print('IconButton pressed ...');
                         },
                       ),
                     ),
