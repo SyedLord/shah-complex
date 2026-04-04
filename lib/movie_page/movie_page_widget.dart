@@ -69,6 +69,7 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                         fit: BoxFit.cover,
                       ),
                       Container(
+                        width: double.infinity,
                         height: 300.0,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -297,7 +298,7 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               onTap: () async {
                                 await launchURL(widget.movieDoc?.driveType ==
                                         'gdrive'
-                                    ? 'https://drive.google.com/uc?export=download&id=${widget.movieDoc?.videoUrl}'
+                                    ? 'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&key=AIzaSyBlPgv8kAOBEQLrvakhvLL87sCzgju1rIE'
                                     : 'https://onedrive.live.com/download?resid=${widget.movieDoc?.videoUrl}');
                               },
                               child: Container(
@@ -753,110 +754,117 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                     .designToken
                                     .spacing
                                     .md),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'MORE LIKE THIS',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelLarge
-                                          .override(
-                                            font: GoogleFonts.inter(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'MORE LIKE THIS',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelLarge
+                                                        .fontStyle,
+                                              ),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.bold,
                                               fontStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .labelLarge
                                                       .fontStyle,
+                                              lineHeight: 1.3,
                                             ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 14.0,
-                                            letterSpacing: 0.0,
+                                      ),
+                                      Container(
+                                        width: 40.0,
+                                        height: 4.0,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          borderRadius: BorderRadius.circular(
+                                              FlutterFlowTheme.of(context)
+                                                  .designToken
+                                                  .radius
+                                                  .full),
+                                        ),
+                                      ),
+                                    ].divide(SizedBox(
+                                        height: FlutterFlowTheme.of(context)
+                                            .designToken
+                                            .spacing
+                                            .xs)),
+                                  ),
+                                  Text(
+                                    'TRAILERS & MORE',
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          font: GoogleFonts.inter(
                                             fontWeight: FontWeight.bold,
                                             fontStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelLarge
                                                     .fontStyle,
-                                            lineHeight: 1.3,
                                           ),
-                                    ),
-                                    Container(
-                                      width: 40.0,
-                                      height: 4.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        borderRadius: BorderRadius.circular(
-                                            FlutterFlowTheme.of(context)
-                                                .designToken
-                                                .radius
-                                                .full),
-                                      ),
-                                    ),
-                                  ].divide(SizedBox(
-                                      height: FlutterFlowTheme.of(context)
-                                          .designToken
-                                          .spacing
-                                          .xs)),
-                                ),
-                                Text(
-                                  'TRAILERS & MORE',
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelLarge
-                                      .override(
-                                        font: GoogleFonts.inter(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelLarge
                                                   .fontStyle,
+                                          lineHeight: 1.3,
                                         ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelLarge
-                                            .fontStyle,
-                                        lineHeight: 1.3,
-                                      ),
-                                ),
-                                Text(
-                                  'DETAILS',
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelLarge
-                                      .override(
-                                        font: GoogleFonts.inter(
+                                  ),
+                                  Text(
+                                    'DETAILS',
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelLarge
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelLarge
                                                   .fontStyle,
+                                          lineHeight: 1.3,
                                         ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelLarge
-                                            .fontStyle,
-                                        lineHeight: 1.3,
-                                      ),
-                                ),
-                              ].divide(SizedBox(
-                                  width: FlutterFlowTheme.of(context)
-                                      .designToken
-                                      .spacing
-                                      .lg)),
+                                  ),
+                                ].divide(SizedBox(
+                                    width: FlutterFlowTheme.of(context)
+                                        .designToken
+                                        .spacing
+                                        .lg)),
+                              ),
                             ),
                           ),
                         ),
