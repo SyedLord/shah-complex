@@ -297,18 +297,9 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                if (widget.movieDoc?.driveType == 'gdrive') {
-                                  await launchURL(
-                                      'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&key=AIzaSyBlPgv8kAOBEQLrvakhvLL87sCzgju1rIE');
-                                } else {
-                                  _model.videolink =
-                                      await actions.getOneDriveDirectLink(
-                                    widget.movieDoc!.videoUrl,
-                                  );
-                                  await launchURL(_model.videolink!);
-                                }
-
-                                safeSetState(() {});
+                                await actions.playVideoInExternalPlayer(
+                                  'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&key=AIzaSyBlPgv8kAOBEQLrvakhvLL87sCzgju1rIE',
+                                );
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -1016,8 +1007,8 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                           color: FlutterFlowTheme.of(context).primaryText,
                           size: 24.0,
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
+                        onPressed: () async {
+                          context.safePop();
                         },
                       ),
                     ),
