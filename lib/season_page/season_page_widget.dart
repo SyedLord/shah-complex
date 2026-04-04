@@ -940,6 +940,7 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
 
                             return ListView.builder(
                               padding: EdgeInsets.zero,
+                              primary: false,
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
                               itemCount: listViewEpisodesRecordList.length,
