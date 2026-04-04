@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
-import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -297,18 +296,8 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                if (widget.movieDoc?.driveType == 'gdrive') {
-                                  await launchURL(
-                                      'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&key=AIzaSyBlPgv8kAOBEQLrvakhvLL87sCzgju1rIE');
-                                } else {
-                                  _model.oneDriveLink =
-                                      await actions.getOneDriveDirectLink(
-                                    widget.movieDoc!.videoUrl,
-                                  );
-                                  await launchURL(_model.oneDriveLink!);
-                                }
-
-                                safeSetState(() {});
+                                await launchURL(
+                                    'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&key=AIzaSyBlPgv8kAOBEQLrvakhvLL87sCzgju1rIE');
                               },
                               child: Container(
                                 decoration: BoxDecoration(

@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 class MoviePageModel extends FlutterFlowModel<MoviePageWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - getOneDriveDirectLink] action in PlayBtn widget.
-  String? oneDriveLink;
   // Model for MovieCard2 component.
   late MovieCard2Model movieCard2Model1;
   // Model for MovieCard2 component.
