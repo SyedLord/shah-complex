@@ -15,16 +15,15 @@ import 'package:url_launcher/url_launcher.dart';
 Future playVideoInExternalPlayer(String videoUrl) async {
   try {
     if (Platform.isAndroid) {
-      // Android ke liye jadu: MIME type 'video/*'
-      // Ye OS ko batata hai ke "Open With" mein sirf Video Players dikhao
       final AndroidIntent intent = AndroidIntent(
         action: 'action_view',
         data: videoUrl,
         type: 'video/*',
+        // YE NAYI LINE HAI: Ye VLC ko hamesha fresh start degi
+        flags: <int>[268435456], // FLAG_ACTIVITY_NEW_TASK
       );
       await intent.launch();
     } else {
-      // iOS (iPhone) ke liye fallback
       Uri url = Uri.parse(videoUrl);
       if (await canLaunchUrl(url)) {
         await launchUrl(url, mode: LaunchMode.externalApplication);
