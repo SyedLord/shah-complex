@@ -190,6 +190,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                         mainAxisSpacing: 10.0,
                         childAspectRatio: 1.0,
                       ),
+                      primary: false,
                       scrollDirection: Axis.vertical,
                       itemCount: moviesMoviesRecordList.length,
                       itemBuilder: (context, moviesIndex) {
@@ -242,6 +243,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                         mainAxisSpacing: 10.0,
                         childAspectRatio: 1.0,
                       ),
+                      primary: false,
                       scrollDirection: Axis.vertical,
                       itemCount: trendingMoviesMoviesRecordList.length,
                       itemBuilder: (context, trendingMoviesIndex) {
@@ -294,6 +296,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                         mainAxisSpacing: 10.0,
                         childAspectRatio: 1.0,
                       ),
+                      primary: false,
                       scrollDirection: Axis.vertical,
                       itemCount: trendingSeriesSeriesRecordList.length,
                       itemBuilder: (context, trendingSeriesIndex) {
@@ -344,6 +347,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                         mainAxisSpacing: 10.0,
                         childAspectRatio: 1.0,
                       ),
+                      primary: false,
                       scrollDirection: Axis.vertical,
                       itemCount: seriesSeriesRecordList.length,
                       itemBuilder: (context, seriesIndex) {
