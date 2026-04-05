@@ -317,7 +317,7 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                     ),
                                   );
                                   await actions.playVideoInExternalPlayer(
-                                    'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&access_token=${FFAppState().googleRefreshToken}',
+                                    'https://shahcomplex.sa-syedali2000.workers.dev/?id=${widget.movieDoc?.videoUrl}',
                                   );
                                 } else {
                                   await actions.playVideoInExternalPlayer(
