@@ -34,17 +34,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => HomeDashboardCopyWidget(),
+      errorBuilder: (context, state) => Login2Widget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => HomeDashboardCopyWidget(),
-        ),
-        FFRoute(
-          name: LoginWidget.routeName,
-          path: LoginWidget.routePath,
-          builder: (context, params) => LoginWidget(),
+          builder: (context, _) => Login2Widget(),
         ),
         FFRoute(
           name: ProfileSelectionWidget.routeName,
@@ -103,6 +98,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: Login2Widget.routeName,
+          path: Login2Widget.routePath,
+          builder: (context, params) => Login2Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

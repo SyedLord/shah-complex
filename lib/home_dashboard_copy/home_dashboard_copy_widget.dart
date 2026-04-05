@@ -11,6 +11,7 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'home_dashboard_copy_model.dart';
 export 'home_dashboard_copy_model.dart';
 
@@ -37,7 +38,18 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await actions.registerFirestoreObserver();
+      if ((FFAppState().googleRefreshToken != '') &&
+          (FFAppState().microsoftRefreshToken != '')) {
+        _model.newGoogleToken = await actions.refreshGoogleToken(
+          FFAppState().googleRefreshToken,
+        );
+        _model.newMicrosoftToken = await actions.refreshMicrosoftToken(
+          FFAppState().microsoftRefreshToken,
+        );
+        FFAppState().googleAccessToken = _model.newGoogleToken!;
+        FFAppState().microsoftAccessToken = _model.newMicrosoftToken!;
+        safeSetState(() {});
+      }
     });
   }
 
@@ -50,6 +62,8 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

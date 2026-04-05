@@ -3,7 +3,6 @@ plugins {
    id "kotlin-android"
    id "dev.flutter.flutter-gradle-plugin"
    id "com.google.gms.google-services"  // Google Services plugin
-
 }
 
 def localProperties = new Properties()
@@ -61,6 +60,11 @@ android {
         targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        
+        // 🌟 YEH LINE ADD HUI HAI - AppAuth redirect ke liye
+        manifestPlaceholders = [
+            'appAuthRedirectScheme': 'com.syedlord.shahcomplex'
+        ]
     }
 
    signingConfigs {

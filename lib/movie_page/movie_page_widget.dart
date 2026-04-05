@@ -8,6 +8,7 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'movie_page_model.dart';
 export 'movie_page_model.dart';
 
@@ -46,6 +47,8 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -297,9 +300,15 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                await actions.playVideoInExternalPlayer(
-                                  'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&key=AIzaSyBlPgv8kAOBEQLrvakhvLL87sCzgju1rIE',
-                                );
+                                if (widget.movieDoc?.driveType == 'gdrive') {
+                                  await actions.playVideoInExternalPlayer(
+                                    'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&access_token=${FFAppState().googleAccessToken}',
+                                  );
+                                } else {
+                                  await actions.playVideoInExternalPlayer(
+                                    'https://graph.microsoft.com/v1.0/me/drive/items/${widget.movieDoc?.videoUrl}/content?access_token=${FFAppState().microsoftAccessToken}',
+                                  );
+                                }
                               },
                               child: Container(
                                 decoration: BoxDecoration(
