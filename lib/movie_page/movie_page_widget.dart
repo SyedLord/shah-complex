@@ -301,6 +301,21 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               highlightColor: Colors.transparent,
                               onTap: () async {
                                 if (widget.movieDoc?.driveType == 'gdrive') {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&access_token=${FFAppState().googleAccessToken}',
+                                        style: TextStyle(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondary,
+                                    ),
+                                  );
                                   await actions.playVideoInExternalPlayer(
                                     'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&access_token=${FFAppState().googleAccessToken}',
                                   );
