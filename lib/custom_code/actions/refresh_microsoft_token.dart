@@ -14,7 +14,8 @@ Future<String?> refreshMicrosoftToken(String refreshToken) async {
   final FlutterAppAuth appAuth = FlutterAppAuth();
   // Wahi Azure wali Client ID
   final String clientId = '11603a39-a52b-42ea-9d41-6630daffb0d6';
-  final String redirectUrl = 'com.syedlord.shahcomplex:/oauth2redirect';
+  final String redirectUrl =
+      'com.googleusercontent.apps.491007200119-idq8l6r70a53q4c40k8l7890agfpagqp://oauth2redirect';
 
   try {
     final TokenResponse? result = await appAuth.token(TokenRequest(
