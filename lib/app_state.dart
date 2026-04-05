@@ -33,7 +33,7 @@ class FFAppState extends ChangeNotifier {
           prefs.getString('ff_microsoftRefreshToken') ?? _microsoftRefreshToken;
     });
     _safeInit(() {
-      _isLoggedin = prefs.getString('ff_isLoggedin') ?? _isLoggedin;
+      _isLoggedin = prefs.getBool('ff_isLoggedin') ?? _isLoggedin;
     });
   }
 
@@ -107,11 +107,11 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_microsoftRefreshToken', value);
   }
 
-  String _isLoggedin = '';
-  String get isLoggedin => _isLoggedin;
-  set isLoggedin(String value) {
+  bool _isLoggedin = false;
+  bool get isLoggedin => _isLoggedin;
+  set isLoggedin(bool value) {
     _isLoggedin = value;
-    prefs.setString('ff_isLoggedin', value);
+    prefs.setBool('ff_isLoggedin', value);
   }
 }
 

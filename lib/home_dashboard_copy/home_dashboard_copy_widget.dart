@@ -38,17 +38,34 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if ((FFAppState().googleRefreshToken != '') &&
-          (FFAppState().microsoftRefreshToken != '')) {
-        _model.newGoogleToken = await actions.refreshGoogleToken(
-          FFAppState().googleRefreshToken,
-        );
-        _model.newMicrosoftToken = await actions.refreshMicrosoftToken(
-          FFAppState().microsoftRefreshToken,
-        );
-        FFAppState().googleAccessToken = _model.newGoogleToken!;
-        FFAppState().microsoftAccessToken = _model.newMicrosoftToken!;
-        safeSetState(() {});
+      if (FFAppState().isLoggedin == true) {
+        if ((FFAppState().googleRefreshToken != '') &&
+            (FFAppState().microsoftRefreshToken != '')) {
+          _model.newGoogleToken = await actions.refreshGoogleToken(
+            FFAppState().googleRefreshToken,
+          );
+          _model.newMicrosoftToken = await actions.refreshMicrosoftToken(
+            FFAppState().microsoftRefreshToken,
+          );
+          if ((_model.newGoogleToken != null && _model.newGoogleToken != '') &&
+              (_model.newMicrosoftToken != null &&
+                  _model.newMicrosoftToken != '')) {
+            FFAppState().googleAccessToken = _model.newGoogleToken!;
+            FFAppState().microsoftAccessToken = _model.newMicrosoftToken!;
+            safeSetState(() {});
+          } else {
+            FFAppState().googleAccessToken = '';
+            FFAppState().googleRefreshToken = '';
+            FFAppState().microsoftAccessToken = '';
+            FFAppState().microsoftRefreshToken = '';
+            FFAppState().isLoggedin = false;
+            safeSetState(() {});
+
+            context.goNamed(LoginPageWidget.routeName);
+          }
+        }
+      } else {
+        context.goNamed(LoginPageWidget.routeName);
       }
     });
   }

@@ -6,4 +6,4 @@ export '/home_dashboard_copy/home_dashboard_copy_widget.dart'
 export '/all_items/all_items_widget.dart' show AllItemsWidget;
 export '/movie_page/movie_page_widget.dart' show MoviePageWidget;
 export '/season_page/season_page_widget.dart' show SeasonPageWidget;
-export '/login2/login2_widget.dart' show Login2Widget;
+export '/login_page/login_page_widget.dart' show LoginPageWidget;

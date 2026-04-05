@@ -1,8 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'login2_widget.dart' show Login2Widget;
+import '/index.dart';
+import 'login_page_widget.dart' show LoginPageWidget;
 import 'package:flutter/material.dart';
 
-class Login2Model extends FlutterFlowModel<Login2Widget> {
+class LoginPageModel extends FlutterFlowModel<LoginPageWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Custom Action - googleDriveLogin] action in GoogleLoginBtn widget.

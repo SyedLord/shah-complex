@@ -3,32 +3,34 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
+import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'login2_model.dart';
-export 'login2_model.dart';
+import 'package:provider/provider.dart';
+import 'login_page_model.dart';
+export 'login_page_model.dart';
 
-class Login2Widget extends StatefulWidget {
-  const Login2Widget({super.key});
+class LoginPageWidget extends StatefulWidget {
+  const LoginPageWidget({super.key});
 
-  static String routeName = 'Login2';
-  static String routePath = '/login2';
+  static String routeName = 'LoginPage';
+  static String routePath = '/loginPage';
 
   @override
-  State<Login2Widget> createState() => _Login2WidgetState();
+  State<LoginPageWidget> createState() => _LoginPageWidgetState();
 }
 
-class _Login2WidgetState extends State<Login2Widget> {
-  late Login2Model _model;
+class _LoginPageWidgetState extends State<LoginPageWidget> {
+  late LoginPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => Login2Model());
+    _model = createModel(context, () => LoginPageModel());
   }
 
   @override
@@ -40,6 +42,8 @@ class _Login2WidgetState extends State<Login2Widget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -353,10 +357,22 @@ class _Login2WidgetState extends State<Login2Widget> {
                                   r'''$.refreshToken''',
                                 ).toString();
                                 safeSetState(() {});
+                                if ((FFAppState().googleRefreshToken !=
+                                            '') &&
+                                    (FFAppState().microsoftRefreshToken !=
+                                            '')) {
+                                  FFAppState().isLoggedin = true;
+                                  safeSetState(() {});
+
+                                  context.goNamed(
+                                      HomeDashboardCopyWidget.routeName);
+                                }
 
                                 safeSetState(() {});
                               },
-                              text: 'Login Google',
+                              text: FFAppState().googleRefreshToken != ''
+                                  ? 'Login Sucessful'
+                                  : 'Login Google',
                               icon: FaIcon(
                                 FontAwesomeIcons.google,
                                 size: 15.0,
@@ -411,10 +427,22 @@ class _Login2WidgetState extends State<Login2Widget> {
                                   r'''$.refreshToken''',
                                 ).toString();
                                 safeSetState(() {});
+                                if ((FFAppState().googleRefreshToken !=
+                                            '') &&
+                                    (FFAppState().microsoftRefreshToken !=
+                                            '')) {
+                                  FFAppState().isLoggedin = true;
+                                  safeSetState(() {});
+
+                                  context.goNamed(
+                                      HomeDashboardCopyWidget.routeName);
+                                }
 
                                 safeSetState(() {});
                               },
-                              text: 'Login OneDrive',
+                              text: FFAppState().microsoftRefreshToken != ''
+                                  ? 'Login Sucessful'
+                                  : 'Login OneDrive',
                               icon: Icon(
                                 Icons.cloud_outlined,
                                 size: 24.0,
@@ -602,55 +630,6 @@ class _Login2WidgetState extends State<Login2Widget> {
                   ].divide(SizedBox(
                       height:
                           FlutterFlowTheme.of(context).designToken.spacing.xl)),
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: AlignmentDirectional(0.0, -1.0),
-            child: Container(
-              height: 44.0,
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      '9:41',
-                      style: TextStyle(
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.signal_cellular_4_bar_rounded,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.wifi_rounded,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.battery_full_rounded,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 16.0,
-                        ),
-                      ].divide(SizedBox(
-                          width: FlutterFlowTheme.of(context)
-                              .designToken
-                              .spacing
-                              .xs)),
-                    ),
-                  ],
                 ),
               ),
             ),
