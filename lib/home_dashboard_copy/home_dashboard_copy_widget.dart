@@ -39,7 +39,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (FFAppState().isLoggedin == true) {
-        if ((FFAppState().googleRefreshToken != '') &&
+        if ((FFAppState().googleRefreshToken != '') ||
             (FFAppState().microsoftRefreshToken != '')) {
           _model.newGoogleToken = await actions.refreshGoogleToken(
             FFAppState().googleRefreshToken,
@@ -47,7 +47,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
           _model.newMicrosoftToken = await actions.refreshMicrosoftToken(
             FFAppState().microsoftRefreshToken,
           );
-          if ((_model.newGoogleToken != null && _model.newGoogleToken != '') &&
+          if ((_model.newGoogleToken != null && _model.newGoogleToken != '') ||
               (_model.newMicrosoftToken != null &&
                   _model.newMicrosoftToken != '')) {
             FFAppState().googleAccessToken = _model.newGoogleToken!;

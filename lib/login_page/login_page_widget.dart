@@ -380,7 +380,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   ),
                                 );
                                 if ((FFAppState().googleRefreshToken !=
-                                            '') &&
+                                            '') ||
                                     (FFAppState().microsoftRefreshToken !=
                                             '')) {
                                   FFAppState().isLoggedin = true;
