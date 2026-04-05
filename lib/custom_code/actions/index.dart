@@ -5,3 +5,4 @@ export 'google_drive_login.dart' show googleDriveLogin;
 export 'one_drive_login.dart' show oneDriveLogin;
 export 'refresh_google_token.dart' show refreshGoogleToken;
 export 'refresh_microsoft_token.dart' show refreshMicrosoftToken;
+export 'google_drive_login2.dart' show googleDriveLogin2;
