@@ -317,7 +317,7 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                     ),
                                   );
                                   await actions.playVideoInExternalPlayer(
-                                    'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&access_token=${FFAppState().googleAccessToken}',
+                                    'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&access_token=${FFAppState().googleRefreshToken}',
                                   );
                                 } else {
                                   await actions.playVideoInExternalPlayer(
