@@ -15,9 +15,9 @@ Future<dynamic> googleDriveLogin() async {
 
   // Yahan apna NAYA Google Client ID daalein jo is app ke liye banaya ho
   final String clientId =
-      '491007200119-v0ubtsmno0296pggb7atpg4v6uikmob9.apps.googleusercontent.com';
-  // App ka naya redirect URL
-  final String redirectUrl = 'com.syedlord.shahcomplex:/oauth2redirect';
+      '491007200119-idq8l6r70a53q4c40k8l7890agfpagqp.apps.googleusercontent.com';
+  final String redirectUrl =
+      'com.googleusercontent.apps.491007200119-idq8l6r70a53q4c40k8l7890agfpagqp:/oauth2redirect';
 
   try {
     final AuthorizationTokenResponse? result =

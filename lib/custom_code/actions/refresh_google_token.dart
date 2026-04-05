@@ -14,8 +14,9 @@ Future<String?> refreshGoogleToken(String refreshToken) async {
   final FlutterAppAuth appAuth = FlutterAppAuth();
   // Wahi Google Client ID jo pehle use ki thi
   final String clientId =
-      'YOUR_NEW_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
-  final String redirectUrl = 'com.syedlord.shahcomplex:/oauth2redirect';
+      '491007200119-idq8l6r70a53q4c40k8l7890agfpagqp.apps.googleusercontent.com';
+  final String redirectUrl =
+      'com.googleusercontent.apps.491007200119-idq8l6r70a53q4c40k8l7890agfpagqp:/oauth2redirect';
 
   try {
     final TokenResponse? result = await appAuth.token(TokenRequest(

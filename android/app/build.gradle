@@ -63,7 +63,7 @@ android {
         
         // 🌟 YEH LINE ADD HUI HAI - AppAuth redirect ke liye
         manifestPlaceholders = [
-            'appAuthRedirectScheme': 'com.syedlord.shahcomplex'
+            'appAuthRedirectScheme': 'com.googleusercontent.apps.491007200119-idq8l6r70a53q4c40k8l7890agfpagqp'
         ]
     }
 
