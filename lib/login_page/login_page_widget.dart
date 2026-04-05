@@ -365,6 +365,20 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   r'''$.refreshToken''',
                                 ).toString();
                                 safeSetState(() {});
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Access Token: ${FFAppState().googleAccessToken} Refresh Token: ${FFAppState().googleRefreshToken}',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).secondary,
+                                  ),
+                                );
                                 if ((FFAppState().googleRefreshToken !=
                                             '') &&
                                     (FFAppState().microsoftRefreshToken !=
@@ -435,6 +449,20 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   r'''$.refreshToken''',
                                 ).toString();
                                 safeSetState(() {});
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Access Token: ${FFAppState().microsoftAccessToken}Refresh Token: ${FFAppState().microsoftRefreshToken}',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).secondary,
+                                  ),
+                                );
                                 if ((FFAppState().googleRefreshToken !=
                                             '') &&
                                     (FFAppState().microsoftRefreshToken !=
