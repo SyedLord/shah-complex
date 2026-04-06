@@ -8,6 +8,8 @@ class SeasonPageModel extends FlutterFlowModel<SeasonPageWidget> {
 
   int selectedSeason = 1;
 
+  bool isExpanded = false;
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for SeasonSelector widget.
