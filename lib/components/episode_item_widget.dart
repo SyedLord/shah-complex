@@ -2,9 +2,11 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'episode_item_model.dart';
 export 'episode_item_model.dart';
 
@@ -44,6 +46,8 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(
           0.0, 0.0, 0.0, FlutterFlowTheme.of(context).designToken.spacing.sm),
@@ -73,11 +77,28 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                   ),
                   child: Stack(
                     children: [
-                      CachedNetworkImage(
-                        fadeInDuration: Duration(milliseconds: 0),
-                        fadeOutDuration: Duration(milliseconds: 0),
-                        imageUrl: widget.episodeDoc!.thumbnail,
-                        fit: BoxFit.cover,
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          if (widget.episodeDoc?.driveType == 'gdrive') {
+                            await actions.playVideoInExternalPlayer(
+                              'https://shahcomplex.sa-syedali2000.workers.dev/?id=${widget.episodeDoc?.videoUrl}',
+                            );
+                          } else {
+                            await actions.playVideoInExternalPlayer(
+                              'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&file_id=${widget.episodeDoc?.videoUrl}&key=Pappu@007',
+                            );
+                          }
+                        },
+                        child: CachedNetworkImage(
+                          fadeInDuration: Duration(milliseconds: 0),
+                          fadeOutDuration: Duration(milliseconds: 0),
+                          imageUrl: widget.episodeDoc!.thumbnail,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       Align(
                         alignment: AlignmentDirectional(0.0, 0.0),
