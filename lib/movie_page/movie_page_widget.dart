@@ -301,27 +301,12 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               highlightColor: Colors.transparent,
                               onTap: () async {
                                 if (widget.movieDoc?.driveType == 'gdrive') {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'https://www.googleapis.com/drive/v3/files/${widget.movieDoc?.videoUrl}?alt=media&access_token=${FFAppState().googleAccessToken}',
-                                        style: TextStyle(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
-                                      ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                    ),
-                                  );
                                   await actions.playVideoInExternalPlayer(
                                     'https://shahcomplex.sa-syedali2000.workers.dev/?id=${widget.movieDoc?.videoUrl}',
                                   );
                                 } else {
                                   await actions.playVideoInExternalPlayer(
-                                    'https://graph.microsoft.com/v1.0/me/drive/items/${widget.movieDoc?.videoUrl}/content?access_token=${FFAppState().microsoftAccessToken}',
+                                    'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&fileid=${widget.movieDoc?.videoUrl}&key=Pappu@007',
                                   );
                                 }
                               },

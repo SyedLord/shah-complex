@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
-import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -37,37 +36,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
     _model = createModel(context, () => HomeDashboardCopyModel());
 
     // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().isLoggedin == true) {
-        if ((FFAppState().googleRefreshToken != '') ||
-            (FFAppState().microsoftRefreshToken != '')) {
-          _model.newGoogleToken = await actions.refreshGoogleToken(
-            FFAppState().googleRefreshToken,
-          );
-          _model.newMicrosoftToken = await actions.refreshMicrosoftToken(
-            FFAppState().microsoftRefreshToken,
-          );
-          if ((_model.newGoogleToken != null && _model.newGoogleToken != '') ||
-              (_model.newMicrosoftToken != null &&
-                  _model.newMicrosoftToken != '')) {
-            FFAppState().googleAccessToken = _model.newGoogleToken!;
-            FFAppState().microsoftAccessToken = _model.newMicrosoftToken!;
-            safeSetState(() {});
-          } else {
-            FFAppState().googleAccessToken = '';
-            FFAppState().googleRefreshToken = '';
-            FFAppState().microsoftAccessToken = '';
-            FFAppState().microsoftRefreshToken = '';
-            FFAppState().isLoggedin = false;
-            safeSetState(() {});
-
-            context.goNamed(LoginPageWidget.routeName);
-          }
-        }
-      } else {
-        context.goNamed(LoginPageWidget.routeName);
-      }
-    });
+    SchedulerBinding.instance.addPostFrameCallback((_) async {});
   }
 
   @override

@@ -9,10 +9,6 @@ import 'package:flutter/material.dart';
 class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - refreshGoogleToken] action in HomeDashboardCopy widget.
-  String? newGoogleToken;
-  // Stores action output result for [Custom Action - refreshMicrosoftToken] action in HomeDashboardCopy widget.
-  String? newMicrosoftToken;
   // Model for HeroPoster component.
   late HeroPosterModel heroPosterModel;
   // Model for section_header component.
