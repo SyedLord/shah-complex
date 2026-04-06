@@ -306,7 +306,7 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                   );
                                 } else {
                                   await actions.playVideoInExternalPlayer(
-                                    'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&fileid=${widget.movieDoc?.videoUrl}&key=Pappu@007',
+                                    'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&file_id=${widget.movieDoc?.videoUrl}&key=Pappu@007',
                                   );
                                 }
                               },
