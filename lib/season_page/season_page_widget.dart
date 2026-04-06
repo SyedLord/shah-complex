@@ -252,10 +252,7 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                               ),
                             ),
                             Text(
-                              valueOrDefault<String>(
-                                widget.seriesDoc?.totalSeasons.toString(),
-                                '1 Seasons',
-                              ),
+                              '${widget.seriesDoc?.totalSeasons.toString()} Seasons',
                               style: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(
@@ -290,190 +287,37 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).primary,
-                                borderRadius: BorderRadius.circular(
-                                    FlutterFlowTheme.of(context)
-                                        .designToken
-                                        .radius
-                                        .lg),
-                              ),
-                              child: Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Stack(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  children: [
-                                    Container(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            FlutterFlowTheme.of(context)
-                                                .designToken
-                                                .spacing
-                                                .xl,
-                                            FlutterFlowTheme.of(context)
-                                                .designToken
-                                                .spacing
-                                                .md,
-                                            FlutterFlowTheme.of(context)
-                                                .designToken
-                                                .spacing
-                                                .xl,
-                                            FlutterFlowTheme.of(context)
-                                                .designToken
-                                                .spacing
-                                                .md),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.play_arrow_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              size: 16.0,
-                                            ),
-                                            Text(
-                                              'Play',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .labelMedium
-                                                  .override(
-                                                    font: GoogleFonts.inter(
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .fontStyle,
-                                                    ),
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    fontSize: 12.0,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium
-                                                            .fontStyle,
-                                                    lineHeight: 1.3,
-                                                  ),
-                                            ),
-                                            Container(
-                                              width: 0.0,
-                                              height: 0.0,
-                                            ),
-                                          ].divide(SizedBox(width: 8.0)),
-                                        ),
-                                      ),
+                            AnimatedDefaultTextStyle(
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
-                                    Container(
-                                      width: 0.0,
-                                      height: 0.0,
-                                    ),
-                                  ],
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.normal,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                    lineHeight: 1.4,
+                                  ),
+                              duration: Duration(milliseconds: 600),
+                              curve: Curves.easeIn,
+                              child: Text(
+                                valueOrDefault<String>(
+                                  widget.seriesDoc?.description,
+                                  'Description',
                                 ),
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).secondary,
-                                borderRadius: BorderRadius.circular(
-                                    FlutterFlowTheme.of(context)
-                                        .designToken
-                                        .radius
-                                        .lg),
-                              ),
-                              child: Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Stack(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  children: [
-                                    Container(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            FlutterFlowTheme.of(context)
-                                                .designToken
-                                                .spacing
-                                                .xl,
-                                            FlutterFlowTheme.of(context)
-                                                .designToken
-                                                .spacing
-                                                .md,
-                                            FlutterFlowTheme.of(context)
-                                                .designToken
-                                                .spacing
-                                                .xl,
-                                            FlutterFlowTheme.of(context)
-                                                .designToken
-                                                .spacing
-                                                .md),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.download_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              size: 16.0,
-                                            ),
-                                            Text(
-                                              'Download',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .labelMedium
-                                                  .override(
-                                                    font: GoogleFonts.inter(
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .fontStyle,
-                                                    ),
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    fontSize: 12.0,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium
-                                                            .fontStyle,
-                                                    lineHeight: 1.3,
-                                                  ),
-                                            ),
-                                            Container(
-                                              width: 0.0,
-                                              height: 0.0,
-                                            ),
-                                          ].divide(SizedBox(width: 8.0)),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 0.0,
-                                      height: 0.0,
-                                    ),
-                                  ],
-                                ),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ].divide(SizedBox(
@@ -481,32 +325,6 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                   .designToken
                                   .spacing
                                   .sm)),
-                        ),
-                        Text(
-                          valueOrDefault<String>(
-                            widget.seriesDoc?.description,
-                            'Description',
-                          ),
-                          maxLines: 3,
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                font: GoogleFonts.inter(
-                                  fontWeight: FontWeight.normal,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .fontStyle,
-                                ),
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 14.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.normal,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontStyle,
-                                lineHeight: 1.4,
-                              ),
-                          overflow: TextOverflow.ellipsis,
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
