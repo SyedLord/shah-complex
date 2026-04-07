@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,6 +42,10 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
 
     _model.searchFieldTextController ??= TextEditingController();
     _model.searchFieldFocusNode ??= FocusNode();
+
+    _model.expandableExpandableController =
+        ExpandableController(initialExpanded: false)
+          ..addListener(() => safeSetState(() {}));
   }
 
   @override
@@ -356,6 +361,102 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                   ],
                 ),
               ],
+            ),
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                height: 200.0,
+                color: Color(0x00000000),
+                child: ExpandableNotifier(
+                  controller: _model.expandableExpandableController,
+                  child: ExpandablePanel(
+                    header: Text(
+                      'Header',
+                      style: FlutterFlowTheme.of(context).titleLarge.override(
+                            font: GoogleFonts.inter(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .fontStyle,
+                            ),
+                            color: Colors.black,
+                            letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .fontStyle,
+                          ),
+                    ),
+                    collapsed: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Collapsed body text',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    color: Color(0x8A000000),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                    expanded: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          'Expanded body text',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    color: Color(0x8A000000),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                    theme: ExpandableThemeData(
+                      tapHeaderToExpand: true,
+                      tapBodyToExpand: false,
+                      tapBodyToCollapse: false,
+                      headerAlignment: ExpandablePanelHeaderAlignment.center,
+                      hasIcon: true,
+                    ),
+                  ),
+                ),
+              ),
             ),
             Container(
               decoration: BoxDecoration(

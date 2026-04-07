@@ -3,6 +3,7 @@ import '/components/section_header_search_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'search_screen_widget.dart' show SearchScreenWidget;
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreenModel extends FlutterFlowModel<SearchScreenWidget> {
@@ -52,6 +53,8 @@ class SearchScreenModel extends FlutterFlowModel<SearchScreenWidget> {
   List<SeriesRecord>? outSeries;
   // Model for section_headerSearch component.
   late SectionHeaderSearchModel sectionHeaderSearchModel;
+  // State field(s) for Expandable widget.
+  late ExpandableController expandableExpandableController;
 
   @override
   void initState(BuildContext context) {
@@ -65,5 +68,6 @@ class SearchScreenModel extends FlutterFlowModel<SearchScreenWidget> {
     searchFieldTextController?.dispose();
 
     sectionHeaderSearchModel.dispose();
+    expandableExpandableController.dispose();
   }
 }

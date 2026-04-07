@@ -38,6 +38,7 @@ dependencies:
   collection: 1.19.1
   dropdown_button2: 2.3.9
   easy_debounce: 2.0.1
+  expandable: 5.0.1
   firebase_core: 3.14.0
   firebase_core_platform_interface: 5.4.0
   firebase_core_web: 2.23.0
