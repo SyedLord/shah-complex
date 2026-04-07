@@ -74,213 +74,180 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(
-                        FlutterFlowTheme.of(context).designToken.spacing.md),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            FlutterFlowIconButton(
-                              buttonSize: 40.0,
-                              icon: Icon(
-                                Icons.arrow_back_rounded,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                size: 24.0,
-                              ),
-                              onPressed: () async {
-                                context.safePop();
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      FlutterFlowIconButton(
+                        buttonSize: 40.0,
+                        icon: Icon(
+                          Icons.arrow_back_rounded,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
+                          context.safePop();
+                        },
+                      ),
+                      Expanded(
+                        child: Container(
+                          width: 300.0,
+                          child: TextFormField(
+                            controller: _model.searchFieldTextController,
+                            focusNode: _model.searchFieldFocusNode,
+                            onChanged: (_) => EasyDebounce.debounce(
+                              '_model.searchFieldTextController',
+                              Duration(milliseconds: 2000),
+                              () async {
+                                _model.outMovies = await actions.vipSmartSearch(
+                                  _model.searchFieldTextController.text,
+                                  _model.loadedMovies?.toList(),
+                                );
+                                _model.outSeries =
+                                    await actions.vipSmartSearchSeries(
+                                  _model.searchFieldTextController.text,
+                                  _model.loadedSeries?.toList(),
+                                );
+                                _model.searchResultMovies = _model.outMovies!
+                                    .toList()
+                                    .cast<MoviesRecord>();
+                                _model.searchResultSeries = _model.outSeries!
+                                    .toList()
+                                    .cast<SeriesRecord>();
+                                safeSetState(() {});
+
+                                safeSetState(() {});
                               },
                             ),
-                            Expanded(
-                              child: Container(
-                                width: 300.0,
-                                child: TextFormField(
-                                  controller: _model.searchFieldTextController,
-                                  focusNode: _model.searchFieldFocusNode,
-                                  onChanged: (_) => EasyDebounce.debounce(
-                                    '_model.searchFieldTextController',
-                                    Duration(milliseconds: 2000),
-                                    () async {
-                                      _model.outMovies =
-                                          await actions.vipSmartSearch(
-                                        _model.searchFieldTextController.text,
-                                        _model.loadedMovies?.toList(),
-                                      );
-                                      _model.outSeries =
-                                          await actions.vipSmartSearchSeries(
-                                        _model.searchFieldTextController.text,
-                                        _model.loadedSeries?.toList(),
-                                      );
-                                      _model.searchResultMovies = _model
-                                          .outMovies!
-                                          .toList()
-                                          .cast<MoviesRecord>();
-                                      _model.searchResultSeries = _model
-                                          .outSeries!
-                                          .toList()
-                                          .cast<SeriesRecord>();
-                                      safeSetState(() {});
-
-                                      safeSetState(() {});
-                                    },
-                                  ),
-                                  autofocus: false,
-                                  enabled: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    hintText: 'Search Here',
-                                    hintStyle: FlutterFlowTheme.of(context)
+                            autofocus: false,
+                            enabled: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              hintText: 'Search Here',
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontStyle,
+                                    ),
+                                    fontSize: 20.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
                                         .labelMedium
-                                        .override(
-                                          font: GoogleFonts.inter(
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontStyle,
-                                          ),
-                                          fontSize: 20.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .fontStyle,
-                                        ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0x00000000),
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    filled: true,
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    suffixIcon: _model
-                                            .searchFieldTextController!
-                                            .text
-                                            .isNotEmpty
-                                        ? InkWell(
-                                            onTap: () async {
-                                              _model.searchFieldTextController
-                                                  ?.clear();
-                                              _model.outMovies =
-                                                  await actions.vipSmartSearch(
-                                                _model.searchFieldTextController
-                                                    .text,
-                                                _model.loadedMovies?.toList(),
-                                              );
-                                              _model.outSeries = await actions
-                                                  .vipSmartSearchSeries(
-                                                _model.searchFieldTextController
-                                                    .text,
-                                                _model.loadedSeries?.toList(),
-                                              );
-                                              _model.searchResultMovies = _model
-                                                  .outMovies!
-                                                  .toList()
-                                                  .cast<MoviesRecord>();
-                                              _model.searchResultSeries = _model
-                                                  .outSeries!
-                                                  .toList()
-                                                  .cast<SeriesRecord>();
-                                              safeSetState(() {});
-
-                                              safeSetState(() {});
-                                              safeSetState(() {});
-                                            },
-                                            child: Icon(
-                                              Icons.clear,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              size: 22,
-                                            ),
-                                          )
-                                        : null,
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
                                   ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.poppins(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                        fontSize: 20.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                  cursorColor:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  enableInteractiveSelection: true,
-                                  validator: _model
-                                      .searchFieldTextControllerValidator
-                                      .asValidator(context),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
                                 ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              suffixIcon: _model.searchFieldTextController!.text
+                                      .isNotEmpty
+                                  ? InkWell(
+                                      onTap: () async {
+                                        _model.searchFieldTextController
+                                            ?.clear();
+                                        _model.outMovies =
+                                            await actions.vipSmartSearch(
+                                          _model.searchFieldTextController.text,
+                                          _model.loadedMovies?.toList(),
+                                        );
+                                        _model.outSeries =
+                                            await actions.vipSmartSearchSeries(
+                                          _model.searchFieldTextController.text,
+                                          _model.loadedSeries?.toList(),
+                                        );
+                                        _model.searchResultMovies = _model
+                                            .outMovies!
+                                            .toList()
+                                            .cast<MoviesRecord>();
+                                        _model.searchResultSeries = _model
+                                            .outSeries!
+                                            .toList()
+                                            .cast<SeriesRecord>();
+                                        safeSetState(() {});
+
+                                        safeSetState(() {});
+                                        safeSetState(() {});
+                                      },
+                                      child: Icon(
+                                        Icons.clear,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 22,
+                                      ),
+                                    )
+                                  : null,
                             ),
-                          ].divide(SizedBox(
-                              width: FlutterFlowTheme.of(context)
-                                  .designToken
-                                  .spacing
-                                  .md)),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.poppins(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                            cursorColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            enableInteractiveSelection: true,
+                            validator: _model.searchFieldTextControllerValidator
+                                .asValidator(context),
+                          ),
                         ),
-                      ].divide(SizedBox(
-                          width: FlutterFlowTheme.of(context)
-                              .designToken
-                              .spacing
-                              .md)),
-                    ),
+                      ),
+                    ].divide(SizedBox(
+                        width: FlutterFlowTheme.of(context)
+                            .designToken
+                            .spacing
+                            .md)),
                   ),
                 ],
               ),
