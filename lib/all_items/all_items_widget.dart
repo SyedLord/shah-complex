@@ -161,10 +161,12 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
               Expanded(
                 child: StreamBuilder<List<MoviesRecord>>(
                   stream: queryMoviesRecord(
-                    queryBuilder: (moviesRecord) => moviesRecord.where(
-                      'category',
-                      isEqualTo: widget.categoryName,
-                    ),
+                    queryBuilder: (moviesRecord) => moviesRecord
+                        .where(
+                          'category',
+                          isEqualTo: widget.categoryName,
+                        )
+                        .orderBy('title'),
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
