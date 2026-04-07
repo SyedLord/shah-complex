@@ -98,6 +98,50 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: SearchScreenWidget.routeName,
+          path: SearchScreenWidget.routePath,
+          builder: (context, params) => SearchScreenWidget(
+            categoryName: params.getParam(
+              'categoryName',
+              ParamType.String,
+            ),
+            categoryType: params.getParam(
+              'categoryType',
+              ParamType.String,
+            ),
+            isTrending: params.getParam(
+              'isTrending',
+              ParamType.bool,
+            ),
+            isContinueWatching: params.getParam(
+              'isContinueWatching',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: SearchResultsWidget.routeName,
+          path: SearchResultsWidget.routePath,
+          asyncParams: {
+            'passedMovieList':
+                getDocList(['movies'], MoviesRecord.fromSnapshot),
+            'passedSeriesList':
+                getDocList(['series'], SeriesRecord.fromSnapshot),
+          },
+          builder: (context, params) => SearchResultsWidget(
+            passedMovieList: params.getParam<MoviesRecord>(
+              'passedMovieList',
+              ParamType.Document,
+              isList: true,
+            ),
+            passedSeriesList: params.getParam<SeriesRecord>(
+              'passedSeriesList',
+              ParamType.Document,
+              isList: true,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

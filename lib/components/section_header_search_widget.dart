@@ -1,31 +1,31 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'section_header_model.dart';
-export 'section_header_model.dart';
+import 'section_header_search_model.dart';
+export 'section_header_search_model.dart';
 
-class SectionHeaderWidget extends StatefulWidget {
-  const SectionHeaderWidget({
+class SectionHeaderSearchWidget extends StatefulWidget {
+  const SectionHeaderSearchWidget({
     super.key,
-    this.title,
-    this.type,
-    required this.isTrending,
-    required this.isContinueWatching,
+    this.moviesData,
+    this.seriesData,
+    required this.title,
   });
 
+  final List<MoviesRecord>? moviesData;
+  final List<SeriesRecord>? seriesData;
   final String? title;
-  final String? type;
-  final bool? isTrending;
-  final bool? isContinueWatching;
 
   @override
-  State<SectionHeaderWidget> createState() => _SectionHeaderWidgetState();
+  State<SectionHeaderSearchWidget> createState() =>
+      _SectionHeaderSearchWidgetState();
 }
 
-class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
-  late SectionHeaderModel _model;
+class _SectionHeaderSearchWidgetState extends State<SectionHeaderSearchWidget> {
+  late SectionHeaderSearchModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -36,7 +36,7 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SectionHeaderModel());
+    _model = createModel(context, () => SectionHeaderSearchModel());
   }
 
   @override
@@ -59,7 +59,7 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
             Text(
               valueOrDefault<String>(
                 widget.title,
-                'Trending Now',
+                'Title',
               ),
               style: FlutterFlowTheme.of(context).titleMedium.override(
                     font: GoogleFonts.inter(
@@ -83,25 +83,23 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
               highlightColor: Colors.transparent,
               onTap: () async {
                 context.goNamed(
-                  AllItemsWidget.routeName,
+                  SearchResultsWidget.routeName,
                   queryParameters: {
-                    'categoryName': serializeParam(
-                      widget.title,
-                      ParamType.String,
+                    'passedMovieList': serializeParam(
+                      widget.moviesData,
+                      ParamType.Document,
+                      isList: true,
                     ),
-                    'categoryType': serializeParam(
-                      widget.type,
-                      ParamType.String,
-                    ),
-                    'isTrending': serializeParam(
-                      widget.isTrending,
-                      ParamType.bool,
-                    ),
-                    'isContinueWatching': serializeParam(
-                      widget.isContinueWatching,
-                      ParamType.bool,
+                    'passedSeriesList': serializeParam(
+                      widget.seriesData,
+                      ParamType.Document,
+                      isList: true,
                     ),
                   }.withoutNulls,
+                  extra: <String, dynamic>{
+                    'passedMovieList': widget.moviesData,
+                    'passedSeriesList': widget.seriesData,
+                  },
                 );
               },
               child: Text(
