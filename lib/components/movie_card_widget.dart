@@ -53,15 +53,13 @@ class _MovieCardWidgetState extends State<MovieCardWidget> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
         ),
-        child: Stack(
-          children: [
-            CachedNetworkImage(
-              fadeInDuration: Duration(milliseconds: 0),
-              fadeOutDuration: Duration(milliseconds: 0),
-              imageUrl: widget.img!,
-              fit: BoxFit.cover,
-            ),
-          ],
+        child: CachedNetworkImage(
+          fadeInDuration: Duration(milliseconds: 0),
+          fadeOutDuration: Duration(milliseconds: 0),
+          imageUrl: widget.img!,
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.cover,
         ),
       ),
     );
