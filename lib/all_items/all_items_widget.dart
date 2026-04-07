@@ -131,7 +131,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                             size: 24.0,
                           ),
                           onPressed: () {
-                            print('IconButton pressed ...');
+                            print('SearchBtn pressed ...');
                           },
                         ),
                         FlutterFlowIconButton(
@@ -159,75 +159,79 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
             ),
             if (widget.categoryType == 'movie')
               Expanded(
-                child: StreamBuilder<List<MoviesRecord>>(
-                  stream: queryMoviesRecord(
-                    queryBuilder: (moviesRecord) => moviesRecord
-                        .where(
-                          'category',
-                          isEqualTo: widget.categoryName,
-                        )
-                        .orderBy('title'),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                  child: StreamBuilder<List<MoviesRecord>>(
+                    stream: queryMoviesRecord(
+                      queryBuilder: (moviesRecord) => moviesRecord
+                          .where(
+                            'category',
+                            isEqualTo: widget.categoryName,
+                          )
+                          .orderBy('title'),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
-                    List<MoviesRecord> moviesMoviesRecordList = snapshot.data!;
-
-                    return GridView.builder(
-                      padding: EdgeInsets.zero,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 10.0,
-                        childAspectRatio: 0.6,
-                      ),
-                      primary: false,
-                      scrollDirection: Axis.vertical,
-                      itemCount: moviesMoviesRecordList.length,
-                      itemBuilder: (context, moviesIndex) {
-                        final moviesMoviesRecord =
-                            moviesMoviesRecordList[moviesIndex];
-                        return InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed(
-                              MoviePageWidget.routeName,
-                              queryParameters: {
-                                'movieDoc': serializeParam(
-                                  moviesMoviesRecord,
-                                  ParamType.Document,
-                                ),
-                              }.withoutNulls,
-                              extra: <String, dynamic>{
-                                'movieDoc': moviesMoviesRecord,
-                              },
-                            );
-                          },
-                          child: MovieCardWidget(
-                            key: Key(
-                                'Key0kt_${moviesIndex}_of_${moviesMoviesRecordList.length}'),
-                            img: moviesMoviesRecord.posterImage,
-                            movieDoc: moviesMoviesRecord,
-                          ),
                         );
-                      },
-                    );
-                  },
+                      }
+                      List<MoviesRecord> moviesMoviesRecordList =
+                          snapshot.data!;
+
+                      return GridView.builder(
+                        padding: EdgeInsets.zero,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          childAspectRatio: 0.6,
+                        ),
+                        primary: false,
+                        scrollDirection: Axis.vertical,
+                        itemCount: moviesMoviesRecordList.length,
+                        itemBuilder: (context, moviesIndex) {
+                          final moviesMoviesRecord =
+                              moviesMoviesRecordList[moviesIndex];
+                          return InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                MoviePageWidget.routeName,
+                                queryParameters: {
+                                  'movieDoc': serializeParam(
+                                    moviesMoviesRecord,
+                                    ParamType.Document,
+                                  ),
+                                }.withoutNulls,
+                                extra: <String, dynamic>{
+                                  'movieDoc': moviesMoviesRecord,
+                                },
+                              );
+                            },
+                            child: MovieCardWidget(
+                              key: Key(
+                                  'Key0kt_${moviesIndex}_of_${moviesMoviesRecordList.length}'),
+                              img: moviesMoviesRecord.posterImage,
+                              movieDoc: moviesMoviesRecord,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
             if ((widget.categoryType == 'movie') &&
@@ -380,10 +384,12 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
               Expanded(
                 child: StreamBuilder<List<SeriesRecord>>(
                   stream: querySeriesRecord(
-                    queryBuilder: (seriesRecord) => seriesRecord.where(
-                      'category',
-                      isEqualTo: widget.categoryName,
-                    ),
+                    queryBuilder: (seriesRecord) => seriesRecord
+                        .where(
+                          'category',
+                          isEqualTo: widget.categoryName,
+                        )
+                        .orderBy('title'),
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.

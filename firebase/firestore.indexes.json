@@ -15,6 +15,20 @@
       ]
     },
     {
+      "collectionGroup": "series",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "category",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "title",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "episodes",
       "queryScope": "COLLECTION",
       "fields": [
