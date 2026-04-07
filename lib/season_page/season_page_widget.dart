@@ -71,10 +71,12 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                           widget.seriesDoc?.backdropImage,
                           'https://dimg.dreamflow.cloud/v1/image/Stranger%20Things%20season%204%20cinematic%20wide%20shot',
                         ),
-                        height: 240.0,
+                        width: double.infinity,
+                        height: double.infinity,
                         fit: BoxFit.cover,
                       ),
                       Container(
+                        width: double.infinity,
                         height: 240.0,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(

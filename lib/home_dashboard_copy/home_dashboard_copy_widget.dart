@@ -329,7 +329,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                             ),
                             Container(
                               width: double.infinity,
-                              height: 200.0,
+                              height: 220.0,
                               decoration: BoxDecoration(),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -463,7 +463,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                             ),
                             Container(
                               width: double.infinity,
-                              height: 200.0,
+                              height: 220.0,
                               decoration: BoxDecoration(),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(

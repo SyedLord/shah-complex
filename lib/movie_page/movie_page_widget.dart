@@ -69,7 +69,8 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                         fadeInDuration: Duration(milliseconds: 0),
                         fadeOutDuration: Duration(milliseconds: 0),
                         imageUrl: widget.movieDoc!.backdropImage,
-                        height: 300.0,
+                        width: double.infinity,
+                        height: double.infinity,
                         fit: BoxFit.cover,
                       ),
                       Container(
