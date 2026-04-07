@@ -14,18 +14,7 @@ import 'search_screen_model.dart';
 export 'search_screen_model.dart';
 
 class SearchScreenWidget extends StatefulWidget {
-  const SearchScreenWidget({
-    super.key,
-    required this.categoryName,
-    required this.categoryType,
-    required this.isTrending,
-    required this.isContinueWatching,
-  });
-
-  final String? categoryName;
-  final String? categoryType;
-  final bool? isTrending;
-  final bool? isContinueWatching;
+  const SearchScreenWidget({super.key});
 
   static String routeName = 'SearchScreen';
   static String routePath = '/searchScreen';

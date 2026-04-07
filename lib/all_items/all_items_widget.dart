@@ -142,8 +142,8 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                                 color: FlutterFlowTheme.of(context).primaryText,
                                 size: 24.0,
                               ),
-                              onPressed: () {
-                                print('SearchBtn pressed ...');
+                              onPressed: () async {
+                                context.pushNamed(SearchScreenWidget.routeName);
                               },
                             ),
                             FlutterFlowIconButton(

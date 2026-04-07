@@ -102,24 +102,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: SearchScreenWidget.routeName,
           path: SearchScreenWidget.routePath,
-          builder: (context, params) => SearchScreenWidget(
-            categoryName: params.getParam(
-              'categoryName',
-              ParamType.String,
-            ),
-            categoryType: params.getParam(
-              'categoryType',
-              ParamType.String,
-            ),
-            isTrending: params.getParam(
-              'isTrending',
-              ParamType.bool,
-            ),
-            isContinueWatching: params.getParam(
-              'isContinueWatching',
-              ParamType.bool,
-            ),
-          ),
+          builder: (context, params) => SearchScreenWidget(),
         ),
         FFRoute(
           name: SearchResultsWidget.routeName,
