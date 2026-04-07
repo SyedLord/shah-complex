@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'all_items_model.dart';
 export 'all_items_model.dart';
@@ -39,6 +40,13 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => AllItemsModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (widget.categoryType == 'movie') {
+        await queryMoviesRecordOnce();
+      }
+    });
   }
 
   @override
@@ -64,53 +72,96 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
               ),
-              child: Padding(
-                padding: EdgeInsets.all(
-                    FlutterFlowTheme.of(context).designToken.spacing.md),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(
+                        FlutterFlowTheme.of(context).designToken.spacing.md),
+                    child: Row(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        FlutterFlowIconButton(
-                          buttonSize: 40.0,
-                          icon: Icon(
-                            Icons.arrow_back_rounded,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            context.safePop();
-                          },
-                        ),
-                        Text(
-                          valueOrDefault<String>(
-                            widget.categoryName,
-                            'Category Name',
-                          ),
-                          style: FlutterFlowTheme.of(context)
-                              .titleLarge
-                              .override(
-                                font: GoogleFonts.inter(
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .fontStyle,
-                                ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            FlutterFlowIconButton(
+                              buttonSize: 40.0,
+                              icon: Icon(
+                                Icons.arrow_back_rounded,
                                 color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 22.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .titleLarge
-                                    .fontStyle,
-                                lineHeight: 1.2,
+                                size: 24.0,
                               ),
+                              onPressed: () async {
+                                context.safePop();
+                              },
+                            ),
+                            Text(
+                              valueOrDefault<String>(
+                                widget.categoryName,
+                                'Category Name',
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .fontStyle,
+                                    ),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 22.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .fontStyle,
+                                    lineHeight: 1.2,
+                                  ),
+                            ),
+                          ].divide(SizedBox(
+                              width: FlutterFlowTheme.of(context)
+                                  .designToken
+                                  .spacing
+                                  .md)),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            FlutterFlowIconButton(
+                              buttonSize: 40.0,
+                              icon: Icon(
+                                Icons.search_rounded,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 24.0,
+                              ),
+                              onPressed: () {
+                                print('SearchBtn pressed ...');
+                              },
+                            ),
+                            FlutterFlowIconButton(
+                              buttonSize: 40.0,
+                              icon: Icon(
+                                Icons.filter_list_rounded,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 24.0,
+                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                              },
+                            ),
+                          ].divide(SizedBox(
+                              width: FlutterFlowTheme.of(context)
+                                  .designToken
+                                  .spacing
+                                  .sm)),
                         ),
                       ].divide(SizedBox(
                           width: FlutterFlowTheme.of(context)
@@ -118,43 +169,8 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                               .spacing
                               .md)),
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        FlutterFlowIconButton(
-                          buttonSize: 40.0,
-                          icon: Icon(
-                            Icons.search_rounded,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 24.0,
-                          ),
-                          onPressed: () {
-                            print('SearchBtn pressed ...');
-                          },
-                        ),
-                        FlutterFlowIconButton(
-                          buttonSize: 40.0,
-                          icon: Icon(
-                            Icons.filter_list_rounded,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 24.0,
-                          ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                          },
-                        ),
-                      ].divide(SizedBox(
-                          width: FlutterFlowTheme.of(context)
-                              .designToken
-                              .spacing
-                              .sm)),
-                    ),
-                  ].divide(SizedBox(
-                      width:
-                          FlutterFlowTheme.of(context).designToken.spacing.md)),
-                ),
+                  ),
+                ],
               ),
             ),
             if (widget.categoryType == 'movie')
