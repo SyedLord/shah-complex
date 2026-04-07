@@ -237,220 +237,232 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
             if ((widget.categoryType == 'movie') &&
                 (widget.isTrending == true))
               Expanded(
-                child: StreamBuilder<List<MoviesRecord>>(
-                  stream: queryMoviesRecord(
-                    queryBuilder: (moviesRecord) => moviesRecord.where(
-                      'is_trending',
-                      isEqualTo: true,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                  child: StreamBuilder<List<MoviesRecord>>(
+                    stream: queryMoviesRecord(
+                      queryBuilder: (moviesRecord) => moviesRecord.where(
+                        'is_trending',
+                        isEqualTo: true,
+                      ),
                     ),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
-                    List<MoviesRecord> trendingMoviesMoviesRecordList =
-                        snapshot.data!;
-
-                    return GridView.builder(
-                      padding: EdgeInsets.zero,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 10.0,
-                        childAspectRatio: 1.0,
-                      ),
-                      primary: false,
-                      scrollDirection: Axis.vertical,
-                      itemCount: trendingMoviesMoviesRecordList.length,
-                      itemBuilder: (context, trendingMoviesIndex) {
-                        final trendingMoviesMoviesRecord =
-                            trendingMoviesMoviesRecordList[trendingMoviesIndex];
-                        return InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed(
-                              MoviePageWidget.routeName,
-                              queryParameters: {
-                                'movieDoc': serializeParam(
-                                  trendingMoviesMoviesRecord,
-                                  ParamType.Document,
-                                ),
-                              }.withoutNulls,
-                              extra: <String, dynamic>{
-                                'movieDoc': trendingMoviesMoviesRecord,
-                              },
-                            );
-                          },
-                          child: MovieCardWidget(
-                            key: Key(
-                                'Key3c9_${trendingMoviesIndex}_of_${trendingMoviesMoviesRecordList.length}'),
-                            img: trendingMoviesMoviesRecord.posterImage,
-                            movieDoc: trendingMoviesMoviesRecord,
-                          ),
                         );
-                      },
-                    );
-                  },
+                      }
+                      List<MoviesRecord> trendingMoviesMoviesRecordList =
+                          snapshot.data!;
+
+                      return GridView.builder(
+                        padding: EdgeInsets.zero,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          childAspectRatio: 1.0,
+                        ),
+                        primary: false,
+                        scrollDirection: Axis.vertical,
+                        itemCount: trendingMoviesMoviesRecordList.length,
+                        itemBuilder: (context, trendingMoviesIndex) {
+                          final trendingMoviesMoviesRecord =
+                              trendingMoviesMoviesRecordList[
+                                  trendingMoviesIndex];
+                          return InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                MoviePageWidget.routeName,
+                                queryParameters: {
+                                  'movieDoc': serializeParam(
+                                    trendingMoviesMoviesRecord,
+                                    ParamType.Document,
+                                  ),
+                                }.withoutNulls,
+                                extra: <String, dynamic>{
+                                  'movieDoc': trendingMoviesMoviesRecord,
+                                },
+                              );
+                            },
+                            child: MovieCardWidget(
+                              key: Key(
+                                  'Key3c9_${trendingMoviesIndex}_of_${trendingMoviesMoviesRecordList.length}'),
+                              img: trendingMoviesMoviesRecord.posterImage,
+                              movieDoc: trendingMoviesMoviesRecord,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
             if ((widget.categoryType == 'series') &&
                 (widget.isTrending == true))
               Expanded(
-                child: StreamBuilder<List<SeriesRecord>>(
-                  stream: querySeriesRecord(
-                    queryBuilder: (seriesRecord) => seriesRecord.where(
-                      'is_trending',
-                      isEqualTo: true,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                  child: StreamBuilder<List<SeriesRecord>>(
+                    stream: querySeriesRecord(
+                      queryBuilder: (seriesRecord) => seriesRecord.where(
+                        'is_trending',
+                        isEqualTo: true,
+                      ),
                     ),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
-                    List<SeriesRecord> trendingSeriesSeriesRecordList =
-                        snapshot.data!;
-
-                    return GridView.builder(
-                      padding: EdgeInsets.zero,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 10.0,
-                        childAspectRatio: 1.0,
-                      ),
-                      primary: false,
-                      scrollDirection: Axis.vertical,
-                      itemCount: trendingSeriesSeriesRecordList.length,
-                      itemBuilder: (context, trendingSeriesIndex) {
-                        final trendingSeriesSeriesRecord =
-                            trendingSeriesSeriesRecordList[trendingSeriesIndex];
-                        return InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed(
-                              SeasonPageWidget.routeName,
-                              queryParameters: {
-                                'seriesDoc': serializeParam(
-                                  trendingSeriesSeriesRecord,
-                                  ParamType.Document,
-                                ),
-                              }.withoutNulls,
-                              extra: <String, dynamic>{
-                                'seriesDoc': trendingSeriesSeriesRecord,
-                              },
-                            );
-                          },
-                          child: MovieCardWidget(
-                            key: Key(
-                                'Keywo1_${trendingSeriesIndex}_of_${trendingSeriesSeriesRecordList.length}'),
-                            img: trendingSeriesSeriesRecord.posterImage,
-                            seriesDoc: trendingSeriesSeriesRecord,
-                          ),
                         );
-                      },
-                    );
-                  },
+                      }
+                      List<SeriesRecord> trendingSeriesSeriesRecordList =
+                          snapshot.data!;
+
+                      return GridView.builder(
+                        padding: EdgeInsets.zero,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          childAspectRatio: 1.0,
+                        ),
+                        primary: false,
+                        scrollDirection: Axis.vertical,
+                        itemCount: trendingSeriesSeriesRecordList.length,
+                        itemBuilder: (context, trendingSeriesIndex) {
+                          final trendingSeriesSeriesRecord =
+                              trendingSeriesSeriesRecordList[
+                                  trendingSeriesIndex];
+                          return InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                SeasonPageWidget.routeName,
+                                queryParameters: {
+                                  'seriesDoc': serializeParam(
+                                    trendingSeriesSeriesRecord,
+                                    ParamType.Document,
+                                  ),
+                                }.withoutNulls,
+                                extra: <String, dynamic>{
+                                  'seriesDoc': trendingSeriesSeriesRecord,
+                                },
+                              );
+                            },
+                            child: MovieCardWidget(
+                              key: Key(
+                                  'Keywo1_${trendingSeriesIndex}_of_${trendingSeriesSeriesRecordList.length}'),
+                              img: trendingSeriesSeriesRecord.posterImage,
+                              seriesDoc: trendingSeriesSeriesRecord,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
             if (widget.categoryType == 'series')
               Expanded(
-                child: StreamBuilder<List<SeriesRecord>>(
-                  stream: querySeriesRecord(
-                    queryBuilder: (seriesRecord) => seriesRecord
-                        .where(
-                          'category',
-                          isEqualTo: widget.categoryName,
-                        )
-                        .orderBy('title'),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                  child: StreamBuilder<List<SeriesRecord>>(
+                    stream: querySeriesRecord(
+                      queryBuilder: (seriesRecord) => seriesRecord
+                          .where(
+                            'category',
+                            isEqualTo: widget.categoryName,
+                          )
+                          .orderBy('title'),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
-                    List<SeriesRecord> seriesSeriesRecordList = snapshot.data!;
-
-                    return GridView.builder(
-                      padding: EdgeInsets.zero,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 10.0,
-                        childAspectRatio: 0.6,
-                      ),
-                      primary: false,
-                      scrollDirection: Axis.vertical,
-                      itemCount: seriesSeriesRecordList.length,
-                      itemBuilder: (context, seriesIndex) {
-                        final seriesSeriesRecord =
-                            seriesSeriesRecordList[seriesIndex];
-                        return InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed(
-                              SeasonPageWidget.routeName,
-                              queryParameters: {
-                                'seriesDoc': serializeParam(
-                                  seriesSeriesRecord,
-                                  ParamType.Document,
-                                ),
-                              }.withoutNulls,
-                              extra: <String, dynamic>{
-                                'seriesDoc': seriesSeriesRecord,
-                              },
-                            );
-                          },
-                          child: MovieCardWidget(
-                            key: Key(
-                                'Key8no_${seriesIndex}_of_${seriesSeriesRecordList.length}'),
-                            img: seriesSeriesRecord.posterImage,
-                            seriesDoc: seriesSeriesRecord,
-                          ),
                         );
-                      },
-                    );
-                  },
+                      }
+                      List<SeriesRecord> seriesSeriesRecordList =
+                          snapshot.data!;
+
+                      return GridView.builder(
+                        padding: EdgeInsets.zero,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          childAspectRatio: 0.6,
+                        ),
+                        primary: false,
+                        scrollDirection: Axis.vertical,
+                        itemCount: seriesSeriesRecordList.length,
+                        itemBuilder: (context, seriesIndex) {
+                          final seriesSeriesRecord =
+                              seriesSeriesRecordList[seriesIndex];
+                          return InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                SeasonPageWidget.routeName,
+                                queryParameters: {
+                                  'seriesDoc': serializeParam(
+                                    seriesSeriesRecord,
+                                    ParamType.Document,
+                                  ),
+                                }.withoutNulls,
+                                extra: <String, dynamic>{
+                                  'seriesDoc': seriesSeriesRecord,
+                                },
+                              );
+                            },
+                            child: MovieCardWidget(
+                              key: Key(
+                                  'Key8no_${seriesIndex}_of_${seriesSeriesRecordList.length}'),
+                              img: seriesSeriesRecord.posterImage,
+                              seriesDoc: seriesSeriesRecord,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
             Container(
