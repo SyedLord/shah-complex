@@ -52,13 +52,17 @@ class SearchScreenModel extends FlutterFlowModel<SearchScreenWidget> {
   // Stores action output result for [Custom Action - vipSmartSearchSeries] action in SearchField widget.
   List<SeriesRecord>? outSeries;
   // Model for section_headerSearch component.
-  late SectionHeaderSearchModel sectionHeaderSearchModel;
+  late SectionHeaderSearchModel sectionHeaderSearchModel1;
+  // Model for section_headerSearch component.
+  late SectionHeaderSearchModel sectionHeaderSearchModel2;
   // State field(s) for Expandable widget.
   late ExpandableController expandableExpandableController;
 
   @override
   void initState(BuildContext context) {
-    sectionHeaderSearchModel =
+    sectionHeaderSearchModel1 =
+        createModel(context, () => SectionHeaderSearchModel());
+    sectionHeaderSearchModel2 =
         createModel(context, () => SectionHeaderSearchModel());
   }
 
@@ -67,7 +71,8 @@ class SearchScreenModel extends FlutterFlowModel<SearchScreenWidget> {
     searchFieldFocusNode?.dispose();
     searchFieldTextController?.dispose();
 
-    sectionHeaderSearchModel.dispose();
+    sectionHeaderSearchModel1.dispose();
+    sectionHeaderSearchModel2.dispose();
     expandableExpandableController.dispose();
   }
 }

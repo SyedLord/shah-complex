@@ -262,7 +262,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     wrapWithModel(
-                      model: _model.sectionHeaderSearchModel,
+                      model: _model.sectionHeaderSearchModel1,
                       updateCallback: () => safeSetState(() {}),
                       child: SectionHeaderSearchWidget(
                         title: 'Movies Result',
@@ -317,6 +317,83 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                                         'Key5l5_${searchedMoviesIndex}_of_${searchedMovies.length}'),
                                     img: searchedMoviesItem.posterImage,
                                     movieDoc: searchedMoviesItem,
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            ListView(
+              padding: EdgeInsets.zero,
+              primary: false,
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    wrapWithModel(
+                      model: _model.sectionHeaderSearchModel2,
+                      updateCallback: () => safeSetState(() {}),
+                      child: SectionHeaderSearchWidget(
+                        title: 'Series Result',
+                        seriesData: _model.searchResultSeries,
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 220.0,
+                      decoration: BoxDecoration(),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 0.0),
+                        child: Builder(
+                          builder: (context) {
+                            final searchedSeries = _model.searchResultSeries
+                                .toList()
+                                .take(10)
+                                .toList();
+
+                            return ListView.separated(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: searchedSeries.length,
+                              separatorBuilder: (_, __) =>
+                                  SizedBox(width: 10.0),
+                              itemBuilder: (context, searchedSeriesIndex) {
+                                final searchedSeriesItem =
+                                    searchedSeries[searchedSeriesIndex];
+                                return InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed(
+                                      SeasonPageWidget.routeName,
+                                      queryParameters: {
+                                        'seriesDoc': serializeParam(
+                                          searchedSeriesItem,
+                                          ParamType.Document,
+                                        ),
+                                      }.withoutNulls,
+                                      extra: <String, dynamic>{
+                                        'seriesDoc': searchedSeriesItem,
+                                      },
+                                    );
+                                  },
+                                  child: MovieCardWidget(
+                                    key: Key(
+                                        'Key7g5_${searchedSeriesIndex}_of_${searchedSeries.length}'),
+                                    img: searchedSeriesItem.posterImage,
+                                    seriesDoc: searchedSeriesItem,
                                   ),
                                 );
                               },
