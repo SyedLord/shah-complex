@@ -218,6 +218,62 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                   ),
                 ),
               ),
+            if (widget.passedSeriesList != null &&
+                (widget.passedSeriesList)!.isNotEmpty)
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                  child: Builder(
+                    builder: (context) {
+                      final passedSeries =
+                          widget.passedSeriesList?.toList() ?? [];
+
+                      return GridView.builder(
+                        padding: EdgeInsets.zero,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          childAspectRatio: 0.6,
+                        ),
+                        primary: false,
+                        scrollDirection: Axis.vertical,
+                        itemCount: passedSeries.length,
+                        itemBuilder: (context, passedSeriesIndex) {
+                          final passedSeriesItem =
+                              passedSeries[passedSeriesIndex];
+                          return InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                SeasonPageWidget.routeName,
+                                queryParameters: {
+                                  'seriesDoc': serializeParam(
+                                    passedSeriesItem,
+                                    ParamType.Document,
+                                  ),
+                                }.withoutNulls,
+                                extra: <String, dynamic>{
+                                  'seriesDoc': passedSeriesItem,
+                                },
+                              );
+                            },
+                            child: MovieCardWidget(
+                              key: Key(
+                                  'Key2ap_${passedSeriesIndex}_of_${passedSeries.length}'),
+                              img: passedSeriesItem.posterImage,
+                              seriesDoc: passedSeriesItem,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
             Container(
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,

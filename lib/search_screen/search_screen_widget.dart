@@ -252,160 +252,162 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                 ],
               ),
             ),
-            ListView(
-              padding: EdgeInsets.zero,
-              primary: false,
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    wrapWithModel(
-                      model: _model.sectionHeaderSearchModel1,
-                      updateCallback: () => safeSetState(() {}),
-                      child: SectionHeaderSearchWidget(
-                        title: 'Movies Result',
-                        moviesData: _model.searchResultMovies,
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 220.0,
-                      decoration: BoxDecoration(),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 0.0),
-                        child: Builder(
-                          builder: (context) {
-                            final searchedMovies = _model.searchResultMovies
-                                .toList()
-                                .take(10)
-                                .toList();
-
-                            return ListView.separated(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: searchedMovies.length,
-                              separatorBuilder: (_, __) =>
-                                  SizedBox(width: 10.0),
-                              itemBuilder: (context, searchedMoviesIndex) {
-                                final searchedMoviesItem =
-                                    searchedMovies[searchedMoviesIndex];
-                                return InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed(
-                                      MoviePageWidget.routeName,
-                                      queryParameters: {
-                                        'movieDoc': serializeParam(
-                                          searchedMoviesItem,
-                                          ParamType.Document,
-                                        ),
-                                      }.withoutNulls,
-                                      extra: <String, dynamic>{
-                                        'movieDoc': searchedMoviesItem,
-                                      },
-                                    );
-                                  },
-                                  child: MovieCardWidget(
-                                    key: Key(
-                                        'Key5l5_${searchedMoviesIndex}_of_${searchedMovies.length}'),
-                                    img: searchedMoviesItem.posterImage,
-                                    movieDoc: searchedMoviesItem,
-                                  ),
-                                );
-                              },
-                            );
-                          },
+            if (_model.searchResultMovies.isNotEmpty)
+              ListView(
+                padding: EdgeInsets.zero,
+                primary: false,
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      wrapWithModel(
+                        model: _model.sectionHeaderSearchModel1,
+                        updateCallback: () => safeSetState(() {}),
+                        child: SectionHeaderSearchWidget(
+                          title: 'Movies Result',
+                          moviesData: _model.searchResultMovies,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            ListView(
-              padding: EdgeInsets.zero,
-              primary: false,
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    wrapWithModel(
-                      model: _model.sectionHeaderSearchModel2,
-                      updateCallback: () => safeSetState(() {}),
-                      child: SectionHeaderSearchWidget(
-                        title: 'Series Result',
-                        seriesData: _model.searchResultSeries,
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 220.0,
-                      decoration: BoxDecoration(),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 0.0),
-                        child: Builder(
-                          builder: (context) {
-                            final searchedSeries = _model.searchResultSeries
-                                .toList()
-                                .take(10)
-                                .toList();
+                      Container(
+                        width: double.infinity,
+                        height: 220.0,
+                        decoration: BoxDecoration(),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 0.0),
+                          child: Builder(
+                            builder: (context) {
+                              final searchedMovies = _model.searchResultMovies
+                                  .toList()
+                                  .take(10)
+                                  .toList();
 
-                            return ListView.separated(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: searchedSeries.length,
-                              separatorBuilder: (_, __) =>
-                                  SizedBox(width: 10.0),
-                              itemBuilder: (context, searchedSeriesIndex) {
-                                final searchedSeriesItem =
-                                    searchedSeries[searchedSeriesIndex];
-                                return InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed(
-                                      SeasonPageWidget.routeName,
-                                      queryParameters: {
-                                        'seriesDoc': serializeParam(
-                                          searchedSeriesItem,
-                                          ParamType.Document,
-                                        ),
-                                      }.withoutNulls,
-                                      extra: <String, dynamic>{
-                                        'seriesDoc': searchedSeriesItem,
-                                      },
-                                    );
-                                  },
-                                  child: MovieCardWidget(
-                                    key: Key(
-                                        'Key7g5_${searchedSeriesIndex}_of_${searchedSeries.length}'),
-                                    img: searchedSeriesItem.posterImage,
-                                    seriesDoc: searchedSeriesItem,
-                                  ),
-                                );
-                              },
-                            );
-                          },
+                              return ListView.separated(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: searchedMovies.length,
+                                separatorBuilder: (_, __) =>
+                                    SizedBox(width: 10.0),
+                                itemBuilder: (context, searchedMoviesIndex) {
+                                  final searchedMoviesItem =
+                                      searchedMovies[searchedMoviesIndex];
+                                  return InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        MoviePageWidget.routeName,
+                                        queryParameters: {
+                                          'movieDoc': serializeParam(
+                                            searchedMoviesItem,
+                                            ParamType.Document,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'movieDoc': searchedMoviesItem,
+                                        },
+                                      );
+                                    },
+                                    child: MovieCardWidget(
+                                      key: Key(
+                                          'Key5l5_${searchedMoviesIndex}_of_${searchedMovies.length}'),
+                                      img: searchedMoviesItem.posterImage,
+                                      movieDoc: searchedMoviesItem,
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                    ],
+                  ),
+                ],
+              ),
+            if (_model.searchResultSeries.isNotEmpty)
+              ListView(
+                padding: EdgeInsets.zero,
+                primary: false,
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      wrapWithModel(
+                        model: _model.sectionHeaderSearchModel2,
+                        updateCallback: () => safeSetState(() {}),
+                        child: SectionHeaderSearchWidget(
+                          title: 'Series Result',
+                          seriesData: _model.searchResultSeries,
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 220.0,
+                        decoration: BoxDecoration(),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 0.0),
+                          child: Builder(
+                            builder: (context) {
+                              final searchedSeries = _model.searchResultSeries
+                                  .toList()
+                                  .take(10)
+                                  .toList();
+
+                              return ListView.separated(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: searchedSeries.length,
+                                separatorBuilder: (_, __) =>
+                                    SizedBox(width: 10.0),
+                                itemBuilder: (context, searchedSeriesIndex) {
+                                  final searchedSeriesItem =
+                                      searchedSeries[searchedSeriesIndex];
+                                  return InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        SeasonPageWidget.routeName,
+                                        queryParameters: {
+                                          'seriesDoc': serializeParam(
+                                            searchedSeriesItem,
+                                            ParamType.Document,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'seriesDoc': searchedSeriesItem,
+                                        },
+                                      );
+                                    },
+                                    child: MovieCardWidget(
+                                      key: Key(
+                                          'Key7g5_${searchedSeriesIndex}_of_${searchedSeries.length}'),
+                                      img: searchedSeriesItem.posterImage,
+                                      seriesDoc: searchedSeriesItem,
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             Expanded(
               child: Container(
                 width: double.infinity,
