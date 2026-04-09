@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/description_widget_widget.dart';
 import '/components/episode_item_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -286,53 +287,15 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                   .spacing
                                   .md)),
                         ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                _model.isExpanded = !_model.isExpanded;
-                                safeSetState(() {});
-                              },
-                              child: Text(
-                                valueOrDefault<String>(
-                                  widget.seriesDoc?.description,
-                                  'Description',
-                                ),
-                                maxLines: _model.isExpanded == true ? 999 : 3,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FontWeight.normal,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      fontSize: 14.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.normal,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                      lineHeight: 1.4,
-                                    ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                        wrapWithModel(
+                          model: _model.descriptionWidgetModel,
+                          updateCallback: () => safeSetState(() {}),
+                          child: DescriptionWidgetWidget(
+                            description: valueOrDefault<String>(
+                              widget.seriesDoc?.description,
+                              'Description',
                             ),
-                          ].divide(SizedBox(
-                              height: FlutterFlowTheme.of(context)
-                                  .designToken
-                                  .spacing
-                                  .sm)),
+                          ),
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,

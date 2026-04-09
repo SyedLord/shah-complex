@@ -1,3 +1,4 @@
+import '/components/description_widget_widget.dart';
 import '/components/movie_card2_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'movie_page_widget.dart' show MoviePageWidget;
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 class MoviePageModel extends FlutterFlowModel<MoviePageWidget> {
   ///  State fields for stateful widgets in this page.
 
+  // Model for DescriptionWidget component.
+  late DescriptionWidgetModel descriptionWidgetModel;
   // Model for MovieCard2 component.
   late MovieCard2Model movieCard2Model1;
   // Model for MovieCard2 component.
@@ -27,6 +30,8 @@ class MoviePageModel extends FlutterFlowModel<MoviePageWidget> {
 
   @override
   void initState(BuildContext context) {
+    descriptionWidgetModel =
+        createModel(context, () => DescriptionWidgetModel());
     movieCard2Model1 = createModel(context, () => MovieCard2Model());
     movieCard2Model2 = createModel(context, () => MovieCard2Model());
     movieCard2Model3 = createModel(context, () => MovieCard2Model());
@@ -40,6 +45,7 @@ class MoviePageModel extends FlutterFlowModel<MoviePageWidget> {
 
   @override
   void dispose() {
+    descriptionWidgetModel.dispose();
     movieCard2Model1.dispose();
     movieCard2Model2.dispose();
     movieCard2Model3.dispose();

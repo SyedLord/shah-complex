@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/description_widget_widget.dart';
 import '/components/movie_card2_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -518,31 +519,12 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                   .spacing
                                   .sm)),
                         ),
-                        Text(
-                          valueOrDefault<String>(
-                            widget.movieDoc?.description,
-                            'Description',
+                        wrapWithModel(
+                          model: _model.descriptionWidgetModel,
+                          updateCallback: () => safeSetState(() {}),
+                          child: DescriptionWidgetWidget(
+                            description: widget.movieDoc?.description,
                           ),
-                          maxLines: 4,
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                font: GoogleFonts.inter(
-                                  fontWeight: FontWeight.normal,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .fontStyle,
-                                ),
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 14.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.normal,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontStyle,
-                                lineHeight: 1.4,
-                              ),
-                          overflow: TextOverflow.ellipsis,
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
