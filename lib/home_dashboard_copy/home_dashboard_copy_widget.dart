@@ -417,11 +417,14 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                                     16.0, 0.0, 16.0, 0.0),
                                 child: StreamBuilder<List<MoviesRecord>>(
                                   stream: queryMoviesRecord(
-                                    queryBuilder: (moviesRecord) =>
-                                        moviesRecord.where(
-                                      'category',
-                                      isEqualTo: moviesCategoriesRecord.name,
-                                    ),
+                                    queryBuilder: (moviesRecord) => moviesRecord
+                                        .where(
+                                          'category',
+                                          isEqualTo:
+                                              moviesCategoriesRecord.name,
+                                        )
+                                        .orderBy('created_at',
+                                            descending: true),
                                     limit: 10,
                                   ),
                                   builder: (context, snapshot) {
@@ -551,11 +554,14 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                                     16.0, 0.0, 16.0, 0.0),
                                 child: StreamBuilder<List<SeriesRecord>>(
                                   stream: querySeriesRecord(
-                                    queryBuilder: (seriesRecord) =>
-                                        seriesRecord.where(
-                                      'category',
-                                      isEqualTo: seasonsCategoriesRecord.name,
-                                    ),
+                                    queryBuilder: (seriesRecord) => seriesRecord
+                                        .where(
+                                          'category',
+                                          isEqualTo:
+                                              seasonsCategoriesRecord.name,
+                                        )
+                                        .orderBy('created_at',
+                                            descending: true),
                                     limit: 10,
                                   ),
                                   builder: (context, snapshot) {

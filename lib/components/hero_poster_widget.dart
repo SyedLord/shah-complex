@@ -1,6 +1,7 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -272,6 +273,23 @@ class _HeroPosterWidgetState extends State<HeroPosterWidget> {
                                                         .secondary,
                                               ),
                                             );
+                                            if (widget
+                                                    .slideData?.contentType ==
+                                                'movie') {
+                                              if (_model.loadedMovieDoc
+                                                      ?.driveType ==
+                                                  'gdrive') {
+                                                await actions
+                                                    .playVideoInExternalPlayer(
+                                                  'https://shahcomplex.sa-syedali2000.workers.dev/?id=${_model.loadedMovieDoc?.videoUrl}',
+                                                );
+                                              } else {
+                                                await actions
+                                                    .playVideoInExternalPlayer(
+                                                  'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&file_id=${_model.loadedMovieDoc?.videoUrl}&key=Pappu@007',
+                                                );
+                                              }
+                                            }
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(

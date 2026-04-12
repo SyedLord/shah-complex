@@ -82,17 +82,7 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                         focusColor: Colors.transparent,
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
-                        onTap: () async {
-                          if (widget.episodeDoc?.driveType == 'gdrive') {
-                            await actions.playVideoInExternalPlayer(
-                              'https://shahcomplex.sa-syedali2000.workers.dev/?id=${widget.episodeDoc?.videoUrl}',
-                            );
-                          } else {
-                            await actions.playVideoInExternalPlayer(
-                              'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&file_id=${widget.episodeDoc?.videoUrl}&key=Pappu@007',
-                            );
-                          }
-                        },
+                        onTap: () async {},
                         child: CachedNetworkImage(
                           fadeInDuration: Duration(milliseconds: 0),
                           fadeOutDuration: Duration(milliseconds: 0),
@@ -102,26 +92,43 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                       ),
                       Align(
                         alignment: AlignmentDirectional(0.0, 0.0),
-                        child: Container(
-                          width: 32.0,
-                          height: 32.0,
-                          decoration: BoxDecoration(
-                            color: Color(0x66000000),
-                            borderRadius: BorderRadius.circular(
-                                FlutterFlowTheme.of(context)
-                                    .designToken
-                                    .radius
-                                    .full),
-                            border: Border.all(
-                              color: Colors.white,
-                              width: 1.0,
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            if (widget.episodeDoc?.driveType == 'gdrive') {
+                              await actions.playVideoInExternalPlayer(
+                                'https://shahcomplex.sa-syedali2000.workers.dev/?id=${widget.episodeDoc?.videoUrl}',
+                              );
+                            } else {
+                              await actions.playVideoInExternalPlayer(
+                                'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&file_id=${widget.episodeDoc?.videoUrl}&key=Pappu@007',
+                              );
+                            }
+                          },
+                          child: Container(
+                            width: 32.0,
+                            height: 32.0,
+                            decoration: BoxDecoration(
+                              color: Color(0x66000000),
+                              borderRadius: BorderRadius.circular(
+                                  FlutterFlowTheme.of(context)
+                                      .designToken
+                                      .radius
+                                      .full),
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 1.0,
+                              ),
                             ),
-                          ),
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Icon(
-                            Icons.play_arrow_rounded,
-                            color: Colors.white,
-                            size: 20.0,
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Icon(
+                              Icons.play_arrow_rounded,
+                              color: Colors.white,
+                              size: 20.0,
+                            ),
                           ),
                         ),
                       ),
