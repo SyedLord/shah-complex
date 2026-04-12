@@ -35,6 +35,7 @@ Future<List<HeroItemStruct>> getTrendingCarousel() async {
 
       carouselItems.add(HeroItemStruct(
         title: data['title'] ?? 'Unknown Movie',
+        logoImage: data['logo_image'] ?? '',
         image: data['backdrop_image'] ??
             data['poster_image'] ??
             'https://via.placeholder.com/1280x720.png?text=No+Image',
@@ -66,6 +67,7 @@ Future<List<HeroItemStruct>> getTrendingCarousel() async {
 
       carouselItems.add(HeroItemStruct(
         title: data['title'] ?? 'Unknown Series',
+        logoImage: data['logo_image'] ?? '',
         image: data['backdrop_image'] ??
             data['poster_image'] ??
             'https://via.placeholder.com/1280x720.png?text=No+Image',

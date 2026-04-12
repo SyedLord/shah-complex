@@ -98,31 +98,51 @@ class _HeroPosterWidgetState extends State<HeroPosterWidget> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                valueOrDefault<String>(
-                                  widget.slideData?.title,
-                                  'Title',
-                                ),
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .headlineLarge
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FontWeight.w800,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
+                              Stack(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                children: [
+                                  if (widget.slideData?.logoImage == null ||
+                                      widget.slideData?.logoImage == '')
+                                    Text(
+                                      valueOrDefault<String>(
+                                        widget.slideData?.title,
+                                        'Title',
                                       ),
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      fontSize: 32.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w800,
-                                      fontStyle: FlutterFlowTheme.of(context)
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
                                           .headlineLarge
-                                          .fontStyle,
-                                      lineHeight: 1.1,
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w800,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 32.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w800,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                            lineHeight: 1.1,
+                                          ),
                                     ),
+                                  if (widget.slideData?.logoImage != null &&
+                                      widget.slideData?.logoImage != '')
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.network(
+                                        widget.slideData!.logoImage,
+                                        width: double.infinity,
+                                        height: 120.0,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                ],
                               ),
                               Align(
                                 alignment: AlignmentDirectional(0.0, 0.0),
