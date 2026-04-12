@@ -41,6 +41,7 @@ Future<List<HeroItemStruct>> getTrendingCarousel() async {
             'https://via.placeholder.com/1280x720.png?text=No+Image',
         genres: itemGenres, // Yahan ab asli genres jayenge
         contentType: 'movie',
+        movieRef: doc.reference,
         videoLink: data['video_url'] ?? '',
       ));
     }

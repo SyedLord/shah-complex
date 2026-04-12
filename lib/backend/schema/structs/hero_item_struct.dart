@@ -17,6 +17,7 @@ class HeroItemStruct extends FFFirebaseStruct {
     String? videoLink,
     DocumentReference? seriesRef,
     String? logoImage,
+    DocumentReference? movieRef,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _title = title,
         _image = image,
@@ -25,6 +26,7 @@ class HeroItemStruct extends FFFirebaseStruct {
         _videoLink = videoLink,
         _seriesRef = seriesRef,
         _logoImage = logoImage,
+        _movieRef = movieRef,
         super(firestoreUtilData);
 
   // "title" field.
@@ -80,6 +82,13 @@ class HeroItemStruct extends FFFirebaseStruct {
 
   bool hasLogoImage() => _logoImage != null;
 
+  // "movieRef" field.
+  DocumentReference? _movieRef;
+  DocumentReference? get movieRef => _movieRef;
+  set movieRef(DocumentReference? val) => _movieRef = val;
+
+  bool hasMovieRef() => _movieRef != null;
+
   static HeroItemStruct fromMap(Map<String, dynamic> data) => HeroItemStruct(
         title: data['title'] as String?,
         image: data['image'] as String?,
@@ -88,6 +97,7 @@ class HeroItemStruct extends FFFirebaseStruct {
         videoLink: data['videoLink'] as String?,
         seriesRef: data['seriesRef'] as DocumentReference?,
         logoImage: data['logoImage'] as String?,
+        movieRef: data['movieRef'] as DocumentReference?,
       );
 
   static HeroItemStruct? maybeFromMap(dynamic data) =>
@@ -101,6 +111,7 @@ class HeroItemStruct extends FFFirebaseStruct {
         'videoLink': _videoLink,
         'seriesRef': _seriesRef,
         'logoImage': _logoImage,
+        'movieRef': _movieRef,
       }.withoutNulls;
 
   @override
@@ -133,6 +144,10 @@ class HeroItemStruct extends FFFirebaseStruct {
         'logoImage': serializeParam(
           _logoImage,
           ParamType.String,
+        ),
+        'movieRef': serializeParam(
+          _movieRef,
+          ParamType.DocumentReference,
         ),
       }.withoutNulls;
 
@@ -174,6 +189,12 @@ class HeroItemStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        movieRef: deserializeParam(
+          data['movieRef'],
+          ParamType.DocumentReference,
+          false,
+          collectionNamePath: ['movies'],
+        ),
       );
 
   @override
@@ -189,12 +210,21 @@ class HeroItemStruct extends FFFirebaseStruct {
         contentType == other.contentType &&
         videoLink == other.videoLink &&
         seriesRef == other.seriesRef &&
-        logoImage == other.logoImage;
+        logoImage == other.logoImage &&
+        movieRef == other.movieRef;
   }
 
   @override
-  int get hashCode => const ListEquality().hash(
-      [title, image, genres, contentType, videoLink, seriesRef, logoImage]);
+  int get hashCode => const ListEquality().hash([
+        title,
+        image,
+        genres,
+        contentType,
+        videoLink,
+        seriesRef,
+        logoImage,
+        movieRef
+      ]);
 }
 
 HeroItemStruct createHeroItemStruct({
@@ -204,6 +234,7 @@ HeroItemStruct createHeroItemStruct({
   String? videoLink,
   DocumentReference? seriesRef,
   String? logoImage,
+  DocumentReference? movieRef,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -216,6 +247,7 @@ HeroItemStruct createHeroItemStruct({
       videoLink: videoLink,
       seriesRef: seriesRef,
       logoImage: logoImage,
+      movieRef: movieRef,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

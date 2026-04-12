@@ -1,7 +1,8 @@
-import '/backend/schema/structs/index.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,12 +58,57 @@ class _HeroPosterWidgetState extends State<HeroPosterWidget> {
                 height: 600.0,
                 child: Stack(
                   children: [
-                    CachedNetworkImage(
-                      fadeInDuration: Duration(milliseconds: 0),
-                      fadeOutDuration: Duration(milliseconds: 0),
-                      imageUrl: widget.slideData!.image,
-                      height: 600.0,
-                      fit: BoxFit.cover,
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        if (widget.slideData?.contentType == 'movie') {
+                          _model.loadedMovieDoc =
+                              await MoviesRecord.getDocumentOnce(
+                                  widget.slideData!.movieRef!);
+
+                          context.pushNamed(
+                            MoviePageWidget.routeName,
+                            queryParameters: {
+                              'movieDoc': serializeParam(
+                                _model.loadedMovieDoc,
+                                ParamType.Document,
+                              ),
+                            }.withoutNulls,
+                            extra: <String, dynamic>{
+                              'movieDoc': _model.loadedMovieDoc,
+                            },
+                          );
+                        } else {
+                          _model.loadedSeriesDoc =
+                              await SeriesRecord.getDocumentOnce(
+                                  widget.slideData!.seriesRef!);
+
+                          context.pushNamed(
+                            SeasonPageWidget.routeName,
+                            queryParameters: {
+                              'seriesDoc': serializeParam(
+                                _model.loadedSeriesDoc,
+                                ParamType.Document,
+                              ),
+                            }.withoutNulls,
+                            extra: <String, dynamic>{
+                              'seriesDoc': _model.loadedSeriesDoc,
+                            },
+                          );
+                        }
+
+                        safeSetState(() {});
+                      },
+                      child: CachedNetworkImage(
+                        fadeInDuration: Duration(milliseconds: 0),
+                        fadeOutDuration: Duration(milliseconds: 0),
+                        imageUrl: widget.slideData!.image,
+                        height: 600.0,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     Container(
                       height: 600.0,
