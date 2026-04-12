@@ -142,40 +142,41 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Stack(
-                          children: [
-                            if (widget.seriesDoc?.logoImage == null ||
-                                widget.seriesDoc?.logoImage == '')
-                              Text(
-                                valueOrDefault<String>(
-                                  widget.seriesDoc?.title,
-                                  'Title',
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .headlineMedium
-                                    .override(
-                                      font: GoogleFonts.inter(
+                        Align(
+                          alignment: AlignmentDirectional(-1.0, 0.0),
+                          child: Stack(
+                            children: [
+                              if (widget.seriesDoc?.logoImage == null ||
+                                  widget.seriesDoc?.logoImage == '')
+                                Text(
+                                  valueOrDefault<String>(
+                                    widget.seriesDoc?.title,
+                                    'Title',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineMedium
+                                      .override(
+                                        font: GoogleFonts.inter(
+                                          fontWeight: FontWeight.w900,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineMedium
+                                                  .fontStyle,
+                                        ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        fontSize: 26.0,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w900,
                                         fontStyle: FlutterFlowTheme.of(context)
                                             .headlineMedium
                                             .fontStyle,
+                                        lineHeight: 1.2,
                                       ),
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      fontSize: 26.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w900,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .headlineMedium
-                                          .fontStyle,
-                                      lineHeight: 1.2,
-                                    ),
-                              ),
-                            if (widget.seriesDoc?.logoImage != null &&
-                                widget.seriesDoc?.logoImage != '')
-                              Align(
-                                alignment: AlignmentDirectional(-1.0, 0.0),
-                                child: ClipRRect(
+                                ),
+                              if (widget.seriesDoc?.logoImage != null &&
+                                  widget.seriesDoc?.logoImage != '')
+                                ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.network(
                                     widget.seriesDoc!.logoImage,
@@ -184,8 +185,8 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                     fit: BoxFit.contain,
                                   ),
                                 ),
-                              ),
-                          ],
+                            ],
+                          ),
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
