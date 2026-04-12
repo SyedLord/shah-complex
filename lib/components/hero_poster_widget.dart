@@ -248,74 +248,117 @@ class _HeroPosterWidgetState extends State<HeroPosterWidget> {
                                     children: [
                                       Expanded(
                                         flex: 1,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            borderRadius: BorderRadius.circular(
-                                                FlutterFlowTheme.of(context)
-                                                    .designToken
-                                                    .radius
-                                                    .lg),
-                                          ),
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
-                                            child: Stack(
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'THIS IS FOR TESTING',
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .designToken
+                                                          .radius
+                                                          .lg),
+                                            ),
+                                            child: Align(
                                               alignment: AlignmentDirectional(
                                                   0.0, 0.0),
-                                              children: [
-                                                Container(
-                                                  child: Padding(
-                                                    padding: EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .designToken
-                                                                .spacing
-                                                                .xl,
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .designToken
-                                                                .spacing
-                                                                .md,
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .designToken
-                                                                .spacing
-                                                                .xl,
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .designToken
-                                                                .spacing
-                                                                .md),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Icon(
-                                                          Icons
-                                                              .play_arrow_rounded,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          size: 16.0,
-                                                        ),
-                                                        Text(
-                                                          'Play',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .labelMedium
-                                                              .override(
-                                                                font:
-                                                                    GoogleFonts
-                                                                        .inter(
+                                              child: Stack(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                children: [
+                                                  Container(
+                                                    child: Padding(
+                                                      padding: EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .designToken
+                                                                  .spacing
+                                                                  .xl,
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .designToken
+                                                                  .spacing
+                                                                  .md,
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .designToken
+                                                                  .spacing
+                                                                  .xl,
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .designToken
+                                                                  .spacing
+                                                                  .md),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons
+                                                                .play_arrow_rounded,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 16.0,
+                                                          ),
+                                                          Text(
+                                                            'Play',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .labelMedium
+                                                                .override(
+                                                                  font:
+                                                                      GoogleFonts
+                                                                          .inter(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w600,
@@ -323,37 +366,25 @@ class _HeroPosterWidgetState extends State<HeroPosterWidget> {
                                                                           context)
                                                                       .labelMedium
                                                                       .fontStyle,
+                                                                  lineHeight:
+                                                                      1.3,
                                                                 ),
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                                fontSize: 12.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                fontStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontStyle,
-                                                                lineHeight: 1.3,
-                                                              ),
-                                                        ),
-                                                        Container(
-                                                          width: 0.0,
-                                                          height: 0.0,
-                                                        ),
-                                                      ].divide(
-                                                          SizedBox(width: 8.0)),
+                                                          ),
+                                                          Container(
+                                                            width: 0.0,
+                                                            height: 0.0,
+                                                          ),
+                                                        ].divide(SizedBox(
+                                                            width: 8.0)),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  width: 0.0,
-                                                  height: 0.0,
-                                                ),
-                                              ],
+                                                  Container(
+                                                    width: 0.0,
+                                                    height: 0.0,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
