@@ -25,16 +25,21 @@ Future<List<HeroItemStruct>> getTrendingCarousel() async {
     for (var doc in movieSnapshot.docs) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
+      // 🔥 NAYI LOGIC: Asli Genres uthao. Agar na mile to Category uthao.
+      List<String> itemGenres = [];
+      if (data['genres'] != null && (data['genres'] as List).isNotEmpty) {
+        itemGenres = List<String>.from(data['genres']);
+      } else if (data['category'] != null) {
+        itemGenres = [data['category']]; // Fallback
+      }
+
       carouselItems.add(HeroItemStruct(
         title: data['title'] ?? 'Unknown Movie',
-        // Aapke DB ka exact field name: 'backdrop_image'
         image: data['backdrop_image'] ??
             data['poster_image'] ??
             'https://via.placeholder.com/1280x720.png?text=No+Image',
-        // Aapke DB mein 'category' hai (e.g., "Hollywood"). Isay hum list mein daal kar bhej rahe hain taake UI na toote.
-        genres: data['category'] != null ? [data['category']] : [],
+        genres: itemGenres, // Yahan ab asli genres jayenge
         contentType: 'movie',
-        // Aapke DB ka exact field name: 'video_url'
         videoLink: data['video_url'] ?? '',
       ));
     }
@@ -51,12 +56,20 @@ Future<List<HeroItemStruct>> getTrendingCarousel() async {
     for (var doc in seriesSnapshot.docs) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
+      // 🔥 NAYI LOGIC: Asli Genres uthao.
+      List<String> itemGenres = [];
+      if (data['genres'] != null && (data['genres'] as List).isNotEmpty) {
+        itemGenres = List<String>.from(data['genres']);
+      } else if (data['category'] != null) {
+        itemGenres = [data['category']]; // Fallback
+      }
+
       carouselItems.add(HeroItemStruct(
         title: data['title'] ?? 'Unknown Series',
         image: data['backdrop_image'] ??
             data['poster_image'] ??
             'https://via.placeholder.com/1280x720.png?text=No+Image',
-        genres: data['category'] != null ? [data['category']] : [],
+        genres: itemGenres, // Yahan ab asli genres jayenge
         contentType: 'series',
         seriesRef: doc.reference,
       ));
