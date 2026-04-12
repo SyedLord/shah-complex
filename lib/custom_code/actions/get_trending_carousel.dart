@@ -10,65 +10,69 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 Future<List<HeroItemStruct>> getTrendingCarousel() async {
-  // Wo list jisme hum movies aur series mix karenge
   List<HeroItemStruct> carouselItems = [];
 
   try {
     // ==========================================
-    // 1. MOVIES UTHAYEN (Max 3)
+    // 1. MOVIES UTHAYEN
     // ==========================================
-    QuerySnapshot movieSnapshot = await FirebaseFirestore.instance
-        .collection(
-            'movies') // Agar database mein naam alag hai to yahan change karein
-        // .orderBy('rating', descending: true) // Agar trending nikalni hai to is line ko un-comment karein
-        .limit(3)
-        .get();
+    QuerySnapshot movieSnapshot =
+        await FirebaseFirestore.instance.collection('movies').limit(3).get();
 
     for (var doc in movieSnapshot.docs) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-      // Movie ka data HeroItem mein fit karna
+      // 🔥 VIP FIX: Check and add https:// if missing
+      String imageUrl = data['image'] ?? '';
+      if (imageUrl.isNotEmpty && !imageUrl.startsWith('http')) {
+        // Agar link kisi slash (/) se shuru ho raha hai TMDB API ki tarah
+        if (imageUrl.startsWith('/')) {
+          imageUrl = 'https://image.tmdb.org/t/p/w500' + imageUrl;
+        } else {
+          imageUrl = 'https://' + imageUrl;
+        }
+      }
+
       carouselItems.add(HeroItemStruct(
         title: data['title'] ?? 'Unknown Movie',
-        image: data['image'] ??
-            '', // Agar field ka naam poster hai to 'image' ki jagah 'poster' likhein
+        image: imageUrl,
         genres: data['genres'] != null ? List<String>.from(data['genres']) : [],
         contentType: 'movie',
-        videoLink:
-            data['video_id'] ?? '', // Apni video field ka naam yahan likhein
-        // seriesRef khali rahega kyunke ye movie hai
+        videoLink: data['video_id'] ?? '',
       ));
     }
 
     // ==========================================
-    // 2. SERIES UTHAYEN (Max 3)
+    // 2. SERIES UTHAYEN
     // ==========================================
-    QuerySnapshot seriesSnapshot = await FirebaseFirestore.instance
-        .collection(
-            'series') // Agar collection ka naam alag hai to change karein
-        // .orderBy('rating', descending: true)
-        .limit(3)
-        .get();
+    QuerySnapshot seriesSnapshot =
+        await FirebaseFirestore.instance.collection('series').limit(3).get();
 
     for (var doc in seriesSnapshot.docs) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-      // Series ka data HeroItem mein fit karna
+      // 🔥 VIP FIX: Check and add https:// if missing
+      String imageUrl = data['image'] ?? '';
+      if (imageUrl.isNotEmpty && !imageUrl.startsWith('http')) {
+        if (imageUrl.startsWith('/')) {
+          imageUrl = 'https://image.tmdb.org/t/p/w500' + imageUrl;
+        } else {
+          imageUrl = 'https://' + imageUrl;
+        }
+      }
+
       carouselItems.add(HeroItemStruct(
         title: data['title'] ?? 'Unknown Series',
-        image: data['image'] ?? '',
+        image: imageUrl,
         genres: data['genres'] != null ? List<String>.from(data['genres']) : [],
         contentType: 'series',
-        seriesRef: doc
-            .reference, // Is se humein play button par episode dhoondne mein madad milegi
-        // videoLink khali rahega kyunke iski episodes alag collection mein hain
+        seriesRef: doc.reference,
       ));
     }
 
     // ==========================================
     // 3. MIX KAREIN (Shuffle)
     // ==========================================
-    // Is line se movies aur series aapas mein mix ho jayengi (jaise Movie, Series, Movie, Movie, Series)
     carouselItems.shuffle();
 
     return carouselItems;
