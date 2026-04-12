@@ -1,9 +1,7 @@
 import '/backend/schema/structs/index.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -416,89 +414,6 @@ class _HeroPosterWidgetState extends State<HeroPosterWidget> {
                 ),
               ),
             ],
-          ),
-        ),
-        Align(
-          alignment: AlignmentDirectional(0.0, -1.0),
-          child: Container(
-            height: 100.0,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xCC000000), Colors.transparent],
-                stops: [0.0, 1.0],
-                begin: AlignmentDirectional(0.0, -1.0),
-                end: AlignmentDirectional(0, 1.0),
-              ),
-            ),
-            child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(
-                  FlutterFlowTheme.of(context).designToken.spacing.md,
-                  40.0,
-                  FlutterFlowTheme.of(context).designToken.spacing.md,
-                  0.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.question_mark,
-                    color: FlutterFlowTheme.of(context).primary,
-                    size: 32.0,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      FlutterFlowIconButton(
-                        buttonSize: 40.0,
-                        icon: Icon(
-                          Icons.cast_rounded,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 24.0,
-                        ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
-                        },
-                      ),
-                      FlutterFlowIconButton(
-                        buttonSize: 40.0,
-                        icon: Icon(
-                          Icons.search_rounded,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 24.0,
-                        ),
-                        onPressed: () async {
-                          context.pushNamed(SearchScreenWidget.routeName);
-                        },
-                      ),
-                      Container(
-                        width: 32.0,
-                        height: 32.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primary,
-                          shape: BoxShape.circle,
-                        ),
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        child: Text(
-                          'AR',
-                          style: TextStyle(
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12.8,
-                          ),
-                        ),
-                      ),
-                    ].divide(SizedBox(
-                        width: FlutterFlowTheme.of(context)
-                            .designToken
-                            .spacing
-                            .lg)),
-                  ),
-                ],
-              ),
-            ),
           ),
         ),
       ],
