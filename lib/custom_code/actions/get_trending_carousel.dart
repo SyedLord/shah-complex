@@ -16,55 +16,47 @@ Future<List<HeroItemStruct>> getTrendingCarousel() async {
     // ==========================================
     // 1. MOVIES UTHAYEN
     // ==========================================
-    QuerySnapshot movieSnapshot =
-        await FirebaseFirestore.instance.collection('movies').limit(3).get();
+    QuerySnapshot movieSnapshot = await FirebaseFirestore.instance
+        .collection('movies')
+        .where('is_trending', isEqualTo: true)
+        .limit(3)
+        .get();
 
     for (var doc in movieSnapshot.docs) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-      // 🔥 VIP FIX: Check and add https:// if missing
-      String imageUrl = data['image'] ?? '';
-      if (imageUrl.isNotEmpty && !imageUrl.startsWith('http')) {
-        // Agar link kisi slash (/) se shuru ho raha hai TMDB API ki tarah
-        if (imageUrl.startsWith('/')) {
-          imageUrl = 'https://image.tmdb.org/t/p/w500' + imageUrl;
-        } else {
-          imageUrl = 'https://' + imageUrl;
-        }
-      }
-
       carouselItems.add(HeroItemStruct(
         title: data['title'] ?? 'Unknown Movie',
-        image: imageUrl,
-        genres: data['genres'] != null ? List<String>.from(data['genres']) : [],
+        // Aapke DB ka exact field name: 'backdrop_image'
+        image: data['backdrop_image'] ??
+            data['poster_image'] ??
+            'https://via.placeholder.com/1280x720.png?text=No+Image',
+        // Aapke DB mein 'category' hai (e.g., "Hollywood"). Isay hum list mein daal kar bhej rahe hain taake UI na toote.
+        genres: data['category'] != null ? [data['category']] : [],
         contentType: 'movie',
-        videoLink: data['video_id'] ?? '',
+        // Aapke DB ka exact field name: 'video_url'
+        videoLink: data['video_url'] ?? '',
       ));
     }
 
     // ==========================================
     // 2. SERIES UTHAYEN
     // ==========================================
-    QuerySnapshot seriesSnapshot =
-        await FirebaseFirestore.instance.collection('series').limit(3).get();
+    QuerySnapshot seriesSnapshot = await FirebaseFirestore.instance
+        .collection('series')
+        .where('is_trending', isEqualTo: true)
+        .limit(3)
+        .get();
 
     for (var doc in seriesSnapshot.docs) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-      // 🔥 VIP FIX: Check and add https:// if missing
-      String imageUrl = data['image'] ?? '';
-      if (imageUrl.isNotEmpty && !imageUrl.startsWith('http')) {
-        if (imageUrl.startsWith('/')) {
-          imageUrl = 'https://image.tmdb.org/t/p/w500' + imageUrl;
-        } else {
-          imageUrl = 'https://' + imageUrl;
-        }
-      }
-
       carouselItems.add(HeroItemStruct(
         title: data['title'] ?? 'Unknown Series',
-        image: imageUrl,
-        genres: data['genres'] != null ? List<String>.from(data['genres']) : [],
+        image: data['backdrop_image'] ??
+            data['poster_image'] ??
+            'https://via.placeholder.com/1280x720.png?text=No+Image',
+        genres: data['category'] != null ? [data['category']] : [],
         contentType: 'series',
         seriesRef: doc.reference,
       ));
@@ -81,5 +73,6 @@ Future<List<HeroItemStruct>> getTrendingCarousel() async {
     return [];
   }
 }
+
 // Set your action name, define your arguments and return parameter,
 // and then add the boilerplate code using the green button on the right!
