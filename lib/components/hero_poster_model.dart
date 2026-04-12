@@ -10,9 +10,9 @@ class HeroPosterModel extends FlutterFlowModel<HeroPosterWidget> {
 
   ///  State fields for stateful widgets in this component.
 
-  // Stores action output result for [Backend Call - Read Document] action in Image widget.
+  // Stores action output result for [Backend Call - Read Document] action in Stack widget.
   MoviesRecord? loadedMovieDoc;
-  // Stores action output result for [Backend Call - Read Document] action in Image widget.
+  // Stores action output result for [Backend Call - Read Document] action in Stack widget.
   SeriesRecord? loadedSeriesDoc;
 
   @override
