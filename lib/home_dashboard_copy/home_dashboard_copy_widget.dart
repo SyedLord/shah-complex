@@ -70,14 +70,14 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Flexible(
+                Expanded(
                   child: Builder(
                     builder: (context) {
                       final currentSlide = _model.carouselItems.toList();
 
                       return Container(
                         width: double.infinity,
-                        height: 630.0,
+                        height: 650.0,
                         child: Stack(
                           children: [
                             Padding(
