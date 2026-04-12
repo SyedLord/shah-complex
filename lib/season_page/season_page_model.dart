@@ -1,6 +1,7 @@
 import '/components/description_widget_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/index.dart';
 import 'season_page_widget.dart' show SeasonPageWidget;
 import 'package:flutter/material.dart';
 

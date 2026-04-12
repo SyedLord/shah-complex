@@ -6,7 +6,10 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart'
+    as smooth_page_indicator;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,7 +39,12 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
     _model = createModel(context, () => HomeDashboardCopyModel());
 
     // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {});
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.trendingList = await actions.getTrendingCarousel();
+      _model.carouselItems =
+          _model.trendingList!.toList().cast<HeroItemStruct>();
+      safeSetState(() {});
+    });
   }
 
   @override
@@ -62,10 +70,83 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                wrapWithModel(
-                  model: _model.heroPosterModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: HeroPosterWidget(),
+                Expanded(
+                  child: Builder(
+                    builder: (context) {
+                      final currentSlide = _model.carouselItems.toList();
+
+                      return Container(
+                        width: double.infinity,
+                        height: 630.0,
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 40.0),
+                              child: PageView.builder(
+                                controller: _model.pageViewController ??=
+                                    PageController(
+                                        initialPage: max(0,
+                                            min(0, currentSlide.length - 1))),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: currentSlide.length,
+                                itemBuilder: (context, currentSlideIndex) {
+                                  final currentSlideItem =
+                                      currentSlide[currentSlideIndex];
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      HeroPosterWidget(
+                                        key: Key(
+                                            'Keyjri_${currentSlideIndex}_of_${currentSlide.length}'),
+                                        slideData: currentSlideItem,
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 1.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 16.0),
+                                child:
+                                    smooth_page_indicator.SmoothPageIndicator(
+                                  controller: _model.pageViewController ??=
+                                      PageController(
+                                          initialPage: max(0,
+                                              min(0, currentSlide.length - 1))),
+                                  count: currentSlide.length,
+                                  axisDirection: Axis.horizontal,
+                                  onDotClicked: (i) async {
+                                    await _model.pageViewController!
+                                        .animateToPage(
+                                      i,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.ease,
+                                    );
+                                    safeSetState(() {});
+                                  },
+                                  effect: smooth_page_indicator.SlideEffect(
+                                    spacing: 8.0,
+                                    radius: 8.0,
+                                    dotWidth: 8.0,
+                                    dotHeight: 8.0,
+                                    dotColor:
+                                        FlutterFlowTheme.of(context).accent1,
+                                    activeDotColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    paintStyle: PaintingStyle.fill,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.max,
@@ -601,8 +682,8 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                           color: FlutterFlowTheme.of(context).primaryText,
                           size: 24.0,
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
+                        onPressed: () async {
+                          context.pushNamed(SearchScreenWidget.routeName);
                         },
                       ),
                       Container(

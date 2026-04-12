@@ -10,6 +10,7 @@ import 'place.dart';
 import 'uploaded_file.dart';
 import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '/backend/schema/structs/index.dart';
 
 List<String> generateSeasonList(int totalSeasons) {
   // Ye function 1 se le kar totalSeasons tak string list banayega. Agar 4 diya to ["1", "2", "3", "4"]
@@ -18,4 +19,13 @@ List<String> generateSeasonList(int totalSeasons) {
 
 int stringToInt(String val) {
   return int.parse(val);
+}
+
+String formatGenres(List<String>? genreList) {
+  // Agar list khali hai to kuch mat dikhao
+  if (genreList == null || genreList.isEmpty) {
+    return '';
+  }
+  // List ke har item ke darmiyan dot laga kar ek text bana do
+  return genreList.join(' • ');
 }

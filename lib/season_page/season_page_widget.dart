@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -846,8 +847,8 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                               color: FlutterFlowTheme.of(context).primaryText,
                               size: 20.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              context.pushNamed(SearchScreenWidget.routeName);
                             },
                           ),
                         ),

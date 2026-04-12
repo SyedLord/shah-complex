@@ -1,6 +1,7 @@
 import '/components/description_widget_widget.dart';
 import '/components/movie_card2_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'movie_page_widget.dart' show MoviePageWidget;
 import 'package:flutter/material.dart';
 

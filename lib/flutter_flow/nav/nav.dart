@@ -125,6 +125,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               isList: true,
             ),
           ),
+        ),
+        FFRoute(
+          name: HomeDashboardWidget.routeName,
+          path: HomeDashboardWidget.routePath,
+          builder: (context, params) => HomeDashboardWidget(),
+        ),
+        FFRoute(
+          name: HomeDashboard2Widget.routeName,
+          path: HomeDashboard2Widget.routePath,
+          builder: (context, params) => HomeDashboard2Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -197,6 +207,7 @@ class FFParameters {
     ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -215,6 +226,7 @@ class FFParameters {
       type,
       isList,
       collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
     );
   }
 }
