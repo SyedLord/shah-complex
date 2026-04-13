@@ -385,7 +385,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 ProfileSelectionWidget.routeName,
                                 context.mounted);
                           },
-                          text: 'Button',
+                          text: 'Sign In',
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 40.0,
