@@ -8,5 +8,7 @@ export '/movie_page/movie_page_widget.dart' show MoviePageWidget;
 export '/season_page/season_page_widget.dart' show SeasonPageWidget;
 export '/search_screen/search_screen_widget.dart' show SearchScreenWidget;
 export '/search_results/search_results_widget.dart' show SearchResultsWidget;
-export '/home_dashboard/home_dashboard_widget.dart' show HomeDashboardWidget;
-export '/home_dashboard2/home_dashboard2_widget.dart' show HomeDashboard2Widget;
+export '/login/login_widget.dart' show LoginWidget;
+export '/create_profile/create_profile_widget.dart' show CreateProfileWidget;
+export '/profile_selection_copy/profile_selection_copy_widget.dart'
+    show ProfileSelectionCopyWidget;

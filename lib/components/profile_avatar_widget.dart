@@ -9,16 +9,16 @@ export 'profile_avatar_model.dart';
 class ProfileAvatarWidget extends StatefulWidget {
   const ProfileAvatarWidget({
     super.key,
-    this.img_desc,
-    this.is_editing,
-    this.name,
-    this.is_active,
-  });
+    required this.profileImage,
+    bool? isEditing,
+    required this.name,
+    this.isActive,
+  }) : this.isEditing = isEditing ?? false;
 
-  final String? img_desc;
-  final bool? is_editing;
+  final String? profileImage;
+  final bool isEditing;
   final String? name;
-  final bool? is_active;
+  final bool? isActive;
 
   @override
   State<ProfileAvatarWidget> createState() => _ProfileAvatarWidgetState();
@@ -66,23 +66,21 @@ class _ProfileAvatarWidgetState extends State<ProfileAvatarWidget> {
                 CachedNetworkImage(
                   fadeInDuration: Duration(milliseconds: 0),
                   fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl: valueOrDefault<String>(
-                    widget.img_desc,
-                    'https://dimg.dreamflow.cloud/v1/image/cool%20aesthetic%20anime%20boy%20profile%20picture%20blue',
-                  ),
+                  imageUrl: '',
                   fit: BoxFit.cover,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Color(0x88000000),
+                if (widget.isEditing == true)
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0x88000000),
+                    ),
+                    alignment: AlignmentDirectional(0.0, 0.0),
+                    child: Icon(
+                      Icons.edit_rounded,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      size: 32.0,
+                    ),
                   ),
-                  alignment: AlignmentDirectional(0.0, 0.0),
-                  child: Icon(
-                    Icons.edit_rounded,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    size: 32.0,
-                  ),
-                ),
               ],
             ),
           ),
@@ -97,7 +95,7 @@ class _ProfileAvatarWidgetState extends State<ProfileAvatarWidget> {
                   fontWeight: FontWeight.w500,
                   fontStyle: FlutterFlowTheme.of(context).titleMedium.fontStyle,
                 ),
-                color: widget.is_active == false
+                color: widget.isActive == false
                     ? FlutterFlowTheme.of(context).secondaryText
                     : FlutterFlowTheme.of(context).primaryText,
                 fontSize: 17.0,

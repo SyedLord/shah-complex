@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -34,6 +35,10 @@ class FFAppState extends ChangeNotifier {
     });
     _safeInit(() {
       _isLoggedin = prefs.getBool('ff_isLoggedin') ?? _isLoggedin;
+    });
+    _safeInit(() {
+      _activeProfileRef =
+          prefs.getString('ff_activeProfileRef')?.ref ?? _activeProfileRef;
     });
   }
 
@@ -112,6 +117,15 @@ class FFAppState extends ChangeNotifier {
   set isLoggedin(bool value) {
     _isLoggedin = value;
     prefs.setBool('ff_isLoggedin', value);
+  }
+
+  DocumentReference? _activeProfileRef;
+  DocumentReference? get activeProfileRef => _activeProfileRef;
+  set activeProfileRef(DocumentReference? value) {
+    _activeProfileRef = value;
+    value != null
+        ? prefs.setString('ff_activeProfileRef', value.path)
+        : prefs.remove('ff_activeProfileRef');
   }
 }
 

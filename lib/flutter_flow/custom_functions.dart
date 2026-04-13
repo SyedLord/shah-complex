@@ -11,6 +11,7 @@ import 'uploaded_file.dart';
 import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/backend/schema/structs/index.dart';
+import '/auth/firebase_auth/auth_util.dart';
 
 List<String> generateSeasonList(int totalSeasons) {
   // Ye function 1 se le kar totalSeasons tak string list banayega. Agar 4 diya to ["1", "2", "3", "4"]
