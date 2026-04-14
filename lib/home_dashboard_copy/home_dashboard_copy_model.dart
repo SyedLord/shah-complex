@@ -1,6 +1,7 @@
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/movie_card_widget.dart';
+import '/components/profile_dropdown_widget.dart';
 import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
@@ -22,6 +23,8 @@ class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
           int index, Function(HeroItemStruct) updateFn) =>
       carouselItems[index] = updateFn(carouselItems[index]);
 
+  bool showProfileDropdown = false;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Custom Action - getTrendingCarousel] action in HomeDashboardCopy widget.
@@ -42,6 +45,8 @@ class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
   late SectionHeaderModel sectionHeaderModel3;
   // Model for movie_card component.
   late MovieCardModel movieCardModel3;
+  // Model for ProfileDropdown component.
+  late ProfileDropdownModel profileDropdownModel;
 
   @override
   void initState(BuildContext context) {
@@ -49,6 +54,7 @@ class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
     sectionHeaderModel2 = createModel(context, () => SectionHeaderModel());
     sectionHeaderModel3 = createModel(context, () => SectionHeaderModel());
     movieCardModel3 = createModel(context, () => MovieCardModel());
+    profileDropdownModel = createModel(context, () => ProfileDropdownModel());
   }
 
   @override
@@ -57,5 +63,6 @@ class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
     sectionHeaderModel2.dispose();
     sectionHeaderModel3.dispose();
     movieCardModel3.dispose();
+    profileDropdownModel.dispose();
   }
 }

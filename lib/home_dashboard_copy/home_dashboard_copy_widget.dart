@@ -1,6 +1,7 @@
 import '/backend/backend.dart';
 import '/components/hero_poster_widget.dart';
 import '/components/movie_card_widget.dart';
+import '/components/profile_dropdown_widget.dart';
 import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -734,21 +735,32 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                               context.pushNamed(SearchScreenWidget.routeName);
                             },
                           ),
-                          Container(
-                            width: 32.0,
-                            height: 32.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).primary,
-                              shape: BoxShape.circle,
-                            ),
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                homeDashboardCopyProfilesRecord.profileImage,
-                                width: 200.0,
-                                height: 200.0,
-                                fit: BoxFit.cover,
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              _model.showProfileDropdown =
+                                  !_model.showProfileDropdown;
+                              safeSetState(() {});
+                            },
+                            child: Container(
+                              width: 32.0,
+                              height: 32.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).primary,
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  homeDashboardCopyProfilesRecord.profileImage,
+                                  width: 200.0,
+                                  height: 200.0,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
@@ -918,6 +930,12 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                   ),
                 ),
               ),
+              if (_model.showProfileDropdown == true)
+                wrapWithModel(
+                  model: _model.profileDropdownModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: ProfileDropdownWidget(),
+                ),
             ],
           ),
         );

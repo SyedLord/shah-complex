@@ -36,7 +36,11 @@ dependencies:
   cloud_firestore_platform_interface: 6.6.9
   cloud_firestore_web: 4.4.9
   collection: 1.19.1
-  dropdown_button2: 2.3.9
+  dropdown_button2: 
+    git:
+      url: https://github.com/FlutterFlow/dropdown_button2.git
+      ref: 9bbeb2fd68e12615251a67208eb21bc75628c02c
+      path: packages/dropdown_button2
   easy_debounce: 2.0.1
   expandable: 5.0.1
   firebase_auth: 5.6.0
