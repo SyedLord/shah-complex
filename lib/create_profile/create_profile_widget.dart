@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'create_profile_model.dart';
 export 'create_profile_model.dart';
@@ -14,9 +15,11 @@ class CreateProfileWidget extends StatefulWidget {
   const CreateProfileWidget({
     super.key,
     this.profileDoc,
-  });
+    bool? isFirstProfile,
+  }) : this.isFirstProfile = isFirstProfile ?? false;
 
   final ProfilesRecord? profileDoc;
+  final bool isFirstProfile;
 
   static String routeName = 'CreateProfile';
   static String routePath = '/createProfile';
@@ -100,12 +103,11 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         FFButtonWidget(
-                          onPressed:
-                              (createProfileProfilesRecordList.length < 1)
-                                  ? null
-                                  : () async {
-                                      context.safePop();
-                                    },
+                          onPressed: (widget.isFirstProfile == true)
+                              ? null
+                              : () async {
+                                  context.safePop();
+                                },
                           text: 'Cancel',
                           options: FFButtonOptions(
                             height: 40.0,
@@ -181,6 +183,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                       profileImage:
                                           'https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg',
                                       isKids: false,
+                                      isMainProfile: widget.isFirstProfile,
                                     ));
 
                                     context.goNamed(
@@ -463,12 +466,51 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                               ),
                             ),
                           ),
-                          Container(
-                            height: FlutterFlowTheme.of(context)
-                                .designToken
-                                .spacing
-                                .xl,
-                          ),
+                          if (widget.profileDoc != null)
+                            FFButtonWidget(
+                              onPressed: () async {
+                                await widget.profileDoc!.reference.delete();
+
+                                context
+                                    .goNamed(ProfileSelectionWidget.routeName);
+                              },
+                              text: 'Delete Profile',
+                              icon: FaIcon(
+                                FontAwesomeIcons.trashAlt,
+                                size: 15.0,
+                              ),
+                              options: FFButtonOptions(
+                                height: 40.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: Color(0x00E50914),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      font: GoogleFonts.poppins(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
+                                    ),
+                                elevation: 0.0,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
                         ].divide(SizedBox(
                             height: FlutterFlowTheme.of(context)
                                 .designToken

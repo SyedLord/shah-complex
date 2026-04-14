@@ -37,7 +37,15 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
       );
       if (!(_model.fetchedProfiles != null &&
           (_model.fetchedProfiles)!.isNotEmpty)) {
-        context.goNamed(CreateProfileWidget.routeName);
+        context.goNamed(
+          CreateProfileWidget.routeName,
+          queryParameters: {
+            'isFirstProfile': serializeParam(
+              true,
+              ParamType.bool,
+            ),
+          }.withoutNulls,
+        );
       }
     });
   }
@@ -207,7 +215,15 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed(CreateProfileWidget.routeName);
+                          context.pushNamed(
+                            CreateProfileWidget.routeName,
+                            queryParameters: {
+                              'isFirstProfile': serializeParam(
+                                false,
+                                ParamType.bool,
+                              ),
+                            }.withoutNulls,
+                          );
                         },
                         child: Column(
                           mainAxisSize: MainAxisSize.min,

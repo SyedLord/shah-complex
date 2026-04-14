@@ -194,6 +194,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'profileDoc',
               ParamType.Document,
             ),
+            isFirstProfile: params.getParam(
+              'isFirstProfile',
+              ParamType.bool,
+            ),
           ),
         ),
         FFRoute(

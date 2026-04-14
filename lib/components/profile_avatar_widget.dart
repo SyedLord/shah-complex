@@ -88,7 +88,7 @@ class _ProfileAvatarWidgetState extends State<ProfileAvatarWidget> {
         Text(
           valueOrDefault<String>(
             widget.name,
-            'Aditya',
+            'Profile',
           ),
           style: FlutterFlowTheme.of(context).titleMedium.override(
                 font: GoogleFonts.inter(

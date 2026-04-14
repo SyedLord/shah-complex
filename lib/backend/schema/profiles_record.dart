@@ -30,12 +30,18 @@ class ProfilesRecord extends FirestoreRecord {
   bool get isKids => _isKids ?? false;
   bool hasIsKids() => _isKids != null;
 
+  // "is_main_profile" field.
+  bool? _isMainProfile;
+  bool get isMainProfile => _isMainProfile ?? false;
+  bool hasIsMainProfile() => _isMainProfile != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
     _profileName = snapshotData['profile_name'] as String?;
     _profileImage = snapshotData['profile_image'] as String?;
     _isKids = snapshotData['is_kids'] as bool?;
+    _isMainProfile = snapshotData['is_main_profile'] as bool?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -81,12 +87,14 @@ Map<String, dynamic> createProfilesRecordData({
   String? profileName,
   String? profileImage,
   bool? isKids,
+  bool? isMainProfile,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'profile_name': profileName,
       'profile_image': profileImage,
       'is_kids': isKids,
+      'is_main_profile': isMainProfile,
     }.withoutNulls,
   );
 
@@ -100,12 +108,13 @@ class ProfilesRecordDocumentEquality implements Equality<ProfilesRecord> {
   bool equals(ProfilesRecord? e1, ProfilesRecord? e2) {
     return e1?.profileName == e2?.profileName &&
         e1?.profileImage == e2?.profileImage &&
-        e1?.isKids == e2?.isKids;
+        e1?.isKids == e2?.isKids &&
+        e1?.isMainProfile == e2?.isMainProfile;
   }
 
   @override
-  int hash(ProfilesRecord? e) =>
-      const ListEquality().hash([e?.profileName, e?.profileImage, e?.isKids]);
+  int hash(ProfilesRecord? e) => const ListEquality()
+      .hash([e?.profileName, e?.profileImage, e?.isKids, e?.isMainProfile]);
 
   @override
   bool isValidKey(Object? o) => o is ProfilesRecord;
