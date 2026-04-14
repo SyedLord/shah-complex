@@ -3,6 +3,7 @@ import '/components/hero_poster_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/components/profile_dropdown_widget.dart';
 import '/components/section_header_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -13,6 +14,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'home_dashboard_copy_model.dart';
@@ -29,10 +31,13 @@ class HomeDashboardCopyWidget extends StatefulWidget {
       _HomeDashboardCopyWidgetState();
 }
 
-class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
+class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget>
+    with TickerProviderStateMixin {
   late HomeDashboardCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -45,6 +50,21 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
       _model.carouselItems =
           _model.trendingList!.toList().cast<HeroItemStruct>();
       safeSetState(() {});
+    });
+
+    animationsMap.addAll({
+      'profileDropdownOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
     });
   }
 
@@ -930,12 +950,20 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget> {
                   ),
                 ),
               ),
+              Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color(0x32141414),
+                ),
+              ),
               if (_model.showProfileDropdown == true)
                 wrapWithModel(
                   model: _model.profileDropdownModel,
                   updateCallback: () => safeSetState(() {}),
                   child: ProfileDropdownWidget(),
-                ),
+                ).animateOnPageLoad(
+                    animationsMap['profileDropdownOnPageLoadAnimation']!),
             ],
           ),
         );
