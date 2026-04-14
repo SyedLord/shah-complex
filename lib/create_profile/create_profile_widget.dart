@@ -467,7 +467,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                               ),
                             ),
                           ),
-                          if (widget.isFirstProfile == false)
+                          if ((widget.profileDoc?.isMainProfile == false) &&
+                              (widget.profileDoc != null))
                             FFButtonWidget(
                               onPressed: () async {
                                 await widget.profileDoc!.reference.delete();
