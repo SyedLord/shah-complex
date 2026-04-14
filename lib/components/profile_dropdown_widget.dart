@@ -2,7 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'profile_dropdown_model.dart';
@@ -56,29 +55,6 @@ class _ProfileDropdownWidgetState extends State<ProfileDropdownWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0,
-                    FlutterFlowTheme.of(context).designToken.spacing.md, 0.0),
-                child: Container(
-                  width: 16.0,
-                  height: 8.0,
-                  decoration: BoxDecoration(),
-                  child: Stack(
-                    children: [
-                      Transform.rotate(
-                        angle: 45.0 * (math.pi / 180),
-                        child: Container(
-                          width: 12.0,
-                          height: 12.0,
-                          decoration: BoxDecoration(
-                            color: Color(0xFF141414),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               ClipRRect(
                 borderRadius: BorderRadius.circular(
                     FlutterFlowTheme.of(context).designToken.radius.md),
