@@ -200,11 +200,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: ProfileSelectionCopyWidget.routeName,
           path: ProfileSelectionCopyWidget.routePath,
           builder: (context, params) => ProfileSelectionCopyWidget(),
-        ),
-        FFRoute(
-          name: HomeDashboardProfileMenuWidget.routeName,
-          path: HomeDashboardProfileMenuWidget.routePath,
-          builder: (context, params) => HomeDashboardProfileMenuWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

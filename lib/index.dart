@@ -12,5 +12,3 @@ export '/login/login_widget.dart' show LoginWidget;
 export '/create_profile/create_profile_widget.dart' show CreateProfileWidget;
 export '/profile_selection_copy/profile_selection_copy_widget.dart'
     show ProfileSelectionCopyWidget;
-export '/home_dashboard_profile_menu/home_dashboard_profile_menu_widget.dart'
-    show HomeDashboardProfileMenuWidget;

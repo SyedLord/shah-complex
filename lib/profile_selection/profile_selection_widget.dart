@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/profile_avatar_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
@@ -91,28 +90,6 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                     child: Container(
                       height: 80.0,
                       decoration: BoxDecoration(),
-                      child: Padding(
-                        padding: EdgeInsets.all(24.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            FlutterFlowIconButton(
-                              buttonSize: 40.0,
-                              icon: Icon(
-                                Icons.edit_rounded,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                size: 24.0,
-                              ),
-                              onPressed: () async {
-                                _model.isEditMode = !_model.isEditMode;
-                                safeSetState(() {});
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
                     ),
                   ),
                   Container(
@@ -221,6 +198,66 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                       ),
                     ),
                   ),
+                  if (_model.isEditMode == true)
+                    Align(
+                      alignment: AlignmentDirectional(0.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(CreateProfileWidget.routeName);
+                        },
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 100.0,
+                              height: 100.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.0),
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context).divider,
+                                  width: 2.0,
+                                ),
+                              ),
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Icon(
+                                Icons.add_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 48.0,
+                              ),
+                            ),
+                            Text(
+                              'Add Profile',
+                              style: FlutterFlowTheme.of(context)
+                                  .titleMedium
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
+                                    ),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    fontSize: 17.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
+                                    lineHeight: 1.3,
+                                  ),
+                            ),
+                          ].divide(SizedBox(height: 8.0)),
+                        ),
+                      ),
+                    ),
                   Align(
                     alignment: AlignmentDirectional(0.0, 0.9),
                     child: Container(
@@ -254,32 +291,45 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                             width: 0.0,
                                             height: 0.0,
                                           ),
-                                          Text(
-                                            'Manage Profiles',
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium
-                                                .override(
-                                                  font: GoogleFonts.inter(
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              _model.isEditMode =
+                                                  !_model.isEditMode;
+                                              safeSetState(() {});
+                                            },
+                                            child: Text(
+                                              'Manage Profiles',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.inter(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    fontSize: 12.0,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w600,
                                                     fontStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .labelMedium
                                                             .fontStyle,
+                                                    lineHeight: 1.3,
                                                   ),
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  fontSize: 12.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelMedium
-                                                          .fontStyle,
-                                                  lineHeight: 1.3,
-                                                ),
+                                            ),
                                           ),
                                           Container(
                                             width: 0.0,
