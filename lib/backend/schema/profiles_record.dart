@@ -35,6 +35,11 @@ class ProfilesRecord extends FirestoreRecord {
   bool get isMainProfile => _isMainProfile ?? false;
   bool hasIsMainProfile() => _isMainProfile != null;
 
+  // "created_at" field.
+  DateTime? _createdAt;
+  DateTime? get createdAt => _createdAt;
+  bool hasCreatedAt() => _createdAt != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -42,6 +47,7 @@ class ProfilesRecord extends FirestoreRecord {
     _profileImage = snapshotData['profile_image'] as String?;
     _isKids = snapshotData['is_kids'] as bool?;
     _isMainProfile = snapshotData['is_main_profile'] as bool?;
+    _createdAt = snapshotData['created_at'] as DateTime?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -88,6 +94,7 @@ Map<String, dynamic> createProfilesRecordData({
   String? profileImage,
   bool? isKids,
   bool? isMainProfile,
+  DateTime? createdAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -95,6 +102,7 @@ Map<String, dynamic> createProfilesRecordData({
       'profile_image': profileImage,
       'is_kids': isKids,
       'is_main_profile': isMainProfile,
+      'created_at': createdAt,
     }.withoutNulls,
   );
 
@@ -109,12 +117,18 @@ class ProfilesRecordDocumentEquality implements Equality<ProfilesRecord> {
     return e1?.profileName == e2?.profileName &&
         e1?.profileImage == e2?.profileImage &&
         e1?.isKids == e2?.isKids &&
-        e1?.isMainProfile == e2?.isMainProfile;
+        e1?.isMainProfile == e2?.isMainProfile &&
+        e1?.createdAt == e2?.createdAt;
   }
 
   @override
-  int hash(ProfilesRecord? e) => const ListEquality()
-      .hash([e?.profileName, e?.profileImage, e?.isKids, e?.isMainProfile]);
+  int hash(ProfilesRecord? e) => const ListEquality().hash([
+        e?.profileName,
+        e?.profileImage,
+        e?.isKids,
+        e?.isMainProfile,
+        e?.createdAt
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is ProfilesRecord;

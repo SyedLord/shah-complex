@@ -184,6 +184,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                           'https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg',
                                       isKids: false,
                                       isMainProfile: widget.isFirstProfile,
+                                      createdAt: getCurrentTimestamp,
                                     ));
 
                                     context.goNamed(
@@ -466,7 +467,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                               ),
                             ),
                           ),
-                          if (widget.profileDoc != null)
+                          if (widget.isFirstProfile == false)
                             FFButtonWidget(
                               onPressed: () async {
                                 await widget.profileDoc!.reference.delete();

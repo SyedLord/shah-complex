@@ -62,6 +62,7 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
     return StreamBuilder<List<ProfilesRecord>>(
       stream: queryProfilesRecord(
         parent: currentUserReference,
+        queryBuilder: (profilesRecord) => profilesRecord.orderBy('created_at'),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
