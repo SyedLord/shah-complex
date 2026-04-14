@@ -716,80 +716,6 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget>
                   ],
                 ),
               ),
-              Container(
-                height: 100.0,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xAA000000), Colors.transparent],
-                    stops: [0.0, 1.0],
-                    begin: AlignmentDirectional(0.0, -1.0),
-                    end: AlignmentDirectional(0, 1.0),
-                  ),
-                ),
-                child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 16.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.question_mark,
-                        color: FlutterFlowTheme.of(context).primary,
-                        size: 32.0,
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          FlutterFlowIconButton(
-                            buttonSize: 40.0,
-                            icon: Icon(
-                              Icons.search_rounded,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 24.0,
-                            ),
-                            onPressed: () async {
-                              context.pushNamed(SearchScreenWidget.routeName);
-                            },
-                          ),
-                          InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              _model.showProfileDropdown =
-                                  !_model.showProfileDropdown;
-                              safeSetState(() {});
-                            },
-                            child: Container(
-                              width: 32.0,
-                              height: 32.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).primary,
-                                shape: BoxShape.circle,
-                              ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.network(
-                                  homeDashboardCopyProfilesRecord.profileImage,
-                                  width: 200.0,
-                                  height: 200.0,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ].divide(SizedBox(width: 24.0)),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               Align(
                 alignment: AlignmentDirectional(0.0, 1.0),
                 child: Container(
@@ -950,11 +876,86 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget>
                   ),
                 ),
               ),
+              if (_model.showProfileDropdown == true)
+                Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Color(0x67141414),
+                  ),
+                ),
               Container(
-                width: double.infinity,
-                height: double.infinity,
+                height: 100.0,
                 decoration: BoxDecoration(
-                  color: Color(0x32141414),
+                  gradient: LinearGradient(
+                    colors: [Color(0xAA000000), Colors.transparent],
+                    stops: [0.0, 1.0],
+                    begin: AlignmentDirectional(0.0, -1.0),
+                    end: AlignmentDirectional(0, 1.0),
+                  ),
+                ),
+                child: Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 16.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.question_mark,
+                        color: FlutterFlowTheme.of(context).primary,
+                        size: 32.0,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          FlutterFlowIconButton(
+                            buttonSize: 40.0,
+                            icon: Icon(
+                              Icons.search_rounded,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 24.0,
+                            ),
+                            onPressed: () async {
+                              context.pushNamed(SearchScreenWidget.routeName);
+                            },
+                          ),
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              _model.showProfileDropdown =
+                                  !_model.showProfileDropdown;
+                              safeSetState(() {});
+                            },
+                            child: Container(
+                              width: 32.0,
+                              height: 32.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).primary,
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  homeDashboardCopyProfilesRecord.profileImage,
+                                  width: 200.0,
+                                  height: 200.0,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ].divide(SizedBox(width: 24.0)),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               if (_model.showProfileDropdown == true)
