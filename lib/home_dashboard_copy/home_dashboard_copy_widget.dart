@@ -59,7 +59,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget>
           FadeEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
-            duration: 600.0.ms,
+            duration: 200.0.ms,
             begin: 0.0,
             end: 1.0,
           ),
