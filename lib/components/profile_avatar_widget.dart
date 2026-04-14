@@ -66,7 +66,7 @@ class _ProfileAvatarWidgetState extends State<ProfileAvatarWidget> {
                 CachedNetworkImage(
                   fadeInDuration: Duration(milliseconds: 0),
                   fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl: '',
+                  imageUrl: widget.profileImage!,
                   fit: BoxFit.cover,
                 ),
                 if (widget.isEditing == true)
