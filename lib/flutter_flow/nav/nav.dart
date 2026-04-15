@@ -204,6 +204,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: ProfileSelectionCopyWidget.routeName,
           path: ProfileSelectionCopyWidget.routePath,
           builder: (context, params) => ProfileSelectionCopyWidget(),
+        ),
+        FFRoute(
+          name: ChooseProfileIconWidget.routeName,
+          path: ChooseProfileIconWidget.routePath,
+          builder: (context, params) => ChooseProfileIconWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

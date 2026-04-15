@@ -278,28 +278,39 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 5.0, 5.0),
-                                      child: Container(
-                                        width: 32.0,
-                                        height: 32.0,
-                                        decoration: BoxDecoration(
-                                          color: Color(0x88000000),
-                                          borderRadius: BorderRadius.circular(
-                                              FlutterFlowTheme.of(context)
-                                                  .designToken
-                                                  .radius
-                                                  .full),
-                                          border: Border.all(
-                                            color: Colors.white,
-                                            width: 1.0,
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                              ChooseProfileIconWidget
+                                                  .routeName);
+                                        },
+                                        child: Container(
+                                          width: 32.0,
+                                          height: 32.0,
+                                          decoration: BoxDecoration(
+                                            color: Color(0x88000000),
+                                            borderRadius: BorderRadius.circular(
+                                                FlutterFlowTheme.of(context)
+                                                    .designToken
+                                                    .radius
+                                                    .full),
+                                            border: Border.all(
+                                              color: Colors.white,
+                                              width: 1.0,
+                                            ),
                                           ),
-                                        ),
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        child: Icon(
-                                          Icons.edit_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          size: 18.0,
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: Icon(
+                                            Icons.edit_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            size: 18.0,
+                                          ),
                                         ),
                                       ),
                                     ),

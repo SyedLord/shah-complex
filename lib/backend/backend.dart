@@ -12,6 +12,7 @@ import 'schema/user_progress_record.dart';
 import 'schema/categories_record.dart';
 import 'schema/users_record.dart';
 import 'schema/profiles_record.dart';
+import 'schema/profile_icons_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -27,6 +28,7 @@ export 'schema/user_progress_record.dart';
 export 'schema/categories_record.dart';
 export 'schema/users_record.dart';
 export 'schema/profiles_record.dart';
+export 'schema/profile_icons_record.dart';
 
 /// Functions to query MoviesRecords (as a Stream and as a Future).
 Future<int> queryMoviesRecordCount({
@@ -288,6 +290,43 @@ Future<List<ProfilesRecord>> queryProfilesRecordOnce({
     queryCollectionOnce(
       ProfilesRecord.collection(parent),
       ProfilesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query ProfileIconsRecords (as a Stream and as a Future).
+Future<int> queryProfileIconsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ProfileIconsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ProfileIconsRecord>> queryProfileIconsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ProfileIconsRecord.collection,
+      ProfileIconsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ProfileIconsRecord>> queryProfileIconsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ProfileIconsRecord.collection,
+      ProfileIconsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
