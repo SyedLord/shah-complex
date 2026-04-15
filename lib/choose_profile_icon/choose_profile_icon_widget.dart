@@ -79,8 +79,8 @@ class _ChooseProfileIconWidgetState extends State<ChooseProfileIconWidget> {
                                 color: FlutterFlowTheme.of(context).primaryText,
                                 size: 24.0,
                               ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
+                              onPressed: () async {
+                                context.pop();
                               },
                             ),
                             Expanded(
@@ -226,8 +226,7 @@ class _ChooseProfileIconWidgetState extends State<ChooseProfileIconWidget> {
                                                   Duration(milliseconds: 500),
                                               fadeOutDuration:
                                                   Duration(milliseconds: 500),
-                                              imageUrl:
-                                                  'https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg',
+                                              imageUrl: iconListItem,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
