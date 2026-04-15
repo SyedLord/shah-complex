@@ -6,8 +6,10 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'create_profile_model.dart';
 export 'create_profile_model.dart';
 
@@ -38,6 +40,12 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
     super.initState();
     _model = createModel(context, () => CreateProfileModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      FFAppState().tempSelectedAvatar = '';
+      safeSetState(() {});
+    });
+
     _model.profileNameTextController ??=
         TextEditingController(text: widget.profileDoc?.profileName);
     _model.profileNameFocusNode ??= FocusNode();
@@ -54,6 +62,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return StreamBuilder<List<ProfilesRecord>>(
       stream: queryProfilesRecord(
         parent: currentUserReference,
@@ -173,6 +183,22 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                         .update(createProfilesRecordData(
                                       profileName:
                                           _model.profileNameTextController.text,
+                                      profileImage: () {
+                                        if (FFAppState().tempSelectedAvatar !=
+                                                '') {
+                                          return FFAppState()
+                                              .tempSelectedAvatar;
+                                        } else if (widget
+                                                    .profileDoc?.profileImage !=
+                                                null &&
+                                            widget.profileDoc?.profileImage !=
+                                                '') {
+                                          return widget
+                                              .profileDoc?.profileImage;
+                                        } else {
+                                          return 'https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg';
+                                        }
+                                      }(),
                                     ));
                                   } else {
                                     await ProfilesRecord.createDoc(
@@ -180,8 +206,22 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                         .set(createProfilesRecordData(
                                       profileName:
                                           _model.profileNameTextController.text,
-                                      profileImage:
-                                          'https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg',
+                                      profileImage: () {
+                                        if (FFAppState().tempSelectedAvatar !=
+                                                '') {
+                                          return FFAppState()
+                                              .tempSelectedAvatar;
+                                        } else if (widget
+                                                    .profileDoc?.profileImage !=
+                                                null &&
+                                            widget.profileDoc?.profileImage !=
+                                                '') {
+                                          return widget
+                                              .profileDoc?.profileImage;
+                                        } else {
+                                          return 'https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg';
+                                        }
+                                      }(),
                                       isKids: false,
                                       isMainProfile: widget.isFirstProfile,
                                       createdAt: getCurrentTimestamp,
@@ -267,8 +307,20 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                   CachedNetworkImage(
                                     fadeInDuration: Duration(milliseconds: 0),
                                     fadeOutDuration: Duration(milliseconds: 0),
-                                    imageUrl:
-                                        'https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg',
+                                    imageUrl: () {
+                                      if (FFAppState().tempSelectedAvatar !=
+                                              '') {
+                                        return FFAppState().tempSelectedAvatar;
+                                      } else if (widget
+                                                  .profileDoc?.profileImage !=
+                                              null &&
+                                          widget.profileDoc?.profileImage !=
+                                              '') {
+                                        return widget.profileDoc!.profileImage;
+                                      } else {
+                                        return 'https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg';
+                                      }
+                                    }(),
                                     width: double.infinity,
                                     height: double.infinity,
                                     fit: BoxFit.contain,

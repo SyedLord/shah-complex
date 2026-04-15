@@ -127,6 +127,12 @@ class FFAppState extends ChangeNotifier {
         ? prefs.setString('ff_activeProfileRef', value.path)
         : prefs.remove('ff_activeProfileRef');
   }
+
+  String _tempSelectedAvatar = '';
+  String get tempSelectedAvatar => _tempSelectedAvatar;
+  set tempSelectedAvatar(String value) {
+    _tempSelectedAvatar = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {
