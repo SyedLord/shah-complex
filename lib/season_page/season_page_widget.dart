@@ -1012,12 +1012,36 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                               final gridViewSeriesRecord =
                                                   gridViewSeriesRecordList[
                                                       gridViewIndex];
-                                              return MovieCardWidget(
-                                                key: Key(
-                                                    'Key7lq_${gridViewIndex}_of_${gridViewSeriesRecordList.length}'),
-                                                img: gridViewSeriesRecord
-                                                    .posterImage,
-                                                seriesDoc: gridViewSeriesRecord,
+                                              return InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  context.pushNamed(
+                                                    SeasonPageWidget.routeName,
+                                                    queryParameters: {
+                                                      'seriesDoc':
+                                                          serializeParam(
+                                                        gridViewSeriesRecord,
+                                                        ParamType.Document,
+                                                      ),
+                                                    }.withoutNulls,
+                                                    extra: <String, dynamic>{
+                                                      'seriesDoc':
+                                                          gridViewSeriesRecord,
+                                                    },
+                                                  );
+                                                },
+                                                child: MovieCardWidget(
+                                                  key: Key(
+                                                      'Key7lq_${gridViewIndex}_of_${gridViewSeriesRecordList.length}'),
+                                                  img: gridViewSeriesRecord
+                                                      .posterImage,
+                                                  seriesDoc:
+                                                      gridViewSeriesRecord,
+                                                ),
                                               );
                                             },
                                           );
