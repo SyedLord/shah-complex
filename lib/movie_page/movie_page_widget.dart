@@ -967,7 +967,7 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                         ),
                         Container(
                           width: double.infinity,
-                          height: 570.0,
+                          height: 600.0,
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 40.0),
@@ -1039,12 +1039,34 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                             final gridViewMoviesRecord =
                                                 gridViewMoviesRecordList[
                                                     gridViewIndex];
-                                            return MovieCardWidget(
-                                              key: Key(
-                                                  'Keyhu6_${gridViewIndex}_of_${gridViewMoviesRecordList.length}'),
-                                              img:
-                                                  widget.movieDoc?.posterImage,
-                                              movieDoc: widget.movieDoc,
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  MoviePageWidget.routeName,
+                                                  queryParameters: {
+                                                    'movieDoc': serializeParam(
+                                                      gridViewMoviesRecord,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'movieDoc':
+                                                        gridViewMoviesRecord,
+                                                  },
+                                                );
+                                              },
+                                              child: MovieCardWidget(
+                                                key: Key(
+                                                    'Keyhu6_${gridViewIndex}_of_${gridViewMoviesRecordList.length}'),
+                                                img: widget
+                                                    .movieDoc?.posterImage,
+                                                movieDoc: widget.movieDoc,
+                                              ),
                                             );
                                           },
                                         );

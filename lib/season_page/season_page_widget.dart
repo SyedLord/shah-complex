@@ -795,7 +795,7 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                         ),
                         Container(
                           width: double.infinity,
-                          height: 570.0,
+                          height: 600.0,
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 40.0),
