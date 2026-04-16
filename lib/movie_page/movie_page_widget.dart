@@ -258,7 +258,10 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     6.0, 2.0, 6.0, 2.0),
                                 child: Text(
-                                  'PG-13',
+                                  valueOrDefault<String>(
+                                    widget.movieDoc?.contentRating,
+                                    'NR',
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .labelSmall
                                       .override(
@@ -550,65 +553,6 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                           child: DescriptionWidgetWidget(
                             description: widget.movieDoc?.description,
                           ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Cast:',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelSmall
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .labelSmall
-                                          .fontStyle,
-                                    ),
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    fontSize: 10.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelSmall
-                                        .fontStyle,
-                                    lineHeight: 1.2,
-                                  ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                'Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page...',
-                                maxLines: 1,
-                                style: FlutterFlowTheme.of(context)
-                                    .labelSmall
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .fontStyle,
-                                      ),
-                                      color: FlutterFlowTheme.of(context).hint,
-                                      fontSize: 10.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .labelSmall
-                                          .fontStyle,
-                                      lineHeight: 1.2,
-                                    ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ].divide(SizedBox(
-                              width: FlutterFlowTheme.of(context)
-                                  .designToken
-                                  .spacing
-                                  .xs)),
                         ),
                         Container(
                           child: Padding(

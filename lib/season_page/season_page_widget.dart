@@ -253,7 +253,10 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     6.0, 2.0, 6.0, 2.0),
                                 child: Text(
-                                  'TV-MA',
+                                  valueOrDefault<String>(
+                                    widget.seriesDoc?.contentRating,
+                                    'NR',
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .labelSmall
                                       .override(

@@ -85,6 +85,11 @@ class MoviesRecord extends FirestoreRecord {
   DateTime? get createdAt => _createdAt;
   bool hasCreatedAt() => _createdAt != null;
 
+  // "content_rating" field.
+  String? _contentRating;
+  String get contentRating => _contentRating ?? '';
+  bool hasContentRating() => _contentRating != null;
+
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _tmdbId = castToType<int>(snapshotData['tmdb_id']);
@@ -100,6 +105,7 @@ class MoviesRecord extends FirestoreRecord {
     _duration = snapshotData['duration'] as String?;
     _logoImage = snapshotData['logo_image'] as String?;
     _createdAt = snapshotData['created_at'] as DateTime?;
+    _contentRating = snapshotData['content_rating'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -149,6 +155,7 @@ Map<String, dynamic> createMoviesRecordData({
   String? duration,
   String? logoImage,
   DateTime? createdAt,
+  String? contentRating,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -165,6 +172,7 @@ Map<String, dynamic> createMoviesRecordData({
       'duration': duration,
       'logo_image': logoImage,
       'created_at': createdAt,
+      'content_rating': contentRating,
     }.withoutNulls,
   );
 
@@ -190,7 +198,8 @@ class MoviesRecordDocumentEquality implements Equality<MoviesRecord> {
         e1?.backdropImage == e2?.backdropImage &&
         e1?.duration == e2?.duration &&
         e1?.logoImage == e2?.logoImage &&
-        e1?.createdAt == e2?.createdAt;
+        e1?.createdAt == e2?.createdAt &&
+        e1?.contentRating == e2?.contentRating;
   }
 
   @override
@@ -208,7 +217,8 @@ class MoviesRecordDocumentEquality implements Equality<MoviesRecord> {
         e?.backdropImage,
         e?.duration,
         e?.logoImage,
-        e?.createdAt
+        e?.createdAt,
+        e?.contentRating
       ]);
 
   @override
