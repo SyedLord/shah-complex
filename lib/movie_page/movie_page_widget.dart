@@ -965,116 +965,106 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            height: 500.0,
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 40.0),
-                              child: PageView(
-                                controller: _model.pageViewController ??=
-                                    PageController(initialPage: 0),
-                                onPageChanged: (_) async {
-                                  _model.tabIndex = _model.pageViewCurrentIndex;
-                                  safeSetState(() {});
-                                },
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  SingleChildScrollView(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Flexible(
-                                          child:
-                                              StreamBuilder<List<MoviesRecord>>(
-                                            stream: queryMoviesRecord(
-                                              queryBuilder: (moviesRecord) =>
-                                                  moviesRecord
-                                                      .whereArrayContainsAny(
-                                                          'genres',
-                                                          widget.movieDoc
-                                                              ?.genres),
-                                              limit: 9,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      valueColor:
-                                                          AlwaysStoppedAnimation<
-                                                              Color>(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary,
-                                                      ),
-                                                    ),
+                        Container(
+                          width: double.infinity,
+                          height: 500.0,
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 40.0),
+                            child: PageView(
+                              controller: _model.pageViewController ??=
+                                  PageController(initialPage: 0),
+                              onPageChanged: (_) async {
+                                _model.tabIndex = _model.pageViewCurrentIndex;
+                                safeSetState(() {});
+                              },
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      StreamBuilder<List<MoviesRecord>>(
+                                        stream: queryMoviesRecord(
+                                          queryBuilder: (moviesRecord) =>
+                                              moviesRecord
+                                                  .whereArrayContainsAny(
+                                                      'genres',
+                                                      widget.movieDoc?.genres),
+                                          limit: 9,
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                          Color>(
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
                                                   ),
-                                                );
-                                              }
-                                              List<MoviesRecord>
-                                                  gridViewMoviesRecordList =
-                                                  snapshot.data!;
-
-                                              return GridView.builder(
-                                                padding: EdgeInsets.zero,
-                                                gridDelegate:
-                                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 3,
-                                                  crossAxisSpacing:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .designToken
-                                                          .spacing
-                                                          .md,
-                                                  mainAxisSpacing:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .designToken
-                                                          .spacing
-                                                          .md,
-                                                  childAspectRatio: 0.6,
                                                 ),
-                                                primary: false,
-                                                shrinkWrap: true,
-                                                itemCount:
-                                                    gridViewMoviesRecordList
-                                                        .length,
-                                                itemBuilder:
-                                                    (context, gridViewIndex) {
-                                                  final gridViewMoviesRecord =
-                                                      gridViewMoviesRecordList[
-                                                          gridViewIndex];
-                                                  return MovieCardWidget(
-                                                    key: Key(
-                                                        'Keyhu6_${gridViewIndex}_of_${gridViewMoviesRecordList.length}'),
-                                                    img: widget
-                                                        .movieDoc?.posterImage,
-                                                    movieDoc: widget.movieDoc,
-                                                  );
-                                                },
+                                              ),
+                                            );
+                                          }
+                                          List<MoviesRecord>
+                                              gridViewMoviesRecordList =
+                                              snapshot.data!;
+
+                                          return GridView.builder(
+                                            padding: EdgeInsets.zero,
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 3,
+                                              crossAxisSpacing:
+                                                  FlutterFlowTheme.of(context)
+                                                      .designToken
+                                                      .spacing
+                                                      .md,
+                                              mainAxisSpacing:
+                                                  FlutterFlowTheme.of(context)
+                                                      .designToken
+                                                      .spacing
+                                                      .md,
+                                              childAspectRatio: 0.6,
+                                            ),
+                                            primary: false,
+                                            shrinkWrap: true,
+                                            itemCount:
+                                                gridViewMoviesRecordList.length,
+                                            itemBuilder:
+                                                (context, gridViewIndex) {
+                                              final gridViewMoviesRecord =
+                                                  gridViewMoviesRecordList[
+                                                      gridViewIndex];
+                                              return MovieCardWidget(
+                                                key: Key(
+                                                    'Keyhu6_${gridViewIndex}_of_${gridViewMoviesRecordList.length}'),
+                                                img: widget
+                                                    .movieDoc?.posterImage,
+                                                movieDoc: widget.movieDoc,
                                               );
                                             },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                          );
+                                        },
+                                      ),
+                                    ],
                                   ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [],
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [],
-                                  ),
-                                ],
-                              ),
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [],
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [],
+                                ),
+                              ],
                             ),
                           ),
                         ),
