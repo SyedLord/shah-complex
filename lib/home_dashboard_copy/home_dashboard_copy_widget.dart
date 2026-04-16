@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/continue_watching_card_widget.dart';
 import '/components/hero_poster_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/components/profile_dropdown_widget.dart';
@@ -9,6 +10,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
@@ -391,38 +393,73 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget>
                         ),
                       ],
                     ),
-                    wrapWithModel(
-                      model: _model.sectionHeaderModel3,
-                      updateCallback: () => safeSetState(() {}),
-                      child: SectionHeaderWidget(
-                        title: 'Continue Watching',
-                        isTrending: false,
-                        isContinueWatching: false,
-                      ),
-                    ),
-                    Container(
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 16.0, 0.0, 16.0),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              wrapWithModel(
-                                model: _model.movieCardModel3,
-                                updateCallback: () => safeSetState(() {}),
-                                child: MovieCardWidget(
-                                  img:
-                                      'image.tmdb.org/t/p/w500/xA7N41glw17MBQtcWSm2eBlBRuG.jpg',
-                                ),
-                              ),
-                            ],
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        wrapWithModel(
+                          model: _model.sectionHeaderModel3,
+                          updateCallback: () => safeSetState(() {}),
+                          child: SectionHeaderWidget(
+                            title: 'Continue Watching',
+                            isTrending: false,
+                            isContinueWatching: false,
                           ),
                         ),
-                      ),
+                        Container(
+                          height: 120.0,
+                          decoration: BoxDecoration(),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 0.0, 16.0, 0.0),
+                            child: StreamBuilder<List<ItemsRecord>>(
+                              stream: queryItemsRecord(
+                                parent: functions.getContinueWatchingRef(
+                                    FFAppState().activeProfileRef!),
+                                queryBuilder: (itemsRecord) => itemsRecord
+                                    .orderBy('updated_at', descending: true),
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          FlutterFlowTheme.of(context).primary,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<ItemsRecord> listViewItemsRecordList =
+                                    snapshot.data!;
+
+                                return ListView.separated(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: listViewItemsRecordList.length,
+                                  separatorBuilder: (_, __) =>
+                                      SizedBox(width: 10.0),
+                                  itemBuilder: (context, listViewIndex) {
+                                    final listViewItemsRecord =
+                                        listViewItemsRecordList[listViewIndex];
+                                    return ContinueWatchingCardWidget(
+                                      key: Key(
+                                          'Keyuz4_${listViewIndex}_of_${listViewItemsRecordList.length}'),
+                                      continueDoc: listViewItemsRecord,
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     StreamBuilder<List<CategoriesRecord>>(
                       stream: queryCategoriesRecord(

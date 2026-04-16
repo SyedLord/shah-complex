@@ -1,6 +1,5 @@
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/movie_card_widget.dart';
 import '/components/profile_dropdown_widget.dart';
 import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -43,8 +42,6 @@ class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
   late SectionHeaderModel sectionHeaderModel2;
   // Model for section_header component.
   late SectionHeaderModel sectionHeaderModel3;
-  // Model for movie_card component.
-  late MovieCardModel movieCardModel3;
   // Model for ProfileDropdown component.
   late ProfileDropdownModel profileDropdownModel;
 
@@ -53,7 +50,6 @@ class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
     sectionHeaderModel1 = createModel(context, () => SectionHeaderModel());
     sectionHeaderModel2 = createModel(context, () => SectionHeaderModel());
     sectionHeaderModel3 = createModel(context, () => SectionHeaderModel());
-    movieCardModel3 = createModel(context, () => MovieCardModel());
     profileDropdownModel = createModel(context, () => ProfileDropdownModel());
   }
 
@@ -62,7 +58,6 @@ class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
     sectionHeaderModel1.dispose();
     sectionHeaderModel2.dispose();
     sectionHeaderModel3.dispose();
-    movieCardModel3.dispose();
     profileDropdownModel.dispose();
   }
 }

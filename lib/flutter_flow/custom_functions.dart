@@ -30,3 +30,32 @@ String formatGenres(List<String>? genreList) {
   // List ke har item ke darmiyan dot laga kar ek text bana do
   return genreList.join(' • ');
 }
+
+double calculateProgressRatio(
+  int? watched,
+  int? total,
+) {
+  // Agar values null hon ya total zero ho, to error se bachne k liye 0.0 return kro
+  if (watched == null || total == null || total <= 0) {
+    return 0.0;
+  }
+
+  // Ratio calculate kro
+  double ratio = watched / total;
+
+  // Make sure kro k value hamesha 0.0 aur 1.0 k darmian he rahey (progress bar UI kharab na ho)
+  if (ratio > 1.0) {
+    return 1.0;
+  } else if (ratio < 0.0) {
+    return 0.0;
+  }
+
+  return ratio;
+}
+
+DocumentReference getContinueWatchingRef(DocumentReference profileRef) {
+  // Ye profileRef me se ID nikal kar continue_watching ka naya rasta bana dega
+  return FirebaseFirestore.instance
+      .collection('continue_watching')
+      .doc(profileRef.id);
+}
