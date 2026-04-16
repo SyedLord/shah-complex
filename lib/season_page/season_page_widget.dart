@@ -808,42 +808,56 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                               },
                               scrollDirection: Axis.horizontal,
                               children: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 10.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          FlutterFlowDropDown<String>(
-                                            controller: _model
-                                                    .seasonSelectorValueController ??=
-                                                FormFieldController<String>(
-                                              _model.seasonSelectorValue ??=
-                                                  _model.selectedSeason
-                                                      .toString(),
-                                            ),
-                                            options: functions
-                                                .generateSeasonList(widget
-                                                    .seriesDoc!.totalSeasons),
-                                            onChanged: (val) async {
-                                              safeSetState(() => _model
-                                                  .seasonSelectorValue = val);
-                                              _model.selectedSeason =
-                                                  functions.stringToInt(_model
-                                                      .seasonSelectorValue!);
-                                              safeSetState(() {});
-                                            },
-                                            width: 200.0,
-                                            height: 40.0,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      font: GoogleFonts.inter(
+                                SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 10.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            FlutterFlowDropDown<String>(
+                                              controller: _model
+                                                      .seasonSelectorValueController ??=
+                                                  FormFieldController<String>(
+                                                _model.seasonSelectorValue ??=
+                                                    _model.selectedSeason
+                                                        .toString(),
+                                              ),
+                                              options: functions
+                                                  .generateSeasonList(widget
+                                                      .seriesDoc!.totalSeasons),
+                                              onChanged: (val) async {
+                                                safeSetState(() => _model
+                                                    .seasonSelectorValue = val);
+                                                _model.selectedSeason =
+                                                    functions.stringToInt(_model
+                                                        .seasonSelectorValue!);
+                                                safeSetState(() {});
+                                              },
+                                              width: 200.0,
+                                              height: 40.0,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
                                                         fontWeight:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -855,113 +869,93 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                                                 .bodyMedium
                                                                 .fontStyle,
                                                       ),
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .fontWeight,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .fontStyle,
-                                                    ),
-                                            hintText: 'Season',
-                                            icon: Icon(
-                                              Icons.keyboard_arrow_down_rounded,
-                                              color:
+                                              hintText: 'Season',
+                                              icon: Icon(
+                                                Icons
+                                                    .keyboard_arrow_down_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 24.0,
+                                              ),
+                                              fillColor:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              size: 24.0,
+                                                      .secondaryBackground,
+                                              elevation: 2.0,
+                                              borderColor: Colors.transparent,
+                                              borderWidth: 0.0,
+                                              borderRadius: 8.0,
+                                              margin: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      12.0, 0.0, 12.0, 0.0),
+                                              hidesUnderline: true,
+                                              isOverButton: false,
+                                              isSearchable: false,
+                                              isMultiSelect: false,
                                             ),
-                                            fillColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                            elevation: 2.0,
-                                            borderColor: Colors.transparent,
-                                            borderWidth: 0.0,
-                                            borderRadius: 8.0,
-                                            margin:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    12.0, 0.0, 12.0, 0.0),
-                                            hidesUnderline: true,
-                                            isOverButton: false,
-                                            isSearchable: false,
-                                            isMultiSelect: false,
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    SingleChildScrollView(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          StreamBuilder<List<EpisodesRecord>>(
-                                            stream: queryEpisodesRecord(
-                                              parent:
-                                                  widget.seriesDoc?.reference,
-                                              queryBuilder: (episodesRecord) =>
-                                                  episodesRecord
-                                                      .where(
-                                                        'season_number',
-                                                        isEqualTo: _model
-                                                            .selectedSeason,
-                                                      )
-                                                      .orderBy(
-                                                          'episode_number'),
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      valueColor:
-                                                          AlwaysStoppedAnimation<
-                                                              Color>(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary,
-                                                      ),
-                                                    ),
+                                      StreamBuilder<List<EpisodesRecord>>(
+                                        stream: queryEpisodesRecord(
+                                          parent: widget.seriesDoc?.reference,
+                                          queryBuilder: (episodesRecord) =>
+                                              episodesRecord
+                                                  .where(
+                                                    'season_number',
+                                                    isEqualTo:
+                                                        _model.selectedSeason,
+                                                  )
+                                                  .orderBy('episode_number'),
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                          Color>(
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
                                                   ),
-                                                );
-                                              }
-                                              List<EpisodesRecord>
-                                                  listViewEpisodesRecordList =
-                                                  snapshot.data!;
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          List<EpisodesRecord>
+                                              listViewEpisodesRecordList =
+                                              snapshot.data!;
 
-                                              return ListView.builder(
-                                                padding: EdgeInsets.zero,
-                                                primary: false,
-                                                shrinkWrap: true,
-                                                scrollDirection: Axis.vertical,
-                                                itemCount:
-                                                    listViewEpisodesRecordList
-                                                        .length,
-                                                itemBuilder:
-                                                    (context, listViewIndex) {
-                                                  final listViewEpisodesRecord =
-                                                      listViewEpisodesRecordList[
-                                                          listViewIndex];
-                                                  return EpisodeItemWidget(
-                                                    key: Key(
-                                                        'Key75e_${listViewIndex}_of_${listViewEpisodesRecordList.length}'),
-                                                    episodeDoc:
-                                                        listViewEpisodesRecord,
-                                                  );
-                                                },
+                                          return ListView.builder(
+                                            padding: EdgeInsets.zero,
+                                            primary: false,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.vertical,
+                                            itemCount:
+                                                listViewEpisodesRecordList
+                                                    .length,
+                                            itemBuilder:
+                                                (context, listViewIndex) {
+                                              final listViewEpisodesRecord =
+                                                  listViewEpisodesRecordList[
+                                                      listViewIndex];
+                                              return EpisodeItemWidget(
+                                                key: Key(
+                                                    'Keykha_${listViewIndex}_of_${listViewEpisodesRecordList.length}'),
+                                                episodeDoc:
+                                                    listViewEpisodesRecord,
                                               );
                                             },
-                                          ),
-                                        ],
+                                          );
+                                        },
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 Column(
                                   mainAxisSize: MainAxisSize.max,
