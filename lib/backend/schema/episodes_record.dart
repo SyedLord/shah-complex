@@ -60,6 +60,11 @@ class EpisodesRecord extends FirestoreRecord {
   String get thumbnail => _thumbnail ?? '';
   bool hasThumbnail() => _thumbnail != null;
 
+  // "tmdb_id" field.
+  int? _tmdbId;
+  int get tmdbId => _tmdbId ?? 0;
+  bool hasTmdbId() => _tmdbId != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -72,6 +77,7 @@ class EpisodesRecord extends FirestoreRecord {
     _description = snapshotData['description'] as String?;
     _duration = snapshotData['duration'] as String?;
     _thumbnail = snapshotData['thumbnail'] as String?;
+    _tmdbId = castToType<int>(snapshotData['tmdb_id']);
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -123,6 +129,7 @@ Map<String, dynamic> createEpisodesRecordData({
   String? description,
   String? duration,
   String? thumbnail,
+  int? tmdbId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -135,6 +142,7 @@ Map<String, dynamic> createEpisodesRecordData({
       'description': description,
       'duration': duration,
       'thumbnail': thumbnail,
+      'tmdb_id': tmdbId,
     }.withoutNulls,
   );
 
@@ -154,7 +162,8 @@ class EpisodesRecordDocumentEquality implements Equality<EpisodesRecord> {
         e1?.category == e2?.category &&
         e1?.description == e2?.description &&
         e1?.duration == e2?.duration &&
-        e1?.thumbnail == e2?.thumbnail;
+        e1?.thumbnail == e2?.thumbnail &&
+        e1?.tmdbId == e2?.tmdbId;
   }
 
   @override
@@ -167,7 +176,8 @@ class EpisodesRecordDocumentEquality implements Equality<EpisodesRecord> {
         e?.category,
         e?.description,
         e?.duration,
-        e?.thumbnail
+        e?.thumbnail,
+        e?.tmdbId
       ]);
 
   @override
