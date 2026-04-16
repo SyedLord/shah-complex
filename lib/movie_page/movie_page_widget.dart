@@ -1063,8 +1063,8 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                               child: MovieCardWidget(
                                                 key: Key(
                                                     'Keyhu6_${gridViewIndex}_of_${gridViewMoviesRecordList.length}'),
-                                                img: widget
-                                                    .movieDoc?.posterImage,
+                                                img: gridViewMoviesRecord
+                                                    .posterImage,
                                                 movieDoc: widget.movieDoc,
                                               ),
                                             );
