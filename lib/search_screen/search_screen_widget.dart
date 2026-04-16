@@ -87,7 +87,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                           size: 24.0,
                         ),
                         onPressed: () async {
-                          context.safePop();
+                          context.pop();
                         },
                       ),
                       Expanded(

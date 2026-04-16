@@ -96,7 +96,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                                 size: 24.0,
                               ),
                               onPressed: () async {
-                                context.safePop();
+                                context.pop();
                               },
                             ),
                             Text(
