@@ -14,6 +14,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -980,8 +981,11 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget>
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
-                                child: Image.network(
-                                  homeDashboardCopyProfilesRecord.profileImage,
+                                child: CachedNetworkImage(
+                                  fadeInDuration: Duration(milliseconds: 200),
+                                  fadeOutDuration: Duration(milliseconds: 200),
+                                  imageUrl: homeDashboardCopyProfilesRecord
+                                      .profileImage,
                                   width: 200.0,
                                   height: 200.0,
                                   fit: BoxFit.cover,

@@ -85,8 +85,8 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                         highlightColor: Colors.transparent,
                         onTap: () async {},
                         child: CachedNetworkImage(
-                          fadeInDuration: Duration(milliseconds: 0),
-                          fadeOutDuration: Duration(milliseconds: 0),
+                          fadeInDuration: Duration(milliseconds: 200),
+                          fadeOutDuration: Duration(milliseconds: 200),
                           imageUrl: widget.episodeDoc!.thumbnail,
                           fit: BoxFit.cover,
                         ),

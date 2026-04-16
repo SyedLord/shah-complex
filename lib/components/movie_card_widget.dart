@@ -54,8 +54,8 @@ class _MovieCardWidgetState extends State<MovieCardWidget> {
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: CachedNetworkImage(
-          fadeInDuration: Duration(milliseconds: 0),
-          fadeOutDuration: Duration(milliseconds: 0),
+          fadeInDuration: Duration(milliseconds: 200),
+          fadeOutDuration: Duration(milliseconds: 200),
           imageUrl: widget.img!,
           width: double.infinity,
           height: double.infinity,

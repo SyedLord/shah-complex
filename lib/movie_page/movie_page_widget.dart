@@ -179,8 +179,12 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                   alignment: AlignmentDirectional(-1.0, 0.0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.network(
-                                      widget.movieDoc!.logoImage,
+                                    child: CachedNetworkImage(
+                                      fadeInDuration:
+                                          Duration(milliseconds: 200),
+                                      fadeOutDuration:
+                                          Duration(milliseconds: 200),
+                                      imageUrl: widget.movieDoc!.logoImage,
                                       width: double.infinity,
                                       height: 120.0,
                                       fit: BoxFit.contain,

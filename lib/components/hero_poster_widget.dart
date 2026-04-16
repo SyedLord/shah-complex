@@ -108,8 +108,8 @@ class _HeroPosterWidgetState extends State<HeroPosterWidget> {
                         highlightColor: Colors.transparent,
                         onTap: () async {},
                         child: CachedNetworkImage(
-                          fadeInDuration: Duration(milliseconds: 0),
-                          fadeOutDuration: Duration(milliseconds: 0),
+                          fadeInDuration: Duration(milliseconds: 200),
+                          fadeOutDuration: Duration(milliseconds: 200),
                           imageUrl: widget.slideData!.image,
                           height: 600.0,
                           fit: BoxFit.cover,
@@ -188,8 +188,13 @@ class _HeroPosterWidgetState extends State<HeroPosterWidget> {
                                       ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
-                                        child: Image.network(
-                                          widget.slideData!.logoImage,
+                                        child: CachedNetworkImage(
+                                          fadeInDuration:
+                                              Duration(milliseconds: 200),
+                                          fadeOutDuration:
+                                              Duration(milliseconds: 200),
+                                          imageUrl:
+                                              widget.slideData!.logoImage,
                                           width: double.infinity,
                                           height: 120.0,
                                           fit: BoxFit.contain,

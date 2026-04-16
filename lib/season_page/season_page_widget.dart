@@ -68,8 +68,8 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                   child: Stack(
                     children: [
                       CachedNetworkImage(
-                        fadeInDuration: Duration(milliseconds: 0),
-                        fadeOutDuration: Duration(milliseconds: 0),
+                        fadeInDuration: Duration(milliseconds: 200),
+                        fadeOutDuration: Duration(milliseconds: 200),
                         imageUrl: valueOrDefault<String>(
                           widget.seriesDoc?.backdropImage,
                           'https://dimg.dreamflow.cloud/v1/image/Stranger%20Things%20season%204%20cinematic%20wide%20shot',
@@ -179,8 +179,11 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                   widget.seriesDoc?.logoImage != '')
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.network(
-                                    widget.seriesDoc!.logoImage,
+                                  child: CachedNetworkImage(
+                                    fadeInDuration: Duration(milliseconds: 200),
+                                    fadeOutDuration:
+                                        Duration(milliseconds: 200),
+                                    imageUrl: widget.seriesDoc!.logoImage,
                                     width: double.infinity,
                                     height: 120.0,
                                     fit: BoxFit.contain,
