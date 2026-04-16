@@ -138,6 +138,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: SeasonPageWidget.routeName,
           path: SeasonPageWidget.routePath,
+          requireAuth: true,
           asyncParams: {
             'seriesDoc': getDoc(['series'], SeriesRecord.fromSnapshot),
           },
@@ -185,6 +186,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: CreateProfileWidget.routeName,
           path: CreateProfileWidget.routePath,
+          requireAuth: true,
           asyncParams: {
             'profileDoc':
                 getDoc(['users', 'profiles'], ProfilesRecord.fromSnapshot),
@@ -208,6 +210,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: ChooseProfileIconWidget.routeName,
           path: ChooseProfileIconWidget.routePath,
+          requireAuth: true,
           builder: (context, params) => ChooseProfileIconWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
