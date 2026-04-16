@@ -975,6 +975,10 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               child: PageView(
                                 controller: _model.pageViewController ??=
                                     PageController(initialPage: 0),
+                                onPageChanged: (_) async {
+                                  _model.tabIndex = _model.pageViewCurrentIndex;
+                                  safeSetState(() {});
+                                },
                                 scrollDirection: Axis.horizontal,
                                 children: [
                                   SingleChildScrollView(
