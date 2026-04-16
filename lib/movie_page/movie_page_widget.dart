@@ -6,10 +6,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'movie_page_model.dart';
 export 'movie_page_model.dart';
 
@@ -48,6 +50,8 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -325,15 +329,13 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                if (widget.movieDoc?.driveType == 'gdrive') {
-                                  await actions.playVideoInExternalPlayer(
-                                    'https://shahcomplex.sa-syedali2000.workers.dev/?id=${widget.movieDoc?.videoUrl}',
-                                  );
-                                } else {
-                                  await actions.playVideoInExternalPlayer(
-                                    'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&file_id=${widget.movieDoc?.videoUrl}&key=Pappu@007',
-                                  );
-                                }
+                                await actions.launchExternalPlayer(
+                                  widget.movieDoc,
+                                  functions.emptyEpisodeDoc(),
+                                  functions.emptyContinueDoc(),
+                                  FFAppState().activeProfileRef!.id,
+                                  '',
+                                );
                               },
                               child: Container(
                                 decoration: BoxDecoration(

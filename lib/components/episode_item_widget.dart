@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -98,15 +99,13 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            if (widget.episodeDoc?.driveType == 'gdrive') {
-                              await actions.playVideoInExternalPlayer(
-                                'https://shahcomplex.sa-syedali2000.workers.dev/?id=${widget.episodeDoc?.videoUrl}',
-                              );
-                            } else {
-                              await actions.playVideoInExternalPlayer(
-                                'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&file_id=${widget.episodeDoc?.videoUrl}&key=Pappu@007',
-                              );
-                            }
+                            await actions.launchExternalPlayer(
+                              functions.emptyMovieDoc(),
+                              widget.episodeDoc,
+                              functions.emptyContinueDoc(),
+                              FFAppState().activeProfileRef!.id,
+                              widget.episodeDoc?.parentReference.id,
+                            );
                           },
                           child: Container(
                             width: 32.0,

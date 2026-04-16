@@ -56,17 +56,11 @@ class _ContinueWatchingCardWidgetState
       highlightColor: Colors.transparent,
       onTap: () async {
         await actions.launchExternalPlayer(
-          widget.continueDoc!.videoUrl,
-          widget.continueDoc!.tmdbId,
-          widget.continueDoc!.title,
-          widget.continueDoc!.contentType,
-          widget.continueDoc?.totalSeconds,
-          widget.continueDoc?.watchedSeconds,
-          widget.continueDoc?.season,
-          widget.continueDoc?.episode,
-          widget.continueDoc!.imageUrl,
-          widget.continueDoc?.seriesId,
+          functions.emptyMovieDoc(),
+          functions.emptyEpisodeDoc(),
+          widget.continueDoc,
           FFAppState().activeProfileRef!.id,
+          '',
         );
       },
       child: Container(

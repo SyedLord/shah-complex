@@ -59,3 +59,15 @@ DocumentReference getContinueWatchingRef(DocumentReference profileRef) {
       .collection('continue_watching')
       .doc(profileRef.id);
 }
+
+MoviesRecord? emptyMovieDoc() {
+  return null;
+}
+
+EpisodesRecord? emptyEpisodeDoc() {
+  return null;
+}
+
+ItemsRecord? emptyContinueDoc() {
+  return null;
+}
