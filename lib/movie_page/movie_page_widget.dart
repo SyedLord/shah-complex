@@ -1,6 +1,6 @@
 import '/backend/backend.dart';
 import '/components/description_widget_widget.dart';
-import '/components/movie_card2_widget.dart';
+import '/components/movie_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -719,6 +719,7 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                           color: FlutterFlowTheme.of(context).divider,
                         ),
                         Container(
+                          decoration: BoxDecoration(),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0,
@@ -728,210 +729,345 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                     .designToken
                                     .spacing
                                     .md),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'MORE LIKE THIS',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelLarge
-                                            .override(
-                                              font: GoogleFonts.inter(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    await _model.pageViewController
+                                        ?.animateToPage(
+                                      0,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.ease,
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'MORE LIKE THIS',
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                font: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLarge
+                                                          .fontStyle,
+                                                ),
+                                                color: _model.tabIndex == 0
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                fontSize: 14.0,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.bold,
                                                 fontStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .labelLarge
                                                         .fontStyle,
+                                                lineHeight: 1.3,
                                               ),
+                                        ),
+                                        if (_model.tabIndex == 0)
+                                          Container(
+                                            width: 40.0,
+                                            height: 4.0,
+                                            decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              fontSize: 14.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelLarge
-                                                      .fontStyle,
-                                              lineHeight: 1.3,
+                                                      .primary,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .designToken
+                                                          .radius
+                                                          .full),
                                             ),
-                                      ),
-                                      Container(
-                                        width: 40.0,
-                                        height: 4.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          borderRadius: BorderRadius.circular(
-                                              FlutterFlowTheme.of(context)
-                                                  .designToken
-                                                  .radius
-                                                  .full),
-                                        ),
-                                      ),
-                                    ].divide(SizedBox(
-                                        height: FlutterFlowTheme.of(context)
-                                            .designToken
-                                            .spacing
-                                            .xs)),
-                                  ),
-                                  Text(
-                                    'TRAILERS & MORE',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          font: GoogleFonts.inter(
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelLarge
-                                                    .fontStyle,
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 14.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLarge
-                                                  .fontStyle,
-                                          lineHeight: 1.3,
-                                        ),
+                                      ].divide(SizedBox(
+                                          height: FlutterFlowTheme.of(context)
+                                              .designToken
+                                              .spacing
+                                              .xs)),
+                                    ),
                                   ),
-                                  Text(
-                                    'DETAILS',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          font: GoogleFonts.inter(
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelLarge
-                                                    .fontStyle,
+                                ),
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    await _model.pageViewController
+                                        ?.animateToPage(
+                                      1,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.ease,
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          'TRAILERS',
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                font: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLarge
+                                                          .fontStyle,
+                                                ),
+                                                color: _model.tabIndex == 1
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                fontSize: 14.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelLarge
+                                                        .fontStyle,
+                                                lineHeight: 1.3,
+                                              ),
+                                        ),
+                                        if (_model.tabIndex == 1)
+                                          Container(
+                                            width: 40.0,
+                                            height: 4.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .designToken
+                                                          .radius
+                                                          .full),
+                                            ),
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 14.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLarge
-                                                  .fontStyle,
-                                          lineHeight: 1.3,
-                                        ),
+                                      ].divide(SizedBox(
+                                          height: FlutterFlowTheme.of(context)
+                                              .designToken
+                                              .spacing
+                                              .xs)),
+                                    ),
                                   ),
-                                ].divide(SizedBox(
-                                    width: FlutterFlowTheme.of(context)
-                                        .designToken
-                                        .spacing
-                                        .lg)),
-                              ),
+                                ),
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    await _model.pageViewController
+                                        ?.animateToPage(
+                                      2,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.ease,
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          'MORE',
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                font: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLarge
+                                                          .fontStyle,
+                                                ),
+                                                color: _model.tabIndex == 2
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                fontSize: 14.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelLarge
+                                                        .fontStyle,
+                                                lineHeight: 1.3,
+                                              ),
+                                        ),
+                                        if (_model.tabIndex == 2)
+                                          Container(
+                                            width: 40.0,
+                                            height: 4.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .designToken
+                                                          .radius
+                                                          .full),
+                                            ),
+                                          ),
+                                      ].divide(SizedBox(
+                                          height: FlutterFlowTheme.of(context)
+                                              .designToken
+                                              .spacing
+                                              .xs)),
+                                    ),
+                                  ),
+                                ),
+                              ].divide(SizedBox(
+                                  width: FlutterFlowTheme.of(context)
+                                      .designToken
+                                      .spacing
+                                      .lg)),
                             ),
                           ),
                         ),
-                        GridView(
-                          padding: EdgeInsets.zero,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            crossAxisSpacing: FlutterFlowTheme.of(context)
-                                .designToken
-                                .spacing
-                                .md,
-                            mainAxisSpacing: FlutterFlowTheme.of(context)
-                                .designToken
-                                .spacing
-                                .md,
-                            childAspectRatio: 0.66,
+                        Expanded(
+                          child: Container(
+                            width: double.infinity,
+                            height: 500.0,
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 40.0),
+                              child: PageView(
+                                controller: _model.pageViewController ??=
+                                    PageController(initialPage: 0),
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        StreamBuilder<List<MoviesRecord>>(
+                                          stream: queryMoviesRecord(
+                                            queryBuilder: (moviesRecord) =>
+                                                moviesRecord
+                                                    .whereArrayContainsAny(
+                                                        'genres',
+                                                        widget
+                                                            .movieDoc?.genres),
+                                            limit: 9,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<MoviesRecord>
+                                                gridViewMoviesRecordList =
+                                                snapshot.data!;
+
+                                            return GridView.builder(
+                                              padding: EdgeInsets.zero,
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 3,
+                                                crossAxisSpacing:
+                                                    FlutterFlowTheme.of(context)
+                                                        .designToken
+                                                        .spacing
+                                                        .md,
+                                                mainAxisSpacing:
+                                                    FlutterFlowTheme.of(context)
+                                                        .designToken
+                                                        .spacing
+                                                        .md,
+                                                childAspectRatio: 0.6,
+                                              ),
+                                              primary: false,
+                                              shrinkWrap: true,
+                                              itemCount:
+                                                  gridViewMoviesRecordList
+                                                      .length,
+                                              itemBuilder:
+                                                  (context, gridViewIndex) {
+                                                final gridViewMoviesRecord =
+                                                    gridViewMoviesRecordList[
+                                                        gridViewIndex];
+                                                return MovieCardWidget(
+                                                  key: Key(
+                                                      'Keyhu6_${gridViewIndex}_of_${gridViewMoviesRecordList.length}'),
+                                                  img: widget
+                                                      .movieDoc?.posterImage,
+                                                  movieDoc: widget.movieDoc,
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [],
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [],
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          shrinkWrap: true,
-                          children: [
-                            wrapWithModel(
-                              model: _model.movieCard2Model1,
-                              updateCallback: () => safeSetState(() {}),
-                              child: MovieCard2Widget(
-                                img:
-                                    'https://dimg.dreamflow.cloud/v1/image/Interstellar%20movie%20poster',
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.movieCard2Model2,
-                              updateCallback: () => safeSetState(() {}),
-                              child: MovieCard2Widget(
-                                img:
-                                    'https://dimg.dreamflow.cloud/v1/image/The%20Dark%20Knight%20movie%20poster',
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.movieCard2Model3,
-                              updateCallback: () => safeSetState(() {}),
-                              child: MovieCard2Widget(
-                                img:
-                                    'https://dimg.dreamflow.cloud/v1/image/Memento%20movie%20poster',
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.movieCard2Model4,
-                              updateCallback: () => safeSetState(() {}),
-                              child: MovieCard2Widget(
-                                img:
-                                    'https://dimg.dreamflow.cloud/v1/image/Tenet%20movie%20poster',
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.movieCard2Model5,
-                              updateCallback: () => safeSetState(() {}),
-                              child: MovieCard2Widget(
-                                img:
-                                    'https://dimg.dreamflow.cloud/v1/image/The%20Prestige%20movie%20poster',
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.movieCard2Model6,
-                              updateCallback: () => safeSetState(() {}),
-                              child: MovieCard2Widget(
-                                img:
-                                    'https://dimg.dreamflow.cloud/v1/image/Shutter%20Island%20movie%20poster',
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.movieCard2Model7,
-                              updateCallback: () => safeSetState(() {}),
-                              child: MovieCard2Widget(
-                                img:
-                                    'https://dimg.dreamflow.cloud/v1/image/The%20Matrix%20movie%20poster',
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.movieCard2Model8,
-                              updateCallback: () => safeSetState(() {}),
-                              child: MovieCard2Widget(
-                                img:
-                                    'https://dimg.dreamflow.cloud/v1/image/Blade%20Runner%202049%20movie%20poster',
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.movieCard2Model9,
-                              updateCallback: () => safeSetState(() {}),
-                              child: MovieCard2Widget(
-                                img:
-                                    'https://dimg.dreamflow.cloud/v1/image/Dunkirk%20movie%20poster',
-                              ),
-                            ),
-                          ],
                         ),
                       ].divide(SizedBox(
                           height: FlutterFlowTheme.of(context)
