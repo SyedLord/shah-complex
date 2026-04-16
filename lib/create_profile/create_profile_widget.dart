@@ -305,8 +305,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                               child: Stack(
                                 children: [
                                   CachedNetworkImage(
-                                    fadeInDuration: Duration(milliseconds: 0),
-                                    fadeOutDuration: Duration(milliseconds: 0),
+                                    fadeInDuration: Duration(milliseconds: 2),
+                                    fadeOutDuration: Duration(milliseconds: 2),
                                     imageUrl: () {
                                       if (FFAppState().tempSelectedAvatar !=
                                               '') {

@@ -223,9 +223,9 @@ class _ChooseProfileIconWidgetState extends State<ChooseProfileIconWidget> {
                                                 BorderRadius.circular(8.0),
                                             child: CachedNetworkImage(
                                               fadeInDuration:
-                                                  Duration(milliseconds: 500),
+                                                  Duration(milliseconds: 200),
                                               fadeOutDuration:
-                                                  Duration(milliseconds: 500),
+                                                  Duration(milliseconds: 200),
                                               imageUrl: iconListItem,
                                               fit: BoxFit.cover,
                                             ),

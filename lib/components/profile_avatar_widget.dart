@@ -64,8 +64,8 @@ class _ProfileAvatarWidgetState extends State<ProfileAvatarWidget> {
             child: Stack(
               children: [
                 CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
+                  fadeInDuration: Duration(milliseconds: 100),
+                  fadeOutDuration: Duration(milliseconds: 100),
                   imageUrl: widget.profileImage!,
                   fit: BoxFit.cover,
                 ),
