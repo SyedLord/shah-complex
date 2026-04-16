@@ -796,7 +796,7 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                         Expanded(
                           child: Container(
                             width: double.infinity,
-                            height: 500.0,
+                            height: 570.0,
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 40.0),
@@ -967,7 +967,7 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                   Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Expanded(
+                                      Flexible(
                                         child:
                                             StreamBuilder<List<SeriesRecord>>(
                                           stream: querySeriesRecord(
