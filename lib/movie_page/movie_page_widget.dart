@@ -990,9 +990,14 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                     StreamBuilder<List<MoviesRecord>>(
                                       stream: queryMoviesRecord(
                                         queryBuilder: (moviesRecord) =>
-                                            moviesRecord.whereArrayContainsAny(
-                                                'genres',
-                                                widget.movieDoc?.genres),
+                                            moviesRecord
+                                                .whereArrayContainsAny('genres',
+                                                    widget.movieDoc?.genres)
+                                                .where(
+                                                  'tmdb_id',
+                                                  isNotEqualTo:
+                                                      widget.movieDoc?.tmdbId,
+                                                ),
                                         limit: 9,
                                       ),
                                       builder: (context, snapshot) {

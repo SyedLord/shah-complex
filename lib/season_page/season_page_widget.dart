@@ -970,8 +970,12 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                               seriesRecord
                                                   .whereArrayContainsAny(
                                                       'genres',
-                                                      widget
-                                                          .seriesDoc?.genres),
+                                                      widget.seriesDoc?.genres)
+                                                  .where(
+                                                    'tmdb_id',
+                                                    isNotEqualTo: widget
+                                                        .seriesDoc?.tmdbId,
+                                                  ),
                                           limit: 9,
                                         ),
                                         builder: (context, snapshot) {
