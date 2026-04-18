@@ -1,6 +1,7 @@
 import '/backend/backend.dart';
 import '/components/description_widget_widget.dart';
 import '/components/episode_item_widget.dart';
+import '/components/i_m_d_b_ratings_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -197,26 +198,12 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              '98% Match',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .labelLarge
-                                          .fontStyle,
-                                    ),
-                                    color: FlutterFlowTheme.of(context).success,
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .fontStyle,
-                                    lineHeight: 1.3,
-                                  ),
+                            wrapWithModel(
+                              model: _model.iMDBRatingsModel,
+                              updateCallback: () => safeSetState(() {}),
+                              child: IMDBRatingsWidget(
+                                rating: widget.seriesDoc!.voteAverage,
+                              ),
                             ),
                             Text(
                               '2022',

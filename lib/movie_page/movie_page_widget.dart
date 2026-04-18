@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/components/description_widget_widget.dart';
+import '/components/i_m_d_b_ratings_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -199,26 +200,12 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              '99% Match',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .labelLarge
-                                          .fontStyle,
-                                    ),
-                                    color: FlutterFlowTheme.of(context).success,
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .fontStyle,
-                                    lineHeight: 1.3,
-                                  ),
+                            wrapWithModel(
+                              model: _model.iMDBRatingsModel,
+                              updateCallback: () => safeSetState(() {}),
+                              child: IMDBRatingsWidget(
+                                rating: widget.movieDoc!.voteAverage,
+                              ),
                             ),
                             Text(
                               valueOrDefault<String>(

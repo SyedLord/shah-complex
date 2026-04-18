@@ -75,6 +75,11 @@ class SeriesRecord extends FirestoreRecord {
   String get contentRating => _contentRating ?? '';
   bool hasContentRating() => _contentRating != null;
 
+  // "vote_average" field.
+  double? _voteAverage;
+  double get voteAverage => _voteAverage ?? 0.0;
+  bool hasVoteAverage() => _voteAverage != null;
+
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _tmdbId = castToType<int>(snapshotData['tmdb_id']);
@@ -88,6 +93,7 @@ class SeriesRecord extends FirestoreRecord {
     _logoImage = snapshotData['logo_image'] as String?;
     _createdAt = snapshotData['created_at'] as DateTime?;
     _contentRating = snapshotData['content_rating'] as String?;
+    _voteAverage = castToType<double>(snapshotData['vote_average']);
   }
 
   static CollectionReference get collection =>
@@ -135,6 +141,7 @@ Map<String, dynamic> createSeriesRecordData({
   String? logoImage,
   DateTime? createdAt,
   String? contentRating,
+  double? voteAverage,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -149,6 +156,7 @@ Map<String, dynamic> createSeriesRecordData({
       'logo_image': logoImage,
       'created_at': createdAt,
       'content_rating': contentRating,
+      'vote_average': voteAverage,
     }.withoutNulls,
   );
 
@@ -172,7 +180,8 @@ class SeriesRecordDocumentEquality implements Equality<SeriesRecord> {
         e1?.totalSeasons == e2?.totalSeasons &&
         e1?.logoImage == e2?.logoImage &&
         e1?.createdAt == e2?.createdAt &&
-        e1?.contentRating == e2?.contentRating;
+        e1?.contentRating == e2?.contentRating &&
+        e1?.voteAverage == e2?.voteAverage;
   }
 
   @override
@@ -188,7 +197,8 @@ class SeriesRecordDocumentEquality implements Equality<SeriesRecord> {
         e?.totalSeasons,
         e?.logoImage,
         e?.createdAt,
-        e?.contentRating
+        e?.contentRating,
+        e?.voteAverage
       ]);
 
   @override
