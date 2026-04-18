@@ -54,10 +54,7 @@ class _IMDBRatingsWidgetState extends State<IMDBRatingsWidget> {
             size: 18.0,
           ),
           Text(
-            formatNumber(
-              widget.rating,
-              formatType: FormatType.decimal,
-            ),
+            widget.rating.toString(),
             style: FlutterFlowTheme.of(context).labelLarge.override(
                   font: GoogleFonts.inter(
                     fontWeight: FontWeight.bold,
