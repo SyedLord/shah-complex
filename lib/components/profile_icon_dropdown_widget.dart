@@ -53,7 +53,7 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Container(
               decoration: BoxDecoration(
