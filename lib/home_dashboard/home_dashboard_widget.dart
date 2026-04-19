@@ -3,6 +3,7 @@ import '/components/continue_watching_card_widget.dart';
 import '/components/hero_poster_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/components/profile_dropdown_widget.dart';
+import '/components/profile_icon_dropdown_widget.dart';
 import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -971,7 +972,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget>
                                 await showAlignedDialog(
                                   context: context,
                                   isGlobal: false,
-                                  avoidOverflow: false,
+                                  avoidOverflow: true,
                                   targetAnchor: AlignmentDirectional(0.0, 0.0)
                                       .resolve(Directionality.of(context)),
                                   followerAnchor:
@@ -980,7 +981,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget>
                                   builder: (dialogContext) {
                                     return Material(
                                       color: Colors.transparent,
-                                      child: ProfileDropdownWidget(),
+                                      child: ProfileIconDropdownWidget(),
                                     );
                                   },
                                 );
