@@ -93,10 +93,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ProfileSelectionWidget(),
         ),
         FFRoute(
-          name: HomeDashboardCopyWidget.routeName,
-          path: HomeDashboardCopyWidget.routePath,
+          name: HomeDashboardWidget.routeName,
+          path: HomeDashboardWidget.routePath,
           requireAuth: true,
-          builder: (context, params) => HomeDashboardCopyWidget(),
+          builder: (context, params) => HomeDashboardWidget(),
         ),
         FFRoute(
           name: AllItemsWidget.routeName,

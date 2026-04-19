@@ -182,7 +182,7 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                               safeSetState(() {});
 
                                               context.goNamed(
-                                                  HomeDashboardCopyWidget
+                                                  HomeDashboardWidget
                                                       .routeName);
                                             }
                                           },

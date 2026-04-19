@@ -4,10 +4,10 @@ import '/components/profile_dropdown_widget.dart';
 import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 'home_dashboard_copy_widget.dart' show HomeDashboardCopyWidget;
+import 'home_dashboard_widget.dart' show HomeDashboardWidget;
 import 'package:flutter/material.dart';
 
-class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
+class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
   ///  Local state fields for this page.
 
   List<HeroItemStruct> carouselItems = [];
@@ -26,7 +26,7 @@ class HomeDashboardCopyModel extends FlutterFlowModel<HomeDashboardCopyWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - getTrendingCarousel] action in HomeDashboardCopy widget.
+  // Stores action output result for [Custom Action - getTrendingCarousel] action in HomeDashboard widget.
   List<HeroItemStruct>? trendingList;
   // State field(s) for PageView widget.
   PageController? pageViewController;

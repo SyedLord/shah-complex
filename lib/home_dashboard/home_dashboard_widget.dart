@@ -14,29 +14,29 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'home_dashboard_copy_model.dart';
-export 'home_dashboard_copy_model.dart';
+import 'home_dashboard_model.dart';
+export 'home_dashboard_model.dart';
 
-class HomeDashboardCopyWidget extends StatefulWidget {
-  const HomeDashboardCopyWidget({super.key});
+class HomeDashboardWidget extends StatefulWidget {
+  const HomeDashboardWidget({super.key});
 
-  static String routeName = 'HomeDashboardCopy';
-  static String routePath = '/homeDashboardCopy';
+  static String routeName = 'HomeDashboard';
+  static String routePath = '/homeDashboard';
 
   @override
-  State<HomeDashboardCopyWidget> createState() =>
-      _HomeDashboardCopyWidgetState();
+  State<HomeDashboardWidget> createState() => _HomeDashboardWidgetState();
 }
 
-class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget>
+class _HomeDashboardWidgetState extends State<HomeDashboardWidget>
     with TickerProviderStateMixin {
-  late HomeDashboardCopyModel _model;
+  late HomeDashboardModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -45,7 +45,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomeDashboardCopyModel());
+    _model = createModel(context, () => HomeDashboardModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -103,7 +103,7 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget>
           );
         }
 
-        final homeDashboardCopyProfilesRecord = snapshot.data!;
+        final homeDashboardProfilesRecord = snapshot.data!;
 
         return Scaffold(
           key: scaffoldKey,
@@ -961,34 +961,50 @@ class _HomeDashboardCopyWidgetState extends State<HomeDashboardCopyWidget>
                               context.pushNamed(SearchScreenWidget.routeName);
                             },
                           ),
-                          InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              _model.showProfileDropdown =
-                                  !_model.showProfileDropdown;
-                              safeSetState(() {});
-                            },
-                            child: Container(
-                              width: 32.0,
-                              height: 32.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).primary,
-                                shape: BoxShape.circle,
-                              ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: CachedNetworkImage(
-                                  fadeInDuration: Duration(milliseconds: 200),
-                                  fadeOutDuration: Duration(milliseconds: 200),
-                                  imageUrl: homeDashboardCopyProfilesRecord
-                                      .profileImage,
-                                  width: 200.0,
-                                  height: 200.0,
-                                  fit: BoxFit.cover,
+                          Builder(
+                            builder: (context) => InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                await showAlignedDialog(
+                                  context: context,
+                                  isGlobal: false,
+                                  avoidOverflow: false,
+                                  targetAnchor: AlignmentDirectional(0.0, 0.0)
+                                      .resolve(Directionality.of(context)),
+                                  followerAnchor:
+                                      AlignmentDirectional(1.0, -1.0)
+                                          .resolve(Directionality.of(context)),
+                                  builder: (dialogContext) {
+                                    return Material(
+                                      color: Colors.transparent,
+                                      child: ProfileDropdownWidget(),
+                                    );
+                                  },
+                                );
+                              },
+                              child: Container(
+                                width: 32.0,
+                                height: 32.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  shape: BoxShape.circle,
+                                ),
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: CachedNetworkImage(
+                                    fadeInDuration: Duration(milliseconds: 200),
+                                    fadeOutDuration:
+                                        Duration(milliseconds: 200),
+                                    imageUrl: homeDashboardProfilesRecord
+                                        .profileImage,
+                                    width: 200.0,
+                                    height: 200.0,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
