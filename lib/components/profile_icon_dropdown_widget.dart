@@ -41,6 +41,7 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
       borderRadius: BorderRadius.circular(
           FlutterFlowTheme.of(context).designToken.radius.md),
       child: Container(
+        width: 250.0,
         decoration: BoxDecoration(
           color: Color(0xF2141414),
           borderRadius: BorderRadius.circular(
@@ -53,7 +54,7 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               decoration: BoxDecoration(
