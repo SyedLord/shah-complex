@@ -973,7 +973,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget>
                                   context: context,
                                   isGlobal: false,
                                   avoidOverflow: true,
-                                  targetAnchor: AlignmentDirectional(1.0, 1.0)
+                                  targetAnchor: AlignmentDirectional(0.0, 0.0)
                                       .resolve(Directionality.of(context)),
                                   followerAnchor:
                                       AlignmentDirectional(1.0, -1.0)
