@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -277,61 +276,50 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              if (widget.mediaType == 'movie') {
-                                await actions.updateMetadataDirectly(
-                                  widget.docRefMovie,
-                                  FFAppState().emptyDocRefSeries,
-                                  _model.apiFullData!,
-                                  widget.mediaType!,
-                                );
-                              } else {
-                                await actions.updateMetadataDirectly(
-                                  FFAppState().emptyDocRefMovies,
-                                  widget.docRefSeries,
-                                  _model.apiFullData!,
-                                  widget.mediaType!,
-                                );
-                              }
-
-                              context.safePop();
-                            },
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Container(
-                                width: 120.0,
-                                height: 180.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: CachedNetworkImage(
-                                  fadeInDuration: Duration(milliseconds: 200),
-                                  fadeOutDuration: Duration(milliseconds: 200),
-                                  imageUrl: _model.previewPoster!,
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 8.0, 0.0, 0.0),
-                            child: Text(
-                              valueOrDefault<String>(
-                                _model.previewTitle,
-                                'Title',
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    font: GoogleFonts.inter(
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                if (widget.mediaType == 'movie') {
+                                  await actions.updateMetadataDirectly(
+                                    widget.docRefMovie,
+                                    FFAppState().emptyDocRefSeries,
+                                    _model.apiFullData!,
+                                    widget.mediaType!,
+                                  );
+                                } else {
+                                  await actions.updateMetadataDirectly(
+                                    FFAppState().emptyDocRefMovies,
+                                    widget.docRefSeries,
+                                    _model.apiFullData!,
+                                    widget.mediaType!,
+                                  );
+                                }
+
+                                context.safePop();
+                              },
+                              child: Text(
+                                valueOrDefault<String>(
+                                  _model.previewTitle,
+                                  'Title',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .fontWeight,
@@ -339,14 +327,7 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                                           .bodyMedium
                                           .fontStyle,
                                     ),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
+                              ),
                             ),
                           ),
                         ],
@@ -363,7 +344,10 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              _model.apiResult!.toString(),
+                              getJsonField(
+                                _model.apiResult,
+                                r'''$.poster_path''',
+                              ).toString(),
                               style: TextStyle(
                                 color: FlutterFlowTheme.of(context).primaryText,
                               ),
@@ -383,10 +367,6 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                                 _model.apiResult,
                                 r'''$.name''',
                               ).toString();
-                        _model.previewPoster = getJsonField(
-                          _model.apiResult,
-                          r'''$.poster_path''',
-                        ).toString();
                         safeSetState(() {});
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
