@@ -1,3 +1,4 @@
+import '/components/movie_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -276,6 +277,39 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              if (widget.mediaType == 'movie') {
+                                await actions.updateMetadataDirectly(
+                                  widget.docRefMovie,
+                                  FFAppState().emptyDocRefSeries,
+                                  _model.apiFullData!,
+                                  widget.mediaType!,
+                                );
+                              } else {
+                                await actions.updateMetadataDirectly(
+                                  FFAppState().emptyDocRefMovies,
+                                  widget.docRefSeries,
+                                  _model.apiFullData!,
+                                  widget.mediaType!,
+                                );
+                              }
+
+                              context.safePop();
+                            },
+                            child: wrapWithModel(
+                              model: _model.movieCardModel,
+                              updateCallback: () => safeSetState(() {}),
+                              child: MovieCardWidget(
+                                img:
+                                    'https://image.tmdb.org/t/p/w500${_model.previewPoster}',
+                              ),
+                            ),
+                          ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 8.0, 0.0, 0.0),
@@ -285,22 +319,6 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                if (widget.mediaType == 'movie') {
-                                  await actions.updateMetadataDirectly(
-                                    widget.docRefMovie,
-                                    FFAppState().emptyDocRefSeries,
-                                    _model.apiFullData!,
-                                    widget.mediaType!,
-                                  );
-                                } else {
-                                  await actions.updateMetadataDirectly(
-                                    FFAppState().emptyDocRefMovies,
-                                    widget.docRefSeries,
-                                    _model.apiFullData!,
-                                    widget.mediaType!,
-                                  );
-                                }
-
                                 context.safePop();
                               },
                               child: Text(
@@ -367,6 +385,7 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                                 _model.apiResult,
                                 r'''$.name''',
                               ).toString();
+                        _model.previewPoster = _model.previewPoster;
                         safeSetState(() {});
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
