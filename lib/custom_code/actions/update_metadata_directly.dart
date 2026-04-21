@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 Future<void> updateMetadataDirectly(
   DocumentReference? docRefMovie,
@@ -34,6 +36,9 @@ Future<void> updateMetadataDirectly(
   }
 
   Map<String, dynamic> updates = {};
+  String apiKey =
+      "c5668e874013b9df2a50fba06875a331"; // TMDB API Key for episodes
+  String tmdbIdStr = apiFullData['id'].toString();
 
   try {
     // --- 2. COMMON FIELDS ---
@@ -144,11 +149,73 @@ Future<void> updateMetadataDirectly(
       updates['content_rating'] = contentRating.isEmpty ? "NR" : contentRating;
     }
 
-    // --- 6. FIREBASE UPDATE (Magic!) ---
-    // Yahan ab direct docRef ki jagah 'targetRef' use ho raha hai
+    // --- 6. MAIN DOCUMENT UPDATE ---
     await targetRef.update(updates);
     print(
-        "✅ Metadata successfully updated in ${mediaType.toUpperCase()} collection!");
+        "✅ Main Metadata successfully updated in ${mediaType.toUpperCase()} collection!");
+
+    // --- 7. EPISODES SUBCOLLECTION UPDATE (NEW MAGIC 🪄) ---
+    if (mediaType.toLowerCase() != 'movie') {
+      print("🔄 Updating episodes subcollection...");
+
+      // Get all existing episodes from Firestore
+      QuerySnapshot episodesSnapshot =
+          await targetRef.collection('episodes').get();
+
+      for (var epDoc in episodesSnapshot.docs) {
+        Map<String, dynamic> epData = epDoc.data() as Map<String, dynamic>;
+        int? seasonNum = epData['season_number'];
+        int? episodeNum = epData['episode_number'];
+
+        if (seasonNum != null && episodeNum != null) {
+          // TMDB API call for this specific episode
+          String epUrl =
+              "https://api.themoviedb.org/3/tv/$tmdbIdStr/season/$seasonNum/episode/$episodeNum?api_key=$apiKey";
+
+          try {
+            final response = await http.get(Uri.parse(epUrl));
+            if (response.statusCode == 200) {
+              var epApiData = jsonDecode(response.body);
+              Map<String, dynamic> epUpdates = {};
+
+              // Title update
+              if (epApiData['name'] != null &&
+                  epApiData['name'].toString().isNotEmpty) {
+                epUpdates['title'] = epApiData['name'];
+              }
+              // Description update
+              if (epApiData['overview'] != null &&
+                  epApiData['overview'].toString().isNotEmpty) {
+                epUpdates['description'] = epApiData['overview'];
+              }
+              // Thumbnail update
+              if (epApiData['still_path'] != null) {
+                epUpdates['thumbnail'] =
+                    'https://image.tmdb.org/t/p/w500${epApiData['still_path']}';
+              }
+              // Duration update
+              if (epApiData['runtime'] != null) {
+                int runtime = epApiData['runtime'];
+                int h = runtime ~/ 60;
+                int m = runtime % 60;
+                epUpdates['duration'] =
+                    h > 0 ? (m > 0 ? "${h}h ${m}m" : "${h}h") : "${m}m";
+              }
+
+              // Update this episode in Firestore
+              if (epUpdates.isNotEmpty) {
+                await epDoc.reference.update(epUpdates);
+                print("✅ Updated Season $seasonNum Episode $episodeNum");
+              }
+            }
+          } catch (e) {
+            print(
+                "❌ Failed to update Season $seasonNum Episode $episodeNum: $e");
+          }
+        }
+      }
+      print("✅ All episodes updated successfully!");
+    }
   } catch (e) {
     print("❌ Error updating document: $e");
   }
