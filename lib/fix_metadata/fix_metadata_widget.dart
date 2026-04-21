@@ -383,6 +383,10 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                                 _model.apiResult,
                                 r'''$.name''',
                               ).toString();
+                        _model.previewPoster = getJsonField(
+                          _model.apiResult,
+                          r'''$.poster_path''',
+                        ).toString();
                         safeSetState(() {});
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
