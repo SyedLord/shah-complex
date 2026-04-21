@@ -1,4 +1,3 @@
-import '/components/movie_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -6,7 +5,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'fix_metadata_model.dart';
 export 'fix_metadata_model.dart';
 
@@ -52,8 +50,6 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -277,38 +273,6 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              if (widget.mediaType == 'movie') {
-                                await actions.updateMetadataDirectly(
-                                  widget.docRefMovie,
-                                  FFAppState().emptyDocRefSeries,
-                                  _model.apiFullData!,
-                                  widget.mediaType!,
-                                );
-                              } else {
-                                await actions.updateMetadataDirectly(
-                                  FFAppState().emptyDocRefMovies,
-                                  widget.docRefSeries,
-                                  _model.apiFullData!,
-                                  widget.mediaType!,
-                                );
-                              }
-
-                              context.safePop();
-                            },
-                            child: wrapWithModel(
-                              model: _model.movieCardModel,
-                              updateCallback: () => safeSetState(() {}),
-                              child: MovieCardWidget(
-                                img: _model.previewPoster,
-                              ),
-                            ),
-                          ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 8.0, 0.0, 0.0),
