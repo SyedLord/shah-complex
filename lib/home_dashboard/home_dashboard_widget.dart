@@ -2,10 +2,8 @@ import '/backend/backend.dart';
 import '/components/continue_watching_card_widget.dart';
 import '/components/hero_poster_widget.dart';
 import '/components/movie_card_widget.dart';
-import '/components/profile_dropdown_widget.dart';
 import '/components/profile_icon_dropdown_widget.dart';
 import '/components/section_header_widget.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -19,7 +17,6 @@ import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'home_dashboard_model.dart';
@@ -35,13 +32,10 @@ class HomeDashboardWidget extends StatefulWidget {
   State<HomeDashboardWidget> createState() => _HomeDashboardWidgetState();
 }
 
-class _HomeDashboardWidgetState extends State<HomeDashboardWidget>
-    with TickerProviderStateMixin {
+class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
   late HomeDashboardModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -54,21 +48,6 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget>
       _model.carouselItems =
           _model.trendingList!.toList().cast<HeroItemStruct>();
       safeSetState(() {});
-    });
-
-    animationsMap.addAll({
-      'profileDropdownOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 200.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-        ],
-      ),
     });
   }
 
@@ -915,14 +894,6 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget>
                   ),
                 ),
               ),
-              if (_model.showProfileDropdown == true)
-                Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Color(0x67141414),
-                  ),
-                ),
               Container(
                 height: 100.0,
                 decoration: BoxDecoration(
@@ -1016,13 +987,6 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget>
                   ),
                 ),
               ),
-              if (_model.showProfileDropdown == true)
-                wrapWithModel(
-                  model: _model.profileDropdownModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: ProfileDropdownWidget(),
-                ).animateOnPageLoad(
-                    animationsMap['profileDropdownOnPageLoadAnimation']!),
             ],
           ),
         );

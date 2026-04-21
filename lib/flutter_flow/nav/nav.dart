@@ -212,6 +212,46 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: ChooseProfileIconWidget.routePath,
           requireAuth: true,
           builder: (context, params) => ChooseProfileIconWidget(),
+        ),
+        FFRoute(
+          name: SearchWidget.routeName,
+          path: SearchWidget.routePath,
+          asyncParams: {
+            'passedMovieList': getDoc(['movies'], MoviesRecord.fromSnapshot),
+            'passedSeriesList': getDoc(['series'], SeriesRecord.fromSnapshot),
+          },
+          builder: (context, params) => SearchWidget(
+            passedMovieList: params.getParam(
+              'passedMovieList',
+              ParamType.Document,
+            ),
+            passedSeriesList: params.getParam(
+              'passedSeriesList',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: FixMetadataWidget.routeName,
+          path: FixMetadataWidget.routePath,
+          builder: (context, params) => FixMetadataWidget(
+            docRefMovie: params.getParam(
+              'docRefMovie',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['movies'],
+            ),
+            docRefSeries: params.getParam(
+              'docRefSeries',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['series'],
+            ),
+            mediaType: params.getParam(
+              'mediaType',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -59,6 +59,11 @@ abstract class FlutterFlowTheme {
   late Color hint;
   late Color divider;
   late Color outline;
+  late Color onPrimary;
+  late Color onSecondary;
+  late Color onSurface;
+  late Color onError;
+  late Color transparent;
 
   FFDesignTokens get designToken => FFDesignTokens(this);
 
@@ -150,7 +155,7 @@ class LightModeTheme extends FlutterFlowTheme {
 
   late Color primary = const Color(0xFFE50914);
   late Color secondary = const Color(0xFF333333);
-  late Color tertiary = const Color(0xFF808080);
+  late Color tertiary = const Color(0xFFE50914);
   late Color alternate = const Color(0xFF2F2F2F);
   late Color primaryText = const Color(0xFFFFFFFF);
   late Color secondaryText = const Color(0xFFB3B3B3);
@@ -158,7 +163,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color secondaryBackground = const Color(0xFF141414);
   late Color accent1 = const Color(0xFFE50914);
   late Color accent2 = const Color(0x4D39D2C0);
-  late Color accent3 = const Color(0x4DEE8B60);
+  late Color accent3 = const Color(0xFF808080);
   late Color accent4 = const Color(0xCCFFFFFF);
   late Color success = const Color(0xFF46D369);
   late Color warning = const Color(0xFFF9CF58);
@@ -168,6 +173,11 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color hint = const Color(0xFF808080);
   late Color divider = const Color(0xFF2F2F2F);
   late Color outline = const Color(0xFF2F2F2F);
+  late Color onPrimary = const Color(0xFFFFFFFF);
+  late Color onSecondary = const Color(0xFFFFFFFF);
+  late Color onSurface = const Color(0xFFFFFFFF);
+  late Color onError = const Color(0xFFFFFFFF);
+  late Color transparent = const Color(0x00000000);
 }
 
 abstract class Typography {
@@ -350,7 +360,7 @@ class DarkModeTheme extends FlutterFlowTheme {
 
   late Color primary = const Color(0xFFE50914);
   late Color secondary = const Color(0xFF333333);
-  late Color tertiary = const Color(0xFF808080);
+  late Color tertiary = const Color(0xFFE50914);
   late Color alternate = const Color(0xFF2F2F2F);
   late Color primaryText = const Color(0xFFFFFFFF);
   late Color secondaryText = const Color(0xFFB3B3B3);
@@ -358,7 +368,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color secondaryBackground = const Color(0xFF141414);
   late Color accent1 = const Color(0xFFE50914);
   late Color accent2 = const Color(0x4D39D2C0);
-  late Color accent3 = const Color(0x4DEE8B60);
+  late Color accent3 = const Color(0xFF808080);
   late Color accent4 = const Color(0xB2262D34);
   late Color success = const Color(0xFF46D369);
   late Color warning = const Color(0xFFF9CF58);
@@ -368,6 +378,11 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color hint = const Color(0xFF808080);
   late Color divider = const Color(0xFF2F2F2F);
   late Color outline = const Color(0xFF2F2F2F);
+  late Color onPrimary = const Color(0xFFFFFFFF);
+  late Color onSecondary = const Color(0xFFFFFFFF);
+  late Color onSurface = const Color(0xFFFFFFFF);
+  late Color onError = const Color(0xFFFFFFFF);
+  late Color transparent = const Color(0x00000000);
 }
 
 class FFDesignTokens {
@@ -380,11 +395,14 @@ class FFDesignTokens {
 
 class FFSpacing {
   const FFSpacing();
+  double get none => 0.0;
   double get xs => 4.0;
   double get sm => 8.0;
   double get md => 16.0;
   double get lg => 24.0;
   double get xl => 32.0;
+  double get xxl => 48.0;
+  double get xxxl => 64.0;
 }
 
 class FFRadius {

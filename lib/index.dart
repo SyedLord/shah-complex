@@ -13,3 +13,5 @@ export '/profile_selection_copy/profile_selection_copy_widget.dart'
     show ProfileSelectionCopyWidget;
 export '/choose_profile_icon/choose_profile_icon_widget.dart'
     show ChooseProfileIconWidget;
+export '/search/search_widget.dart' show SearchWidget;
+export '/fix_metadata/fix_metadata_widget.dart' show FixMetadataWidget;

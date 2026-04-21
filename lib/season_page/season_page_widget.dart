@@ -3,6 +3,7 @@ import '/components/description_widget_widget.dart';
 import '/components/episode_item_widget.dart';
 import '/components/i_m_d_b_ratings_widget.dart';
 import '/components/movie_card_widget.dart';
+import '/components/profile_icon_dropdown_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -11,6 +12,7 @@ import '/flutter_flow/form_field_controller.dart';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -1125,12 +1127,12 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                           child: FlutterFlowIconButton(
                             buttonSize: 40.0,
                             icon: Icon(
-                              Icons.cast_rounded,
+                              Icons.search_rounded,
                               color: FlutterFlowTheme.of(context).primaryText,
                               size: 20.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              context.pushNamed(SearchScreenWidget.routeName);
                             },
                           ),
                         ),
@@ -1146,16 +1148,37 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                     .full),
                           ),
                           alignment: AlignmentDirectional(0.0, 0.0),
-                          child: FlutterFlowIconButton(
-                            buttonSize: 40.0,
-                            icon: Icon(
-                              Icons.search_rounded,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 20.0,
+                          child: Builder(
+                            builder: (context) => FlutterFlowIconButton(
+                              buttonSize: 40.0,
+                              icon: Icon(
+                                Icons.keyboard_control_sharp,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 20.0,
+                              ),
+                              onPressed: () async {
+                                await showAlignedDialog(
+                                  context: context,
+                                  isGlobal: false,
+                                  avoidOverflow: true,
+                                  targetAnchor: AlignmentDirectional(1.0, 1.0)
+                                      .resolve(Directionality.of(context)),
+                                  followerAnchor:
+                                      AlignmentDirectional(1.0, -1.0)
+                                          .resolve(Directionality.of(context)),
+                                  builder: (dialogContext) {
+                                    return Material(
+                                      color: Colors.transparent,
+                                      child: ProfileIconDropdownWidget(
+                                        docRefSeries:
+                                            widget.seriesDoc?.reference,
+                                        mediaType: 'series',
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
                             ),
-                            onPressed: () async {
-                              context.pushNamed(SearchScreenWidget.routeName);
-                            },
                           ),
                         ),
                       ].divide(SizedBox(

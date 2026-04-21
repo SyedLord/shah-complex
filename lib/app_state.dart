@@ -133,6 +133,18 @@ class FFAppState extends ChangeNotifier {
   set tempSelectedAvatar(String value) {
     _tempSelectedAvatar = value;
   }
+
+  DocumentReference? _emptyDocRefSeries;
+  DocumentReference? get emptyDocRefSeries => _emptyDocRefSeries;
+  set emptyDocRefSeries(DocumentReference? value) {
+    _emptyDocRefSeries = value;
+  }
+
+  DocumentReference? _emptyDocRefMovies;
+  DocumentReference? get emptyDocRefMovies => _emptyDocRefMovies;
+  set emptyDocRefMovies(DocumentReference? value) {
+    _emptyDocRefMovies = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {
