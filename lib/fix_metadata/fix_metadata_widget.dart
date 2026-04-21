@@ -387,7 +387,7 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                         _model.previewPoster =
                             'https://image.tmdb.org/t/p/w500${getJsonField(
                           _model.apiResult,
-                          r'''$.poster_image''',
+                          r'''$.poster_path''',
                         ).toString()}';
                         safeSetState(() {});
                       } else {
