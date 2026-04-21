@@ -348,17 +348,46 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                         _model.textController.text,
                         widget.mediaType!,
                       );
-                      _model.apiFullData = _model.apiResult;
-                      _model.previewTitle = widget.mediaType == 'movie'
-                          ? getJsonField(
-                              _model.apiResult,
-                              r'''$.title''',
-                            ).toString()
-                          : getJsonField(
-                              _model.apiResult,
-                              r'''$.name''',
-                            ).toString();
-                      safeSetState(() {});
+                      if (_model.apiResult != null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              _model.apiResult!.toString(),
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                        _model.apiFullData = _model.apiResult;
+                        _model.previewTitle = widget.mediaType == 'movie'
+                            ? getJsonField(
+                                _model.apiResult,
+                                r'''$.title''',
+                              ).toString()
+                            : getJsonField(
+                                _model.apiResult,
+                                r'''$.name''',
+                              ).toString();
+                        safeSetState(() {});
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'error',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                      }
 
                       safeSetState(() {});
                     },
