@@ -305,8 +305,7 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                               model: _model.movieCardModel,
                               updateCallback: () => safeSetState(() {}),
                               child: MovieCardWidget(
-                                img:
-                                    'https://image.tmdb.org/t/p/w500${_model.previewPoster}',
+                                img: _model.previewPoster,
                               ),
                             ),
                           ),
@@ -385,7 +384,11 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                                 _model.apiResult,
                                 r'''$.name''',
                               ).toString();
-                        _model.previewPoster = _model.previewPoster;
+                        _model.previewPoster =
+                            'https://image.tmdb.org/t/p/w500${getJsonField(
+                          _model.apiResult,
+                          r'''$.poster_image''',
+                        ).toString()}';
                         safeSetState(() {});
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
