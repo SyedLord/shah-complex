@@ -128,7 +128,7 @@ class _ContinueWatchingCardWidgetState
             valueOrDefault<String>(
               widget.continueDoc?.contentType == 'movie'
                   ? widget.continueDoc?.title
-                  : 'Season ${widget.continueDoc?.season.toString()}, Episode ${widget.continueDoc?.episode.toString()}',
+                  : widget.continueDoc?.showName,
               'Title',
             ),
             style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -143,6 +143,26 @@ class _ContinueWatchingCardWidgetState
                 ),
           ),
         ),
+        if (widget.continueDoc?.contentType != 'movie')
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+            child: Text(
+              'Season ${widget.continueDoc?.season.toString()}, Episode ${widget.continueDoc?.episode.toString()}',
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    font: GoogleFonts.inter(
+                      fontWeight: FontWeight.w600,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                    ),
+                    color: FlutterFlowTheme.of(context).accent3,
+                    fontSize: 12.0,
+                    letterSpacing: 0.0,
+                    fontWeight: FontWeight.w600,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                  ),
+            ),
+          ),
       ],
     );
   }
