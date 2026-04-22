@@ -687,6 +687,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                       child: MovieCardWidget(
                                                         key: Key(
                                                             'Key2nh_${searchedMoviesIndex}_of_${searchedMovies.length}'),
+                                                        img: searchedMoviesItem
+                                                            .posterImage,
                                                       ),
                                                     );
                                                   },
