@@ -1,83 +1,61 @@
-import '/components/local_filter_chip_widget.dart';
-import '/components/movie_card_widget.dart';
-import '/components/search_result_item_widget.dart';
-import '/components/season_card_widget.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'search_widget.dart' show SearchWidget;
 import 'package:flutter/material.dart';
 
 class SearchModel extends FlutterFlowModel<SearchWidget> {
   ///  Local state fields for this page.
 
-  bool isHidden = true;
+  List<MoviesRecord> searchResultMovies = [];
+  void addToSearchResultMovies(MoviesRecord item) =>
+      searchResultMovies.add(item);
+  void removeFromSearchResultMovies(MoviesRecord item) =>
+      searchResultMovies.remove(item);
+  void removeAtIndexFromSearchResultMovies(int index) =>
+      searchResultMovies.removeAt(index);
+  void insertAtIndexInSearchResultMovies(int index, MoviesRecord item) =>
+      searchResultMovies.insert(index, item);
+  void updateSearchResultMoviesAtIndex(
+          int index, Function(MoviesRecord) updateFn) =>
+      searchResultMovies[index] = updateFn(searchResultMovies[index]);
+
+  List<SeriesRecord> searchResultSeries = [];
+  void addToSearchResultSeries(SeriesRecord item) =>
+      searchResultSeries.add(item);
+  void removeFromSearchResultSeries(SeriesRecord item) =>
+      searchResultSeries.remove(item);
+  void removeAtIndexFromSearchResultSeries(int index) =>
+      searchResultSeries.removeAt(index);
+  void insertAtIndexInSearchResultSeries(int index, SeriesRecord item) =>
+      searchResultSeries.insert(index, item);
+  void updateSearchResultSeriesAtIndex(
+          int index, Function(SeriesRecord) updateFn) =>
+      searchResultSeries[index] = updateFn(searchResultSeries[index]);
+
+  int tabIndex = 0;
 
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Firestore Query - Query a collection] action in Search widget.
+  List<MoviesRecord>? loadedMovies;
+  // Stores action output result for [Firestore Query - Query a collection] action in Search widget.
+  List<SeriesRecord>? loadedSeries;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  // Model for LocalFilterChip.
-  late LocalFilterChipModel localFilterChipModel1;
-  // Model for LocalFilterChip.
-  late LocalFilterChipModel localFilterChipModel2;
-  // Model for LocalFilterChip.
-  late LocalFilterChipModel localFilterChipModel3;
-  // Model for LocalFilterChip.
-  late LocalFilterChipModel localFilterChipModel4;
-  // Model for movie_card component.
-  late MovieCardModel movieCardModel;
-  // Model for SeasonCard.
-  late SeasonCardModel seasonCardModel1;
-  // Model for SeasonCard.
-  late SeasonCardModel seasonCardModel2;
-  // Model for SeasonCard.
-  late SeasonCardModel seasonCardModel3;
-  // Model for SearchResultItem.
-  late SearchResultItemModel searchResultItemModel1;
-  // Model for SearchResultItem.
-  late SearchResultItemModel searchResultItemModel2;
-  // Model for SearchResultItem.
-  late SearchResultItemModel searchResultItemModel3;
-  // Model for SearchResultItem.
-  late SearchResultItemModel searchResultItemModel4;
+  // Stores action output result for [Custom Action - vipSmartSearch] action in TextField widget.
+  List<MoviesRecord>? outMovies;
+  // Stores action output result for [Custom Action - vipSmartSearchSeries] action in TextField widget.
+  List<SeriesRecord>? outSeries;
 
   @override
-  void initState(BuildContext context) {
-    localFilterChipModel1 = createModel(context, () => LocalFilterChipModel());
-    localFilterChipModel2 = createModel(context, () => LocalFilterChipModel());
-    localFilterChipModel3 = createModel(context, () => LocalFilterChipModel());
-    localFilterChipModel4 = createModel(context, () => LocalFilterChipModel());
-    movieCardModel = createModel(context, () => MovieCardModel());
-    seasonCardModel1 = createModel(context, () => SeasonCardModel());
-    seasonCardModel2 = createModel(context, () => SeasonCardModel());
-    seasonCardModel3 = createModel(context, () => SeasonCardModel());
-    searchResultItemModel1 =
-        createModel(context, () => SearchResultItemModel());
-    searchResultItemModel2 =
-        createModel(context, () => SearchResultItemModel());
-    searchResultItemModel3 =
-        createModel(context, () => SearchResultItemModel());
-    searchResultItemModel4 =
-        createModel(context, () => SearchResultItemModel());
-  }
+  void initState(BuildContext context) {}
 
   @override
   void dispose() {
     textFieldFocusNode?.dispose();
     textController?.dispose();
-
-    localFilterChipModel1.dispose();
-    localFilterChipModel2.dispose();
-    localFilterChipModel3.dispose();
-    localFilterChipModel4.dispose();
-    movieCardModel.dispose();
-    seasonCardModel1.dispose();
-    seasonCardModel2.dispose();
-    seasonCardModel3.dispose();
-    searchResultItemModel1.dispose();
-    searchResultItemModel2.dispose();
-    searchResultItemModel3.dispose();
-    searchResultItemModel4.dispose();
   }
 }

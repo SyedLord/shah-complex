@@ -216,20 +216,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: SearchWidget.routeName,
           path: SearchWidget.routePath,
-          asyncParams: {
-            'passedMovieList': getDoc(['movies'], MoviesRecord.fromSnapshot),
-            'passedSeriesList': getDoc(['series'], SeriesRecord.fromSnapshot),
-          },
-          builder: (context, params) => SearchWidget(
-            passedMovieList: params.getParam(
-              'passedMovieList',
-              ParamType.Document,
-            ),
-            passedSeriesList: params.getParam(
-              'passedSeriesList',
-              ParamType.Document,
-            ),
-          ),
+          builder: (context, params) => SearchWidget(),
         ),
         FFRoute(
           name: FixMetadataWidget.routeName,

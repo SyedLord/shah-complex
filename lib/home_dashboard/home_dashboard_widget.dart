@@ -930,7 +930,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                               size: 24.0,
                             ),
                             onPressed: () async {
-                              context.pushNamed(SearchScreenWidget.routeName);
+                              context.pushNamed(SearchWidget.routeName);
                             },
                           ),
                           Builder(

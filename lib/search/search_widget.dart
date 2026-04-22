@@ -1,26 +1,21 @@
 import '/backend/backend.dart';
-import '/components/local_filter_chip_widget.dart';
 import '/components/movie_card_widget.dart';
-import '/components/search_result_item_widget.dart';
 import '/components/season_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
+import '/custom_code/actions/index.dart' as actions;
+import '/index.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'search_model.dart';
 export 'search_model.dart';
 
 class SearchWidget extends StatefulWidget {
-  const SearchWidget({
-    super.key,
-    required this.passedMovieList,
-    required this.passedSeriesList,
-  });
-
-  final MoviesRecord? passedMovieList;
-  final SeriesRecord? passedSeriesList;
+  const SearchWidget({super.key});
 
   static String routeName = 'Search';
   static String routePath = '/search';
@@ -38,6 +33,12 @@ class _SearchWidgetState extends State<SearchWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SearchModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.loadedMovies = await queryMoviesRecordOnce();
+      _model.loadedSeries = await querySeriesRecordOnce();
+    });
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
@@ -95,7 +96,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         decoration: BoxDecoration(
@@ -129,6 +130,43 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                         _model.textController,
                                                     focusNode: _model
                                                         .textFieldFocusNode,
+                                                    onChanged: (_) =>
+                                                        EasyDebounce.debounce(
+                                                      '_model.textController',
+                                                      Duration(
+                                                          milliseconds: 2000),
+                                                      () async {
+                                                        _model.outMovies =
+                                                            await actions
+                                                                .vipSmartSearch(
+                                                          _model.textController
+                                                              .text,
+                                                          _model.loadedMovies
+                                                              ?.toList(),
+                                                        );
+                                                        _model.outSeries =
+                                                            await actions
+                                                                .vipSmartSearchSeries(
+                                                          _model.textController
+                                                              .text,
+                                                          _model.loadedSeries
+                                                              ?.toList(),
+                                                        );
+                                                        _model.searchResultMovies =
+                                                            _model.outMovies!
+                                                                .toList()
+                                                                .cast<
+                                                                    MoviesRecord>();
+                                                        _model.searchResultSeries =
+                                                            _model.outSeries!
+                                                                .toList()
+                                                                .cast<
+                                                                    SeriesRecord>();
+                                                        safeSetState(() {});
+
+                                                        safeSetState(() {});
+                                                      },
+                                                    ),
                                                     autofocus: false,
                                                     enabled: true,
                                                     obscureText: false,
@@ -270,337 +308,712 @@ class _SearchWidgetState extends State<SearchWidget> {
                                           ),
                                         ),
                                       ),
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            wrapWithModel(
-                                              model:
-                                                  _model.localFilterChipModel1,
-                                              updateCallback: () =>
-                                                  safeSetState(() {}),
-                                              child: LocalFilterChipWidget(
-                                                label: 'All',
-                                                active: true,
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              _model.tabIndex = 0;
+                                              safeSetState(() {});
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: _model.tabIndex == 0
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondary,
+                                                borderRadius:
+                                                    BorderRadius.circular(4.0),
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        24.0, 8.0, 24.0, 8.0),
+                                                child: Text(
+                                                  'All',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelMedium
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
+                                                        lineHeight: 1.3,
+                                                      ),
+                                                ),
                                               ),
                                             ),
-                                            wrapWithModel(
-                                              model:
-                                                  _model.localFilterChipModel2,
-                                              updateCallback: () =>
-                                                  safeSetState(() {}),
-                                              child: LocalFilterChipWidget(
-                                                label: 'Movies',
-                                                active: false,
+                                          ),
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              _model.tabIndex = 1;
+                                              safeSetState(() {});
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: _model.tabIndex == 1
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondary,
+                                                borderRadius:
+                                                    BorderRadius.circular(4.0),
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        24.0, 8.0, 24.0, 8.0),
+                                                child: Text(
+                                                  'Movies',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelMedium
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
+                                                        lineHeight: 1.3,
+                                                      ),
+                                                ),
                                               ),
                                             ),
-                                            wrapWithModel(
-                                              model:
-                                                  _model.localFilterChipModel3,
-                                              updateCallback: () =>
-                                                  safeSetState(() {}),
-                                              child: LocalFilterChipWidget(
-                                                label: 'TV Shows',
-                                                active: false,
+                                          ),
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              _model.tabIndex = 2;
+                                              safeSetState(() {});
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: _model.tabIndex == 2
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondary,
+                                                borderRadius:
+                                                    BorderRadius.circular(4.0),
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        24.0, 8.0, 24.0, 8.0),
+                                                child: Text(
+                                                  'Seasons',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelMedium
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
+                                                        lineHeight: 1.3,
+                                                      ),
+                                                ),
                                               ),
                                             ),
-                                            wrapWithModel(
-                                              model:
-                                                  _model.localFilterChipModel4,
-                                              updateCallback: () =>
-                                                  safeSetState(() {}),
-                                              child: LocalFilterChipWidget(
-                                                label: 'Seasons',
-                                                active: false,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                          ),
+                                        ].divide(SizedBox(width: 8.0)),
                                       ),
                                     ].divide(SizedBox(height: 16.0)),
                                   ),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 16.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                            if (_model.tabIndex == 0)
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 0.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Trending Movies',
-                                          style: FlutterFlowTheme.of(context)
-                                              .titleLarge
-                                              .override(
-                                                font: GoogleFonts.inter(
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleLarge
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleLarge
-                                                          .fontStyle,
-                                                ),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                letterSpacing: 0.0,
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleLarge
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleLarge
-                                                        .fontStyle,
-                                                lineHeight: 1.2,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 220.0,
-                                    decoration: BoxDecoration(),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 0.0, 16.0, 0.0),
-                                      child: ListView(
-                                        padding: EdgeInsets.zero,
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.horizontal,
-                                        children: [
-                                          wrapWithModel(
-                                            model: _model.movieCardModel,
-                                            updateCallback: () =>
-                                                safeSetState(() {}),
-                                            child: MovieCardWidget(),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ].divide(SizedBox(height: 16.0)),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 16.0, 0.0, 16.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 0.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Top Seasons',
-                                          style: FlutterFlowTheme.of(context)
-                                              .titleLarge
-                                              .override(
-                                                font: GoogleFonts.inter(
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleLarge
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleLarge
-                                                          .fontStyle,
-                                                ),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                letterSpacing: 0.0,
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleLarge
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleLarge
-                                                        .fontStyle,
-                                                lineHeight: 1.2,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
+                                        0.0, 0.0, 0.0, 16.0),
+                                    child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 16.0, 0.0),
-                                          child: Container(
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                wrapWithModel(
-                                                  model:
-                                                      _model.seasonCardModel1,
-                                                  updateCallback: () =>
-                                                      safeSetState(() {}),
-                                                  child: SeasonCardWidget(
-                                                    img_desc:
-                                                        'https://dimg.dreamflow.cloud/v1/image/Stranger%20Things%204%20cinematic%20landscape',
-                                                    season: 'Season 4',
-                                                    title: 'Stranger Things',
-                                                  ),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'Movies Results',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .titleLarge
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleLarge
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleLarge
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleLarge
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleLarge
+                                                              .fontStyle,
+                                                      lineHeight: 1.2,
+                                                    ),
+                                              ),
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  _model.tabIndex = 1;
+                                                  safeSetState(() {});
+                                                },
+                                                child: Text(
+                                                  'See All',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .accent3,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
                                                 ),
-                                                wrapWithModel(
-                                                  model:
-                                                      _model.seasonCardModel2,
-                                                  updateCallback: () =>
-                                                      safeSetState(() {}),
-                                                  child: SeasonCardWidget(
-                                                    img_desc:
-                                                        'https://dimg.dreamflow.cloud/v1/image/Alice%20in%20Borderland%202%20city%20landscape',
-                                                    season: 'Season 2',
-                                                    title:
-                                                        'Alice in Borderland',
-                                                  ),
-                                                ),
-                                                wrapWithModel(
-                                                  model:
-                                                      _model.seasonCardModel3,
-                                                  updateCallback: () =>
-                                                      safeSetState(() {}),
-                                                  child: SeasonCardWidget(
-                                                    img_desc:
-                                                        'https://dimg.dreamflow.cloud/v1/image/The%20Witcher%203%20fantasy%20landscape',
-                                                    season: 'Season 3',
-                                                    title: 'The Witcher',
-                                                  ),
-                                                ),
-                                              ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 220.0,
+                                          decoration: BoxDecoration(),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            child: Builder(
+                                              builder: (context) {
+                                                final searchedMovies = _model
+                                                    .searchResultMovies
+                                                    .toList()
+                                                    .take(10)
+                                                    .toList();
+
+                                                return ListView.separated(
+                                                  padding: EdgeInsets.zero,
+                                                  shrinkWrap: true,
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemCount:
+                                                      searchedMovies.length,
+                                                  separatorBuilder: (_, __) =>
+                                                      SizedBox(width: 10.0),
+                                                  itemBuilder: (context,
+                                                      searchedMoviesIndex) {
+                                                    final searchedMoviesItem =
+                                                        searchedMovies[
+                                                            searchedMoviesIndex];
+                                                    return InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        context.pushNamed(
+                                                          MoviePageWidget
+                                                              .routeName,
+                                                          queryParameters: {
+                                                            'movieDoc':
+                                                                serializeParam(
+                                                              searchedMoviesItem,
+                                                              ParamType
+                                                                  .Document,
+                                                            ),
+                                                          }.withoutNulls,
+                                                          extra: <String,
+                                                              dynamic>{
+                                                            'movieDoc':
+                                                                searchedMoviesItem,
+                                                          },
+                                                        );
+                                                      },
+                                                      child: MovieCardWidget(
+                                                        key: Key(
+                                                            'Key2nh_${searchedMoviesIndex}_of_${searchedMovies.length}'),
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
                                             ),
                                           ),
                                         ),
-                                      ],
+                                      ].divide(SizedBox(height: 16.0)),
                                     ),
                                   ),
-                                ].divide(SizedBox(height: 16.0)),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 16.0, 16.0, 16.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Text(
-                                    'Popular Searches',
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          font: GoogleFonts.inter(
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleMedium
-                                                    .fontStyle,
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 16.0, 0.0, 16.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 0.0, 16.0, 0.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'Seasons Results',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .titleLarge
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleLarge
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleLarge
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleLarge
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleLarge
+                                                              .fontStyle,
+                                                      lineHeight: 1.2,
+                                                    ),
+                                              ),
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  _model.tabIndex = 2;
+                                                  safeSetState(() {});
+                                                },
+                                                child: Text(
+                                                  'See All',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .accent3,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMedium
-                                                  .fontStyle,
-                                          lineHeight: 1.3,
                                         ),
-                                  ),
-                                  wrapWithModel(
-                                    model: _model.searchResultItemModel1,
-                                    updateCallback: () => safeSetState(() {}),
-                                    child: SearchResultItemWidget(
-                                      img_desc:
-                                          'https://dimg.dreamflow.cloud/v1/image/Jujutsu%20Kaisen%20anime%20action',
-                                      title: 'Jujutsu Kaisen',
+                                        Container(
+                                          width: double.infinity,
+                                          height: 120.0,
+                                          decoration: BoxDecoration(),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            child: Builder(
+                                              builder: (context) {
+                                                final searchedSeries = _model
+                                                    .searchResultSeries
+                                                    .toList()
+                                                    .take(10)
+                                                    .toList();
+
+                                                return ListView.separated(
+                                                  padding: EdgeInsets.zero,
+                                                  shrinkWrap: true,
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemCount:
+                                                      searchedSeries.length,
+                                                  separatorBuilder: (_, __) =>
+                                                      SizedBox(width: 10.0),
+                                                  itemBuilder: (context,
+                                                      searchedSeriesIndex) {
+                                                    final searchedSeriesItem =
+                                                        searchedSeries[
+                                                            searchedSeriesIndex];
+                                                    return InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        context.pushNamed(
+                                                          SeasonPageWidget
+                                                              .routeName,
+                                                          queryParameters: {
+                                                            'seriesDoc':
+                                                                serializeParam(
+                                                              searchedSeriesItem,
+                                                              ParamType
+                                                                  .Document,
+                                                            ),
+                                                          }.withoutNulls,
+                                                          extra: <String,
+                                                              dynamic>{
+                                                            'seriesDoc':
+                                                                searchedSeriesItem,
+                                                          },
+                                                        );
+                                                      },
+                                                      child: SeasonCardWidget(
+                                                        key: Key(
+                                                            'Keyjs9_${searchedSeriesIndex}_of_${searchedSeries.length}'),
+                                                        posterImage:
+                                                            searchedSeriesItem
+                                                                .backdropImage,
+                                                        titleImage:
+                                                            searchedSeriesItem
+                                                                .logoImage,
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ].divide(SizedBox(height: 16.0)),
                                     ),
                                   ),
-                                  wrapWithModel(
-                                    model: _model.searchResultItemModel2,
-                                    updateCallback: () => safeSetState(() {}),
-                                    child: SearchResultItemWidget(
-                                      img_desc:
-                                          'https://dimg.dreamflow.cloud/v1/image/The%20Crown%20royal%20drama',
-                                      title: 'The Crown',
-                                    ),
-                                  ),
-                                  wrapWithModel(
-                                    model: _model.searchResultItemModel3,
-                                    updateCallback: () => safeSetState(() {}),
-                                    child: SearchResultItemWidget(
-                                      img_desc:
-                                          'https://dimg.dreamflow.cloud/v1/image/Wednesday%20Addams%20gothic',
-                                      title: 'Wednesday',
-                                    ),
-                                  ),
-                                  wrapWithModel(
-                                    model: _model.searchResultItemModel4,
-                                    updateCallback: () => safeSetState(() {}),
-                                    child: SearchResultItemWidget(
-                                      img_desc:
-                                          'https://dimg.dreamflow.cloud/v1/image/Arcane%20animation',
-                                      title: 'Arcane',
-                                    ),
-                                  ),
-                                ].divide(SizedBox(height: 16.0)),
+                                ],
                               ),
-                            ),
+                            if (_model.tabIndex == 1)
+                              SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 0.0, 10.0, 0.0),
+                                        child: Builder(
+                                          builder: (context) {
+                                            final searchedMoviesAll = _model
+                                                .searchResultMovies
+                                                .toList();
+
+                                            return GridView.builder(
+                                              padding: EdgeInsets.zero,
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 3,
+                                                crossAxisSpacing: 10.0,
+                                                mainAxisSpacing: 10.0,
+                                                childAspectRatio: 0.6,
+                                              ),
+                                              primary: false,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount:
+                                                  searchedMoviesAll.length,
+                                              itemBuilder: (context,
+                                                  searchedMoviesAllIndex) {
+                                                final searchedMoviesAllItem =
+                                                    searchedMoviesAll[
+                                                        searchedMoviesAllIndex];
+                                                return InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    context.pushNamed(
+                                                      MoviePageWidget.routeName,
+                                                      queryParameters: {
+                                                        'movieDoc':
+                                                            serializeParam(
+                                                          searchedMoviesAllItem,
+                                                          ParamType.Document,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'movieDoc':
+                                                            searchedMoviesAllItem,
+                                                      },
+                                                    );
+                                                  },
+                                                  child: MovieCardWidget(
+                                                    key: Key(
+                                                        'Keys00_${searchedMoviesAllIndex}_of_${searchedMoviesAll.length}'),
+                                                    img: searchedMoviesAllItem
+                                                        .posterImage,
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            if (_model.tabIndex == 2)
+                              SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 0.0, 10.0, 0.0),
+                                        child: Builder(
+                                          builder: (context) {
+                                            final searchedSeriesAll = _model
+                                                .searchResultSeries
+                                                .toList();
+
+                                            return GridView.builder(
+                                              padding: EdgeInsets.zero,
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2,
+                                                crossAxisSpacing: 10.0,
+                                                mainAxisSpacing: 10.0,
+                                                childAspectRatio: 1.5,
+                                              ),
+                                              primary: false,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount:
+                                                  searchedSeriesAll.length,
+                                              itemBuilder: (context,
+                                                  searchedSeriesAllIndex) {
+                                                final searchedSeriesAllItem =
+                                                    searchedSeriesAll[
+                                                        searchedSeriesAllIndex];
+                                                return SeasonCardWidget(
+                                                  key: Key(
+                                                      'Keyjly_${searchedSeriesAllIndex}_of_${searchedSeriesAll.length}'),
+                                                  posterImage:
+                                                      searchedSeriesAllItem
+                                                          .backdropImage,
+                                                  titleImage:
+                                                      searchedSeriesAllItem
+                                                          .logoImage,
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                           ],
                         ),
                       ),

@@ -1,25 +1,20 @@
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'season_card_model.dart';
 export 'season_card_model.dart';
 
 class SeasonCardWidget extends StatefulWidget {
   const SeasonCardWidget({
     super.key,
-    String? img_desc,
-    String? season,
-    String? title,
-  })  : this.img_desc = img_desc ??
+    String? posterImage,
+    String? titleImage,
+  })  : this.posterImage = posterImage ??
             'https://dimg.dreamflow.cloud/v1/image/Stranger%20Things%204%20cinematic%20landscape',
-        this.season = season ?? 'Season 4',
-        this.title = title ?? 'Stranger Things';
+        this.titleImage = titleImage ??
+            'https://dimg.dreamflow.cloud/v1/image/Stranger%20Things%204%20cinematic%20landscape';
 
-  final String img_desc;
-  final String season;
-  final String title;
+  final String posterImage;
+  final String titleImage;
 
   @override
   State<SeasonCardWidget> createState() => _SeasonCardWidgetState();
@@ -49,116 +44,40 @@ class _SeasonCardWidgetState extends State<SeasonCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+    return Container(
+      width: 180.0,
+      height: 120.0,
+      decoration: BoxDecoration(),
       child: Container(
-        child: Container(
-          width: 240.0,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AspectRatio(
-                aspectRatio: 1.77,
+        width: 180.0,
+        height: 120.0,
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                widget.posterImage,
+                width: 180.0,
+                height: 120.0,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Align(
+              alignment: AlignmentDirectional(0.0, 1.0),
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Container(
-                    width: 240.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.0),
-                      shape: BoxShape.rectangle,
-                    ),
-                    child: Stack(
-                      alignment: AlignmentDirectional(-1.0, -1.0),
-                      children: [
-                        CachedNetworkImage(
-                          fadeInDuration: Duration(milliseconds: 0),
-                          fadeOutDuration: Duration(milliseconds: 0),
-                          imageUrl: valueOrDefault<String>(
-                            widget.img_desc,
-                            'https://dimg.dreamflow.cloud/v1/image/Stranger%20Things%204%20cinematic%20landscape',
-                          ),
-                          fit: BoxFit.cover,
-                          alignment: Alignment(0.0, 0.0),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(-1.0, 1.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Color(0xCC000000), Colors.transparent],
-                                stops: [0.0, 1.0],
-                                begin: AlignmentDirectional(0.0, 1.0),
-                                end: AlignmentDirectional(0, -1.0),
-                              ),
-                              shape: BoxShape.rectangle,
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Container(
-                                child: Text(
-                                  valueOrDefault<String>(
-                                    widget.season,
-                                    'Season 4',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelSmall
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelSmall
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelSmall
-                                                  .fontStyle,
-                                        ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .fontStyle,
-                                        lineHeight: 1.2,
-                                      ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  child: Image.network(
+                    widget.titleImage,
+                    width: 100.0,
+                    height: 50.0,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
-              Text(
-                valueOrDefault<String>(
-                  widget.title,
-                  'Stranger Things',
-                ),
-                maxLines: 1,
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      font: GoogleFonts.inter(
-                        fontWeight: FontWeight.w600,
-                        fontStyle:
-                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                      ),
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.w600,
-                      fontStyle:
-                          FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                      lineHeight: 1.4,
-                    ),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ].divide(SizedBox(height: 8.0)),
-          ),
+            ),
+          ],
         ),
       ),
     );
