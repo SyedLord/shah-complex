@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'index.dart'; // Imports other custom actions
+
 import 'package:flutter/services.dart';
 
 Future launchExternalPlayer(
@@ -119,8 +121,11 @@ Future launchExternalPlayer(
   // ─── 5. Build the Firestore document path ───────────────────────────────────
   // Format: continue_watching/{profileId}/items/{tmdbId}_{season}_{episode}
 
-  final String docId =
-      '${tmdbId ?? "unknown"}_${seasonNum?.toString() ?? ""}_${episodeNum?.toString() ?? ""}';
+  // Movies use only tmdbId as docId to prevent duplication.
+  // Episodes use tmdbId_season_episode for per-episode uniqueness.
+  final String docId = contentType == 'episode'
+      ? '${tmdbId ?? "unknown"}_${seasonNum ?? 0}_${episodeNum ?? 0}'
+      : '${tmdbId ?? "unknown"}';
 
   final DocumentReference itemRef = FirebaseFirestore.instance
       .collection('continue_watching')
@@ -143,9 +148,10 @@ Future launchExternalPlayer(
       'updated_at': FieldValue.serverTimestamp(),
       'series_id': resolvedSeriesId ?? '',
       'image_url': imageUrl ?? '',
-      'season': seasonNum ?? 0,
-      'episode': episodeNum ?? 0,
       'drive_type': driveType ?? '',
+      // Only store season/episode for episodes — avoids 0/0 ghost fields on movies
+      if (contentType == 'episode') 'season': seasonNum ?? 0,
+      if (contentType == 'episode') 'episode': episodeNum ?? 0,
     }, SetOptions(merge: true));
     return;
   }

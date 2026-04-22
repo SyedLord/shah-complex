@@ -62,121 +62,78 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: Padding(
-          padding: EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    FlutterFlowIconButton(
-                      borderRadius: 8.0,
-                      buttonSize: 40.0,
-                      fillColor: Colors.transparent,
-                      icon: Icon(
-                        Icons.arrow_back_rounded,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 24.0,
-                      ),
-                      onPressed: () async {
-                        context.safePop();
-                      },
-                    ),
-                    Text(
-                      'Fix Metadata',
-                      style: FlutterFlowTheme.of(context).titleMedium.override(
-                            font: GoogleFonts.inter(
-                              fontWeight: FlutterFlowTheme.of(context)
-                                  .titleMedium
-                                  .fontWeight,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .titleMedium
-                                  .fontStyle,
-                            ),
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            letterSpacing: 0.0,
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .fontStyle,
-                            lineHeight: 1.3,
-                          ),
-                    ),
-                  ].divide(SizedBox(width: 16.0)),
-                ),
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
+        body: SafeArea(
+          top: true,
+          child: Padding(
+            padding: EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      FlutterFlowIconButton(
+                        borderRadius: 8.0,
+                        buttonSize: 40.0,
+                        fillColor: Colors.transparent,
+                        icon: Icon(
+                          Icons.arrow_back_rounded,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
+                          context.safePop();
+                        },
+                      ),
                       Text(
-                        'TMDB ID',
+                        'Fix Metadata',
                         style: FlutterFlowTheme.of(context)
-                            .labelMedium
+                            .titleMedium
                             .override(
                               font: GoogleFonts.inter(
                                 fontWeight: FlutterFlowTheme.of(context)
-                                    .labelMedium
+                                    .titleMedium
                                     .fontWeight,
                                 fontStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
+                                    .titleMedium
                                     .fontStyle,
                               ),
-                              color: FlutterFlowTheme.of(context).secondaryText,
+                              color: FlutterFlowTheme.of(context).primaryText,
                               letterSpacing: 0.0,
                               fontWeight: FlutterFlowTheme.of(context)
-                                  .labelMedium
+                                  .titleMedium
                                   .fontWeight,
                               fontStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
+                                  .titleMedium
                                   .fontStyle,
                               lineHeight: 1.3,
                             ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                          shape: BoxShape.rectangle,
-                        ),
-                        child: TextFormField(
-                          controller: _model.textController,
-                          focusNode: _model.textFieldFocusNode,
-                          autofocus: false,
-                          enabled: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            isDense: true,
-                            hintText: 'Enter TMDB ID',
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  font: GoogleFonts.inter(
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .fontStyle,
-                                  ),
-                                  color: FlutterFlowTheme.of(context).accent3,
-                                  letterSpacing: 0.0,
+                    ].divide(SizedBox(width: 16.0)),
+                  ),
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'TMDB ID',
+                          style: FlutterFlowTheme.of(context)
+                              .labelMedium
+                              .override(
+                                font: GoogleFonts.inter(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .fontWeight,
@@ -184,49 +141,90 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                                       .labelMedium
                                       .fontStyle,
                                 ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
+                                lineHeight: 1.3,
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            filled: true,
-                            fillColor: FlutterFlowTheme.of(context)
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                            shape: BoxShape.rectangle,
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                          child: TextFormField(
+                            controller: _model.textController,
+                            focusNode: _model.textFieldFocusNode,
+                            autofocus: false,
+                            enabled: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              hintText: 'Enter TMDB ID',
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
                                     font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .labelMedium
                                           .fontWeight,
                                       fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .labelMedium
                                           .fontStyle,
                                     ),
+                                    color: FlutterFlowTheme.of(context).accent3,
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .fontWeight,
@@ -234,191 +232,218 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                                         .bodyMedium
                                         .fontStyle,
                                   ),
-                          cursorColor: FlutterFlowTheme.of(context).primaryText,
-                          enableInteractiveSelection: true,
-                          validator: _model.textControllerValidator
-                              .asValidator(context),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                            cursorColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            enableInteractiveSelection: true,
+                            validator: _model.textControllerValidator
+                                .asValidator(context),
+                          ),
                         ),
-                      ),
-                      Text(
-                        'You can find the TMDB ID in the URL of the movie or series page on themoviedb.org.',
-                        maxLines: 2,
-                        style: FlutterFlowTheme.of(context).bodySmall.override(
-                              font: GoogleFonts.inter(
+                        Text(
+                          'You can find the TMDB ID in the URL of the movie or series page on themoviedb.org.',
+                          maxLines: 2,
+                          style: FlutterFlowTheme.of(context)
+                              .bodySmall
+                              .override(
+                                font: GoogleFonts.inter(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .fontStyle,
+                                ),
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                letterSpacing: 0.0,
                                 fontWeight: FlutterFlowTheme.of(context)
                                     .bodySmall
                                     .fontWeight,
                                 fontStyle: FlutterFlowTheme.of(context)
                                     .bodySmall
                                     .fontStyle,
+                                lineHeight: 1.4,
                               ),
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              letterSpacing: 0.0,
-                              fontWeight: FlutterFlowTheme.of(context)
-                                  .bodySmall
-                                  .fontWeight,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodySmall
-                                  .fontStyle,
-                              lineHeight: 1.4,
-                            ),
-                      ),
-                    ].divide(SizedBox(height: 8.0)),
-                  ),
-                  Container(
-                    height: 24.0,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                      ].divide(SizedBox(height: 8.0)),
                     ),
-                    child: Visibility(
-                      visible: _model.apiFullData != null,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              if (widget.mediaType == 'movie') {
-                                await actions.updateMetadataDirectly(
-                                  widget.docRefMovie,
-                                  FFAppState().emptyDocRefSeries,
-                                  _model.apiFullData!,
-                                  widget.mediaType!,
-                                );
-                              } else {
-                                await actions.updateMetadataDirectly(
-                                  FFAppState().emptyDocRefMovies,
-                                  widget.docRefSeries,
-                                  _model.apiFullData!,
-                                  widget.mediaType!,
-                                );
-                              }
+                    Container(
+                      height: 24.0,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      child: Visibility(
+                        visible: _model.apiFullData != null,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 8.0, 0.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  if (widget.mediaType == 'movie') {
+                                    await actions.updateMetadataDirectly(
+                                      widget.docRefMovie,
+                                      FFAppState().emptyDocRefSeries,
+                                      _model.apiFullData!,
+                                      widget.mediaType!,
+                                    );
+                                  } else {
+                                    await actions.updateMetadataDirectly(
+                                      FFAppState().emptyDocRefMovies,
+                                      widget.docRefSeries,
+                                      _model.apiFullData!,
+                                      widget.mediaType!,
+                                    );
+                                  }
 
-                              context.safePop();
-                            },
-                            child: wrapWithModel(
-                              model: _model.movieCardModel,
-                              updateCallback: () => safeSetState(() {}),
-                              child: MovieCardWidget(
-                                img: _model.previewPoster,
+                                  context.safePop();
+                                },
+                                child: wrapWithModel(
+                                  model: _model.movieCardModel,
+                                  updateCallback: () => safeSetState(() {}),
+                                  child: MovieCardWidget(
+                                    img: _model.previewPoster,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 8.0, 0.0, 0.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.safePop();
-                              },
-                              child: Text(
-                                valueOrDefault<String>(
-                                  _model.previewTitle,
-                                  'Title',
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
+                            Padding(
+                              padding: EdgeInsets.all(
+                                  FlutterFlowTheme.of(context)
+                                      .designToken
+                                      .spacing
+                                      .xs),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.safePop();
+                                },
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    _model.previewTitle,
+                                    'Title',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        font: GoogleFonts.inter(
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w600,
                                         fontStyle: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .fontStyle,
                                       ),
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  FFButtonWidget(
-                    onPressed: () async {
-                      _model.apiResult = await actions.fetchTmdbMetadata(
-                        _model.textController.text,
-                        widget.mediaType!,
-                      );
-                      if (_model.apiResult != null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              getJsonField(
-                                _model.apiResult,
-                                r'''$.poster_path''',
-                              ).toString(),
-                              style: TextStyle(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
-                            ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                          ),
+                    FFButtonWidget(
+                      onPressed: () async {
+                        _model.apiResult = await actions.fetchTmdbMetadata(
+                          _model.textController.text,
+                          widget.mediaType!,
                         );
-                        _model.apiFullData = _model.apiResult;
-                        _model.previewTitle = widget.mediaType == 'movie'
-                            ? getJsonField(
-                                _model.apiResult,
-                                r'''$.title''',
-                              ).toString()
-                            : getJsonField(
-                                _model.apiResult,
-                                r'''$.name''',
-                              ).toString();
-                        _model.previewPoster =
-                            'https://image.tmdb.org/t/p/w500${getJsonField(
-                          _model.apiResult,
-                          r'''$.poster_path''',
-                        ).toString()}';
-                        safeSetState(() {});
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'error',
-                              style: TextStyle(
-                                color: FlutterFlowTheme.of(context).primaryText,
+                        if (_model.apiResult != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                getJsonField(
+                                  _model.apiResult,
+                                  r'''$.poster_path''',
+                                ).toString(),
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
                               ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
                             ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                          ),
-                        );
-                      }
+                          );
+                          _model.apiFullData = _model.apiResult;
+                          _model.previewTitle = widget.mediaType == 'movie'
+                              ? getJsonField(
+                                  _model.apiResult,
+                                  r'''$.title''',
+                                ).toString()
+                              : getJsonField(
+                                  _model.apiResult,
+                                  r'''$.name''',
+                                ).toString();
+                          _model.previewPoster =
+                              'https://image.tmdb.org/t/p/w500${getJsonField(
+                            _model.apiResult,
+                            r'''$.poster_path''',
+                          ).toString()}';
+                          safeSetState(() {});
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'error',
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
+                            ),
+                          );
+                        }
 
-                      safeSetState(() {});
-                    },
-                    text: 'Sync Metadata',
-                    options: FFButtonOptions(
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                font: GoogleFonts.poppins(
+                        safeSetState(() {});
+                      },
+                      text: 'Sync Metadata',
+                      options: FFButtonOptions(
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  font: GoogleFonts.poppins(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontStyle,
+                                  ),
+                                  color: Colors.white,
+                                  letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .fontWeight,
@@ -426,22 +451,14 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                                       .titleSmall
                                       .fontStyle,
                                 ),
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                                fontWeight: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .fontWeight,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .fontStyle,
-                              ),
-                      elevation: 0.0,
-                      borderRadius: BorderRadius.circular(8.0),
+                        elevation: 0.0,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
                     ),
-                  ),
-                ].divide(SizedBox(height: 16.0)),
-              ),
-            ],
+                  ].divide(SizedBox(height: 16.0)),
+                ),
+              ],
+            ),
           ),
         ),
       ),
