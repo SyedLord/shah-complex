@@ -80,6 +80,11 @@ class ItemsRecord extends FirestoreRecord {
   String get driveType => _driveType ?? '';
   bool hasDriveType() => _driveType != null;
 
+  // "show_name" field.
+  String? _showName;
+  String get showName => _showName ?? '';
+  bool hasShowName() => _showName != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -96,6 +101,7 @@ class ItemsRecord extends FirestoreRecord {
     _season = castToType<int>(snapshotData['season']);
     _episode = castToType<int>(snapshotData['episode']);
     _driveType = snapshotData['drive_type'] as String?;
+    _showName = snapshotData['show_name'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -150,6 +156,7 @@ Map<String, dynamic> createItemsRecordData({
   int? season,
   int? episode,
   String? driveType,
+  String? showName,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -166,6 +173,7 @@ Map<String, dynamic> createItemsRecordData({
       'season': season,
       'episode': episode,
       'drive_type': driveType,
+      'show_name': showName,
     }.withoutNulls,
   );
 
@@ -189,7 +197,8 @@ class ItemsRecordDocumentEquality implements Equality<ItemsRecord> {
         e1?.imageUrl == e2?.imageUrl &&
         e1?.season == e2?.season &&
         e1?.episode == e2?.episode &&
-        e1?.driveType == e2?.driveType;
+        e1?.driveType == e2?.driveType &&
+        e1?.showName == e2?.showName;
   }
 
   @override
@@ -206,7 +215,8 @@ class ItemsRecordDocumentEquality implements Equality<ItemsRecord> {
         e?.imageUrl,
         e?.season,
         e?.episode,
-        e?.driveType
+        e?.driveType,
+        e?.showName
       ]);
 
   @override

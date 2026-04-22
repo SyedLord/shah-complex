@@ -388,7 +388,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                           ),
                         ),
                         Container(
-                          height: 120.0,
+                          height: 150.0,
                           decoration: BoxDecoration(),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
