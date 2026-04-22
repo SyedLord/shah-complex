@@ -26,6 +26,7 @@ Future launchExternalPlayer(
   String? driveType;
   String? tmdbId;
   String? title;
+  String? showName; // Series ka naam (only for episodes)
   String contentType = 'movie';
   String? imageUrl;
   int startAtSeconds = 0;
@@ -39,6 +40,7 @@ Future launchExternalPlayer(
     driveType = continueDoc.driveType;
     tmdbId = continueDoc.tmdbId; // already a String in this collection
     title = continueDoc.title;
+    showName = continueDoc.showName; // stored from previous session
     contentType = continueDoc.contentType ?? 'movie';
     imageUrl = continueDoc.imageUrl;
     startAtSeconds = continueDoc.watchedSeconds ?? 0;
@@ -56,6 +58,18 @@ Future launchExternalPlayer(
     startAtSeconds = 0;
     seasonNum = episodeDoc.seasonNumber;
     episodeNum = episodeDoc.episodeNumber;
+    // Fetch series name from parent series document
+    if (resolvedSeriesId != null) {
+      try {
+        final seriesSnap = await FirebaseFirestore.instance
+            .collection('series')
+            .doc(resolvedSeriesId)
+            .get();
+        showName = (seriesSnap.data()?['title'] as String?) ?? '';
+      } catch (_) {
+        showName = '';
+      }
+    }
   } else if (movieDoc != null) {
     rawVideoUrl = movieDoc.videoUrl;
     driveType = movieDoc.driveType;
@@ -119,10 +133,9 @@ Future launchExternalPlayer(
   final bool isFinished = progressPercent > 90.0;
 
   // ─── 5. Build the Firestore document path ───────────────────────────────────
-  // Format: continue_watching/{profileId}/items/{tmdbId}_{season}_{episode}
+  // Movies: continue_watching/{profileId}/items/{tmdbId}
+  // Episodes: continue_watching/{profileId}/items/{tmdbId}_{season}_{episode}
 
-  // Movies use only tmdbId as docId to prevent duplication.
-  // Episodes use tmdbId_season_episode for per-episode uniqueness.
   final String docId = contentType == 'episode'
       ? '${tmdbId ?? "unknown"}_${seasonNum ?? 0}_${episodeNum ?? 0}'
       : '${tmdbId ?? "unknown"}';
@@ -136,7 +149,6 @@ Future launchExternalPlayer(
   // ─── 6. Write progress or handle completion ──────────────────────────────────
 
   if (!isFinished) {
-    // Save progress
     await itemRef.set({
       'tmdb_id': tmdbId ?? '',
       'title': title ?? '',
@@ -149,21 +161,20 @@ Future launchExternalPlayer(
       'series_id': resolvedSeriesId ?? '',
       'image_url': imageUrl ?? '',
       'drive_type': driveType ?? '',
-      // Only store season/episode for episodes — avoids 0/0 ghost fields on movies
+      // Only store these fields for episodes
       if (contentType == 'episode') 'season': seasonNum ?? 0,
       if (contentType == 'episode') 'episode': episodeNum ?? 0,
+      if (contentType == 'episode' && showName != null) 'show_name': showName,
     }, SetOptions(merge: true));
     return;
   }
 
   // ─── 7. Episode finished (>90%) — auto-queue next episode ───────────────────
 
-  // Delete the finished item regardless of type
   await itemRef.delete();
 
   if (contentType != 'episode' || resolvedSeriesId == null) return;
 
-  // Try to find next episode: same season, episode + 1
   final int nextEpisodeNum = (episodeNum ?? 0) + 1;
   final int currentSeasonNum = seasonNum ?? 1;
 
@@ -188,7 +199,6 @@ Future launchExternalPlayer(
         .get();
   }
 
-  // Nothing left to queue (series finished)
   if (nextEpQuery.docs.isEmpty) return;
 
   final nextEpData = nextEpQuery.docs.first.data() as Map<String, dynamic>;
@@ -202,7 +212,7 @@ Future launchExternalPlayer(
 
   final String nextDocId = '${tmdbId ?? "unknown"}_${nextSeason}_$nextEpisode';
 
-  // Queue next episode with 0 progress
+  // Queue next episode with 0 progress — carry over show_name
   await FirebaseFirestore.instance
       .collection('continue_watching')
       .doc(profileId)
@@ -211,6 +221,7 @@ Future launchExternalPlayer(
       .set({
     'tmdb_id': tmdbId ?? '',
     'title': nextTitle,
+    'show_name': showName ?? '', // series naam aglay episode mein bhi jaata hai
     'content_type': 'episode',
     'video_url': nextRawUrl,
     'watched_seconds': 0,
