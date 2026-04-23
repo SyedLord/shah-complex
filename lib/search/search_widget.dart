@@ -892,71 +892,65 @@ class _SearchWidgetState extends State<SearchWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 0.0, 10.0, 0.0),
-                                        child: Builder(
-                                          builder: (context) {
-                                            final searchedMoviesAll = _model
-                                                .searchResultMovies
-                                                .toList();
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 0.0, 10.0, 0.0),
+                                      child: Builder(
+                                        builder: (context) {
+                                          final searchedMoviesAll = _model
+                                              .searchResultMovies
+                                              .toList();
 
-                                            return GridView.builder(
-                                              padding: EdgeInsets.zero,
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 3,
-                                                crossAxisSpacing: 10.0,
-                                                mainAxisSpacing: 10.0,
-                                                childAspectRatio: 0.6,
-                                              ),
-                                              primary: false,
-                                              shrinkWrap: true,
-                                              scrollDirection: Axis.vertical,
-                                              itemCount:
-                                                  searchedMoviesAll.length,
-                                              itemBuilder: (context,
-                                                  searchedMoviesAllIndex) {
-                                                final searchedMoviesAllItem =
-                                                    searchedMoviesAll[
-                                                        searchedMoviesAllIndex];
-                                                return InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    context.pushNamed(
-                                                      MoviePageWidget.routeName,
-                                                      queryParameters: {
-                                                        'movieDoc':
-                                                            serializeParam(
+                                          return GridView.builder(
+                                            padding: EdgeInsets.zero,
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 3,
+                                              crossAxisSpacing: 10.0,
+                                              mainAxisSpacing: 10.0,
+                                              childAspectRatio: 0.6,
+                                            ),
+                                            primary: false,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.vertical,
+                                            itemCount: searchedMoviesAll.length,
+                                            itemBuilder: (context,
+                                                searchedMoviesAllIndex) {
+                                              final searchedMoviesAllItem =
+                                                  searchedMoviesAll[
+                                                      searchedMoviesAllIndex];
+                                              return InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  context.pushNamed(
+                                                    MoviePageWidget.routeName,
+                                                    queryParameters: {
+                                                      'movieDoc':
+                                                          serializeParam(
+                                                        searchedMoviesAllItem,
+                                                        ParamType.Document,
+                                                      ),
+                                                    }.withoutNulls,
+                                                    extra: <String, dynamic>{
+                                                      'movieDoc':
                                                           searchedMoviesAllItem,
-                                                          ParamType.Document,
-                                                        ),
-                                                      }.withoutNulls,
-                                                      extra: <String, dynamic>{
-                                                        'movieDoc':
-                                                            searchedMoviesAllItem,
-                                                      },
-                                                    );
-                                                  },
-                                                  child: MovieCardWidget(
-                                                    key: Key(
-                                                        'Keys00_${searchedMoviesAllIndex}_of_${searchedMoviesAll.length}'),
-                                                    img: searchedMoviesAllItem
-                                                        .posterImage,
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                        ),
+                                                    },
+                                                  );
+                                                },
+                                                child: MovieCardWidget(
+                                                  key: Key(
+                                                      'Keys00_${searchedMoviesAllIndex}_of_${searchedMoviesAll.length}'),
+                                                  img: searchedMoviesAllItem
+                                                      .posterImage,
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
                                       ),
                                     ),
                                   ],
@@ -968,49 +962,46 @@ class _SearchWidgetState extends State<SearchWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 0.0, 10.0, 0.0),
-                                        child: Builder(
-                                          builder: (context) {
-                                            final searchedSeriesAll = _model
-                                                .searchResultSeries
-                                                .toList();
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 0.0, 10.0, 0.0),
+                                      child: Builder(
+                                        builder: (context) {
+                                          final searchedSeriesAll = _model
+                                              .searchResultSeries
+                                              .toList();
 
-                                            return GridView.builder(
-                                              padding: EdgeInsets.zero,
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                crossAxisSpacing: 10.0,
-                                                mainAxisSpacing: 10.0,
-                                                childAspectRatio: 1.5,
-                                              ),
-                                              primary: false,
-                                              shrinkWrap: true,
-                                              scrollDirection: Axis.vertical,
-                                              itemCount:
-                                                  searchedSeriesAll.length,
-                                              itemBuilder: (context,
-                                                  searchedSeriesAllIndex) {
-                                                final searchedSeriesAllItem =
-                                                    searchedSeriesAll[
-                                                        searchedSeriesAllIndex];
-                                                return SeasonCardWidget(
-                                                  key: Key(
-                                                      'Keyjly_${searchedSeriesAllIndex}_of_${searchedSeriesAll.length}'),
-                                                  posterImage:
-                                                      searchedSeriesAllItem
-                                                          .backdropImage,
-                                                  titleImage:
-                                                      searchedSeriesAllItem
-                                                          .logoImage,
-                                                );
-                                              },
-                                            );
-                                          },
-                                        ),
+                                          return GridView.builder(
+                                            padding: EdgeInsets.zero,
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              crossAxisSpacing: 10.0,
+                                              mainAxisSpacing: 10.0,
+                                              childAspectRatio: 1.5,
+                                            ),
+                                            primary: false,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.vertical,
+                                            itemCount: searchedSeriesAll.length,
+                                            itemBuilder: (context,
+                                                searchedSeriesAllIndex) {
+                                              final searchedSeriesAllItem =
+                                                  searchedSeriesAll[
+                                                      searchedSeriesAllIndex];
+                                              return SeasonCardWidget(
+                                                key: Key(
+                                                    'Keyjly_${searchedSeriesAllIndex}_of_${searchedSeriesAll.length}'),
+                                                posterImage:
+                                                    searchedSeriesAllItem
+                                                        .backdropImage,
+                                                titleImage:
+                                                    searchedSeriesAllItem
+                                                        .logoImage,
+                                              );
+                                            },
+                                          );
+                                        },
                                       ),
                                     ),
                                   ],
