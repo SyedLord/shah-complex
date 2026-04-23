@@ -70,253 +70,243 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        context.goNamed(HomeDashboardWidget.routeName);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {},
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              FlutterFlowIconButton(
-                                borderRadius: 8.0,
-                                buttonSize: 42.0,
-                                fillColor: Colors.transparent,
-                                icon: Icon(
-                                  Icons.home_rounded,
-                                  color: widget.activeTab == 'home'
-                                      ? FlutterFlowTheme.of(context).primary
-                                      : FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                  size: 26.0,
-                                ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
-                              ),
-                              Text(
-                                'Home',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelSmall
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .fontStyle,
-                                      ),
-                                      color: widget.activeTab == 'home'
-                                          ? FlutterFlowTheme.of(context)
-                                              .primaryText
-                                          : FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                      letterSpacing: 0.0,
+                    Container(
+                      decoration: BoxDecoration(),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: 42.0,
+                            fillColor: Colors.transparent,
+                            icon: Icon(
+                              Icons.home_rounded,
+                              color: widget.activeTab == 'home'
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).secondaryText,
+                              size: 26.0,
+                            ),
+                            onPressed: () async {
+                              context.goNamed(HomeDashboardWidget.routeName);
+                            },
+                          ),
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.goNamed(HomeDashboardWidget.routeName);
+                            },
+                            child: Text(
+                              'Home',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelSmall
+                                  .override(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .labelSmall
                                           .fontWeight,
                                       fontStyle: FlutterFlowTheme.of(context)
                                           .labelSmall
                                           .fontStyle,
-                                      lineHeight: 1.2,
                                     ),
-                              ),
-                            ].divide(SizedBox(height: 4.0)),
+                                    color: widget.activeTab == 'home'
+                                        ? FlutterFlowTheme.of(context)
+                                            .primaryText
+                                        : FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelSmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelSmall
+                                        .fontStyle,
+                                    lineHeight: 1.2,
+                                  ),
+                            ),
                           ),
-                        ),
+                        ].divide(SizedBox(height: 4.0)),
                       ),
                     ),
-                    InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        context.pushNamed(SearchWidget.routeName);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {},
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              FlutterFlowIconButton(
-                                borderRadius: 8.0,
-                                buttonSize: 42.0,
-                                fillColor: Colors.transparent,
-                                icon: Icon(
-                                  Icons.search_rounded,
-                                  color: widget.activeTab == 'search'
-                                      ? FlutterFlowTheme.of(context).primary
-                                      : FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                  size: 26.0,
-                                ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
-                              ),
-                              Text(
-                                'Search',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelSmall
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .fontStyle,
-                                      ),
-                                      color: widget.activeTab == 'search'
-                                          ? FlutterFlowTheme.of(context)
-                                              .primaryText
-                                          : FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                      letterSpacing: 0.0,
+                    Container(
+                      decoration: BoxDecoration(),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: 42.0,
+                            fillColor: Colors.transparent,
+                            icon: Icon(
+                              Icons.search_rounded,
+                              color: widget.activeTab == 'search'
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).secondaryText,
+                              size: 26.0,
+                            ),
+                            onPressed: () async {
+                              context.pushNamed(SearchWidget.routeName);
+                            },
+                          ),
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(SearchWidget.routeName);
+                            },
+                            child: Text(
+                              'Search',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelSmall
+                                  .override(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .labelSmall
                                           .fontWeight,
                                       fontStyle: FlutterFlowTheme.of(context)
                                           .labelSmall
                                           .fontStyle,
-                                      lineHeight: 1.2,
                                     ),
-                              ),
-                            ].divide(SizedBox(height: 4.0)),
+                                    color: widget.activeTab == 'search'
+                                        ? FlutterFlowTheme.of(context)
+                                            .primaryText
+                                        : FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelSmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelSmall
+                                        .fontStyle,
+                                    lineHeight: 1.2,
+                                  ),
+                            ),
                           ),
-                        ),
+                        ].divide(SizedBox(height: 4.0)),
                       ),
                     ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        FlutterFlowIconButton(
-                          borderRadius: 8.0,
-                          buttonSize: 42.0,
-                          fillColor: Colors.transparent,
-                          icon: Icon(
-                            Icons.whatshot_rounded,
-                            color: widget.activeTab == 'news'
-                                ? FlutterFlowTheme.of(context).primary
-                                : FlutterFlowTheme.of(context).secondaryText,
-                            size: 26.0,
+                    Container(
+                      decoration: BoxDecoration(),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: 42.0,
+                            fillColor: Colors.transparent,
+                            icon: Icon(
+                              Icons.whatshot_rounded,
+                              color: widget.activeTab == 'news'
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).secondaryText,
+                              size: 26.0,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                          },
-                        ),
-                        Text(
-                          'New & Hot',
-                          style: FlutterFlowTheme.of(context)
-                              .labelSmall
-                              .override(
-                                font: GoogleFonts.inter(
+                          Text(
+                            'New & Hot',
+                            style: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .override(
+                                  font: GoogleFonts.inter(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelSmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelSmall
+                                        .fontStyle,
+                                  ),
+                                  color: widget.activeTab == 'news'
+                                      ? FlutterFlowTheme.of(context).primaryText
+                                      : FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                  letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .labelSmall
                                       .fontWeight,
                                   fontStyle: FlutterFlowTheme.of(context)
                                       .labelSmall
                                       .fontStyle,
+                                  lineHeight: 1.2,
                                 ),
-                                color: widget.activeTab == 'news'
-                                    ? FlutterFlowTheme.of(context).primaryText
-                                    : FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                letterSpacing: 0.0,
-                                fontWeight: FlutterFlowTheme.of(context)
-                                    .labelSmall
-                                    .fontWeight,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .labelSmall
-                                    .fontStyle,
-                                lineHeight: 1.2,
-                              ),
-                        ),
-                      ].divide(SizedBox(height: 4.0)),
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: widget.activeTab == 'profile'
-                                ? FlutterFlowTheme.of(context).primary
-                                : FlutterFlowTheme.of(context).secondaryText,
-                            shape: BoxShape.circle,
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.all(1.0),
-                            child: Container(
-                              width: 42.0,
-                              height: 42.0,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: CachedNetworkImage(
-                                fadeInDuration: Duration(milliseconds: 100),
-                                fadeOutDuration: Duration(milliseconds: 100),
-                                imageUrl: FFAppState().activeProfileImage,
-                                fit: BoxFit.cover,
+                        ].divide(SizedBox(height: 4.0)),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: widget.activeTab == 'profile'
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).secondaryText,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(1.0),
+                              child: Container(
+                                width: 42.0,
+                                height: 42.0,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: CachedNetworkImage(
+                                  fadeInDuration: Duration(milliseconds: 100),
+                                  fadeOutDuration: Duration(milliseconds: 100),
+                                  imageUrl: FFAppState().activeProfileImage,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Text(
-                          'Profile',
-                          style: FlutterFlowTheme.of(context)
-                              .labelSmall
-                              .override(
-                                font: GoogleFonts.inter(
+                          Text(
+                            'Profile',
+                            style: FlutterFlowTheme.of(context)
+                                .labelSmall
+                                .override(
+                                  font: GoogleFonts.inter(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelSmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelSmall
+                                        .fontStyle,
+                                  ),
+                                  color: widget.activeTab == 'profile'
+                                      ? FlutterFlowTheme.of(context).primaryText
+                                      : FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                  letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .labelSmall
                                       .fontWeight,
                                   fontStyle: FlutterFlowTheme.of(context)
                                       .labelSmall
                                       .fontStyle,
+                                  lineHeight: 1.2,
                                 ),
-                                color: widget.activeTab == 'profile'
-                                    ? FlutterFlowTheme.of(context).primaryText
-                                    : FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                letterSpacing: 0.0,
-                                fontWeight: FlutterFlowTheme.of(context)
-                                    .labelSmall
-                                    .fontWeight,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .labelSmall
-                                    .fontStyle,
-                                lineHeight: 1.2,
-                              ),
-                        ),
-                      ].divide(SizedBox(height: 4.0)),
+                          ),
+                        ].divide(SizedBox(height: 4.0)),
+                      ),
                     ),
                   ],
                 ),
