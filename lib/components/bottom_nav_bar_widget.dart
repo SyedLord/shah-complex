@@ -294,48 +294,84 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                             ),
                             child: Padding(
                               padding: EdgeInsets.all(1.0),
-                              child: Container(
-                                width: 42.0,
-                                height: 42.0,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: CachedNetworkImage(
-                                  fadeInDuration: Duration(milliseconds: 100),
-                                  fadeOutDuration: Duration(milliseconds: 100),
-                                  imageUrl: FFAppState().activeProfileImage,
-                                  fit: BoxFit.cover,
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed(
+                                    MyProfileWidget.routeName,
+                                    extra: <String, dynamic>{
+                                      '__transition_info__': TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                      ),
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  width: 42.0,
+                                  height: 42.0,
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: CachedNetworkImage(
+                                    fadeInDuration: Duration(milliseconds: 100),
+                                    fadeOutDuration:
+                                        Duration(milliseconds: 100),
+                                    imageUrl: FFAppState().activeProfileImage,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          Text(
-                            'Profile',
-                            style: FlutterFlowTheme.of(context)
-                                .labelSmall
-                                .override(
-                                  font: GoogleFonts.inter(
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                MyProfileWidget.routeName,
+                                extra: <String, dynamic>{
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
+                                },
+                              );
+                            },
+                            child: Text(
+                              'Profile',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelSmall
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .labelSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelSmall
+                                          .fontStyle,
+                                    ),
+                                    color: widget.activeTab == 'profile'
+                                        ? FlutterFlowTheme.of(context)
+                                            .primaryText
+                                        : FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                    letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .labelSmall
                                         .fontWeight,
                                     fontStyle: FlutterFlowTheme.of(context)
                                         .labelSmall
                                         .fontStyle,
+                                    lineHeight: 1.2,
                                   ),
-                                  color: widget.activeTab == 'profile'
-                                      ? FlutterFlowTheme.of(context).primaryText
-                                      : FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .labelSmall
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .labelSmall
-                                      .fontStyle,
-                                  lineHeight: 1.2,
-                                ),
+                            ),
                           ),
                         ].divide(SizedBox(height: 4.0)),
                       ),

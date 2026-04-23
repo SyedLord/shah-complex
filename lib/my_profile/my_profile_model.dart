@@ -1,5 +1,5 @@
+import '/components/bottom_nav_bar_widget.dart';
 import '/components/download_item_widget.dart';
-import '/components/menu_item_widget.dart';
 import '/components/watchlist_card_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'my_profile_widget.dart' show MyProfileWidget;
@@ -22,14 +22,8 @@ class MyProfileModel extends FlutterFlowModel<MyProfileWidget> {
   late DownloadItemModel downloadItemModel2;
   // Model for DownloadItem.
   late DownloadItemModel downloadItemModel3;
-  // Model for MenuItem.
-  late MenuItemModel menuItemModel1;
-  // Model for MenuItem.
-  late MenuItemModel menuItemModel2;
-  // Model for MenuItem.
-  late MenuItemModel menuItemModel3;
-  // Model for MenuItem.
-  late MenuItemModel menuItemModel4;
+  // Model for BottomNavBar component.
+  late BottomNavBarModel bottomNavBarModel;
 
   @override
   void initState(BuildContext context) {
@@ -40,10 +34,7 @@ class MyProfileModel extends FlutterFlowModel<MyProfileWidget> {
     downloadItemModel1 = createModel(context, () => DownloadItemModel());
     downloadItemModel2 = createModel(context, () => DownloadItemModel());
     downloadItemModel3 = createModel(context, () => DownloadItemModel());
-    menuItemModel1 = createModel(context, () => MenuItemModel());
-    menuItemModel2 = createModel(context, () => MenuItemModel());
-    menuItemModel3 = createModel(context, () => MenuItemModel());
-    menuItemModel4 = createModel(context, () => MenuItemModel());
+    bottomNavBarModel = createModel(context, () => BottomNavBarModel());
   }
 
   @override
@@ -55,9 +46,6 @@ class MyProfileModel extends FlutterFlowModel<MyProfileWidget> {
     downloadItemModel1.dispose();
     downloadItemModel2.dispose();
     downloadItemModel3.dispose();
-    menuItemModel1.dispose();
-    menuItemModel2.dispose();
-    menuItemModel3.dispose();
-    menuItemModel4.dispose();
+    bottomNavBarModel.dispose();
   }
 }
