@@ -396,23 +396,57 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                             Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                FlutterFlowIconButton(
-                                                  borderRadius: 8.0,
-                                                  buttonSize: 40.0,
-                                                  icon: FaIcon(
-                                                    FontAwesomeIcons.check,
-                                                    color:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary,
-                                                    size: 24.0,
+                                                if ((myListContainerMyListRecord !=
+                                                        null) ==
+                                                    false)
+                                                  FlutterFlowIconButton(
+                                                    borderRadius: 8.0,
+                                                    buttonSize: 40.0,
+                                                    icon: FaIcon(
+                                                      FontAwesomeIcons.plus,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .info,
+                                                      size: 24.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      await MyListRecord
+                                                          .collection
+                                                          .doc(
+                                                              '${FFAppState().activeProfileRef?.id}_${widget.seriesDoc?.reference.id}')
+                                                          .set(
+                                                              createMyListRecordData(
+                                                            profileRef: FFAppState()
+                                                                .activeProfileRef,
+                                                            addedAt:
+                                                                getCurrentTimestamp,
+                                                            seasonRef: widget
+                                                                .seriesDoc
+                                                                ?.reference,
+                                                          ));
+                                                    },
                                                   ),
-                                                  onPressed: () async {
-                                                    await myListContainerMyListRecord!
-                                                        .reference
-                                                        .delete();
-                                                  },
-                                                ),
+                                                if ((myListContainerMyListRecord !=
+                                                        null) ==
+                                                    true)
+                                                  FlutterFlowIconButton(
+                                                    borderRadius: 8.0,
+                                                    buttonSize: 40.0,
+                                                    icon: FaIcon(
+                                                      FontAwesomeIcons.check,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      size: 24.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      await myListContainerMyListRecord!
+                                                          .reference
+                                                          .delete();
+                                                    },
+                                                  ),
                                               ],
                                             ),
                                             Text(
