@@ -4,6 +4,7 @@ import '/components/download_item_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -401,69 +402,80 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                           lineHeight: 1.3,
                                         ),
                                   ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      context.pushNamed(
-                                        AllItemsWidget.routeName,
-                                        queryParameters: {
-                                          'categoryName': serializeParam(
-                                            'My List',
-                                            ParamType.String,
-                                          ),
-                                          'categoryType': serializeParam(
-                                            'my list',
-                                            ParamType.String,
-                                          ),
-                                          'isTrending': serializeParam(
-                                            false,
-                                            ParamType.bool,
-                                          ),
-                                          'isContinueWatching': serializeParam(
-                                            false,
-                                            ParamType.bool,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          '__transition_info__': TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.fade,
-                                          ),
-                                        },
-                                      );
-                                    },
-                                    child: Text(
-                                      'See All',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
+                                  FFButtonWidget(
+                                    onPressed: ((myProfileProfilesRecord !=
+                                                null) ==
+                                            false)
+                                        ? null
+                                        : () async {
+                                            context.pushNamed(
+                                              AllItemsWidget.routeName,
+                                              queryParameters: {
+                                                'categoryName': serializeParam(
+                                                  'My List',
+                                                  ParamType.String,
+                                                ),
+                                                'categoryType': serializeParam(
+                                                  'my list',
+                                                  ParamType.String,
+                                                ),
+                                                'isTrending': serializeParam(
+                                                  false,
+                                                  ParamType.bool,
+                                                ),
+                                                'isContinueWatching':
+                                                    serializeParam(
+                                                  false,
+                                                  ParamType.bool,
+                                                ),
+                                              }.withoutNulls,
+                                              extra: <String, dynamic>{
+                                                '__transition_info__':
+                                                    TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType.fade,
+                                                ),
+                                              },
+                                            );
+                                          },
+                                    text: 'See All',
+                                    options: FFButtonOptions(
+                                      height: 40.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 0.0, 16.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: Color(0x00E50914),
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
                                           .override(
-                                            font: GoogleFonts.inter(
+                                            font: GoogleFonts.poppins(
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium
+                                                      .titleSmall
                                                       .fontWeight,
                                               fontStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium
+                                                      .titleSmall
                                                       .fontStyle,
                                             ),
                                             color: FlutterFlowTheme.of(context)
                                                 .accent3,
+                                            fontSize: 12.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium
+                                                    .titleSmall
                                                     .fontWeight,
                                             fontStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium
+                                                    .titleSmall
                                                     .fontStyle,
-                                            lineHeight: 1.3,
                                           ),
+                                      elevation: 0.0,
+                                      borderRadius: BorderRadius.circular(8.0),
                                     ),
                                   ),
                                 ],
@@ -473,210 +485,260 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                               width: double.infinity,
                               height: 200.0,
                               decoration: BoxDecoration(),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 0.0, 24.0, 0.0),
-                                child: StreamBuilder<List<MyListRecord>>(
-                                  stream: queryMyListRecord(
-                                    queryBuilder: (myListRecord) => myListRecord
-                                        .where(
-                                          'profile_ref',
-                                          isEqualTo:
-                                              FFAppState().activeProfileRef,
-                                        )
-                                        .orderBy('added_at', descending: true),
-                                    limit: 10,
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: CircularProgressIndicator(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                            ),
-                                          ),
+                              child: Stack(
+                                children: [
+                                  if ((myProfileProfilesRecord != null) == true)
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          24.0, 0.0, 24.0, 0.0),
+                                      child: StreamBuilder<List<MyListRecord>>(
+                                        stream: queryMyListRecord(
+                                          queryBuilder: (myListRecord) =>
+                                              myListRecord
+                                                  .where(
+                                                    'profile_ref',
+                                                    isEqualTo: FFAppState()
+                                                        .activeProfileRef,
+                                                  )
+                                                  .orderBy('added_at',
+                                                      descending: true),
+                                          limit: 10,
                                         ),
-                                      );
-                                    }
-                                    List<MyListRecord>
-                                        listViewMyListRecordList =
-                                        snapshot.data!;
-
-                                    return ListView.separated(
-                                      padding: EdgeInsets.zero,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount:
-                                          listViewMyListRecordList.length,
-                                      separatorBuilder: (_, __) =>
-                                          SizedBox(width: 10.0),
-                                      itemBuilder: (context, listViewIndex) {
-                                        final listViewMyListRecord =
-                                            listViewMyListRecordList[
-                                                listViewIndex];
-                                        return Stack(
-                                          children: [
-                                            if (listViewMyListRecord.movieRef !=
-                                                null)
-                                              StreamBuilder<MoviesRecord>(
-                                                stream:
-                                                    MoviesRecord.getDocument(
-                                                        listViewMyListRecord
-                                                            .movieRef!),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50.0,
-                                                        height: 50.0,
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          valueColor:
-                                                              AlwaysStoppedAnimation<
-                                                                  Color>(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-
-                                                  final movieCardMoviesRecord =
-                                                      snapshot.data!;
-
-                                                  return InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      context.pushNamed(
-                                                        MoviePageWidget
-                                                            .routeName,
-                                                        queryParameters: {
-                                                          'movieDoc':
-                                                              serializeParam(
-                                                            movieCardMoviesRecord,
-                                                            ParamType.Document,
-                                                          ),
-                                                        }.withoutNulls,
-                                                        extra: <String,
-                                                            dynamic>{
-                                                          'movieDoc':
-                                                              movieCardMoviesRecord,
-                                                          '__transition_info__':
-                                                              TransitionInfo(
-                                                            hasTransition: true,
-                                                            transitionType:
-                                                                PageTransitionType
-                                                                    .fade,
-                                                          ),
-                                                        },
-                                                      );
-                                                    },
-                                                    child: MovieCardWidget(
-                                                      key: Key(
-                                                          'Keyf5w_${listViewIndex}_of_${listViewMyListRecordList.length}'),
-                                                      img: movieCardMoviesRecord
-                                                          .posterImage,
-                                                    ),
-                                                  );
-                                                },
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                          Color>(
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                  ),
+                                                ),
                                               ),
-                                            if (listViewMyListRecord
-                                                    .seasonRef !=
-                                                null)
-                                              StreamBuilder<SeriesRecord>(
-                                                stream:
-                                                    SeriesRecord.getDocument(
-                                                        listViewMyListRecord
-                                                            .seasonRef!),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50.0,
-                                                        height: 50.0,
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          valueColor:
-                                                              AlwaysStoppedAnimation<
-                                                                  Color>(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
+                                            );
+                                          }
+                                          List<MyListRecord>
+                                              listViewMyListRecordList =
+                                              snapshot.data!;
 
-                                                  final movieCardSeriesRecord =
-                                                      snapshot.data!;
+                                          return ListView.separated(
+                                            padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount:
+                                                listViewMyListRecordList.length,
+                                            separatorBuilder: (_, __) =>
+                                                SizedBox(width: 10.0),
+                                            itemBuilder:
+                                                (context, listViewIndex) {
+                                              final listViewMyListRecord =
+                                                  listViewMyListRecordList[
+                                                      listViewIndex];
+                                              return Stack(
+                                                children: [
+                                                  if (listViewMyListRecord
+                                                          .movieRef !=
+                                                      null)
+                                                    StreamBuilder<MoviesRecord>(
+                                                      stream: MoviesRecord
+                                                          .getDocument(
+                                                              listViewMyListRecord
+                                                                  .movieRef!),
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        // Customize what your widget looks like when it's loading.
+                                                        if (!snapshot.hasData) {
+                                                          return Center(
+                                                            child: SizedBox(
+                                                              width: 50.0,
+                                                              height: 50.0,
+                                                              child:
+                                                                  CircularProgressIndicator(
+                                                                valueColor:
+                                                                    AlwaysStoppedAnimation<
+                                                                        Color>(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        }
 
-                                                  return InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      context.pushNamed(
-                                                        SeasonPageWidget
-                                                            .routeName,
-                                                        queryParameters: {
-                                                          'seriesDoc':
-                                                              serializeParam(
-                                                            movieCardSeriesRecord,
-                                                            ParamType.Document,
+                                                        final movieCardMoviesRecord =
+                                                            snapshot.data!;
+
+                                                        return InkWell(
+                                                          splashColor: Colors
+                                                              .transparent,
+                                                          focusColor: Colors
+                                                              .transparent,
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          highlightColor: Colors
+                                                              .transparent,
+                                                          onTap: () async {
+                                                            context.pushNamed(
+                                                              MoviePageWidget
+                                                                  .routeName,
+                                                              queryParameters: {
+                                                                'movieDoc':
+                                                                    serializeParam(
+                                                                  movieCardMoviesRecord,
+                                                                  ParamType
+                                                                      .Document,
+                                                                ),
+                                                              }.withoutNulls,
+                                                              extra: <String,
+                                                                  dynamic>{
+                                                                'movieDoc':
+                                                                    movieCardMoviesRecord,
+                                                                '__transition_info__':
+                                                                    TransitionInfo(
+                                                                  hasTransition:
+                                                                      true,
+                                                                  transitionType:
+                                                                      PageTransitionType
+                                                                          .fade,
+                                                                ),
+                                                              },
+                                                            );
+                                                          },
+                                                          child:
+                                                              MovieCardWidget(
+                                                            key: Key(
+                                                                'Keyf5w_${listViewIndex}_of_${listViewMyListRecordList.length}'),
+                                                            img: movieCardMoviesRecord
+                                                                .posterImage,
                                                           ),
-                                                        }.withoutNulls,
-                                                        extra: <String,
-                                                            dynamic>{
-                                                          'seriesDoc':
-                                                              movieCardSeriesRecord,
-                                                          '__transition_info__':
-                                                              TransitionInfo(
-                                                            hasTransition: true,
-                                                            transitionType:
-                                                                PageTransitionType
-                                                                    .fade,
-                                                          ),
-                                                        },
-                                                      );
-                                                    },
-                                                    child: MovieCardWidget(
-                                                      key: Key(
-                                                          'Keyl10_${listViewIndex}_of_${listViewMyListRecordList.length}'),
-                                                      img: movieCardSeriesRecord
-                                                          .posterImage,
+                                                        );
+                                                      },
                                                     ),
-                                                  );
-                                                },
-                                              ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  },
-                                ),
+                                                  if (listViewMyListRecord
+                                                          .seasonRef !=
+                                                      null)
+                                                    StreamBuilder<SeriesRecord>(
+                                                      stream: SeriesRecord
+                                                          .getDocument(
+                                                              listViewMyListRecord
+                                                                  .seasonRef!),
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        // Customize what your widget looks like when it's loading.
+                                                        if (!snapshot.hasData) {
+                                                          return Center(
+                                                            child: SizedBox(
+                                                              width: 50.0,
+                                                              height: 50.0,
+                                                              child:
+                                                                  CircularProgressIndicator(
+                                                                valueColor:
+                                                                    AlwaysStoppedAnimation<
+                                                                        Color>(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        }
+
+                                                        final movieCardSeriesRecord =
+                                                            snapshot.data!;
+
+                                                        return InkWell(
+                                                          splashColor: Colors
+                                                              .transparent,
+                                                          focusColor: Colors
+                                                              .transparent,
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          highlightColor: Colors
+                                                              .transparent,
+                                                          onTap: () async {
+                                                            context.pushNamed(
+                                                              SeasonPageWidget
+                                                                  .routeName,
+                                                              queryParameters: {
+                                                                'seriesDoc':
+                                                                    serializeParam(
+                                                                  movieCardSeriesRecord,
+                                                                  ParamType
+                                                                      .Document,
+                                                                ),
+                                                              }.withoutNulls,
+                                                              extra: <String,
+                                                                  dynamic>{
+                                                                'seriesDoc':
+                                                                    movieCardSeriesRecord,
+                                                                '__transition_info__':
+                                                                    TransitionInfo(
+                                                                  hasTransition:
+                                                                      true,
+                                                                  transitionType:
+                                                                      PageTransitionType
+                                                                          .fade,
+                                                                ),
+                                                              },
+                                                            );
+                                                          },
+                                                          child:
+                                                              MovieCardWidget(
+                                                            key: Key(
+                                                                'Keyl10_${listViewIndex}_of_${listViewMyListRecordList.length}'),
+                                                            img: movieCardSeriesRecord
+                                                                .posterImage,
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Text(
+                                      'Your List is Empty !',
+                                      style: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent3,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineMedium
+                                                    .fontStyle,
+                                          ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
