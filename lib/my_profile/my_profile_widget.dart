@@ -484,69 +484,158 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                         final listViewMyListRecord =
                                             listViewMyListRecordList[
                                                 listViewIndex];
-                                        return StreamBuilder<MoviesRecord>(
-                                          stream: MoviesRecord.getDocument(
-                                              listViewMyListRecord.movieRef!),
-                                          builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: 50.0,
-                                                  height: 50.0,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    valueColor:
-                                                        AlwaysStoppedAnimation<
-                                                            Color>(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            }
+                                        return Stack(
+                                          children: [
+                                            if (listViewMyListRecord.movieRef !=
+                                                null)
+                                              StreamBuilder<MoviesRecord>(
+                                                stream:
+                                                    MoviesRecord.getDocument(
+                                                        listViewMyListRecord
+                                                            .movieRef!),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50.0,
+                                                        height: 50.0,
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          valueColor:
+                                                              AlwaysStoppedAnimation<
+                                                                  Color>(
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
 
-                                            final movieCardMoviesRecord =
-                                                snapshot.data!;
+                                                  final movieCardMoviesRecord =
+                                                      snapshot.data!;
 
-                                            return InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                context.pushNamed(
-                                                  MoviePageWidget.routeName,
-                                                  queryParameters: {
-                                                    'movieDoc': serializeParam(
-                                                      movieCardMoviesRecord,
-                                                      ParamType.Document,
+                                                  return InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      context.pushNamed(
+                                                        MoviePageWidget
+                                                            .routeName,
+                                                        queryParameters: {
+                                                          'movieDoc':
+                                                              serializeParam(
+                                                            movieCardMoviesRecord,
+                                                            ParamType.Document,
+                                                          ),
+                                                        }.withoutNulls,
+                                                        extra: <String,
+                                                            dynamic>{
+                                                          'movieDoc':
+                                                              movieCardMoviesRecord,
+                                                          '__transition_info__':
+                                                              TransitionInfo(
+                                                            hasTransition: true,
+                                                            transitionType:
+                                                                PageTransitionType
+                                                                    .fade,
+                                                          ),
+                                                        },
+                                                      );
+                                                    },
+                                                    child: MovieCardWidget(
+                                                      key: Key(
+                                                          'Keyf5w_${listViewIndex}_of_${listViewMyListRecordList.length}'),
+                                                      img: movieCardMoviesRecord
+                                                          .posterImage,
                                                     ),
-                                                  }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'movieDoc':
-                                                        movieCardMoviesRecord,
-                                                    '__transition_info__':
-                                                        TransitionInfo(
-                                                      hasTransition: true,
-                                                      transitionType:
-                                                          PageTransitionType
-                                                              .fade,
-                                                    ),
-                                                  },
-                                                );
-                                              },
-                                              child: MovieCardWidget(
-                                                key: Key(
-                                                    'Keyf5w_${listViewIndex}_of_${listViewMyListRecordList.length}'),
-                                                img: movieCardMoviesRecord
-                                                    .posterImage,
+                                                  );
+                                                },
                                               ),
-                                            );
-                                          },
+                                            if (listViewMyListRecord
+                                                    .seasonRef !=
+                                                null)
+                                              StreamBuilder<SeriesRecord>(
+                                                stream:
+                                                    SeriesRecord.getDocument(
+                                                        listViewMyListRecord
+                                                            .seasonRef!),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50.0,
+                                                        height: 50.0,
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          valueColor:
+                                                              AlwaysStoppedAnimation<
+                                                                  Color>(
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+
+                                                  final movieCardSeriesRecord =
+                                                      snapshot.data!;
+
+                                                  return InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      context.pushNamed(
+                                                        SeasonPageWidget
+                                                            .routeName,
+                                                        queryParameters: {
+                                                          'seriesDoc':
+                                                              serializeParam(
+                                                            movieCardSeriesRecord,
+                                                            ParamType.Document,
+                                                          ),
+                                                        }.withoutNulls,
+                                                        extra: <String,
+                                                            dynamic>{
+                                                          'seriesDoc':
+                                                              movieCardSeriesRecord,
+                                                          '__transition_info__':
+                                                              TransitionInfo(
+                                                            hasTransition: true,
+                                                            transitionType:
+                                                                PageTransitionType
+                                                                    .fade,
+                                                          ),
+                                                        },
+                                                      );
+                                                    },
+                                                    child: MovieCardWidget(
+                                                      key: Key(
+                                                          'Keyl10_${listViewIndex}_of_${listViewMyListRecordList.length}'),
+                                                      img: movieCardSeriesRecord
+                                                          .posterImage,
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                          ],
                                         );
                                       },
                                     );
