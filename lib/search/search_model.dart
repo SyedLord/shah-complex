@@ -35,6 +35,8 @@ class SearchModel extends FlutterFlowModel<SearchWidget> {
 
   int tabIndex = 0;
 
+  bool isHidden = true;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Firestore Query - Query a collection] action in Search widget.

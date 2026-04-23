@@ -39,7 +39,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       _model.loadedMovies = await queryMoviesRecordOnce();
       _model.loadedSeries = await querySeriesRecordOnce();
       _model.outMovies1 = await actions.vipSmartSearch(
-        _model.textController.text,
+        '',
         _model.loadedMovies?.toList(),
       );
       _model.outSeries1 = await actions.vipSmartSearchSeries(
@@ -92,6 +92,25 @@ class _SearchWidgetState extends State<SearchWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          Align(
+                            alignment: AlignmentDirectional(-1.0, -1.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 8.0, 0.0, 8.0),
+                              child: FlutterFlowIconButton(
+                                borderRadius: 8.0,
+                                buttonSize: 40.0,
+                                icon: Icon(
+                                  Icons.arrow_back,
+                                  color: FlutterFlowTheme.of(context).info,
+                                  size: 24.0,
+                                ),
+                                onPressed: () async {
+                                  context.safePop();
+                                },
+                              ),
+                            ),
+                          ),
                           Container(
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
@@ -100,8 +119,9 @@ class _SearchWidgetState extends State<SearchWidget> {
                             ),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 48.0, 16.0, 16.0),
+                                  16.0, 0.0, 16.0, 16.0),
                               child: Container(
+                                decoration: BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -229,7 +249,9 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            Color(0x00000000),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
                                                         width: 1.0,
                                                       ),
                                                       borderRadius:
@@ -307,13 +329,14 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                       .asValidator(context),
                                                 ),
                                               ),
-                                              Icon(
-                                                Icons.mic_rounded,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .accent3,
-                                                size: 22.0,
-                                              ),
+                                              if (_model.isHidden == false)
+                                                Icon(
+                                                  Icons.mic_rounded,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .accent3,
+                                                  size: 22.0,
+                                                ),
                                             ].divide(SizedBox(width: 16.0)),
                                           ),
                                         ),
