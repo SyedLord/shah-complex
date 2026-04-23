@@ -72,7 +72,7 @@ class _SeasonCardWidgetState extends State<SeasonCardWidget> {
                     widget.titleImage,
                     width: 100.0,
                     height: 50.0,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
