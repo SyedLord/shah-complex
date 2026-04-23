@@ -322,7 +322,6 @@ class _SearchWidgetState extends State<SearchWidget> {
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
                                               _model.tabIndex = 0;
-                                              safeSetState(() {});
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(
@@ -387,7 +386,6 @@ class _SearchWidgetState extends State<SearchWidget> {
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
                                               _model.tabIndex = 1;
-                                              safeSetState(() {});
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(
@@ -452,7 +450,6 @@ class _SearchWidgetState extends State<SearchWidget> {
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
                                               _model.tabIndex = 2;
-                                              safeSetState(() {});
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(
