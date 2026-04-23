@@ -1,4 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'season_card_model.dart';
 export 'season_card_model.dart';
@@ -55,8 +56,10 @@ class _SeasonCardWidgetState extends State<SeasonCardWidget> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                widget.posterImage,
+              child: CachedNetworkImage(
+                fadeInDuration: Duration(milliseconds: 200),
+                fadeOutDuration: Duration(milliseconds: 200),
+                imageUrl: widget.posterImage,
                 width: 180.0,
                 height: 120.0,
                 fit: BoxFit.cover,
@@ -68,8 +71,10 @@ class _SeasonCardWidgetState extends State<SeasonCardWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    widget.titleImage,
+                  child: CachedNetworkImage(
+                    fadeInDuration: Duration(milliseconds: 200),
+                    fadeOutDuration: Duration(milliseconds: 200),
+                    imageUrl: widget.titleImage,
                     width: 100.0,
                     height: 50.0,
                     fit: BoxFit.contain,
