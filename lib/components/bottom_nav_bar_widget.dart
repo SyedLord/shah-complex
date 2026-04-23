@@ -89,7 +89,15 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                               size: 26.0,
                             ),
                             onPressed: () async {
-                              context.goNamed(HomeDashboardWidget.routeName);
+                              context.goNamed(
+                                HomeDashboardWidget.routeName,
+                                extra: <String, dynamic>{
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
+                                },
+                              );
                             },
                           ),
                           InkWell(
@@ -151,7 +159,15 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                               size: 26.0,
                             ),
                             onPressed: () async {
-                              context.pushNamed(SearchWidget.routeName);
+                              context.pushNamed(
+                                SearchWidget.routeName,
+                                extra: <String, dynamic>{
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
+                                },
+                              );
                             },
                           ),
                           InkWell(
