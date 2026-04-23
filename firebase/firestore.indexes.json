@@ -29,6 +29,20 @@
       ]
     },
     {
+      "collectionGroup": "my_list",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "profile_ref",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "added_at",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "movies",
       "queryScope": "COLLECTION",
       "fields": [
@@ -95,20 +109,6 @@
         {
           "fieldPath": "tmdb_id",
           "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "my_list",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "profile_ref",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "added_at",
-          "order": "DESCENDING"
         }
       ]
     }

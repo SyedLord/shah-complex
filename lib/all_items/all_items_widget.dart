@@ -8,6 +8,7 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'all_items_model.dart';
 export 'all_items_model.dart';
 
@@ -59,6 +60,8 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -69,116 +72,292 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(
-                        FlutterFlowTheme.of(context).designToken.spacing.md),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            FlutterFlowIconButton(
-                              buttonSize: 40.0,
-                              icon: Icon(
-                                Icons.arrow_back_rounded,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                size: 24.0,
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(
+                          FlutterFlowTheme.of(context).designToken.spacing.md),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              FlutterFlowIconButton(
+                                buttonSize: 40.0,
+                                icon: Icon(
+                                  Icons.arrow_back_rounded,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  size: 24.0,
+                                ),
+                                onPressed: () async {
+                                  context.goNamed(
+                                    HomeDashboardWidget.routeName,
+                                    extra: <String, dynamic>{
+                                      '__transition_info__': TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                      ),
+                                    },
+                                  );
+                                },
                               ),
-                              onPressed: () async {
-                                context.goNamed(
-                                  HomeDashboardWidget.routeName,
-                                  extra: <String, dynamic>{
-                                    '__transition_info__': TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType: PageTransitionType.fade,
-                                    ),
-                                  },
-                                );
-                              },
-                            ),
-                            Text(
-                              valueOrDefault<String>(
-                                widget.categoryName,
-                                'Category Name',
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .titleLarge
-                                  .override(
-                                    font: GoogleFonts.inter(
+                              Text(
+                                valueOrDefault<String>(
+                                  widget.categoryName,
+                                  'Category Name',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .fontStyle,
+                                      ),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 22.0,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.bold,
                                       fontStyle: FlutterFlowTheme.of(context)
                                           .titleLarge
                                           .fontStyle,
+                                      lineHeight: 1.2,
                                     ),
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    fontSize: 22.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleLarge
-                                        .fontStyle,
-                                    lineHeight: 1.2,
-                                  ),
-                            ),
-                          ].divide(SizedBox(
-                              width: FlutterFlowTheme.of(context)
-                                  .designToken
-                                  .spacing
-                                  .md)),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            FlutterFlowIconButton(
-                              buttonSize: 40.0,
-                              icon: Icon(
-                                Icons.search_rounded,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                size: 24.0,
                               ),
-                              onPressed: () async {
-                                context.pushNamed(
-                                  SearchWidget.routeName,
-                                  extra: <String, dynamic>{
-                                    '__transition_info__': TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType: PageTransitionType.fade,
-                                    ),
-                                  },
-                                );
-                              },
-                            ),
-                          ].divide(SizedBox(
-                              width: FlutterFlowTheme.of(context)
-                                  .designToken
-                                  .spacing
-                                  .sm)),
-                        ),
-                      ].divide(SizedBox(
-                          width: FlutterFlowTheme.of(context)
-                              .designToken
-                              .spacing
-                              .md)),
+                            ].divide(SizedBox(
+                                width: FlutterFlowTheme.of(context)
+                                    .designToken
+                                    .spacing
+                                    .md)),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              FlutterFlowIconButton(
+                                buttonSize: 40.0,
+                                icon: Icon(
+                                  Icons.search_rounded,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  size: 24.0,
+                                ),
+                                onPressed: () async {
+                                  context.pushNamed(
+                                    SearchWidget.routeName,
+                                    extra: <String, dynamic>{
+                                      '__transition_info__': TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                      ),
+                                    },
+                                  );
+                                },
+                              ),
+                            ].divide(SizedBox(
+                                width: FlutterFlowTheme.of(context)
+                                    .designToken
+                                    .spacing
+                                    .sm)),
+                          ),
+                        ].divide(SizedBox(
+                            width: FlutterFlowTheme.of(context)
+                                .designToken
+                                .spacing
+                                .md)),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
+            if (widget.categoryType == 'my list')
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                  child: StreamBuilder<List<MyListRecord>>(
+                    stream: queryMyListRecord(
+                      queryBuilder: (myListRecord) => myListRecord
+                          .where(
+                            'profile_ref',
+                            isEqualTo: FFAppState().activeProfileRef,
+                          )
+                          .orderBy('added_at', descending: true),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                      List<MyListRecord> myListMyListRecordList =
+                          snapshot.data!;
+
+                      return GridView.builder(
+                        padding: EdgeInsets.zero,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          childAspectRatio: 0.6,
+                        ),
+                        primary: false,
+                        scrollDirection: Axis.vertical,
+                        itemCount: myListMyListRecordList.length,
+                        itemBuilder: (context, myListIndex) {
+                          final myListMyListRecord =
+                              myListMyListRecordList[myListIndex];
+                          return Stack(
+                            children: [
+                              if (myListMyListRecord.movieRef != null)
+                                StreamBuilder<MoviesRecord>(
+                                  stream: MoviesRecord.getDocument(
+                                      myListMyListRecord.movieRef!),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+
+                                    final movieCardMoviesRecord =
+                                        snapshot.data!;
+
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                          MoviePageWidget.routeName,
+                                          queryParameters: {
+                                            'movieDoc': serializeParam(
+                                              movieCardMoviesRecord,
+                                              ParamType.Document,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            'movieDoc': movieCardMoviesRecord,
+                                            '__transition_info__':
+                                                TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                            ),
+                                          },
+                                        );
+                                      },
+                                      child: MovieCardWidget(
+                                        key: Key(
+                                            'Keykqy_${myListIndex}_of_${myListMyListRecordList.length}'),
+                                        img: movieCardMoviesRecord.posterImage,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              if (myListMyListRecord.seasonRef != null)
+                                StreamBuilder<SeriesRecord>(
+                                  stream: SeriesRecord.getDocument(
+                                      myListMyListRecord.seasonRef!),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+
+                                    final movieCardSeriesRecord =
+                                        snapshot.data!;
+
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                          SeasonPageWidget.routeName,
+                                          queryParameters: {
+                                            'seriesDoc': serializeParam(
+                                              movieCardSeriesRecord,
+                                              ParamType.Document,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            'seriesDoc': movieCardSeriesRecord,
+                                            '__transition_info__':
+                                                TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                            ),
+                                          },
+                                        );
+                                      },
+                                      child: MovieCardWidget(
+                                        key: Key(
+                                            'Keywym_${myListIndex}_of_${myListMyListRecordList.length}'),
+                                        img: movieCardSeriesRecord.posterImage,
+                                      ),
+                                    );
+                                  },
+                                ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
             if (widget.categoryType == 'movie')
               Expanded(
                 child: Padding(
@@ -249,7 +428,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                             },
                             child: MovieCardWidget(
                               key: Key(
-                                  'Key0kt_${moviesIndex}_of_${moviesMoviesRecordList.length}'),
+                                  'Keyh41_${moviesIndex}_of_${moviesMoviesRecordList.length}'),
                               img: moviesMoviesRecord.posterImage,
                               movieDoc: moviesMoviesRecord,
                             ),

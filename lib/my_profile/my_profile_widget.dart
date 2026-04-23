@@ -401,12 +401,59 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                           lineHeight: 1.3,
                                         ),
                                   ),
-                                  Text(
-                                    'See All',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .override(
-                                          font: GoogleFonts.inter(
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        AllItemsWidget.routeName,
+                                        queryParameters: {
+                                          'categoryName': serializeParam(
+                                            'My List',
+                                            ParamType.String,
+                                          ),
+                                          'categoryType': serializeParam(
+                                            'my list',
+                                            ParamType.String,
+                                          ),
+                                          'isTrending': serializeParam(
+                                            false,
+                                            ParamType.bool,
+                                          ),
+                                          'isContinueWatching': serializeParam(
+                                            false,
+                                            ParamType.bool,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          '__transition_info__': TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                          ),
+                                        },
+                                      );
+                                    },
+                                    child: Text(
+                                      'See All',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent3,
+                                            letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
@@ -415,20 +462,9 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
                                                     .fontStyle,
+                                            lineHeight: 1.3,
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .onPrimary,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .fontStyle,
-                                          lineHeight: 1.3,
-                                        ),
+                                    ),
                                   ),
                                 ],
                               ),
