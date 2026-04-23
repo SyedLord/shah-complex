@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/bottom_nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'search_widget.dart' show SearchWidget;
@@ -55,13 +56,19 @@ class SearchModel extends FlutterFlowModel<SearchWidget> {
   List<MoviesRecord>? outMovies;
   // Stores action output result for [Custom Action - vipSmartSearchSeries] action in TextField widget.
   List<SeriesRecord>? outSeries;
+  // Model for BottomNavBar component.
+  late BottomNavBarModel bottomNavBarModel;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    bottomNavBarModel = createModel(context, () => BottomNavBarModel());
+  }
 
   @override
   void dispose() {
     textFieldFocusNode?.dispose();
     textController?.dispose();
+
+    bottomNavBarModel.dispose();
   }
 }

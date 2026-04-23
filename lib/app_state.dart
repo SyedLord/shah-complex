@@ -40,6 +40,10 @@ class FFAppState extends ChangeNotifier {
       _activeProfileRef =
           prefs.getString('ff_activeProfileRef')?.ref ?? _activeProfileRef;
     });
+    _safeInit(() {
+      _activeProfileImage =
+          prefs.getString('ff_activeProfileImage') ?? _activeProfileImage;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -144,6 +148,13 @@ class FFAppState extends ChangeNotifier {
   DocumentReference? get emptyDocRefMovies => _emptyDocRefMovies;
   set emptyDocRefMovies(DocumentReference? value) {
     _emptyDocRefMovies = value;
+  }
+
+  String _activeProfileImage = '';
+  String get activeProfileImage => _activeProfileImage;
+  set activeProfileImage(String value) {
+    _activeProfileImage = value;
+    prefs.setString('ff_activeProfileImage', value);
   }
 }
 

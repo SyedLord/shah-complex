@@ -179,6 +179,8 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                             } else {
                                               FFAppState().activeProfileRef =
                                                   profileListItem.reference;
+                                              FFAppState().activeProfileImage =
+                                                  profileListItem.profileImage;
                                               safeSetState(() {});
 
                                               context.goNamed(
