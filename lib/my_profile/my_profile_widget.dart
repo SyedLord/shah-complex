@@ -4,6 +4,7 @@ import '/components/download_item_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -483,9 +484,69 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                         final listViewMyListRecord =
                                             listViewMyListRecordList[
                                                 listViewIndex];
-                                        return MovieCardWidget(
-                                          key: Key(
-                                              'Keyf5w_${listViewIndex}_of_${listViewMyListRecordList.length}'),
+                                        return StreamBuilder<MoviesRecord>(
+                                          stream: MoviesRecord.getDocument(
+                                              listViewMyListRecord.movieRef!),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            }
+
+                                            final movieCardMoviesRecord =
+                                                snapshot.data!;
+
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  MoviePageWidget.routeName,
+                                                  queryParameters: {
+                                                    'movieDoc': serializeParam(
+                                                      movieCardMoviesRecord,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'movieDoc':
+                                                        movieCardMoviesRecord,
+                                                    '__transition_info__':
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                    ),
+                                                  },
+                                                );
+                                              },
+                                              child: MovieCardWidget(
+                                                key: Key(
+                                                    'Keyf5w_${listViewIndex}_of_${listViewMyListRecordList.length}'),
+                                                img: movieCardMoviesRecord
+                                                    .posterImage,
+                                              ),
+                                            );
+                                          },
                                         );
                                       },
                                     );
