@@ -41,6 +41,10 @@ class SearchModel extends FlutterFlowModel<SearchWidget> {
   List<MoviesRecord>? loadedMovies;
   // Stores action output result for [Firestore Query - Query a collection] action in Search widget.
   List<SeriesRecord>? loadedSeries;
+  // Stores action output result for [Custom Action - vipSmartSearch] action in Search widget.
+  List<MoviesRecord>? outMovies1;
+  // Stores action output result for [Custom Action - vipSmartSearchSeries] action in Search widget.
+  List<SeriesRecord>? outSeries1;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;

@@ -38,6 +38,19 @@ class _SearchWidgetState extends State<SearchWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.loadedMovies = await queryMoviesRecordOnce();
       _model.loadedSeries = await querySeriesRecordOnce();
+      _model.outMovies1 = await actions.vipSmartSearch(
+        _model.textController.text,
+        _model.loadedMovies?.toList(),
+      );
+      _model.outSeries1 = await actions.vipSmartSearchSeries(
+        _model.textController.text,
+        _model.loadedSeries?.toList(),
+      );
+      _model.searchResultMovies =
+          _model.outMovies1!.toList().cast<MoviesRecord>();
+      _model.searchResultSeries =
+          _model.outSeries1!.toList().cast<SeriesRecord>();
+      safeSetState(() {});
     });
 
     _model.textController ??= TextEditingController();
@@ -533,7 +546,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                               CrossAxisAlignment.center,
                                           children: [
                                             Text(
-                                              'Movies Results',
+                                              'Movies',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .titleLarge
@@ -709,7 +722,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                               CrossAxisAlignment.center,
                                           children: [
                                             Text(
-                                              'Seasons Results',
+                                              'Seasons',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .titleLarge
