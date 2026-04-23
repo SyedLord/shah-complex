@@ -729,6 +729,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                     ),
                     Container(
                       height: 100.0,
+                      decoration: BoxDecoration(),
                     ),
                   ],
                 ),

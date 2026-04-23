@@ -97,6 +97,20 @@
           "order": "ASCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "my_list",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "profile_ref",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "added_at",
+          "order": "DESCENDING"
+        }
+      ]
     }
   ]
 }

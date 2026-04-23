@@ -1,7 +1,7 @@
 import '/backend/backend.dart';
 import '/components/bottom_nav_bar_widget.dart';
 import '/components/download_item_widget.dart';
-import '/components/watchlist_card_widget.dart';
+import '/components/movie_card_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -91,7 +91,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                         ),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 32.0, 24.0, 32.0),
+                              24.0, 42.0, 24.0, 32.0),
                           child: Container(
                             decoration: BoxDecoration(),
                             child: Column(
@@ -432,65 +432,65 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                 ],
                               ),
                             ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 0.0, 24.0),
-                                    child: Container(
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          wrapWithModel(
-                                            model: _model.watchlistCardModel1,
-                                            updateCallback: () =>
-                                                safeSetState(() {}),
-                                            child: WatchlistCardWidget(
-                                              img:
-                                                  'https://dimg.dreamflow.cloud/v1/image/Jujutsu%20Kaisen%20anime%20poster',
-                                            ),
-                                          ),
-                                          wrapWithModel(
-                                            model: _model.watchlistCardModel2,
-                                            updateCallback: () =>
-                                                safeSetState(() {}),
-                                            child: WatchlistCardWidget(
-                                              img:
-                                                  'https://dimg.dreamflow.cloud/v1/image/The%20Batman%202022%20movie%20poster',
-                                            ),
-                                          ),
-                                          wrapWithModel(
-                                            model: _model.watchlistCardModel3,
-                                            updateCallback: () =>
-                                                safeSetState(() {}),
-                                            child: WatchlistCardWidget(
-                                              img:
-                                                  'https://dimg.dreamflow.cloud/v1/image/Cyberpunk%20Edgerunners%20poster',
-                                            ),
-                                          ),
-                                          wrapWithModel(
-                                            model: _model.watchlistCardModel4,
-                                            updateCallback: () =>
-                                                safeSetState(() {}),
-                                            child: WatchlistCardWidget(
-                                              img:
-                                                  'https://dimg.dreamflow.cloud/v1/image/Inception%20movie%20poster',
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                            Container(
+                              width: double.infinity,
+                              height: 200.0,
+                              decoration: BoxDecoration(),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 0.0, 24.0, 0.0),
+                                child: StreamBuilder<List<MyListRecord>>(
+                                  stream: queryMyListRecord(
+                                    queryBuilder: (myListRecord) => myListRecord
+                                        .where(
+                                          'profile_ref',
+                                          isEqualTo:
+                                              FFAppState().activeProfileRef,
+                                        )
+                                        .orderBy('added_at', descending: true),
+                                    limit: 10,
                                   ),
-                                ],
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<MyListRecord>
+                                        listViewMyListRecordList =
+                                        snapshot.data!;
+
+                                    return ListView.separated(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount:
+                                          listViewMyListRecordList.length,
+                                      separatorBuilder: (_, __) =>
+                                          SizedBox(width: 10.0),
+                                      itemBuilder: (context, listViewIndex) {
+                                        final listViewMyListRecord =
+                                            listViewMyListRecordList[
+                                                listViewIndex];
+                                        return MovieCardWidget(
+                                          key: Key(
+                                              'Keyf5w_${listViewIndex}_of_${listViewMyListRecordList.length}'),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ],
@@ -580,42 +580,46 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                 ],
                               ),
                             ),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                wrapWithModel(
-                                  model: _model.downloadItemModel1,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: DownloadItemWidget(
-                                    img_desc:
-                                        'https://dimg.dreamflow.cloud/v1/image/Stranger%20Things%20upside%20down%20forest',
-                                    meta: 'S4:E1 • 1.2 GB',
-                                    title: 'Stranger Things',
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 120.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  wrapWithModel(
+                                    model: _model.downloadItemModel1,
+                                    updateCallback: () => safeSetState(() {}),
+                                    child: DownloadItemWidget(
+                                      img_desc:
+                                          'https://dimg.dreamflow.cloud/v1/image/Stranger%20Things%20upside%20down%20forest',
+                                      meta: 'S4:E1 • 1.2 GB',
+                                      title: 'Stranger Things',
+                                    ),
                                   ),
-                                ),
-                                wrapWithModel(
-                                  model: _model.downloadItemModel2,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: DownloadItemWidget(
-                                    img_desc:
-                                        'https://dimg.dreamflow.cloud/v1/image/Tokyo%20deserted%20street',
-                                    meta: 'S2:E5 • 850 MB',
-                                    title: 'Alice in Borderland',
+                                  wrapWithModel(
+                                    model: _model.downloadItemModel2,
+                                    updateCallback: () => safeSetState(() {}),
+                                    child: DownloadItemWidget(
+                                      img_desc:
+                                          'https://dimg.dreamflow.cloud/v1/image/Tokyo%20deserted%20street',
+                                      meta: 'S2:E5 • 850 MB',
+                                      title: 'Alice in Borderland',
+                                    ),
                                   ),
-                                ),
-                                wrapWithModel(
-                                  model: _model.downloadItemModel3,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: DownloadItemWidget(
-                                    img_desc:
-                                        'https://dimg.dreamflow.cloud/v1/image/Anime%20white%20hair%20character',
-                                    meta: 'Movie • 2.1 GB',
-                                    title: 'Jujutsu Kaisen 0',
+                                  wrapWithModel(
+                                    model: _model.downloadItemModel3,
+                                    updateCallback: () => safeSetState(() {}),
+                                    child: DownloadItemWidget(
+                                      img_desc:
+                                          'https://dimg.dreamflow.cloud/v1/image/Anime%20white%20hair%20character',
+                                      meta: 'Movie • 2.1 GB',
+                                      title: 'Jujutsu Kaisen 0',
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),

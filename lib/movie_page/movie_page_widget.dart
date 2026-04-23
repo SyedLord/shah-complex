@@ -13,6 +13,7 @@ import '/index.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'movie_page_model.dart';
@@ -567,48 +568,118 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               children: [
                                 Align(
                                   alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.add_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        size: 24.0,
-                                      ),
-                                      Text(
-                                        'My List',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .override(
-                                              font: GoogleFonts.inter(
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelSmall
-                                                        .fontStyle,
+                                  child: StreamBuilder<List<MyListRecord>>(
+                                    stream: queryMyListRecord(
+                                      queryBuilder: (myListRecord) =>
+                                          myListRecord
+                                              .where(
+                                                'profile_ref',
+                                                isEqualTo: FFAppState()
+                                                    .activeProfileRef,
+                                              )
+                                              .where(
+                                                'movie_ref',
+                                                isEqualTo:
+                                                    widget.movieDoc?.reference,
                                               ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 10.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelSmall
-                                                      .fontStyle,
-                                              lineHeight: 1.2,
+                                      singleRecord: true,
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                              ),
                                             ),
-                                      ),
-                                    ].divide(SizedBox(
-                                        height: FlutterFlowTheme.of(context)
-                                            .designToken
-                                            .spacing
-                                            .xs)),
+                                          ),
+                                        );
+                                      }
+                                      List<MyListRecord>
+                                          myListContainerMyListRecordList =
+                                          snapshot.data!;
+                                      final myListContainerMyListRecord =
+                                          myListContainerMyListRecordList
+                                                  .isNotEmpty
+                                              ? myListContainerMyListRecordList
+                                                  .first
+                                              : null;
+
+                                      return Container(
+                                        decoration: BoxDecoration(),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                FlutterFlowIconButton(
+                                                  borderRadius: 8.0,
+                                                  buttonSize: 40.0,
+                                                  icon: FaIcon(
+                                                    FontAwesomeIcons.check,
+                                                    color:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                    size: 24.0,
+                                                  ),
+                                                  onPressed: () async {
+                                                    await myListContainerMyListRecord!
+                                                        .reference
+                                                        .delete();
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              'My List',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelSmall
+                                                  .override(
+                                                    font: GoogleFonts.inter(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelSmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    fontSize: 10.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelSmall
+                                                            .fontStyle,
+                                                    lineHeight: 1.2,
+                                                  ),
+                                            ),
+                                          ].divide(SizedBox(
+                                              height:
+                                                  FlutterFlowTheme.of(context)
+                                                      .designToken
+                                                      .spacing
+                                                      .xs)),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                                 Align(
