@@ -894,7 +894,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 0.0, 10.0, 0.0),
+                                          16.0, 0.0, 16.0, 0.0),
                                       child: Builder(
                                         builder: (context) {
                                           final searchedMoviesAll = _model
@@ -964,7 +964,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 0.0, 10.0, 0.0),
+                                          16.0, 0.0, 16.0, 0.0),
                                       child: Builder(
                                         builder: (context) {
                                           final searchedSeriesAll = _model
@@ -989,15 +989,38 @@ class _SearchWidgetState extends State<SearchWidget> {
                                               final searchedSeriesAllItem =
                                                   searchedSeriesAll[
                                                       searchedSeriesAllIndex];
-                                              return SeasonCardWidget(
-                                                key: Key(
-                                                    'Keyjly_${searchedSeriesAllIndex}_of_${searchedSeriesAll.length}'),
-                                                posterImage:
-                                                    searchedSeriesAllItem
-                                                        .backdropImage,
-                                                titleImage:
-                                                    searchedSeriesAllItem
-                                                        .logoImage,
+                                              return InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  context.pushNamed(
+                                                    SeasonPageWidget.routeName,
+                                                    queryParameters: {
+                                                      'seriesDoc':
+                                                          serializeParam(
+                                                        searchedSeriesAllItem,
+                                                        ParamType.Document,
+                                                      ),
+                                                    }.withoutNulls,
+                                                    extra: <String, dynamic>{
+                                                      'seriesDoc':
+                                                          searchedSeriesAllItem,
+                                                    },
+                                                  );
+                                                },
+                                                child: SeasonCardWidget(
+                                                  key: Key(
+                                                      'Keyjly_${searchedSeriesAllIndex}_of_${searchedSeriesAll.length}'),
+                                                  posterImage:
+                                                      searchedSeriesAllItem
+                                                          .backdropImage,
+                                                  titleImage:
+                                                      searchedSeriesAllItem
+                                                          .logoImage,
+                                                ),
                                               );
                                             },
                                           );
