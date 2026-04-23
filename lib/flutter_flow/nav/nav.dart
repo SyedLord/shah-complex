@@ -150,35 +150,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: SearchScreenWidget.routeName,
-          path: SearchScreenWidget.routePath,
-          requireAuth: true,
-          builder: (context, params) => SearchScreenWidget(),
-        ),
-        FFRoute(
-          name: SearchResultsWidget.routeName,
-          path: SearchResultsWidget.routePath,
-          requireAuth: true,
-          asyncParams: {
-            'passedMovieList':
-                getDocList(['movies'], MoviesRecord.fromSnapshot),
-            'passedSeriesList':
-                getDocList(['series'], SeriesRecord.fromSnapshot),
-          },
-          builder: (context, params) => SearchResultsWidget(
-            passedMovieList: params.getParam<MoviesRecord>(
-              'passedMovieList',
-              ParamType.Document,
-              isList: true,
-            ),
-            passedSeriesList: params.getParam<SeriesRecord>(
-              'passedSeriesList',
-              ParamType.Document,
-              isList: true,
-            ),
-          ),
-        ),
-        FFRoute(
           name: LoginWidget.routeName,
           path: LoginWidget.routePath,
           builder: (context, params) => LoginWidget(),
@@ -239,6 +210,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
+        ),
+        FFRoute(
+          name: MyProfileWidget.routeName,
+          path: MyProfileWidget.routePath,
+          builder: (context, params) => MyProfileWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

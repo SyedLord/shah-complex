@@ -610,6 +610,13 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                   extra: <String, dynamic>{
                                                     'movieDoc':
                                                         searchedMoviesItem,
+                                                    '__transition_info__':
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                    ),
                                                   },
                                                 );
                                               },
@@ -836,6 +843,12 @@ class _SearchWidgetState extends State<SearchWidget> {
                                           }.withoutNulls,
                                           extra: <String, dynamic>{
                                             'movieDoc': searchedMoviesAllItem,
+                                            '__transition_info__':
+                                                TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                            ),
                                           },
                                         );
                                       },
@@ -899,6 +912,12 @@ class _SearchWidgetState extends State<SearchWidget> {
                                           }.withoutNulls,
                                           extra: <String, dynamic>{
                                             'seriesDoc': searchedSeriesAllItem,
+                                            '__transition_info__':
+                                                TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                            ),
                                           },
                                         );
                                       },

@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/components/movie_card_widget.dart';
+import '/components/season_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -96,7 +97,15 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                                 size: 24.0,
                               ),
                               onPressed: () async {
-                                context.goNamed(HomeDashboardWidget.routeName);
+                                context.goNamed(
+                                  HomeDashboardWidget.routeName,
+                                  extra: <String, dynamic>{
+                                    '__transition_info__': TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType: PageTransitionType.fade,
+                                    ),
+                                  },
+                                );
                               },
                             ),
                             Text(
@@ -143,18 +152,15 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                                 size: 24.0,
                               ),
                               onPressed: () async {
-                                context.pushNamed(SearchScreenWidget.routeName);
-                              },
-                            ),
-                            FlutterFlowIconButton(
-                              buttonSize: 40.0,
-                              icon: Icon(
-                                Icons.filter_list_rounded,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                size: 24.0,
-                              ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
+                                context.pushNamed(
+                                  SearchWidget.routeName,
+                                  extra: <String, dynamic>{
+                                    '__transition_info__': TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType: PageTransitionType.fade,
+                                    ),
+                                  },
+                                );
                               },
                             ),
                           ].divide(SizedBox(
@@ -234,6 +240,10 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                                 }.withoutNulls,
                                 extra: <String, dynamic>{
                                   'movieDoc': moviesMoviesRecord,
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
                                 },
                               );
                             },
@@ -311,6 +321,10 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                                 }.withoutNulls,
                                 extra: <String, dynamic>{
                                   'movieDoc': trendingMoviesMoviesRecord,
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
                                 },
                               );
                             },
@@ -360,10 +374,10 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                       return GridView.builder(
                         padding: EdgeInsets.zero,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
+                          crossAxisCount: 2,
                           crossAxisSpacing: 10.0,
                           mainAxisSpacing: 10.0,
-                          childAspectRatio: 0.6,
+                          childAspectRatio: 1.5,
                         ),
                         primary: false,
                         scrollDirection: Axis.vertical,
@@ -388,14 +402,19 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                                 }.withoutNulls,
                                 extra: <String, dynamic>{
                                   'seriesDoc': trendingSeriesSeriesRecord,
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
                                 },
                               );
                             },
-                            child: MovieCardWidget(
+                            child: SeasonCardWidget(
                               key: Key(
-                                  'Keywo1_${trendingSeriesIndex}_of_${trendingSeriesSeriesRecordList.length}'),
-                              img: trendingSeriesSeriesRecord.posterImage,
-                              seriesDoc: trendingSeriesSeriesRecord,
+                                  'Keyrv4_${trendingSeriesIndex}_of_${trendingSeriesSeriesRecordList.length}'),
+                              posterImage:
+                                  trendingSeriesSeriesRecord.backdropImage,
+                              titleImage: trendingSeriesSeriesRecord.logoImage,
                             ),
                           );
                         },
@@ -438,10 +457,10 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                       return GridView.builder(
                         padding: EdgeInsets.zero,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
+                          crossAxisCount: 2,
                           crossAxisSpacing: 10.0,
                           mainAxisSpacing: 10.0,
-                          childAspectRatio: 0.6,
+                          childAspectRatio: 1.5,
                         ),
                         primary: false,
                         scrollDirection: Axis.vertical,
@@ -465,14 +484,18 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                                 }.withoutNulls,
                                 extra: <String, dynamic>{
                                   'seriesDoc': seriesSeriesRecord,
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
                                 },
                               );
                             },
-                            child: MovieCardWidget(
+                            child: SeasonCardWidget(
                               key: Key(
-                                  'Key8no_${seriesIndex}_of_${seriesSeriesRecordList.length}'),
-                              img: seriesSeriesRecord.posterImage,
-                              seriesDoc: seriesSeriesRecord,
+                                  'Keywz1_${seriesIndex}_of_${seriesSeriesRecordList.length}'),
+                              posterImage: seriesSeriesRecord.backdropImage,
+                              titleImage: seriesSeriesRecord.logoImage,
                             ),
                           );
                         },
@@ -481,148 +504,6 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                   ),
                 ),
               ),
-            Container(
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-              ),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(
-                    FlutterFlowTheme.of(context).designToken.spacing.lg,
-                    FlutterFlowTheme.of(context).designToken.spacing.md,
-                    FlutterFlowTheme.of(context).designToken.spacing.lg,
-                    FlutterFlowTheme.of(context).designToken.spacing.md),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.sort_rounded,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 20.0,
-                          ),
-                          Text(
-                            'Sort',
-                            style: FlutterFlowTheme.of(context)
-                                .labelSmall
-                                .override(
-                                  font: GoogleFonts.inter(
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelSmall
-                                        .fontStyle,
-                                  ),
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  fontSize: 10.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .labelSmall
-                                      .fontStyle,
-                                  lineHeight: 1.2,
-                                ),
-                          ),
-                        ].divide(SizedBox(
-                            height: FlutterFlowTheme.of(context)
-                                .designToken
-                                .spacing
-                                .xs)),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.grid_view_rounded,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 20.0,
-                          ),
-                          Text(
-                            'Layout',
-                            style: FlutterFlowTheme.of(context)
-                                .labelSmall
-                                .override(
-                                  font: GoogleFonts.inter(
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelSmall
-                                        .fontStyle,
-                                  ),
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  fontSize: 10.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .labelSmall
-                                      .fontStyle,
-                                  lineHeight: 1.2,
-                                ),
-                          ),
-                        ].divide(SizedBox(
-                            height: FlutterFlowTheme.of(context)
-                                .designToken
-                                .spacing
-                                .xs)),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.settings_input_component_rounded,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 20.0,
-                          ),
-                          Text(
-                            'Filter',
-                            style: FlutterFlowTheme.of(context)
-                                .labelSmall
-                                .override(
-                                  font: GoogleFonts.inter(
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelSmall
-                                        .fontStyle,
-                                  ),
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  fontSize: 10.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .labelSmall
-                                      .fontStyle,
-                                  lineHeight: 1.2,
-                                ),
-                          ),
-                        ].divide(SizedBox(
-                            height: FlutterFlowTheme.of(context)
-                                .designToken
-                                .spacing
-                                .xs)),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
           ],
         ),
       ),

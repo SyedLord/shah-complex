@@ -83,22 +83,12 @@ class _SectionHeaderSearchWidgetState extends State<SectionHeaderSearchWidget> {
               highlightColor: Colors.transparent,
               onTap: () async {
                 context.goNamed(
-                  SearchResultsWidget.routeName,
-                  queryParameters: {
-                    'passedMovieList': serializeParam(
-                      widget.moviesData,
-                      ParamType.Document,
-                      isList: true,
-                    ),
-                    'passedSeriesList': serializeParam(
-                      widget.seriesData,
-                      ParamType.Document,
-                      isList: true,
-                    ),
-                  }.withoutNulls,
+                  SearchWidget.routeName,
                   extra: <String, dynamic>{
-                    'passedMovieList': widget.moviesData,
-                    'passedSeriesList': widget.seriesData,
+                    '__transition_info__': TransitionInfo(
+                      hasTransition: true,
+                      transitionType: PageTransitionType.fade,
+                    ),
                   },
                 );
               },

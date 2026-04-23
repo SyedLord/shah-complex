@@ -1162,7 +1162,15 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               size: 20.0,
                             ),
                             onPressed: () async {
-                              context.pushNamed(SearchScreenWidget.routeName);
+                              context.pushNamed(
+                                SearchWidget.routeName,
+                                extra: <String, dynamic>{
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
+                                },
+                              );
                             },
                           ),
                         ),

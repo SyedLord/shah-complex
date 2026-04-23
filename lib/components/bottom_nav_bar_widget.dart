@@ -106,7 +106,15 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.goNamed(HomeDashboardWidget.routeName);
+                              context.goNamed(
+                                HomeDashboardWidget.routeName,
+                                extra: <String, dynamic>{
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
+                                },
+                              );
                             },
                             child: Text(
                               'Home',
@@ -176,7 +184,15 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.pushNamed(SearchWidget.routeName);
+                              context.pushNamed(
+                                SearchWidget.routeName,
+                                extra: <String, dynamic>{
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
+                                },
+                              );
                             },
                             child: Text(
                               'Search',

@@ -5,8 +5,6 @@ export '/home_dashboard/home_dashboard_widget.dart' show HomeDashboardWidget;
 export '/all_items/all_items_widget.dart' show AllItemsWidget;
 export '/movie_page/movie_page_widget.dart' show MoviePageWidget;
 export '/season_page/season_page_widget.dart' show SeasonPageWidget;
-export '/search_screen/search_screen_widget.dart' show SearchScreenWidget;
-export '/search_results/search_results_widget.dart' show SearchResultsWidget;
 export '/login/login_widget.dart' show LoginWidget;
 export '/create_profile/create_profile_widget.dart' show CreateProfileWidget;
 export '/profile_selection_copy/profile_selection_copy_widget.dart'
@@ -15,3 +13,4 @@ export '/choose_profile_icon/choose_profile_icon_widget.dart'
     show ChooseProfileIconWidget;
 export '/search/search_widget.dart' show SearchWidget;
 export '/fix_metadata/fix_metadata_widget.dart' show FixMetadataWidget;
+export '/my_profile/my_profile_widget.dart' show MyProfileWidget;
