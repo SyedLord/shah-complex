@@ -12,6 +12,8 @@ class MoviePageModel extends FlutterFlowModel<MoviePageWidget> {
 
   bool toggleBtn = false;
 
+  bool isHidden = true;
+
   ///  State fields for stateful widgets in this page.
 
   // Model for IMDBRatings component.

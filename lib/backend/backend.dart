@@ -16,6 +16,7 @@ import 'schema/profile_icons_record.dart';
 import 'schema/continue_watching_record.dart';
 import 'schema/items_record.dart';
 import 'schema/my_list_record.dart';
+import 'schema/app_config_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -35,6 +36,7 @@ export 'schema/profile_icons_record.dart';
 export 'schema/continue_watching_record.dart';
 export 'schema/items_record.dart';
 export 'schema/my_list_record.dart';
+export 'schema/app_config_record.dart';
 
 /// Functions to query MoviesRecords (as a Stream and as a Future).
 Future<int> queryMoviesRecordCount({
@@ -447,6 +449,43 @@ Future<List<MyListRecord>> queryMyListRecordOnce({
     queryCollectionOnce(
       MyListRecord.collection,
       MyListRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query AppConfigRecords (as a Stream and as a Future).
+Future<int> queryAppConfigRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      AppConfigRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<AppConfigRecord>> queryAppConfigRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      AppConfigRecord.collection,
+      AppConfigRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<AppConfigRecord>> queryAppConfigRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      AppConfigRecord.collection,
+      AppConfigRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

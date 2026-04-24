@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'flutter_flow/request_manager.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
+import 'dart:convert';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -43,6 +47,12 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _activeProfileImage =
           prefs.getString('ff_activeProfileImage') ?? _activeProfileImage;
+    });
+    _safeInit(() {
+      _localCacheTime = prefs.containsKey('ff_localCacheTime')
+          ? DateTime.fromMillisecondsSinceEpoch(
+              prefs.getInt('ff_localCacheTime')!)
+          : _localCacheTime;
     });
   }
 
@@ -162,6 +172,94 @@ class FFAppState extends ChangeNotifier {
   set downloadProgress(dynamic value) {
     _downloadProgress = value;
   }
+
+  DateTime? _localCacheTime =
+      DateTime.fromMillisecondsSinceEpoch(l1587729060000);
+  DateTime? get localCacheTime => _localCacheTime;
+  set localCacheTime(DateTime? value) {
+    _localCacheTime = value;
+    value != null
+        ? prefs.setInt('ff_localCacheTime', value.millisecondsSinceEpoch)
+        : prefs.remove('ff_localCacheTime');
+  }
+
+  final _profileWatchlistCountManager = FutureRequestManager<int>();
+  Future<int> profileWatchlistCount({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<int> Function() requestFn,
+  }) =>
+      _profileWatchlistCountManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearProfileWatchlistCountCache() =>
+      _profileWatchlistCountManager.clear();
+  void clearProfileWatchlistCountCacheKey(String? uniqueKey) =>
+      _profileWatchlistCountManager.clearRequest(uniqueKey);
+
+  final _trendingMoviesCacheManager =
+      StreamRequestManager<List<MoviesRecord>>();
+  Stream<List<MoviesRecord>> trendingMoviesCache({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Stream<List<MoviesRecord>> Function() requestFn,
+  }) =>
+      _trendingMoviesCacheManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearTrendingMoviesCacheCache() => _trendingMoviesCacheManager.clear();
+  void clearTrendingMoviesCacheCacheKey(String? uniqueKey) =>
+      _trendingMoviesCacheManager.clearRequest(uniqueKey);
+
+  final _trendingSeriesCacheManager =
+      StreamRequestManager<List<SeriesRecord>>();
+  Stream<List<SeriesRecord>> trendingSeriesCache({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Stream<List<SeriesRecord>> Function() requestFn,
+  }) =>
+      _trendingSeriesCacheManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearTrendingSeriesCacheCache() => _trendingSeriesCacheManager.clear();
+  void clearTrendingSeriesCacheCacheKey(String? uniqueKey) =>
+      _trendingSeriesCacheManager.clearRequest(uniqueKey);
+
+  final _moviesCacheManager = StreamRequestManager<List<CategoriesRecord>>();
+  Stream<List<CategoriesRecord>> moviesCache({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Stream<List<CategoriesRecord>> Function() requestFn,
+  }) =>
+      _moviesCacheManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearMoviesCacheCache() => _moviesCacheManager.clear();
+  void clearMoviesCacheCacheKey(String? uniqueKey) =>
+      _moviesCacheManager.clearRequest(uniqueKey);
+
+  final _seasonsCacheManager = StreamRequestManager<List<CategoriesRecord>>();
+  Stream<List<CategoriesRecord>> seasonsCache({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Stream<List<CategoriesRecord>> Function() requestFn,
+  }) =>
+      _seasonsCacheManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearSeasonsCacheCache() => _seasonsCacheManager.clear();
+  void clearSeasonsCacheCacheKey(String? uniqueKey) =>
+      _seasonsCacheManager.clearRequest(uniqueKey);
 }
 
 void _safeInit(Function() initializeField) {

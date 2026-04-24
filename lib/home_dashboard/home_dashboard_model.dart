@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/bottom_nav_bar_widget.dart';
 import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -26,6 +25,8 @@ class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Firestore Query - Query a collection] action in HomeDashboard widget.
+  AppConfigRecord? serverUpdateDoc;
   // Stores action output result for [Custom Action - getTrendingCarousel] action in HomeDashboard widget.
   List<HeroItemStruct>? trendingList;
   // State field(s) for PageView widget.

@@ -190,17 +190,18 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                           FlutterFlowTheme.of(context).designToken.spacing.xs)),
                 ),
               ),
-              FlutterFlowIconButton(
-                buttonSize: 40.0,
-                icon: Icon(
-                  Icons.download_for_offline_rounded,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 24.0,
+              if (_model.isHidden == false)
+                FlutterFlowIconButton(
+                  buttonSize: 40.0,
+                  icon: Icon(
+                    Icons.download_for_offline_rounded,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    size: 24.0,
+                  ),
+                  onPressed: () {
+                    print('IconButton pressed ...');
+                  },
                 ),
-                onPressed: () {
-                  print('IconButton pressed ...');
-                },
-              ),
             ].divide(SizedBox(
                 width: FlutterFlowTheme.of(context).designToken.spacing.md)),
           ),

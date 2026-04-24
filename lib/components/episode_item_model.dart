@@ -3,6 +3,10 @@ import 'episode_item_widget.dart' show EpisodeItemWidget;
 import 'package:flutter/material.dart';
 
 class EpisodeItemModel extends FlutterFlowModel<EpisodeItemWidget> {
+  ///  Local state fields for this component.
+
+  bool isHidden = true;
+
   @override
   void initState(BuildContext context) {}
 
