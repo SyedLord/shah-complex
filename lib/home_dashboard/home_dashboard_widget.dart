@@ -386,86 +386,90 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                           Container(
                             height: 220.0,
                             decoration: BoxDecoration(),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 0.0, 0.0),
-                              child: StreamBuilder<List<MoviesRecord>>(
-                                stream: FFAppState().trendingMoviesCache(
-                                  requestFn: () => queryMoviesRecord(
-                                    queryBuilder: (moviesRecord) => moviesRecord
-                                        .where(
-                                          'is_trending',
-                                          isEqualTo: true,
-                                        )
-                                        .orderBy('created_at',
-                                            descending: true),
-                                    limit: 10,
+                            child: Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 0.0, 0.0),
+                                child: StreamBuilder<List<MoviesRecord>>(
+                                  stream: FFAppState().trendingMoviesCache(
+                                    requestFn: () => queryMoviesRecord(
+                                      queryBuilder: (moviesRecord) =>
+                                          moviesRecord
+                                              .where(
+                                                'is_trending',
+                                                isEqualTo: true,
+                                              )
+                                              .orderBy('created_at',
+                                                  descending: true),
+                                      limit: 10,
+                                    ),
                                   ),
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  }
-                                  List<MoviesRecord>
-                                      trendingRowMoviesRecordList =
-                                      snapshot.data!;
-
-                                  return ListView.separated(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        trendingRowMoviesRecordList.length,
-                                    separatorBuilder: (_, __) =>
-                                        SizedBox(width: 10.0),
-                                    itemBuilder: (context, trendingRowIndex) {
-                                      final trendingRowMoviesRecord =
-                                          trendingRowMoviesRecordList[
-                                              trendingRowIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed(
-                                            MoviePageWidget.routeName,
-                                            queryParameters: {
-                                              'movieDoc': serializeParam(
-                                                trendingRowMoviesRecord,
-                                                ParamType.Document,
-                                              ),
-                                            }.withoutNulls,
-                                            extra: <String, dynamic>{
-                                              'movieDoc':
-                                                  trendingRowMoviesRecord,
-                                            },
-                                          );
-                                        },
-                                        child: MovieCardWidget(
-                                          key: Key(
-                                              'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
-                                          img: trendingRowMoviesRecord
-                                              .posterImage,
-                                          movieDoc: trendingRowMoviesRecord,
-                                        ),
                                       );
-                                    },
-                                  );
-                                },
+                                    }
+                                    List<MoviesRecord>
+                                        trendingRowMoviesRecordList =
+                                        snapshot.data!;
+
+                                    return ListView.separated(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount:
+                                          trendingRowMoviesRecordList.length,
+                                      separatorBuilder: (_, __) =>
+                                          SizedBox(width: 10.0),
+                                      itemBuilder: (context, trendingRowIndex) {
+                                        final trendingRowMoviesRecord =
+                                            trendingRowMoviesRecordList[
+                                                trendingRowIndex];
+                                        return InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            context.pushNamed(
+                                              MoviePageWidget.routeName,
+                                              queryParameters: {
+                                                'movieDoc': serializeParam(
+                                                  trendingRowMoviesRecord,
+                                                  ParamType.Document,
+                                                ),
+                                              }.withoutNulls,
+                                              extra: <String, dynamic>{
+                                                'movieDoc':
+                                                    trendingRowMoviesRecord,
+                                              },
+                                            );
+                                          },
+                                          child: MovieCardWidget(
+                                            key: Key(
+                                                'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
+                                            img: trendingRowMoviesRecord
+                                                .posterImage,
+                                            movieDoc: trendingRowMoviesRecord,
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ),
