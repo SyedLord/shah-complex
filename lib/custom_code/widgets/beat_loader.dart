@@ -17,7 +17,7 @@ class BeatLoader extends StatefulWidget {
     super.key,
     this.width,
     this.height,
-    this.size,
+    required this.size,
     required this.color,
   });
 
