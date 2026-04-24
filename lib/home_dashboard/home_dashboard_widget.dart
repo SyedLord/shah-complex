@@ -194,27 +194,29 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                     },
                                     child: Stack(
                                       children: [
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {},
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: CachedNetworkImage(
-                                              fadeInDuration:
-                                                  Duration(milliseconds: 100),
-                                              fadeOutDuration:
-                                                  Duration(milliseconds: 100),
-                                              imageUrl: currentSlide1Item.image,
-                                              width: double.infinity,
-                                              height: double.infinity,
-                                              fit: BoxFit.cover,
+                                        if (currentSlide1Item.image != '')
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {},
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: CachedNetworkImage(
+                                                fadeInDuration:
+                                                    Duration(milliseconds: 100),
+                                                fadeOutDuration:
+                                                    Duration(milliseconds: 100),
+                                                imageUrl:
+                                                    currentSlide1Item.image,
+                                                width: double.infinity,
+                                                height: double.infinity,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
-                                        ),
                                         Container(
                                           width: double.infinity,
                                           height: double.infinity,
@@ -232,30 +234,48 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                             ),
                                           ),
                                         ),
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 1.0),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 50.0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: CachedNetworkImage(
-                                                fadeInDuration:
-                                                    Duration(milliseconds: 100),
-                                                fadeOutDuration:
-                                                    Duration(milliseconds: 100),
-                                                imageUrl:
-                                                    currentSlide1Item.logoImage,
-                                                width: 300.0,
-                                                height: 100.0,
-                                                fit: BoxFit.contain,
+                                        if (currentSlide1Item.logoImage != '')
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 1.0),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 0.0, 50.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: CachedNetworkImage(
+                                                  fadeInDuration: Duration(
+                                                      milliseconds: 100),
+                                                  fadeOutDuration: Duration(
+                                                      milliseconds: 100),
+                                                  imageUrl: currentSlide1Item
+                                                      .logoImage,
+                                                  width: 300.0,
+                                                  height: 100.0,
+                                                  fit: BoxFit.contain,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
+                                        if (currentSlide1Item.image == '')
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
+                                            child: Container(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: custom_widgets.BeatLoader(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                size: 50.0,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                              ),
+                                            ),
+                                          ),
                                       ],
                                     ),
                                   );
@@ -286,19 +306,6 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                             );
                           },
                         ),
-                      Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        child: Container(
-                          width: 50.0,
-                          height: 50.0,
-                          child: custom_widgets.BeatLoader(
-                            width: 50.0,
-                            height: 50.0,
-                            size: 50.0,
-                            color: FlutterFlowTheme.of(context).primary,
-                          ),
-                        ),
-                      ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
