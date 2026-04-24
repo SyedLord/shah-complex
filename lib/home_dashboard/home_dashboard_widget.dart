@@ -44,16 +44,16 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.trendingList = await actions.getTrendingCarousel();
+      FFAppState().carouselItems =
+          _model.trendingList!.toList().cast<HeroItemStruct>();
+      safeSetState(() {});
       _model.serverUpdateDoc = await queryAppConfigRecordOnce(
         singleRecord: true,
       ).then((s) => s.firstOrNull);
       if ((_model.serverUpdateDoc!.trendingLastUpdated! >
               FFAppState().localCacheTime!) ||
           (FFAppState().localCacheTime == null)) {
-        _model.trendingList = await actions.getTrendingCarousel();
-        FFAppState().carouselItems =
-            _model.trendingList!.toList().cast<HeroItemStruct>();
-        safeSetState(() {});
         FFAppState().clearTrendingMoviesCacheCache();
         FFAppState().clearTrendingSeriesCacheCache();
         FFAppState().clearMoviesCacheCache();
