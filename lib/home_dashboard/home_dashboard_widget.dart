@@ -539,6 +539,8 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                           16.0, 0.0, 16.0, 0.0),
                                       child: StreamBuilder<List<MoviesRecord>>(
                                         stream: FFAppState().moviesCacheList(
+                                          uniqueQueryKey:
+                                              moviesCategoriesRecord.name,
                                           requestFn: () => queryMoviesRecord(
                                             queryBuilder: (moviesRecord) =>
                                                 moviesRecord
@@ -689,6 +691,8 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                           16.0, 0.0, 16.0, 0.0),
                                       child: StreamBuilder<List<SeriesRecord>>(
                                         stream: FFAppState().seasonsCacheList(
+                                          uniqueQueryKey:
+                                              seasonsCategoriesRecord.name,
                                           requestFn: () => querySeriesRecord(
                                             queryBuilder: (seriesRecord) =>
                                                 seriesRecord
