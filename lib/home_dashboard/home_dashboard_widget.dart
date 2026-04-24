@@ -121,121 +121,85 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Builder(
-                        builder: (context) {
-                          final currentSlide1 =
-                              FFAppState().carouselItems.toList();
+                      if (FFAppState().carouselItems.isNotEmpty)
+                        Builder(
+                          builder: (context) {
+                            final currentSlide1 =
+                                FFAppState().carouselItems.toList();
 
-                          return Container(
-                            width: double.infinity,
-                            height: 400.0,
-                            child: CarouselSlider.builder(
-                              itemCount: currentSlide1.length,
-                              itemBuilder: (context, currentSlide1Index, _) {
-                                final currentSlide1Item =
-                                    currentSlide1[currentSlide1Index];
-                                return InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    if (currentSlide1Item.contentType ==
-                                        'movie') {
-                                      _model.loadedMoviesDoc =
-                                          await MoviesRecord.getDocumentOnce(
-                                              currentSlide1Item.movieRef!);
+                            return Container(
+                              width: double.infinity,
+                              height: 400.0,
+                              child: CarouselSlider.builder(
+                                itemCount: currentSlide1.length,
+                                itemBuilder: (context, currentSlide1Index, _) {
+                                  final currentSlide1Item =
+                                      currentSlide1[currentSlide1Index];
+                                  return InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      if (currentSlide1Item.contentType ==
+                                          'movie') {
+                                        _model.loadedMoviesDoc =
+                                            await MoviesRecord.getDocumentOnce(
+                                                currentSlide1Item.movieRef!);
 
-                                      context.pushNamed(
-                                        MoviePageWidget.routeName,
-                                        queryParameters: {
-                                          'movieDoc': serializeParam(
-                                            _model.loadedMoviesDoc,
-                                            ParamType.Document,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          'movieDoc': _model.loadedMoviesDoc,
-                                          '__transition_info__': TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.fade,
-                                          ),
-                                        },
-                                      );
-                                    } else {
-                                      _model.loadedSeriesDoc =
-                                          await SeriesRecord.getDocumentOnce(
-                                              currentSlide1Item.seriesRef!);
+                                        context.pushNamed(
+                                          MoviePageWidget.routeName,
+                                          queryParameters: {
+                                            'movieDoc': serializeParam(
+                                              _model.loadedMoviesDoc,
+                                              ParamType.Document,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            'movieDoc': _model.loadedMoviesDoc,
+                                            '__transition_info__':
+                                                TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                            ),
+                                          },
+                                        );
+                                      } else {
+                                        _model.loadedSeriesDoc =
+                                            await SeriesRecord.getDocumentOnce(
+                                                currentSlide1Item.seriesRef!);
 
-                                      context.pushNamed(
-                                        SeasonPageWidget.routeName,
-                                        queryParameters: {
-                                          'seriesDoc': serializeParam(
-                                            _model.loadedSeriesDoc,
-                                            ParamType.Document,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          'seriesDoc': _model.loadedSeriesDoc,
-                                          '__transition_info__': TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.fade,
-                                          ),
-                                        },
-                                      );
-                                    }
+                                        context.pushNamed(
+                                          SeasonPageWidget.routeName,
+                                          queryParameters: {
+                                            'seriesDoc': serializeParam(
+                                              _model.loadedSeriesDoc,
+                                              ParamType.Document,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            'seriesDoc': _model.loadedSeriesDoc,
+                                            '__transition_info__':
+                                                TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                            ),
+                                          },
+                                        );
+                                      }
 
-                                    safeSetState(() {});
-                                  },
-                                  child: Stack(
-                                    children: [
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {},
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: CachedNetworkImage(
-                                            fadeInDuration:
-                                                Duration(milliseconds: 100),
-                                            fadeOutDuration:
-                                                Duration(milliseconds: 100),
-                                            imageUrl: currentSlide1Item.image,
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              Colors.transparent,
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryBackground
-                                            ],
-                                            stops: [0.3, 1.0],
-                                            begin:
-                                                AlignmentDirectional(0.0, -1.0),
-                                            end: AlignmentDirectional(0, 1.0),
-                                          ),
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(0.0, 1.0),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 50.0),
+                                      safeSetState(() {});
+                                    },
+                                    child: Stack(
+                                      children: [
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {},
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
@@ -244,58 +208,96 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                                   Duration(milliseconds: 100),
                                               fadeOutDuration:
                                                   Duration(milliseconds: 100),
-                                              imageUrl:
-                                                  currentSlide1Item.logoImage,
-                                              width: 300.0,
-                                              height: 100.0,
-                                              fit: BoxFit.contain,
+                                              imageUrl: currentSlide1Item.image,
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        child: Container(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: custom_widgets.BeatLoader(
-                                            width: 50.0,
-                                            height: 50.0,
-                                            size: 50.0,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
+                                        Container(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                Colors.transparent,
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground
+                                              ],
+                                              stops: [0.3, 1.0],
+                                              begin: AlignmentDirectional(
+                                                  0.0, -1.0),
+                                              end: AlignmentDirectional(0, 1.0),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                              carouselController: _model.carouselController ??=
-                                  CarouselSliderController(),
-                              options: CarouselOptions(
-                                initialPage:
-                                    max(0, min(1, currentSlide1.length - 1)),
-                                viewportFraction: 1.0,
-                                disableCenter: true,
-                                enlargeCenterPage: true,
-                                enlargeFactor: 0.25,
-                                enableInfiniteScroll: true,
-                                scrollDirection: Axis.horizontal,
-                                autoPlay: true,
-                                autoPlayAnimationDuration:
-                                    Duration(milliseconds: 800),
-                                autoPlayInterval:
-                                    Duration(milliseconds: (800 + 4000)),
-                                autoPlayCurve: Curves.linear,
-                                pauseAutoPlayInFiniteScroll: true,
-                                onPageChanged: (index, _) =>
-                                    _model.carouselCurrentIndex = index,
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 1.0),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 50.0),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: CachedNetworkImage(
+                                                fadeInDuration:
+                                                    Duration(milliseconds: 100),
+                                                fadeOutDuration:
+                                                    Duration(milliseconds: 100),
+                                                imageUrl:
+                                                    currentSlide1Item.logoImage,
+                                                width: 300.0,
+                                                height: 100.0,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                carouselController:
+                                    _model.carouselController ??=
+                                        CarouselSliderController(),
+                                options: CarouselOptions(
+                                  initialPage:
+                                      max(0, min(1, currentSlide1.length - 1)),
+                                  viewportFraction: 1.0,
+                                  disableCenter: true,
+                                  enlargeCenterPage: true,
+                                  enlargeFactor: 0.25,
+                                  enableInfiniteScroll: true,
+                                  scrollDirection: Axis.horizontal,
+                                  autoPlay: true,
+                                  autoPlayAnimationDuration:
+                                      Duration(milliseconds: 800),
+                                  autoPlayInterval:
+                                      Duration(milliseconds: (800 + 4000)),
+                                  autoPlayCurve: Curves.linear,
+                                  pauseAutoPlayInFiniteScroll: true,
+                                  onPageChanged: (index, _) =>
+                                      _model.carouselCurrentIndex = index,
+                                ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
+                      Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Container(
+                          width: 50.0,
+                          height: 50.0,
+                          child: custom_widgets.BeatLoader(
+                            width: 50.0,
+                            height: 50.0,
+                            size: 50.0,
+                            color: FlutterFlowTheme.of(context).primary,
+                          ),
+                        ),
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
