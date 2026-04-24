@@ -51,8 +51,9 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
       _model.carouselItems =
           _model.trendingList!.toList().cast<HeroItemStruct>();
       safeSetState(() {});
-      if (_model.serverUpdateDoc!.trendingLastUpdated! >
-          FFAppState().localCacheTime!) {
+      if ((_model.serverUpdateDoc!.trendingLastUpdated! >
+              FFAppState().localCacheTime!) ||
+          (FFAppState().localCacheTime == null)) {
         FFAppState().clearTrendingMoviesCacheCache();
         FFAppState().clearTrendingSeriesCacheCache();
         FFAppState().clearMoviesCacheCache();
