@@ -68,7 +68,7 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
                         'App Settings',
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            font: GoogleFonts.inter(
+                            font: GoogleFonts.poppins(
                               fontWeight: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .fontWeight,

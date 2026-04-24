@@ -52,6 +52,21 @@ class FFAppState extends ChangeNotifier {
               prefs.getInt('ff_localCacheTime')!)
           : _localCacheTime;
     });
+    _safeInit(() {
+      _carouselItems = prefs
+              .getStringList('ff_carouselItems')
+              ?.map((x) {
+                try {
+                  return HeroItemStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _carouselItems;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -178,6 +193,47 @@ class FFAppState extends ChangeNotifier {
     value != null
         ? prefs.setInt('ff_localCacheTime', value.millisecondsSinceEpoch)
         : prefs.remove('ff_localCacheTime');
+  }
+
+  List<HeroItemStruct> _carouselItems = [];
+  List<HeroItemStruct> get carouselItems => _carouselItems;
+  set carouselItems(List<HeroItemStruct> value) {
+    _carouselItems = value;
+    prefs.setStringList(
+        'ff_carouselItems', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToCarouselItems(HeroItemStruct value) {
+    carouselItems.add(value);
+    prefs.setStringList(
+        'ff_carouselItems', _carouselItems.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromCarouselItems(HeroItemStruct value) {
+    carouselItems.remove(value);
+    prefs.setStringList(
+        'ff_carouselItems', _carouselItems.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromCarouselItems(int index) {
+    carouselItems.removeAt(index);
+    prefs.setStringList(
+        'ff_carouselItems', _carouselItems.map((x) => x.serialize()).toList());
+  }
+
+  void updateCarouselItemsAtIndex(
+    int index,
+    HeroItemStruct Function(HeroItemStruct) updateFn,
+  ) {
+    carouselItems[index] = updateFn(_carouselItems[index]);
+    prefs.setStringList(
+        'ff_carouselItems', _carouselItems.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInCarouselItems(int index, HeroItemStruct value) {
+    carouselItems.insert(index, value);
+    prefs.setStringList(
+        'ff_carouselItems', _carouselItems.map((x) => x.serialize()).toList());
   }
 
   final _profileWatchlistCountManager = FutureRequestManager<int>();

@@ -254,17 +254,17 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Inter';
+  String get headlineLargeFamily => 'Poppins';
   bool get headlineLargeIsCustom => false;
-  TextStyle get headlineLarge => GoogleFonts.inter(
+  TextStyle get headlineLarge => GoogleFonts.poppins(
         color: theme.primaryText,
         fontWeight: FontWeight.w800,
         fontSize: 32.0,
         height: 1.1,
       );
-  String get headlineMediumFamily => 'Inter';
+  String get headlineMediumFamily => 'Poppins';
   bool get headlineMediumIsCustom => false;
-  TextStyle get headlineMedium => GoogleFonts.inter(
+  TextStyle get headlineMedium => GoogleFonts.poppins(
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 26.0,
@@ -277,17 +277,17 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'Inter';
+  String get titleLargeFamily => 'Poppins';
   bool get titleLargeIsCustom => false;
-  TextStyle get titleLarge => GoogleFonts.inter(
+  TextStyle get titleLarge => GoogleFonts.poppins(
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 22.0,
         height: 1.2,
       );
-  String get titleMediumFamily => 'Inter';
+  String get titleMediumFamily => 'Poppins';
   bool get titleMediumIsCustom => false;
-  TextStyle get titleMedium => GoogleFonts.inter(
+  TextStyle get titleMedium => GoogleFonts.poppins(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 17.0,
@@ -300,49 +300,49 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Inter';
+  String get labelLargeFamily => 'Poppins';
   bool get labelLargeIsCustom => false;
-  TextStyle get labelLarge => GoogleFonts.inter(
+  TextStyle get labelLarge => GoogleFonts.poppins(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 14.0,
         height: 1.3,
       );
-  String get labelMediumFamily => 'Inter';
+  String get labelMediumFamily => 'Poppins';
   bool get labelMediumIsCustom => false;
-  TextStyle get labelMedium => GoogleFonts.inter(
+  TextStyle get labelMedium => GoogleFonts.poppins(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 12.0,
         height: 1.3,
       );
-  String get labelSmallFamily => 'Inter';
+  String get labelSmallFamily => 'Poppins';
   bool get labelSmallIsCustom => false;
-  TextStyle get labelSmall => GoogleFonts.inter(
+  TextStyle get labelSmall => GoogleFonts.poppins(
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 10.0,
         height: 1.2,
       );
-  String get bodyLargeFamily => 'Inter';
+  String get bodyLargeFamily => 'Poppins';
   bool get bodyLargeIsCustom => false;
-  TextStyle get bodyLarge => GoogleFonts.inter(
+  TextStyle get bodyLarge => GoogleFonts.poppins(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
         height: 1.5,
       );
-  String get bodyMediumFamily => 'Inter';
+  String get bodyMediumFamily => 'Poppins';
   bool get bodyMediumIsCustom => false;
-  TextStyle get bodyMedium => GoogleFonts.inter(
+  TextStyle get bodyMedium => GoogleFonts.poppins(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
         height: 1.4,
       );
-  String get bodySmallFamily => 'Inter';
+  String get bodySmallFamily => 'Poppins';
   bool get bodySmallIsCustom => false;
-  TextStyle get bodySmall => GoogleFonts.inter(
+  TextStyle get bodySmall => GoogleFonts.poppins(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,

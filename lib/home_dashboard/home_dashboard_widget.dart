@@ -1,7 +1,6 @@
 import '/backend/backend.dart';
 import '/components/bottom_nav_bar_widget.dart';
 import '/components/continue_watching_card_widget.dart';
-import '/components/hero_poster_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/components/profile_icon_dropdown_widget.dart';
 import '/components/section_header_widget.dart';
@@ -12,8 +11,6 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart'
-    as smooth_page_indicator;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
@@ -45,20 +42,22 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.trendingList = await actions.getTrendingCarousel();
-      _model.carouselItems =
-          _model.trendingList!.toList().cast<HeroItemStruct>();
-      safeSetState(() {});
       _model.serverUpdateDoc = await queryAppConfigRecordOnce(
         singleRecord: true,
       ).then((s) => s.firstOrNull);
       if ((_model.serverUpdateDoc!.trendingLastUpdated! >
               FFAppState().localCacheTime!) ||
           (FFAppState().localCacheTime == null)) {
+        _model.trendingList = await actions.getTrendingCarousel();
+        FFAppState().carouselItems =
+            _model.trendingList!.toList().cast<HeroItemStruct>();
+        safeSetState(() {});
         FFAppState().clearTrendingMoviesCacheCache();
         FFAppState().clearTrendingSeriesCacheCache();
         FFAppState().clearMoviesCacheCache();
         FFAppState().clearSeasonsCacheCache();
+        FFAppState().clearMoviesCacheListCache();
+        FFAppState().clearSeasonsCacheListCache();
       }
     });
   }
@@ -103,6 +102,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
           body: Stack(
             children: [
               RefreshIndicator(
+                color: FlutterFlowTheme.of(context).primary,
                 onRefresh: () async {
                   if (_model.serverUpdateDoc!.trendingLastUpdated! >
                       FFAppState().localCacheTime!) {
@@ -120,104 +120,10 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      if (_model.isHidden == false)
-                        Flexible(
-                          child: Builder(
-                            builder: (context) {
-                              final currentSlide =
-                                  _model.carouselItems.toList();
-
-                              return Container(
-                                width: double.infinity,
-                                height: 650.0,
-                                child: Stack(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 40.0),
-                                      child: PageView.builder(
-                                        controller: _model
-                                                .pageViewController ??=
-                                            PageController(
-                                                initialPage: max(
-                                                    0,
-                                                    min(
-                                                        0,
-                                                        currentSlide.length -
-                                                            1))),
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: currentSlide.length,
-                                        itemBuilder:
-                                            (context, currentSlideIndex) {
-                                          final currentSlideItem =
-                                              currentSlide[currentSlideIndex];
-                                          return Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              HeroPosterWidget(
-                                                key: Key(
-                                                    'Keyjri_${currentSlideIndex}_of_${currentSlide.length}'),
-                                                slideData: currentSlideItem,
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(0.0, 1.0),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 16.0),
-                                        child: smooth_page_indicator
-                                            .SmoothPageIndicator(
-                                          controller: _model
-                                                  .pageViewController ??=
-                                              PageController(
-                                                  initialPage: max(
-                                                      0,
-                                                      min(
-                                                          0,
-                                                          currentSlide.length -
-                                                              1))),
-                                          count: currentSlide.length,
-                                          axisDirection: Axis.horizontal,
-                                          onDotClicked: (i) async {
-                                            await _model.pageViewController!
-                                                .animateToPage(
-                                              i,
-                                              duration:
-                                                  Duration(milliseconds: 500),
-                                              curve: Curves.ease,
-                                            );
-                                            safeSetState(() {});
-                                          },
-                                          effect:
-                                              smooth_page_indicator.SlideEffect(
-                                            spacing: 8.0,
-                                            radius: 8.0,
-                                            dotWidth: 8.0,
-                                            dotHeight: 8.0,
-                                            dotColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondary,
-                                            activeDotColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                            paintStyle: PaintingStyle.stroke,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                        ),
                       Builder(
                         builder: (context) {
-                          final currentSlide1 = _model.carouselItems.toList();
+                          final currentSlide1 =
+                              FFAppState().carouselItems.toList();
 
                           return Container(
                             width: double.infinity,
@@ -295,9 +201,9 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                               BorderRadius.circular(8.0),
                                           child: CachedNetworkImage(
                                             fadeInDuration:
-                                                Duration(milliseconds: 200),
+                                                Duration(milliseconds: 100),
                                             fadeOutDuration:
-                                                Duration(milliseconds: 200),
+                                                Duration(milliseconds: 100),
                                             imageUrl: currentSlide1Item.image,
                                             width: double.infinity,
                                             height: double.infinity,
@@ -332,8 +238,13 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
-                                            child: Image.network(
-                                              currentSlide1Item.logoImage,
+                                            child: CachedNetworkImage(
+                                              fadeInDuration:
+                                                  Duration(milliseconds: 100),
+                                              fadeOutDuration:
+                                                  Duration(milliseconds: 100),
+                                              imageUrl:
+                                                  currentSlide1Item.logoImage,
                                               width: 300.0,
                                               height: 100.0,
                                               fit: BoxFit.contain,
@@ -491,86 +402,90 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                           Container(
                             height: 220.0,
                             decoration: BoxDecoration(),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 0.0, 0.0),
-                              child: StreamBuilder<List<SeriesRecord>>(
-                                stream: FFAppState().trendingSeriesCache(
-                                  requestFn: () => querySeriesRecord(
-                                    queryBuilder: (seriesRecord) => seriesRecord
-                                        .where(
-                                          'is_trending',
-                                          isEqualTo: true,
-                                        )
-                                        .orderBy('created_at',
-                                            descending: true),
-                                    limit: 10,
+                            child: Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 0.0, 0.0),
+                                child: StreamBuilder<List<SeriesRecord>>(
+                                  stream: FFAppState().trendingSeriesCache(
+                                    requestFn: () => querySeriesRecord(
+                                      queryBuilder: (seriesRecord) =>
+                                          seriesRecord
+                                              .where(
+                                                'is_trending',
+                                                isEqualTo: true,
+                                              )
+                                              .orderBy('created_at',
+                                                  descending: true),
+                                      limit: 10,
+                                    ),
                                   ),
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  }
-                                  List<SeriesRecord>
-                                      trendingRowSeriesRecordList =
-                                      snapshot.data!;
-
-                                  return ListView.separated(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        trendingRowSeriesRecordList.length,
-                                    separatorBuilder: (_, __) =>
-                                        SizedBox(width: 10.0),
-                                    itemBuilder: (context, trendingRowIndex) {
-                                      final trendingRowSeriesRecord =
-                                          trendingRowSeriesRecordList[
-                                              trendingRowIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed(
-                                            SeasonPageWidget.routeName,
-                                            queryParameters: {
-                                              'seriesDoc': serializeParam(
-                                                trendingRowSeriesRecord,
-                                                ParamType.Document,
-                                              ),
-                                            }.withoutNulls,
-                                            extra: <String, dynamic>{
-                                              'seriesDoc':
-                                                  trendingRowSeriesRecord,
-                                            },
-                                          );
-                                        },
-                                        child: MovieCardWidget(
-                                          key: Key(
-                                              'Key4sb_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
-                                          img: trendingRowSeriesRecord
-                                              .posterImage,
-                                          seriesDoc: trendingRowSeriesRecord,
-                                        ),
                                       );
-                                    },
-                                  );
-                                },
+                                    }
+                                    List<SeriesRecord>
+                                        trendingRowSeriesRecordList =
+                                        snapshot.data!;
+
+                                    return ListView.separated(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount:
+                                          trendingRowSeriesRecordList.length,
+                                      separatorBuilder: (_, __) =>
+                                          SizedBox(width: 10.0),
+                                      itemBuilder: (context, trendingRowIndex) {
+                                        final trendingRowSeriesRecord =
+                                            trendingRowSeriesRecordList[
+                                                trendingRowIndex];
+                                        return InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            context.pushNamed(
+                                              SeasonPageWidget.routeName,
+                                              queryParameters: {
+                                                'seriesDoc': serializeParam(
+                                                  trendingRowSeriesRecord,
+                                                  ParamType.Document,
+                                                ),
+                                              }.withoutNulls,
+                                              extra: <String, dynamic>{
+                                                'seriesDoc':
+                                                    trendingRowSeriesRecord,
+                                              },
+                                            );
+                                          },
+                                          child: MovieCardWidget(
+                                            key: Key(
+                                                'Key4sb_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
+                                            img: trendingRowSeriesRecord
+                                                .posterImage,
+                                            seriesDoc: trendingRowSeriesRecord,
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ),

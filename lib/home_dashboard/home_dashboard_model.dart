@@ -10,36 +10,16 @@ import 'package:flutter/material.dart';
 class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
   ///  Local state fields for this page.
 
-  List<HeroItemStruct> carouselItems = [];
-  void addToCarouselItems(HeroItemStruct item) => carouselItems.add(item);
-  void removeFromCarouselItems(HeroItemStruct item) =>
-      carouselItems.remove(item);
-  void removeAtIndexFromCarouselItems(int index) =>
-      carouselItems.removeAt(index);
-  void insertAtIndexInCarouselItems(int index, HeroItemStruct item) =>
-      carouselItems.insert(index, item);
-  void updateCarouselItemsAtIndex(
-          int index, Function(HeroItemStruct) updateFn) =>
-      carouselItems[index] = updateFn(carouselItems[index]);
-
   bool showProfileDropdown = false;
 
   bool isHidden = true;
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - getTrendingCarousel] action in HomeDashboard widget.
-  List<HeroItemStruct>? trendingList;
   // Stores action output result for [Firestore Query - Query a collection] action in HomeDashboard widget.
   AppConfigRecord? serverUpdateDoc;
-  // State field(s) for PageView widget.
-  PageController? pageViewController;
-
-  int get pageViewCurrentIndex => pageViewController != null &&
-          pageViewController!.hasClients &&
-          pageViewController!.page != null
-      ? pageViewController!.page!.round()
-      : 0;
+  // Stores action output result for [Custom Action - getTrendingCarousel] action in HomeDashboard widget.
+  List<HeroItemStruct>? trendingList;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController;
   int carouselCurrentIndex = 1;

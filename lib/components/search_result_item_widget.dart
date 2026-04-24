@@ -90,7 +90,7 @@ class _SearchResultItemWidgetState extends State<SearchResultItemWidget> {
                     ),
                     maxLines: 1,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          font: GoogleFonts.inter(
+                          font: GoogleFonts.poppins(
                             fontWeight: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .fontWeight,

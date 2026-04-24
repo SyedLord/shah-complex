@@ -89,7 +89,7 @@ class _WatchlistCardWidgetState extends State<WatchlistCardWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .labelSmall
                                     .override(
-                                      font: GoogleFonts.inter(
+                                      font: GoogleFonts.poppins(
                                         fontWeight: FontWeight.bold,
                                         fontStyle: FlutterFlowTheme.of(context)
                                             .labelSmall
