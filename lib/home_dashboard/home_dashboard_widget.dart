@@ -538,8 +538,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
                                       child: StreamBuilder<List<MoviesRecord>>(
-                                        stream:
-                                            FFAppState().trendingMoviesCache(
+                                        stream: FFAppState().moviesCacheList(
                                           requestFn: () => queryMoviesRecord(
                                             queryBuilder: (moviesRecord) =>
                                                 moviesRecord
@@ -689,8 +688,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
                                       child: StreamBuilder<List<SeriesRecord>>(
-                                        stream:
-                                            FFAppState().trendingSeriesCache(
+                                        stream: FFAppState().seasonsCacheList(
                                           requestFn: () => querySeriesRecord(
                                             queryBuilder: (seriesRecord) =>
                                                 seriesRecord
