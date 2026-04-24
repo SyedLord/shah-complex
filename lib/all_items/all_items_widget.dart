@@ -363,13 +363,15 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                   child: StreamBuilder<List<MoviesRecord>>(
-                    stream: queryMoviesRecord(
-                      queryBuilder: (moviesRecord) => moviesRecord
-                          .where(
-                            'category',
-                            isEqualTo: widget.categoryName,
-                          )
-                          .orderBy('title'),
+                    stream: FFAppState().trendingMoviesCache(
+                      requestFn: () => queryMoviesRecord(
+                        queryBuilder: (moviesRecord) => moviesRecord
+                            .where(
+                              'category',
+                              isEqualTo: widget.categoryName,
+                            )
+                            .orderBy('title'),
+                      ),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -445,10 +447,12 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                   child: StreamBuilder<List<MoviesRecord>>(
-                    stream: queryMoviesRecord(
-                      queryBuilder: (moviesRecord) => moviesRecord.where(
-                        'is_trending',
-                        isEqualTo: true,
+                    stream: FFAppState().trendingMoviesCache(
+                      requestFn: () => queryMoviesRecord(
+                        queryBuilder: (moviesRecord) => moviesRecord.where(
+                          'is_trending',
+                          isEqualTo: true,
+                        ),
                       ),
                     ),
                     builder: (context, snapshot) {
@@ -526,10 +530,12 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                   child: StreamBuilder<List<SeriesRecord>>(
-                    stream: querySeriesRecord(
-                      queryBuilder: (seriesRecord) => seriesRecord.where(
-                        'is_trending',
-                        isEqualTo: true,
+                    stream: FFAppState().trendingSeriesCache(
+                      requestFn: () => querySeriesRecord(
+                        queryBuilder: (seriesRecord) => seriesRecord.where(
+                          'is_trending',
+                          isEqualTo: true,
+                        ),
                       ),
                     ),
                     builder: (context, snapshot) {
@@ -607,13 +613,15 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                   child: StreamBuilder<List<SeriesRecord>>(
-                    stream: querySeriesRecord(
-                      queryBuilder: (seriesRecord) => seriesRecord
-                          .where(
-                            'category',
-                            isEqualTo: widget.categoryName,
-                          )
-                          .orderBy('title'),
+                    stream: FFAppState().trendingSeriesCache(
+                      requestFn: () => querySeriesRecord(
+                        queryBuilder: (seriesRecord) => seriesRecord
+                            .where(
+                              'category',
+                              isEqualTo: widget.categoryName,
+                            )
+                            .orderBy('title'),
+                      ),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
