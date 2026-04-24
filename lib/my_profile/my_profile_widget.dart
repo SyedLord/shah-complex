@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/bottom_nav_bar_widget.dart';
 import '/components/download_item_widget.dart';
@@ -93,7 +94,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                         ),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 42.0, 24.0, 32.0),
+                              24.0, 50.0, 24.0, 32.0),
                           child: Container(
                             decoration: BoxDecoration(),
                             child: Column(
@@ -147,12 +148,34 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                         child: Padding(
                                           padding: EdgeInsets.all(4.0),
                                           child: Container(
-                                            child: Icon(
-                                              Icons.edit_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .onPrimary,
-                                              size: 16.0,
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  ProfileSelectionWidget
+                                                      .routeName,
+                                                  extra: <String, dynamic>{
+                                                    '__transition_info__':
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                    ),
+                                                  },
+                                                );
+                                              },
+                                              child: Icon(
+                                                Icons.edit_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .onPrimary,
+                                                size: 16.0,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -188,12 +211,35 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                             lineHeight: 1.2,
                                           ),
                                     ),
-                                    Text(
-                                      'Premium Member',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
+                                    AuthUserStreamWidget(
+                                      builder: (context) => Text(
+                                        valueOrDefault<bool>(
+                                                    currentUserDocument
+                                                        ?.isAdmin,
+                                                    false) ==
+                                                true
+                                            ? 'Admin'
+                                            : valueOrDefault(
+                                                currentUserDocument
+                                                    ?.memberLevel,
+                                                ''),
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .onSurface,
+                                              letterSpacing: 0.0,
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
@@ -202,20 +248,9 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
                                                       .fontStyle,
+                                              lineHeight: 1.3,
                                             ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .onSurface,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontStyle,
-                                            lineHeight: 1.3,
-                                          ),
+                                      ),
                                     ),
                                   ].divide(SizedBox(height: 4.0)),
                                 ),
@@ -699,51 +734,6 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                           ),
                                                         );
                                                       },
-                                                    ),
-                                                  if ((listViewMyListRecord
-                                                              .movieRef ==
-                                                          null) &&
-                                                      (listViewMyListRecord
-                                                              .seasonRef ==
-                                                          null))
-                                                    Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              0.0, 0.0),
-                                                      child: Text(
-                                                        'Your List is Empty !',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineMedium
-                                                                .override(
-                                                                  font:
-                                                                      GoogleFonts
-                                                                          .inter(
-                                                                    fontWeight: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .headlineMedium
-                                                                        .fontWeight,
-                                                                    fontStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .headlineMedium
-                                                                        .fontStyle,
-                                                                  ),
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .accent3,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .headlineMedium
-                                                                      .fontWeight,
-                                                                  fontStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .headlineMedium
-                                                                      .fontStyle,
-                                                                ),
-                                                      ),
                                                     ),
                                                 ],
                                               );

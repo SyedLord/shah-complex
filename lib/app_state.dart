@@ -156,6 +156,12 @@ class FFAppState extends ChangeNotifier {
     _activeProfileImage = value;
     prefs.setString('ff_activeProfileImage', value);
   }
+
+  dynamic _downloadProgress;
+  dynamic get downloadProgress => _downloadProgress;
+  set downloadProgress(dynamic value) {
+    _downloadProgress = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {
