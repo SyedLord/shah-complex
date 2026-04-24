@@ -44,9 +44,9 @@ class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
   CarouselSliderController? carouselController;
   int carouselCurrentIndex = 1;
 
-  // Stores action output result for [Backend Call - Read Document] action in Image widget.
+  // Stores action output result for [Backend Call - Read Document] action in Stack widget.
   MoviesRecord? loadedMoviesDoc;
-  // Stores action output result for [Backend Call - Read Document] action in Image widget.
+  // Stores action output result for [Backend Call - Read Document] action in Stack widget.
   SeriesRecord? loadedSeriesDoc;
   // Model for section_header component.
   late SectionHeaderModel sectionHeaderModel1;

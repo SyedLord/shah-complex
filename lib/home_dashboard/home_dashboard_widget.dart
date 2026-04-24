@@ -227,104 +227,122 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                               itemBuilder: (context, currentSlide1Index, _) {
                                 final currentSlide1Item =
                                     currentSlide1[currentSlide1Index];
-                                return Stack(
-                                  children: [
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        if (currentSlide1Item.contentType ==
-                                            'movie') {
-                                          _model.loadedMoviesDoc =
-                                              await MoviesRecord
-                                                  .getDocumentOnce(
-                                                      currentSlide1Item
-                                                          .movieRef!);
+                                return InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    if (currentSlide1Item.contentType ==
+                                        'movie') {
+                                      _model.loadedMoviesDoc =
+                                          await MoviesRecord.getDocumentOnce(
+                                              currentSlide1Item.movieRef!);
 
-                                          context.pushNamed(
-                                            MoviePageWidget.routeName,
-                                            queryParameters: {
-                                              'movieDoc': serializeParam(
-                                                _model.loadedMoviesDoc,
-                                                ParamType.Document,
-                                              ),
-                                            }.withoutNulls,
-                                            extra: <String, dynamic>{
-                                              'movieDoc':
-                                                  _model.loadedMoviesDoc,
-                                              '__transition_info__':
-                                                  TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType.fade,
-                                              ),
-                                            },
-                                          );
-                                        } else {
-                                          _model.loadedSeriesDoc =
-                                              await SeriesRecord
-                                                  .getDocumentOnce(
-                                                      currentSlide1Item
-                                                          .seriesRef!);
+                                      context.pushNamed(
+                                        MoviePageWidget.routeName,
+                                        queryParameters: {
+                                          'movieDoc': serializeParam(
+                                            _model.loadedMoviesDoc,
+                                            ParamType.Document,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'movieDoc': _model.loadedMoviesDoc,
+                                          '__transition_info__': TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                          ),
+                                        },
+                                      );
+                                    } else {
+                                      _model.loadedSeriesDoc =
+                                          await SeriesRecord.getDocumentOnce(
+                                              currentSlide1Item.seriesRef!);
 
-                                          context.pushNamed(
-                                            SeasonPageWidget.routeName,
-                                            queryParameters: {
-                                              'seriesDoc': serializeParam(
-                                                _model.loadedSeriesDoc,
-                                                ParamType.Document,
-                                              ),
-                                            }.withoutNulls,
-                                            extra: <String, dynamic>{
-                                              'seriesDoc':
-                                                  _model.loadedSeriesDoc,
-                                              '__transition_info__':
-                                                  TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType.fade,
-                                              ),
-                                            },
-                                          );
-                                        }
+                                      context.pushNamed(
+                                        SeasonPageWidget.routeName,
+                                        queryParameters: {
+                                          'seriesDoc': serializeParam(
+                                            _model.loadedSeriesDoc,
+                                            ParamType.Document,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'seriesDoc': _model.loadedSeriesDoc,
+                                          '__transition_info__': TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                          ),
+                                        },
+                                      );
+                                    }
 
-                                        safeSetState(() {});
-                                      },
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: CachedNetworkImage(
-                                          fadeInDuration:
-                                              Duration(milliseconds: 200),
-                                          fadeOutDuration:
-                                              Duration(milliseconds: 200),
-                                          imageUrl: currentSlide1Item.image,
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(0.0, 1.0),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 50.0),
+                                    safeSetState(() {});
+                                  },
+                                  child: Stack(
+                                    children: [
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {},
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(8.0),
-                                          child: Image.network(
-                                            currentSlide1Item.logoImage,
-                                            width: 300.0,
-                                            height: 100.0,
-                                            fit: BoxFit.contain,
+                                          child: CachedNetworkImage(
+                                            fadeInDuration:
+                                                Duration(milliseconds: 200),
+                                            fadeOutDuration:
+                                                Duration(milliseconds: 200),
+                                            imageUrl: currentSlide1Item.image,
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Container(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Colors.transparent,
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground
+                                            ],
+                                            stops: [0.3, 1.0],
+                                            begin:
+                                                AlignmentDirectional(0.0, -1.0),
+                                            end: AlignmentDirectional(0, 1.0),
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 1.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 50.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.network(
+                                              currentSlide1Item.logoImage,
+                                              width: 300.0,
+                                              height: 100.0,
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 );
                               },
                               carouselController: _model.carouselController ??=
@@ -374,11 +392,13 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                               child: StreamBuilder<List<MoviesRecord>>(
                                 stream: FFAppState().trendingMoviesCache(
                                   requestFn: () => queryMoviesRecord(
-                                    queryBuilder: (moviesRecord) =>
-                                        moviesRecord.where(
-                                      'is_trending',
-                                      isEqualTo: true,
-                                    ),
+                                    queryBuilder: (moviesRecord) => moviesRecord
+                                        .where(
+                                          'is_trending',
+                                          isEqualTo: true,
+                                        )
+                                        .orderBy('created_at',
+                                            descending: true),
                                     limit: 10,
                                   ),
                                 ),
@@ -473,11 +493,13 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                               child: StreamBuilder<List<SeriesRecord>>(
                                 stream: FFAppState().trendingSeriesCache(
                                   requestFn: () => querySeriesRecord(
-                                    queryBuilder: (seriesRecord) =>
-                                        seriesRecord.where(
-                                      'is_trending',
-                                      isEqualTo: true,
-                                    ),
+                                    queryBuilder: (seriesRecord) => seriesRecord
+                                        .where(
+                                          'is_trending',
+                                          isEqualTo: true,
+                                        )
+                                        .orderBy('created_at',
+                                            descending: true),
                                     limit: 10,
                                   ),
                                 ),

@@ -5,6 +5,34 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "is_trending",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_at",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "series",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "is_trending",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_at",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "movies",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
           "fieldPath": "category",
           "order": "ASCENDING"
         },
