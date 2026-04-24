@@ -4,6 +4,7 @@ import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'home_dashboard_widget.dart' show HomeDashboardWidget;
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
@@ -23,6 +24,8 @@ class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
 
   bool showProfileDropdown = false;
 
+  bool isHidden = true;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Custom Action - getTrendingCarousel] action in HomeDashboard widget.
@@ -37,6 +40,14 @@ class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
           pageViewController!.page != null
       ? pageViewController!.page!.round()
       : 0;
+  // State field(s) for Carousel widget.
+  CarouselSliderController? carouselController;
+  int carouselCurrentIndex = 1;
+
+  // Stores action output result for [Backend Call - Read Document] action in Image widget.
+  MoviesRecord? loadedMoviesDoc;
+  // Stores action output result for [Backend Call - Read Document] action in Image widget.
+  SeriesRecord? loadedSeriesDoc;
   // Model for section_header component.
   late SectionHeaderModel sectionHeaderModel1;
   // Model for section_header component.

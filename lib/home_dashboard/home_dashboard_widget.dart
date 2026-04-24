@@ -11,6 +11,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:aligned_dialog/aligned_dialog.dart';
@@ -119,54 +120,22 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Flexible(
-                        child: Builder(
-                          builder: (context) {
-                            final currentSlide = _model.carouselItems.toList();
+                      if (_model.isHidden == false)
+                        Flexible(
+                          child: Builder(
+                            builder: (context) {
+                              final currentSlide =
+                                  _model.carouselItems.toList();
 
-                            return Container(
-                              width: double.infinity,
-                              height: 650.0,
-                              child: Stack(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 40.0),
-                                    child: PageView.builder(
-                                      controller: _model.pageViewController ??=
-                                          PageController(
-                                              initialPage: max(
-                                                  0,
-                                                  min(
-                                                      0,
-                                                      currentSlide.length -
-                                                          1))),
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: currentSlide.length,
-                                      itemBuilder:
-                                          (context, currentSlideIndex) {
-                                        final currentSlideItem =
-                                            currentSlide[currentSlideIndex];
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            HeroPosterWidget(
-                                              key: Key(
-                                                  'Keyjri_${currentSlideIndex}_of_${currentSlide.length}'),
-                                              slideData: currentSlideItem,
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0.0, 1.0),
-                                    child: Padding(
+                              return Container(
+                                width: double.infinity,
+                                height: 650.0,
+                                child: Stack(
+                                  children: [
+                                    Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 16.0),
-                                      child: smooth_page_indicator
-                                          .SmoothPageIndicator(
+                                          0.0, 0.0, 0.0, 40.0),
+                                      child: PageView.builder(
                                         controller: _model
                                                 .pageViewController ??=
                                             PageController(
@@ -176,39 +145,229 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                                         0,
                                                         currentSlide.length -
                                                             1))),
-                                        count: currentSlide.length,
-                                        axisDirection: Axis.horizontal,
-                                        onDotClicked: (i) async {
-                                          await _model.pageViewController!
-                                              .animateToPage(
-                                            i,
-                                            duration:
-                                                Duration(milliseconds: 500),
-                                            curve: Curves.ease,
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: currentSlide.length,
+                                        itemBuilder:
+                                            (context, currentSlideIndex) {
+                                          final currentSlideItem =
+                                              currentSlide[currentSlideIndex];
+                                          return Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              HeroPosterWidget(
+                                                key: Key(
+                                                    'Keyjri_${currentSlideIndex}_of_${currentSlide.length}'),
+                                                slideData: currentSlideItem,
+                                              ),
+                                            ],
                                           );
-                                          safeSetState(() {});
                                         },
-                                        effect:
-                                            smooth_page_indicator.SlideEffect(
-                                          spacing: 8.0,
-                                          radius: 8.0,
-                                          dotWidth: 8.0,
-                                          dotHeight: 8.0,
-                                          dotColor: FlutterFlowTheme.of(context)
-                                              .secondary,
-                                          activeDotColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          paintStyle: PaintingStyle.stroke,
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: AlignmentDirectional(0.0, 1.0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
+                                        child: smooth_page_indicator
+                                            .SmoothPageIndicator(
+                                          controller: _model
+                                                  .pageViewController ??=
+                                              PageController(
+                                                  initialPage: max(
+                                                      0,
+                                                      min(
+                                                          0,
+                                                          currentSlide.length -
+                                                              1))),
+                                          count: currentSlide.length,
+                                          axisDirection: Axis.horizontal,
+                                          onDotClicked: (i) async {
+                                            await _model.pageViewController!
+                                                .animateToPage(
+                                              i,
+                                              duration:
+                                                  Duration(milliseconds: 500),
+                                              curve: Curves.ease,
+                                            );
+                                            safeSetState(() {});
+                                          },
+                                          effect:
+                                              smooth_page_indicator.SlideEffect(
+                                            spacing: 8.0,
+                                            radius: 8.0,
+                                            dotWidth: 8.0,
+                                            dotHeight: 8.0,
+                                            dotColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                            activeDotColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                            paintStyle: PaintingStyle.stroke,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ),
+                      Builder(
+                        builder: (context) {
+                          final currentSlide1 = _model.carouselItems.toList();
+
+                          return Container(
+                            width: double.infinity,
+                            height: 300.0,
+                            child: CarouselSlider.builder(
+                              itemCount: currentSlide1.length,
+                              itemBuilder: (context, currentSlide1Index, _) {
+                                final currentSlide1Item =
+                                    currentSlide1[currentSlide1Index];
+                                return Stack(
+                                  children: [
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        if (currentSlide1Item.contentType ==
+                                            'movie') {
+                                          _model.loadedMoviesDoc =
+                                              await MoviesRecord
+                                                  .getDocumentOnce(
+                                                      currentSlide1Item
+                                                          .movieRef!);
+
+                                          context.pushNamed(
+                                            MoviePageWidget.routeName,
+                                            queryParameters: {
+                                              'movieDoc': serializeParam(
+                                                _model.loadedMoviesDoc,
+                                                ParamType.Document,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'movieDoc':
+                                                  _model.loadedMoviesDoc,
+                                              '__transition_info__':
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.fade,
+                                              ),
+                                            },
+                                          );
+                                        } else {
+                                          _model.loadedSeriesDoc =
+                                              await SeriesRecord
+                                                  .getDocumentOnce(
+                                                      currentSlide1Item
+                                                          .seriesRef!);
+
+                                          context.pushNamed(
+                                            SeasonPageWidget.routeName,
+                                            queryParameters: {
+                                              'seriesDoc': serializeParam(
+                                                _model.loadedSeriesDoc,
+                                                ParamType.Document,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'seriesDoc':
+                                                  _model.loadedSeriesDoc,
+                                              '__transition_info__':
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.fade,
+                                              ),
+                                            },
+                                          );
+                                        }
+
+                                        safeSetState(() {});
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: CachedNetworkImage(
+                                          fadeInDuration:
+                                              Duration(milliseconds: 200),
+                                          fadeOutDuration:
+                                              Duration(milliseconds: 200),
+                                          imageUrl: currentSlide1Item.image,
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: AlignmentDirectional(0.0, 1.0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 20.0),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.network(
+                                            currentSlide1Item.logoImage,
+                                            width: 100.0,
+                                            height: 50.0,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Colors.transparent,
+                                            FlutterFlowTheme.of(context)
+                                                .primaryBackground
+                                          ],
+                                          stops: [0.3, 1.0],
+                                          begin:
+                                              AlignmentDirectional(0.0, -1.0),
+                                          end: AlignmentDirectional(0, 1.0),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                              carouselController: _model.carouselController ??=
+                                  CarouselSliderController(),
+                              options: CarouselOptions(
+                                initialPage:
+                                    max(0, min(1, currentSlide1.length - 1)),
+                                viewportFraction: 1.0,
+                                disableCenter: true,
+                                enlargeCenterPage: true,
+                                enlargeFactor: 0.25,
+                                enableInfiniteScroll: true,
+                                scrollDirection: Axis.horizontal,
+                                autoPlay: true,
+                                autoPlayAnimationDuration:
+                                    Duration(milliseconds: 800),
+                                autoPlayInterval:
+                                    Duration(milliseconds: (800 + 4000)),
+                                autoPlayCurve: Curves.linear,
+                                pauseAutoPlayInFiniteScroll: true,
+                                onPageChanged: (index, _) =>
+                                    _model.carouselCurrentIndex = index,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
