@@ -193,13 +193,15 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                   child: StreamBuilder<List<MyListRecord>>(
-                    stream: queryMyListRecord(
-                      queryBuilder: (myListRecord) => myListRecord
-                          .where(
-                            'profile_ref',
-                            isEqualTo: FFAppState().activeProfileRef,
-                          )
-                          .orderBy('added_at', descending: true),
+                    stream: FFAppState().myListAllItems(
+                      requestFn: () => queryMyListRecord(
+                        queryBuilder: (myListRecord) => myListRecord
+                            .where(
+                              'profile_ref',
+                              isEqualTo: FFAppState().activeProfileRef,
+                            )
+                            .orderBy('added_at', descending: true),
+                      ),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.

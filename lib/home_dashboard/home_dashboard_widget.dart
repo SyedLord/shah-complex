@@ -471,13 +471,40 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                         final trendingRowSeriesRecord =
                                             trendingRowSeriesRecordList[
                                                 trendingRowIndex];
-                                        return SeasonCardWidget(
-                                          key: Key(
-                                              'Keyxqg_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
-                                          posterImage: trendingRowSeriesRecord
-                                              .backdropImage,
-                                          titleImage:
-                                              trendingRowSeriesRecord.logoImage,
+                                        return InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            context.pushNamed(
+                                              SeasonPageWidget.routeName,
+                                              queryParameters: {
+                                                'seriesDoc': serializeParam(
+                                                  trendingRowSeriesRecord,
+                                                  ParamType.Document,
+                                                ),
+                                              }.withoutNulls,
+                                              extra: <String, dynamic>{
+                                                'seriesDoc':
+                                                    trendingRowSeriesRecord,
+                                                '__transition_info__':
+                                                    TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType.fade,
+                                                ),
+                                              },
+                                            );
+                                          },
+                                          child: SeasonCardWidget(
+                                            key: Key(
+                                                'Keyxqg_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
+                                            posterImage: trendingRowSeriesRecord
+                                                .backdropImage,
+                                            titleImage: trendingRowSeriesRecord
+                                                .logoImage,
+                                          ),
                                         );
                                       },
                                     );
@@ -809,14 +836,45 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                               final listViewSeriesRecord =
                                                   listViewSeriesRecordList[
                                                       listViewIndex];
-                                              return SeasonCardWidget(
-                                                key: Key(
-                                                    'Keyd13_${listViewIndex}_of_${listViewSeriesRecordList.length}'),
-                                                posterImage:
-                                                    listViewSeriesRecord
-                                                        .backdropImage,
-                                                titleImage: listViewSeriesRecord
-                                                    .logoImage,
+                                              return InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  context.pushNamed(
+                                                    SeasonPageWidget.routeName,
+                                                    queryParameters: {
+                                                      'seriesDoc':
+                                                          serializeParam(
+                                                        listViewSeriesRecord,
+                                                        ParamType.Document,
+                                                      ),
+                                                    }.withoutNulls,
+                                                    extra: <String, dynamic>{
+                                                      'seriesDoc':
+                                                          listViewSeriesRecord,
+                                                      '__transition_info__':
+                                                          TransitionInfo(
+                                                        hasTransition: true,
+                                                        transitionType:
+                                                            PageTransitionType
+                                                                .fade,
+                                                      ),
+                                                    },
+                                                  );
+                                                },
+                                                child: SeasonCardWidget(
+                                                  key: Key(
+                                                      'Keyd13_${listViewIndex}_of_${listViewSeriesRecordList.length}'),
+                                                  posterImage:
+                                                      listViewSeriesRecord
+                                                          .backdropImage,
+                                                  titleImage:
+                                                      listViewSeriesRecord
+                                                          .logoImage,
+                                                ),
                                               );
                                             },
                                           );
@@ -856,10 +914,14 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.question_mark,
-                        color: FlutterFlowTheme.of(context).primary,
-                        size: 32.0,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.asset(
+                          'assets/images/Shah_Complex_Logo.png',
+                          width: 40.0,
+                          height: 40.0,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       Row(
                         mainAxisSize: MainAxisSize.max,

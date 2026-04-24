@@ -9,14 +9,16 @@ class CreateProfileModel extends FlutterFlowModel<CreateProfileWidget> {
   String profileImage =
       'https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg';
 
+  bool isHIdden = true;
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for ProfileName widget.
   FocusNode? profileNameFocusNode;
   TextEditingController? profileNameTextController;
   String? Function(BuildContext, String?)? profileNameTextControllerValidator;
-  // State field(s) for Switch widget.
-  bool? switchValue;
+  // State field(s) for IsKids widget.
+  bool? isKidsValue;
 
   @override
   void initState(BuildContext context) {}

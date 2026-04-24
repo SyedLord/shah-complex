@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'profile_selection_model.dart';
 export 'profile_selection_model.dart';
 
@@ -182,6 +183,24 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                               FFAppState().activeProfileImage =
                                                   profileListItem.profileImage;
                                               safeSetState(() {});
+                                              if (currentUserEmail ==
+                                                  'samo@shahcomplex.com') {
+                                                _model.soundPlayer ??=
+                                                    AudioPlayer();
+                                                if (_model
+                                                    .soundPlayer!.playing) {
+                                                  await _model.soundPlayer!
+                                                      .stop();
+                                                }
+                                                _model.soundPlayer!
+                                                    .setVolume(1.0);
+                                                _model.soundPlayer!
+                                                    .setAsset(
+                                                        'assets/audios/teri_ma_ki_chut_4_bar.mp3')
+                                                    .then((_) => _model
+                                                        .soundPlayer!
+                                                        .play());
+                                              }
 
                                               context.goNamed(
                                                   HomeDashboardWidget

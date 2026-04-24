@@ -343,6 +343,21 @@ class FFAppState extends ChangeNotifier {
   void clearSeasonsCacheListCache() => _seasonsCacheListManager.clear();
   void clearSeasonsCacheListCacheKey(String? uniqueKey) =>
       _seasonsCacheListManager.clearRequest(uniqueKey);
+
+  final _myListAllItemsManager = StreamRequestManager<List<MyListRecord>>();
+  Stream<List<MyListRecord>> myListAllItems({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Stream<List<MyListRecord>> Function() requestFn,
+  }) =>
+      _myListAllItemsManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearMyListAllItemsCache() => _myListAllItemsManager.clear();
+  void clearMyListAllItemsCacheKey(String? uniqueKey) =>
+      _myListAllItemsManager.clearRequest(uniqueKey);
 }
 
 void _safeInit(Function() initializeField) {
