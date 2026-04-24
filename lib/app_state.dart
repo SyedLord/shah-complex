@@ -236,6 +236,12 @@ class FFAppState extends ChangeNotifier {
         'ff_carouselItems', _carouselItems.map((x) => x.serialize()).toList());
   }
 
+  String _tempProfileName = '';
+  String get tempProfileName => _tempProfileName;
+  set tempProfileName(String value) {
+    _tempProfileName = value;
+  }
+
   final _profileWatchlistCountManager = FutureRequestManager<int>();
   Future<int> profileWatchlistCount({
     String? uniqueQueryKey,
