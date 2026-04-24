@@ -307,23 +307,6 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                         ),
                                       ),
                                     ),
-                                    Align(
-                                      alignment: AlignmentDirectional(0.0, 1.0),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 50.0),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.network(
-                                            currentSlide1Item.logoImage,
-                                            width: 300.0,
-                                            height: 100.0,
-                                            fit: BoxFit.contain,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
                                     Container(
                                       width: double.infinity,
                                       height: double.infinity,
@@ -338,6 +321,23 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                           begin:
                                               AlignmentDirectional(0.0, -1.0),
                                           end: AlignmentDirectional(0, 1.0),
+                                        ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: AlignmentDirectional(0.0, 1.0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 50.0),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.network(
+                                            currentSlide1Item.logoImage,
+                                            width: 300.0,
+                                            height: 100.0,
+                                            fit: BoxFit.contain,
+                                          ),
                                         ),
                                       ),
                                     ),
