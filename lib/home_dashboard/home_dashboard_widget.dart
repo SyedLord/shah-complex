@@ -221,7 +221,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
 
                           return Container(
                             width: double.infinity,
-                            height: 300.0,
+                            height: 400.0,
                             child: CarouselSlider.builder(
                               itemCount: currentSlide1.length,
                               itemBuilder: (context, currentSlide1Index, _) {
@@ -303,7 +303,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                           imageUrl: currentSlide1Item.image,
                                           width: double.infinity,
                                           height: double.infinity,
-                                          fit: BoxFit.contain,
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                     ),
@@ -311,14 +311,14 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                       alignment: AlignmentDirectional(0.0, 1.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 20.0),
+                                            0.0, 0.0, 0.0, 50.0),
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.network(
                                             currentSlide1Item.logoImage,
-                                            width: 100.0,
-                                            height: 50.0,
+                                            width: 300.0,
+                                            height: 100.0,
                                             fit: BoxFit.contain,
                                           ),
                                         ),
