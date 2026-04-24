@@ -174,7 +174,7 @@ class FFAppState extends ChangeNotifier {
   }
 
   DateTime? _localCacheTime =
-      DateTime.fromMillisecondsSinceEpoch(l1587729060000);
+      DateTime.fromMillisecondsSinceEpoch(l1588081500000);
   DateTime? get localCacheTime => _localCacheTime;
   set localCacheTime(DateTime? value) {
     _localCacheTime = value;
