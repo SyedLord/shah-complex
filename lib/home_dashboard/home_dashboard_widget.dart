@@ -307,23 +307,6 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            Colors.transparent,
-                                            FlutterFlowTheme.of(context)
-                                                .primaryBackground
-                                          ],
-                                          stops: [0.3, 1.0],
-                                          begin:
-                                              AlignmentDirectional(0.0, -1.0),
-                                          end: AlignmentDirectional(0, 1.0),
-                                        ),
-                                      ),
-                                    ),
                                     Align(
                                       alignment: AlignmentDirectional(0.0, 1.0),
                                       child: Padding(
@@ -383,10 +366,11 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                             ),
                           ),
                           Container(
+                            height: 220.0,
                             decoration: BoxDecoration(),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 16.0, 0.0, 16.0),
+                                  16.0, 0.0, 0.0, 0.0),
                               child: StreamBuilder<List<MoviesRecord>>(
                                 stream: FFAppState().trendingMoviesCache(
                                   requestFn: () => queryMoviesRecord(
@@ -419,50 +403,47 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                       trendingRowMoviesRecordList =
                                       snapshot.data!;
 
-                                  return SingleChildScrollView(
+                                  return ListView.separated(
+                                    padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: List.generate(
-                                          trendingRowMoviesRecordList.length,
-                                          (trendingRowIndex) {
-                                        final trendingRowMoviesRecord =
-                                            trendingRowMoviesRecordList[
-                                                trendingRowIndex];
-                                        return InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              MoviePageWidget.routeName,
-                                              queryParameters: {
-                                                'movieDoc': serializeParam(
+                                    itemCount:
+                                        trendingRowMoviesRecordList.length,
+                                    separatorBuilder: (_, __) =>
+                                        SizedBox(width: 10.0),
+                                    itemBuilder: (context, trendingRowIndex) {
+                                      final trendingRowMoviesRecord =
+                                          trendingRowMoviesRecordList[
+                                              trendingRowIndex];
+                                      return InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                            MoviePageWidget.routeName,
+                                            queryParameters: {
+                                              'movieDoc': serializeParam(
+                                                trendingRowMoviesRecord,
+                                                ParamType.Document,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'movieDoc':
                                                   trendingRowMoviesRecord,
-                                                  ParamType.Document,
-                                                ),
-                                              }.withoutNulls,
-                                              extra: <String, dynamic>{
-                                                'movieDoc':
-                                                    trendingRowMoviesRecord,
-                                              },
-                                            );
-                                          },
-                                          child: MovieCardWidget(
-                                            key: Key(
-                                                'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
-                                            img: trendingRowMoviesRecord
-                                                .posterImage,
-                                            movieDoc: trendingRowMoviesRecord,
-                                          ),
-                                        );
-                                      }).divide(SizedBox(width: 10.0)),
-                                    ),
+                                            },
+                                          );
+                                        },
+                                        child: MovieCardWidget(
+                                          key: Key(
+                                              'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
+                                          img: trendingRowMoviesRecord
+                                              .posterImage,
+                                          movieDoc: trendingRowMoviesRecord,
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
                               ),
@@ -484,10 +465,11 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                             ),
                           ),
                           Container(
+                            height: 220.0,
                             decoration: BoxDecoration(),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 16.0, 0.0, 16.0),
+                                  16.0, 0.0, 0.0, 0.0),
                               child: StreamBuilder<List<SeriesRecord>>(
                                 stream: FFAppState().trendingSeriesCache(
                                   requestFn: () => querySeriesRecord(
@@ -520,50 +502,47 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                       trendingRowSeriesRecordList =
                                       snapshot.data!;
 
-                                  return SingleChildScrollView(
+                                  return ListView.separated(
+                                    padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: List.generate(
-                                          trendingRowSeriesRecordList.length,
-                                          (trendingRowIndex) {
-                                        final trendingRowSeriesRecord =
-                                            trendingRowSeriesRecordList[
-                                                trendingRowIndex];
-                                        return InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              SeasonPageWidget.routeName,
-                                              queryParameters: {
-                                                'seriesDoc': serializeParam(
+                                    itemCount:
+                                        trendingRowSeriesRecordList.length,
+                                    separatorBuilder: (_, __) =>
+                                        SizedBox(width: 10.0),
+                                    itemBuilder: (context, trendingRowIndex) {
+                                      final trendingRowSeriesRecord =
+                                          trendingRowSeriesRecordList[
+                                              trendingRowIndex];
+                                      return InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                            SeasonPageWidget.routeName,
+                                            queryParameters: {
+                                              'seriesDoc': serializeParam(
+                                                trendingRowSeriesRecord,
+                                                ParamType.Document,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'seriesDoc':
                                                   trendingRowSeriesRecord,
-                                                  ParamType.Document,
-                                                ),
-                                              }.withoutNulls,
-                                              extra: <String, dynamic>{
-                                                'seriesDoc':
-                                                    trendingRowSeriesRecord,
-                                              },
-                                            );
-                                          },
-                                          child: MovieCardWidget(
-                                            key: Key(
-                                                'Key4sb_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
-                                            img: trendingRowSeriesRecord
-                                                .posterImage,
-                                            seriesDoc: trendingRowSeriesRecord,
-                                          ),
-                                        );
-                                      }).divide(SizedBox(width: 10.0)),
-                                    ),
+                                            },
+                                          );
+                                        },
+                                        child: MovieCardWidget(
+                                          key: Key(
+                                              'Key4sb_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
+                                          img: trendingRowSeriesRecord
+                                              .posterImage,
+                                          seriesDoc: trendingRowSeriesRecord,
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
                               ),
