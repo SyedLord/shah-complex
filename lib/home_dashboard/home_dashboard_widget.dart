@@ -119,20 +119,50 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Flexible(
-                        child: Builder(
-                          builder: (context) {
-                            final currentSlide = _model.carouselItems.toList();
+                      Builder(
+                        builder: (context) {
+                          final currentSlide = _model.carouselItems.toList();
 
-                            return Container(
-                              width: double.infinity,
-                              height: 650.0,
-                              child: Stack(
-                                children: [
-                                  Padding(
+                          return Container(
+                            width: double.infinity,
+                            height: 650.0,
+                            child: Stack(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 40.0),
+                                  child: PageView.builder(
+                                    controller: _model.pageViewController ??=
+                                        PageController(
+                                            initialPage: max(
+                                                0,
+                                                min(0,
+                                                    currentSlide.length - 1))),
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: currentSlide.length,
+                                    itemBuilder: (context, currentSlideIndex) {
+                                      final currentSlideItem =
+                                          currentSlide[currentSlideIndex];
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          HeroPosterWidget(
+                                            key: Key(
+                                                'Keyjri_${currentSlideIndex}_of_${currentSlide.length}'),
+                                            slideData: currentSlideItem,
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 1.0),
+                                  child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 40.0),
-                                    child: PageView.builder(
+                                        0.0, 0.0, 0.0, 16.0),
+                                    child: smooth_page_indicator
+                                        .SmoothPageIndicator(
                                       controller: _model.pageViewController ??=
                                           PageController(
                                               initialPage: max(
@@ -141,74 +171,36 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                                       0,
                                                       currentSlide.length -
                                                           1))),
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: currentSlide.length,
-                                      itemBuilder:
-                                          (context, currentSlideIndex) {
-                                        final currentSlideItem =
-                                            currentSlide[currentSlideIndex];
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            HeroPosterWidget(
-                                              key: Key(
-                                                  'Keyjri_${currentSlideIndex}_of_${currentSlide.length}'),
-                                              slideData: currentSlideItem,
-                                            ),
-                                          ],
+                                      count: currentSlide.length,
+                                      axisDirection: Axis.horizontal,
+                                      onDotClicked: (i) async {
+                                        await _model.pageViewController!
+                                            .animateToPage(
+                                          i,
+                                          duration: Duration(milliseconds: 500),
+                                          curve: Curves.ease,
                                         );
+                                        safeSetState(() {});
                                       },
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0.0, 1.0),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 16.0),
-                                      child: smooth_page_indicator
-                                          .SmoothPageIndicator(
-                                        controller: _model
-                                                .pageViewController ??=
-                                            PageController(
-                                                initialPage: max(
-                                                    0,
-                                                    min(
-                                                        0,
-                                                        currentSlide.length -
-                                                            1))),
-                                        count: currentSlide.length,
-                                        axisDirection: Axis.horizontal,
-                                        onDotClicked: (i) async {
-                                          await _model.pageViewController!
-                                              .animateToPage(
-                                            i,
-                                            duration:
-                                                Duration(milliseconds: 500),
-                                            curve: Curves.ease,
-                                          );
-                                          safeSetState(() {});
-                                        },
-                                        effect:
-                                            smooth_page_indicator.SlideEffect(
-                                          spacing: 8.0,
-                                          radius: 8.0,
-                                          dotWidth: 8.0,
-                                          dotHeight: 8.0,
-                                          dotColor: FlutterFlowTheme.of(context)
-                                              .secondary,
-                                          activeDotColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          paintStyle: PaintingStyle.fill,
-                                        ),
+                                      effect: smooth_page_indicator.SlideEffect(
+                                        spacing: 8.0,
+                                        radius: 8.0,
+                                        dotWidth: 8.0,
+                                        dotHeight: 8.0,
+                                        dotColor: FlutterFlowTheme.of(context)
+                                            .secondary,
+                                        activeDotColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                        paintStyle: PaintingStyle.fill,
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
