@@ -425,7 +425,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                               alignment: AlignmentDirectional(-1.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 0.0, 0.0),
+                                    16.0, 0.0, 16.0, 0.0),
                                 child: StreamBuilder<List<SeriesRecord>>(
                                   stream: FFAppState().trendingSeriesCache(
                                     requestFn: () => querySeriesRecord(
@@ -502,7 +502,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                             ),
                           ),
                           Container(
-                            height: 170.0,
+                            height: 180.0,
                             decoration: BoxDecoration(),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
