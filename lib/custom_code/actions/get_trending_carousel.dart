@@ -19,7 +19,7 @@ Future<List<HeroItemStruct>> getTrendingCarousel() async {
     QuerySnapshot movieSnapshot = await FirebaseFirestore.instance
         .collection('movies')
         .where('is_trending', isEqualTo: true)
-        .limit(3)
+        .limit(10)
         .get();
 
     for (var doc in movieSnapshot.docs) {
@@ -52,7 +52,7 @@ Future<List<HeroItemStruct>> getTrendingCarousel() async {
     QuerySnapshot seriesSnapshot = await FirebaseFirestore.instance
         .collection('series')
         .where('is_trending', isEqualTo: true)
-        .limit(3)
+        .limit(10)
         .get();
 
     for (var doc in seriesSnapshot.docs) {
