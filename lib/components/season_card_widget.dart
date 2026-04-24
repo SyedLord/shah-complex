@@ -65,23 +65,24 @@ class _SeasonCardWidgetState extends State<SeasonCardWidget> {
                 fit: BoxFit.cover,
               ),
             ),
-            Align(
-              alignment: AlignmentDirectional(0.0, 1.0),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: CachedNetworkImage(
-                    fadeInDuration: Duration(milliseconds: 200),
-                    fadeOutDuration: Duration(milliseconds: 200),
-                    imageUrl: widget.titleImage,
-                    width: 100.0,
-                    height: 50.0,
-                    fit: BoxFit.contain,
+            if (widget.titleImage != '')
+              Align(
+                alignment: AlignmentDirectional(0.0, 1.0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: CachedNetworkImage(
+                      fadeInDuration: Duration(milliseconds: 200),
+                      fadeOutDuration: Duration(milliseconds: 200),
+                      imageUrl: widget.titleImage,
+                      width: 100.0,
+                      height: 50.0,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),

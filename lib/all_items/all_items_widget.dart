@@ -444,10 +444,12 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                   child: StreamBuilder<List<MoviesRecord>>(
                     stream: FFAppState().trendingMoviesCache(
                       requestFn: () => queryMoviesRecord(
-                        queryBuilder: (moviesRecord) => moviesRecord.where(
-                          'is_trending',
-                          isEqualTo: true,
-                        ),
+                        queryBuilder: (moviesRecord) => moviesRecord
+                            .where(
+                              'is_trending',
+                              isEqualTo: true,
+                            )
+                            .orderBy('created_at', descending: true),
                       ),
                     ),
                     builder: (context, snapshot) {
@@ -526,10 +528,12 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                   child: StreamBuilder<List<SeriesRecord>>(
                     stream: FFAppState().trendingSeriesCache(
                       requestFn: () => querySeriesRecord(
-                        queryBuilder: (seriesRecord) => seriesRecord.where(
-                          'is_trending',
-                          isEqualTo: true,
-                        ),
+                        queryBuilder: (seriesRecord) => seriesRecord
+                            .where(
+                              'is_trending',
+                              isEqualTo: true,
+                            )
+                            .orderBy('created_at', descending: true),
                       ),
                     ),
                     builder: (context, snapshot) {

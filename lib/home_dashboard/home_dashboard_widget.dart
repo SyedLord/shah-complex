@@ -3,6 +3,7 @@ import '/components/bottom_nav_bar_widget.dart';
 import '/components/continue_watching_card_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/components/profile_icon_dropdown_widget.dart';
+import '/components/season_card_widget.dart';
 import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -121,86 +122,123 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      if (FFAppState().carouselItems.isNotEmpty)
-                        Builder(
-                          builder: (context) {
-                            final currentSlide1 =
-                                FFAppState().carouselItems.toList();
+                      Builder(
+                        builder: (context) {
+                          final currentSlide1 =
+                              FFAppState().carouselItems.toList();
 
-                            return Container(
-                              width: double.infinity,
-                              height: 400.0,
-                              child: CarouselSlider.builder(
-                                itemCount: currentSlide1.length,
-                                itemBuilder: (context, currentSlide1Index, _) {
-                                  final currentSlide1Item =
-                                      currentSlide1[currentSlide1Index];
-                                  return InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      if (currentSlide1Item.contentType ==
-                                          'movie') {
-                                        _model.loadedMoviesDoc =
-                                            await MoviesRecord.getDocumentOnce(
-                                                currentSlide1Item.movieRef!);
+                          return Container(
+                            width: double.infinity,
+                            height: 400.0,
+                            child: CarouselSlider.builder(
+                              itemCount: currentSlide1.length,
+                              itemBuilder: (context, currentSlide1Index, _) {
+                                final currentSlide1Item =
+                                    currentSlide1[currentSlide1Index];
+                                return InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    if (currentSlide1Item.contentType ==
+                                        'movie') {
+                                      _model.loadedMoviesDoc =
+                                          await MoviesRecord.getDocumentOnce(
+                                              currentSlide1Item.movieRef!);
 
-                                        context.pushNamed(
-                                          MoviePageWidget.routeName,
-                                          queryParameters: {
-                                            'movieDoc': serializeParam(
-                                              _model.loadedMoviesDoc,
-                                              ParamType.Document,
-                                            ),
-                                          }.withoutNulls,
-                                          extra: <String, dynamic>{
-                                            'movieDoc': _model.loadedMoviesDoc,
-                                            '__transition_info__':
-                                                TransitionInfo(
-                                              hasTransition: true,
-                                              transitionType:
-                                                  PageTransitionType.fade,
-                                            ),
-                                          },
-                                        );
-                                      } else {
-                                        _model.loadedSeriesDoc =
-                                            await SeriesRecord.getDocumentOnce(
-                                                currentSlide1Item.seriesRef!);
+                                      context.pushNamed(
+                                        MoviePageWidget.routeName,
+                                        queryParameters: {
+                                          'movieDoc': serializeParam(
+                                            _model.loadedMoviesDoc,
+                                            ParamType.Document,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'movieDoc': _model.loadedMoviesDoc,
+                                          '__transition_info__': TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                          ),
+                                        },
+                                      );
+                                    } else {
+                                      _model.loadedSeriesDoc =
+                                          await SeriesRecord.getDocumentOnce(
+                                              currentSlide1Item.seriesRef!);
 
-                                        context.pushNamed(
-                                          SeasonPageWidget.routeName,
-                                          queryParameters: {
-                                            'seriesDoc': serializeParam(
-                                              _model.loadedSeriesDoc,
-                                              ParamType.Document,
-                                            ),
-                                          }.withoutNulls,
-                                          extra: <String, dynamic>{
-                                            'seriesDoc': _model.loadedSeriesDoc,
-                                            '__transition_info__':
-                                                TransitionInfo(
-                                              hasTransition: true,
-                                              transitionType:
-                                                  PageTransitionType.fade,
-                                            ),
-                                          },
-                                        );
-                                      }
+                                      context.pushNamed(
+                                        SeasonPageWidget.routeName,
+                                        queryParameters: {
+                                          'seriesDoc': serializeParam(
+                                            _model.loadedSeriesDoc,
+                                            ParamType.Document,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'seriesDoc': _model.loadedSeriesDoc,
+                                          '__transition_info__': TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                          ),
+                                        },
+                                      );
+                                    }
 
-                                      safeSetState(() {});
-                                    },
-                                    child: Stack(
-                                      children: [
-                                        if (currentSlide1Item.image != '')
-                                          InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {},
+                                    safeSetState(() {});
+                                  },
+                                  child: Stack(
+                                    children: [
+                                      if (currentSlide1Item.image != '')
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {},
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: CachedNetworkImage(
+                                              fadeInDuration:
+                                                  Duration(milliseconds: 100),
+                                              fadeOutDuration:
+                                                  Duration(milliseconds: 100),
+                                              imageUrl: currentSlide1Item.image,
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      Container(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Colors.transparent,
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground
+                                            ],
+                                            stops: [0.3, 1.0],
+                                            begin:
+                                                AlignmentDirectional(0.0, -1.0),
+                                            end: AlignmentDirectional(0, 1.0),
+                                          ),
+                                        ),
+                                      ),
+                                      if (currentSlide1Item.logoImage != '')
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 1.0),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 50.0),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
@@ -210,102 +248,60 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                                 fadeOutDuration:
                                                     Duration(milliseconds: 100),
                                                 imageUrl:
-                                                    currentSlide1Item.image,
-                                                width: double.infinity,
-                                                height: double.infinity,
-                                                fit: BoxFit.cover,
+                                                    currentSlide1Item.logoImage,
+                                                width: 300.0,
+                                                height: 100.0,
+                                                fit: BoxFit.contain,
                                               ),
-                                            ),
-                                          ),
-                                        Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                              colors: [
-                                                Colors.transparent,
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryBackground
-                                              ],
-                                              stops: [0.3, 1.0],
-                                              begin: AlignmentDirectional(
-                                                  0.0, -1.0),
-                                              end: AlignmentDirectional(0, 1.0),
                                             ),
                                           ),
                                         ),
-                                        if (currentSlide1Item.logoImage != '')
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 1.0),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 50.0),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: CachedNetworkImage(
-                                                  fadeInDuration: Duration(
-                                                      milliseconds: 100),
-                                                  fadeOutDuration: Duration(
-                                                      milliseconds: 100),
-                                                  imageUrl: currentSlide1Item
-                                                      .logoImage,
-                                                  width: 300.0,
-                                                  height: 100.0,
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        if (currentSlide1Item.image == '')
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
-                                            child: Container(
+                                      if (currentSlide1Item.image == '')
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: Container(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: custom_widgets.BeatLoader(
                                               width: 50.0,
                                               height: 50.0,
-                                              child: custom_widgets.BeatLoader(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                size: 50.0,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                              ),
+                                              size: 50.0,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
                                             ),
                                           ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                                carouselController:
-                                    _model.carouselController ??=
-                                        CarouselSliderController(),
-                                options: CarouselOptions(
-                                  initialPage:
-                                      max(0, min(1, currentSlide1.length - 1)),
-                                  viewportFraction: 1.0,
-                                  disableCenter: true,
-                                  enlargeCenterPage: true,
-                                  enlargeFactor: 0.25,
-                                  enableInfiniteScroll: true,
-                                  scrollDirection: Axis.horizontal,
-                                  autoPlay: true,
-                                  autoPlayAnimationDuration:
-                                      Duration(milliseconds: 800),
-                                  autoPlayInterval:
-                                      Duration(milliseconds: (800 + 4000)),
-                                  autoPlayCurve: Curves.linear,
-                                  pauseAutoPlayInFiniteScroll: true,
-                                  onPageChanged: (index, _) =>
-                                      _model.carouselCurrentIndex = index,
-                                ),
+                                        ),
+                                    ],
+                                  ),
+                                );
+                              },
+                              carouselController: _model.carouselController ??=
+                                  CarouselSliderController(),
+                              options: CarouselOptions(
+                                initialPage:
+                                    max(0, min(1, currentSlide1.length - 1)),
+                                viewportFraction: 1.0,
+                                disableCenter: true,
+                                enlargeCenterPage: true,
+                                enlargeFactor: 0.25,
+                                enableInfiniteScroll: true,
+                                scrollDirection: Axis.horizontal,
+                                autoPlay: true,
+                                autoPlayAnimationDuration:
+                                    Duration(milliseconds: 800),
+                                autoPlayInterval:
+                                    Duration(milliseconds: (800 + 4000)),
+                                autoPlayCurve: Curves.linear,
+                                pauseAutoPlayInFiniteScroll: true,
+                                onPageChanged: (index, _) =>
+                                    _model.carouselCurrentIndex = index,
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
+                      ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -423,7 +419,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                             ),
                           ),
                           Container(
-                            height: 220.0,
+                            height: 120.0,
                             decoration: BoxDecoration(),
                             child: Align(
                               alignment: AlignmentDirectional(-1.0, 0.0),
@@ -475,33 +471,13 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                         final trendingRowSeriesRecord =
                                             trendingRowSeriesRecordList[
                                                 trendingRowIndex];
-                                        return InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              SeasonPageWidget.routeName,
-                                              queryParameters: {
-                                                'seriesDoc': serializeParam(
-                                                  trendingRowSeriesRecord,
-                                                  ParamType.Document,
-                                                ),
-                                              }.withoutNulls,
-                                              extra: <String, dynamic>{
-                                                'seriesDoc':
-                                                    trendingRowSeriesRecord,
-                                              },
-                                            );
-                                          },
-                                          child: MovieCardWidget(
-                                            key: Key(
-                                                'Key4sb_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
-                                            img: trendingRowSeriesRecord
-                                                .posterImage,
-                                            seriesDoc: trendingRowSeriesRecord,
-                                          ),
+                                        return SeasonCardWidget(
+                                          key: Key(
+                                              'Keyxqg_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
+                                          posterImage: trendingRowSeriesRecord
+                                              .backdropImage,
+                                          titleImage:
+                                              trendingRowSeriesRecord.logoImage,
                                         );
                                       },
                                     );
@@ -777,7 +753,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                   ),
                                   Container(
                                     width: double.infinity,
-                                    height: 220.0,
+                                    height: 120.0,
                                     decoration: BoxDecoration(),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -833,36 +809,14 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                               final listViewSeriesRecord =
                                                   listViewSeriesRecordList[
                                                       listViewIndex];
-                                              return InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  context.pushNamed(
-                                                    SeasonPageWidget.routeName,
-                                                    queryParameters: {
-                                                      'seriesDoc':
-                                                          serializeParam(
-                                                        listViewSeriesRecord,
-                                                        ParamType.Document,
-                                                      ),
-                                                    }.withoutNulls,
-                                                    extra: <String, dynamic>{
-                                                      'seriesDoc':
-                                                          listViewSeriesRecord,
-                                                    },
-                                                  );
-                                                },
-                                                child: MovieCardWidget(
-                                                  key: Key(
-                                                      'Keyw42_${listViewIndex}_of_${listViewSeriesRecordList.length}'),
-                                                  img: listViewSeriesRecord
-                                                      .posterImage,
-                                                  seriesDoc:
-                                                      listViewSeriesRecord,
-                                                ),
+                                              return SeasonCardWidget(
+                                                key: Key(
+                                                    'Keyd13_${listViewIndex}_of_${listViewSeriesRecordList.length}'),
+                                                posterImage:
+                                                    listViewSeriesRecord
+                                                        .backdropImage,
+                                                titleImage: listViewSeriesRecord
+                                                    .logoImage,
                                               );
                                             },
                                           );
