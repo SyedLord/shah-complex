@@ -679,12 +679,24 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                               },
                                                             );
                                                           },
-                                                          child:
-                                                              MovieCardWidget(
-                                                            key: Key(
-                                                                'Keyf5w_${listViewIndex}_of_${listViewMyListRecordList.length}'),
-                                                            img: movieCardMoviesRecord
-                                                                .posterImage,
+                                                          child: wrapWithModel(
+                                                            model: _model
+                                                                .movieCardModels1
+                                                                .getModel(
+                                                              '${myProfileProfilesRecord.reference.id}_${movieCardMoviesRecord.reference.id}',
+                                                              listViewIndex,
+                                                            ),
+                                                            updateCallback: () =>
+                                                                safeSetState(
+                                                                    () {}),
+                                                            child:
+                                                                MovieCardWidget(
+                                                              key: Key(
+                                                                'Keyf5w_${'${myProfileProfilesRecord.reference.id}_${movieCardMoviesRecord.reference.id}'}',
+                                                              ),
+                                                              img: movieCardMoviesRecord
+                                                                  .posterImage,
+                                                            ),
                                                           ),
                                                         );
                                                       },
@@ -758,12 +770,24 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                               },
                                                             );
                                                           },
-                                                          child:
-                                                              MovieCardWidget(
-                                                            key: Key(
-                                                                'Keyl10_${listViewIndex}_of_${listViewMyListRecordList.length}'),
-                                                            img: movieCardSeriesRecord
-                                                                .posterImage,
+                                                          child: wrapWithModel(
+                                                            model: _model
+                                                                .movieCardModels2
+                                                                .getModel(
+                                                              '${myProfileProfilesRecord.reference.id}_${movieCardSeriesRecord.reference.id}',
+                                                              listViewIndex,
+                                                            ),
+                                                            updateCallback: () =>
+                                                                safeSetState(
+                                                                    () {}),
+                                                            child:
+                                                                MovieCardWidget(
+                                                              key: Key(
+                                                                'Keyl10_${'${myProfileProfilesRecord.reference.id}_${movieCardSeriesRecord.reference.id}'}',
+                                                              ),
+                                                              img: movieCardSeriesRecord
+                                                                  .posterImage,
+                                                            ),
                                                           ),
                                                         );
                                                       },
