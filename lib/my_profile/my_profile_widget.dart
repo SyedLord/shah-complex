@@ -6,7 +6,6 @@ import '/components/movie_card_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -618,7 +617,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                       stream: FFAppState()
                                                           .myListMovieCard(
                                                         uniqueQueryKey:
-                                                            '${myProfileProfilesRecord.reference.id}_${movieCardMoviesRecord.reference.id}',
+                                                            '${myProfileProfilesRecord.reference.id}_${listViewMyListRecord.movieRef?.id}',
                                                         requestFn: () =>
                                                             MoviesRecord.getDocument(
                                                                 listViewMyListRecord
@@ -699,7 +698,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                       stream: FFAppState()
                                                           .myListSeasonCard(
                                                         uniqueQueryKey:
-                                                            '${myProfileProfilesRecord.reference.id}_${movieCardSeriesRecord.reference.id}',
+                                                            '${myProfileProfilesRecord.reference.id}_${listViewMyListRecord.seasonRef?.id}',
                                                         requestFn: () =>
                                                             SeriesRecord.getDocument(
                                                                 listViewMyListRecord
