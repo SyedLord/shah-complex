@@ -6,6 +6,7 @@ import '/components/movie_card_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -616,6 +617,8 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                     StreamBuilder<MoviesRecord>(
                                                       stream: FFAppState()
                                                           .myListMovieCard(
+                                                        uniqueQueryKey:
+                                                            '${myProfileProfilesRecord.reference.id}_${movieCardMoviesRecord.reference.id}',
                                                         requestFn: () =>
                                                             MoviesRecord.getDocument(
                                                                 listViewMyListRecord
@@ -679,24 +682,12 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                               },
                                                             );
                                                           },
-                                                          child: wrapWithModel(
-                                                            model: _model
-                                                                .movieCardModels1
-                                                                .getModel(
-                                                              '${myProfileProfilesRecord.reference.id}_${movieCardMoviesRecord.reference.id}',
-                                                              listViewIndex,
-                                                            ),
-                                                            updateCallback: () =>
-                                                                safeSetState(
-                                                                    () {}),
-                                                            child:
-                                                                MovieCardWidget(
-                                                              key: Key(
-                                                                'Keyf5w_${'${myProfileProfilesRecord.reference.id}_${movieCardMoviesRecord.reference.id}'}',
-                                                              ),
-                                                              img: movieCardMoviesRecord
-                                                                  .posterImage,
-                                                            ),
+                                                          child:
+                                                              MovieCardWidget(
+                                                            key: Key(
+                                                                'Keyf5w_${listViewIndex}_of_${listViewMyListRecordList.length}'),
+                                                            img: movieCardMoviesRecord
+                                                                .posterImage,
                                                           ),
                                                         );
                                                       },
@@ -707,6 +698,8 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                     StreamBuilder<SeriesRecord>(
                                                       stream: FFAppState()
                                                           .myListSeasonCard(
+                                                        uniqueQueryKey:
+                                                            '${myProfileProfilesRecord.reference.id}_${movieCardSeriesRecord.reference.id}',
                                                         requestFn: () =>
                                                             SeriesRecord.getDocument(
                                                                 listViewMyListRecord
@@ -770,24 +763,12 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                               },
                                                             );
                                                           },
-                                                          child: wrapWithModel(
-                                                            model: _model
-                                                                .movieCardModels2
-                                                                .getModel(
-                                                              '${myProfileProfilesRecord.reference.id}_${movieCardSeriesRecord.reference.id}',
-                                                              listViewIndex,
-                                                            ),
-                                                            updateCallback: () =>
-                                                                safeSetState(
-                                                                    () {}),
-                                                            child:
-                                                                MovieCardWidget(
-                                                              key: Key(
-                                                                'Keyl10_${'${myProfileProfilesRecord.reference.id}_${movieCardSeriesRecord.reference.id}'}',
-                                                              ),
-                                                              img: movieCardSeriesRecord
-                                                                  .posterImage,
-                                                            ),
+                                                          child:
+                                                              MovieCardWidget(
+                                                            key: Key(
+                                                                'Keyl10_${listViewIndex}_of_${listViewMyListRecordList.length}'),
+                                                            img: movieCardSeriesRecord
+                                                                .posterImage,
                                                           ),
                                                         );
                                                       },
