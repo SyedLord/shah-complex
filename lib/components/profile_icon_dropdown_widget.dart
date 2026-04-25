@@ -189,11 +189,6 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
                 highlightColor: Colors.transparent,
                 onTap: () async {
                   context.pushNamed(ProfileSelectionWidget.routeName);
-
-                  FFAppState().clearProfileWatchlistCountCache();
-                  FFAppState().clearMyListAllItemsCache();
-                  FFAppState().clearMyListMovieCardCache();
-                  FFAppState().clearMyListSeasonCardCache();
                 },
                 child: Container(
                   decoration: BoxDecoration(

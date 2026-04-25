@@ -49,6 +49,10 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
           }.withoutNulls,
         );
       }
+      FFAppState().clearProfileWatchlistCountCache();
+      FFAppState().clearMyListAllItemsCache();
+      FFAppState().clearMyListMovieCardCache();
+      FFAppState().clearMyListSeasonCardCache();
     });
   }
 
