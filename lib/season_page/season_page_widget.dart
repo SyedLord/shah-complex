@@ -425,6 +425,14 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                                                 .seriesDoc
                                                                 ?.reference,
                                                           ));
+                                                      FFAppState()
+                                                          .clearProfileWatchlistCountCache();
+                                                      FFAppState()
+                                                          .clearMyListAllItemsCache();
+                                                      FFAppState()
+                                                          .clearMyListMovieCardCache();
+                                                      FFAppState()
+                                                          .clearMyListSeasonCardCache();
                                                     },
                                                   ),
                                                 if ((myListContainerMyListRecord !=
@@ -445,6 +453,14 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                                       await myListContainerMyListRecord!
                                                           .reference
                                                           .delete();
+                                                      FFAppState()
+                                                          .clearProfileWatchlistCountCache();
+                                                      FFAppState()
+                                                          .clearMyListAllItemsCache();
+                                                      FFAppState()
+                                                          .clearMyListMovieCardCache();
+                                                      FFAppState()
+                                                          .clearMyListSeasonCardCache();
                                                     },
                                                   ),
                                               ],

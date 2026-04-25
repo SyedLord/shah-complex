@@ -6,6 +6,10 @@ import 'my_profile_widget.dart' show MyProfileWidget;
 import 'package:flutter/material.dart';
 
 class MyProfileModel extends FlutterFlowModel<MyProfileWidget> {
+  ///  Local state fields for this page.
+
+  bool isHidden = true;
+
   ///  State fields for stateful widgets in this page.
 
   // Model for DownloadItem.

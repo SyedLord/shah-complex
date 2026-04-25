@@ -266,42 +266,55 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              decoration: BoxDecoration(),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '12',
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          font: GoogleFonts.poppins(
+                            if (_model.isHidden == false)
+                              Container(
+                                decoration: BoxDecoration(),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '12',
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            font: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.bold,
                                             fontStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .titleMedium
                                                     .fontStyle,
+                                            lineHeight: 1.3,
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMedium
-                                                  .fontStyle,
-                                          lineHeight: 1.3,
-                                        ),
-                                  ),
-                                  Text(
-                                    'Downloads',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelSmall
-                                        .override(
-                                          font: GoogleFonts.poppins(
+                                    ),
+                                    Text(
+                                      'Downloads',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelSmall
+                                          .override(
+                                            font: GoogleFonts.poppins(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelSmall
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelSmall
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
                                                     .labelSmall
@@ -310,31 +323,20 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .labelSmall
                                                     .fontStyle,
+                                            lineHeight: 1.2,
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelSmall
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelSmall
-                                                  .fontStyle,
-                                          lineHeight: 1.2,
-                                        ),
-                                  ),
-                                ].divide(SizedBox(height: 4.0)),
+                                    ),
+                                  ].divide(SizedBox(height: 4.0)),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 24.0,
-                              child: VerticalDivider(
-                                thickness: 1.0,
-                                color: FlutterFlowTheme.of(context).alternate,
+                            if (_model.isHidden == false)
+                              SizedBox(
+                                height: 24.0,
+                                child: VerticalDivider(
+                                  thickness: 1.0,
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                ),
                               ),
-                            ),
                             Container(
                               decoration: BoxDecoration(),
                               child: Column(
@@ -559,17 +561,19 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       child: StreamBuilder<List<MyListRecord>>(
-                                        stream: queryMyListRecord(
-                                          queryBuilder: (myListRecord) =>
-                                              myListRecord
-                                                  .where(
-                                                    'profile_ref',
-                                                    isEqualTo: FFAppState()
-                                                        .activeProfileRef,
-                                                  )
-                                                  .orderBy('added_at',
-                                                      descending: true),
-                                          limit: 10,
+                                        stream: FFAppState().myListAllItems(
+                                          requestFn: () => queryMyListRecord(
+                                            queryBuilder: (myListRecord) =>
+                                                myListRecord
+                                                    .where(
+                                                      'profile_ref',
+                                                      isEqualTo: FFAppState()
+                                                          .activeProfileRef,
+                                                    )
+                                                    .orderBy('added_at',
+                                                        descending: true),
+                                            limit: 10,
+                                          ),
                                         ),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
@@ -610,10 +614,13 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                           .movieRef !=
                                                       null)
                                                     StreamBuilder<MoviesRecord>(
-                                                      stream: MoviesRecord
-                                                          .getDocument(
-                                                              listViewMyListRecord
-                                                                  .movieRef!),
+                                                      stream: FFAppState()
+                                                          .myListMovieCard(
+                                                        requestFn: () =>
+                                                            MoviesRecord.getDocument(
+                                                                listViewMyListRecord
+                                                                    .movieRef!),
+                                                      ),
                                                       builder:
                                                           (context, snapshot) {
                                                         // Customize what your widget looks like when it's loading.
@@ -686,10 +693,13 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                           .seasonRef !=
                                                       null)
                                                     StreamBuilder<SeriesRecord>(
-                                                      stream: SeriesRecord
-                                                          .getDocument(
-                                                              listViewMyListRecord
-                                                                  .seasonRef!),
+                                                      stream: FFAppState()
+                                                          .myListSeasonCard(
+                                                        requestFn: () =>
+                                                            SeriesRecord.getDocument(
+                                                                listViewMyListRecord
+                                                                    .seasonRef!),
+                                                      ),
                                                       builder:
                                                           (context, snapshot) {
                                                         // Customize what your widget looks like when it's loading.
@@ -771,61 +781,78 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                           ],
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 24.0, 24.0, 8.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Downloads',
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          font: GoogleFonts.poppins(
+                      if (_model.isHidden == false)
+                        Container(
+                          decoration: BoxDecoration(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 24.0, 24.0, 8.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Downloads',
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            font: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.bold,
                                             fontStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .titleMedium
                                                     .fontStyle,
+                                            lineHeight: 1.3,
                                           ),
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.smart_display_rounded,
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMedium
-                                                  .fontStyle,
-                                          lineHeight: 1.3,
+                                              .secondaryText,
+                                          size: 16.0,
                                         ),
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.smart_display_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 16.0,
-                                      ),
-                                      Text(
-                                        'Smart Downloads On',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .override(
-                                              font: GoogleFonts.poppins(
+                                        Text(
+                                          'Smart Downloads On',
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelSmall
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelSmall
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelSmall
+                                                          .fontStyle,
+                                                ),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                letterSpacing: 0.0,
                                                 fontWeight:
                                                     FlutterFlowTheme.of(context)
                                                         .labelSmall
@@ -834,71 +861,59 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .labelSmall
                                                         .fontStyle,
+                                                lineHeight: 1.2,
                                               ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelSmall
-                                                      .fontStyle,
-                                              lineHeight: 1.2,
-                                            ),
+                                        ),
+                                      ].divide(SizedBox(width: 4.0)),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 120.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    wrapWithModel(
+                                      model: _model.downloadItemModel1,
+                                      updateCallback: () => safeSetState(() {}),
+                                      child: DownloadItemWidget(
+                                        img_desc:
+                                            'https://dimg.dreamflow.cloud/v1/image/Stranger%20Things%20upside%20down%20forest',
+                                        meta: 'S4:E1 • 1.2 GB',
+                                        title: 'Stranger Things',
                                       ),
-                                    ].divide(SizedBox(width: 4.0)),
-                                  ),
-                                ],
+                                    ),
+                                    wrapWithModel(
+                                      model: _model.downloadItemModel2,
+                                      updateCallback: () => safeSetState(() {}),
+                                      child: DownloadItemWidget(
+                                        img_desc:
+                                            'https://dimg.dreamflow.cloud/v1/image/Tokyo%20deserted%20street',
+                                        meta: 'S2:E5 • 850 MB',
+                                        title: 'Alice in Borderland',
+                                      ),
+                                    ),
+                                    wrapWithModel(
+                                      model: _model.downloadItemModel3,
+                                      updateCallback: () => safeSetState(() {}),
+                                      child: DownloadItemWidget(
+                                        img_desc:
+                                            'https://dimg.dreamflow.cloud/v1/image/Anime%20white%20hair%20character',
+                                        meta: 'Movie • 2.1 GB',
+                                        title: 'Jujutsu Kaisen 0',
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 120.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  wrapWithModel(
-                                    model: _model.downloadItemModel1,
-                                    updateCallback: () => safeSetState(() {}),
-                                    child: DownloadItemWidget(
-                                      img_desc:
-                                          'https://dimg.dreamflow.cloud/v1/image/Stranger%20Things%20upside%20down%20forest',
-                                      meta: 'S4:E1 • 1.2 GB',
-                                      title: 'Stranger Things',
-                                    ),
-                                  ),
-                                  wrapWithModel(
-                                    model: _model.downloadItemModel2,
-                                    updateCallback: () => safeSetState(() {}),
-                                    child: DownloadItemWidget(
-                                      img_desc:
-                                          'https://dimg.dreamflow.cloud/v1/image/Tokyo%20deserted%20street',
-                                      meta: 'S2:E5 • 850 MB',
-                                      title: 'Alice in Borderland',
-                                    ),
-                                  ),
-                                  wrapWithModel(
-                                    model: _model.downloadItemModel3,
-                                    updateCallback: () => safeSetState(() {}),
-                                    child: DownloadItemWidget(
-                                      img_desc:
-                                          'https://dimg.dreamflow.cloud/v1/image/Anime%20white%20hair%20character',
-                                      meta: 'Movie • 2.1 GB',
-                                      title: 'Jujutsu Kaisen 0',
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),

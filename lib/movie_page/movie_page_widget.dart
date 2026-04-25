@@ -673,6 +673,10 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                                           .clearProfileWatchlistCountCache();
                                                       FFAppState()
                                                           .clearMyListAllItemsCache();
+                                                      FFAppState()
+                                                          .clearMyListMovieCardCache();
+                                                      FFAppState()
+                                                          .clearMyListSeasonCardCache();
                                                     },
                                                   ),
                                                 if ((myListContainerMyListRecord !=
@@ -697,6 +701,10 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                                           .clearProfileWatchlistCountCache();
                                                       FFAppState()
                                                           .clearMyListAllItemsCache();
+                                                      FFAppState()
+                                                          .clearMyListMovieCardCache();
+                                                      FFAppState()
+                                                          .clearMyListSeasonCardCache();
                                                     },
                                                   ),
                                               ],
