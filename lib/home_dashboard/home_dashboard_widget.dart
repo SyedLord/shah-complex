@@ -283,218 +283,232 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                           );
                         },
                       ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          wrapWithModel(
-                            model: _model.sectionHeaderModel1,
-                            updateCallback: () => safeSetState(() {}),
-                            child: SectionHeaderWidget(
-                              title: 'Trending Movies',
-                              type: 'movie',
-                              isTrending: true,
-                              isContinueWatching: false,
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            wrapWithModel(
+                              model: _model.sectionHeaderModel1,
+                              updateCallback: () => safeSetState(() {}),
+                              child: SectionHeaderWidget(
+                                title: 'Trending Movies',
+                                type: 'movie',
+                                isTrending: true,
+                                isContinueWatching: false,
+                              ),
                             ),
-                          ),
-                          Container(
-                            height: 220.0,
-                            decoration: BoxDecoration(),
-                            child: Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 0.0, 0.0),
-                                child: FutureBuilder<List<MoviesRecord>>(
-                                  future: FFAppState().trendingMoviesCache(
-                                    requestFn: () => queryMoviesRecordOnce(
-                                      queryBuilder: (moviesRecord) =>
-                                          moviesRecord
-                                              .where(
-                                                'is_trending',
-                                                isEqualTo: true,
-                                              )
-                                              .orderBy('created_at',
-                                                  descending: true),
-                                      limit: 10,
+                            Container(
+                              height: 220.0,
+                              decoration: BoxDecoration(),
+                              child: Align(
+                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 0.0, 0.0),
+                                  child: FutureBuilder<List<MoviesRecord>>(
+                                    future: FFAppState().trendingMoviesCache(
+                                      requestFn: () => queryMoviesRecordOnce(
+                                        queryBuilder: (moviesRecord) =>
+                                            moviesRecord
+                                                .where(
+                                                  'is_trending',
+                                                  isEqualTo: true,
+                                                )
+                                                .orderBy('created_at',
+                                                    descending: true),
+                                        limit: 10,
+                                      ),
                                     ),
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: SpinKitPulse(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            size: 50.0,
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: SpinKitPulse(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              size: 50.0,
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    }
-                                    List<MoviesRecord>
-                                        trendingRowMoviesRecordList =
-                                        snapshot.data!;
+                                        );
+                                      }
+                                      List<MoviesRecord>
+                                          trendingRowMoviesRecordList =
+                                          snapshot.data!;
 
-                                    return ListView.separated(
-                                      padding: EdgeInsets.zero,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount:
-                                          trendingRowMoviesRecordList.length,
-                                      separatorBuilder: (_, __) =>
-                                          SizedBox(width: 10.0),
-                                      itemBuilder: (context, trendingRowIndex) {
-                                        final trendingRowMoviesRecord =
-                                            trendingRowMoviesRecordList[
-                                                trendingRowIndex];
-                                        return InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              MoviePageWidget.routeName,
-                                              queryParameters: {
-                                                'movieDoc': serializeParam(
-                                                  trendingRowMoviesRecord,
-                                                  ParamType.Document,
-                                                ),
-                                              }.withoutNulls,
-                                              extra: <String, dynamic>{
-                                                'movieDoc':
+                                      return ListView.separated(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount:
+                                            trendingRowMoviesRecordList.length,
+                                        separatorBuilder: (_, __) =>
+                                            SizedBox(width: 10.0),
+                                        itemBuilder:
+                                            (context, trendingRowIndex) {
+                                          final trendingRowMoviesRecord =
+                                              trendingRowMoviesRecordList[
+                                                  trendingRowIndex];
+                                          return InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed(
+                                                MoviePageWidget.routeName,
+                                                queryParameters: {
+                                                  'movieDoc': serializeParam(
                                                     trendingRowMoviesRecord,
-                                              },
-                                            );
-                                          },
-                                          child: MovieCardWidget(
-                                            key: Key(
-                                                'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
-                                            img: trendingRowMoviesRecord
-                                                .posterImage,
-                                            movieDoc: trendingRowMoviesRecord,
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          wrapWithModel(
-                            model: _model.sectionHeaderModel2,
-                            updateCallback: () => safeSetState(() {}),
-                            child: SectionHeaderWidget(
-                              title: 'Trending Series',
-                              type: 'series',
-                              isTrending: true,
-                              isContinueWatching: false,
-                            ),
-                          ),
-                          Container(
-                            height: 120.0,
-                            decoration: BoxDecoration(),
-                            child: Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                child: FutureBuilder<List<SeriesRecord>>(
-                                  future: FFAppState().trendingSeriesCache(
-                                    requestFn: () => querySeriesRecordOnce(
-                                      queryBuilder: (seriesRecord) =>
-                                          seriesRecord
-                                              .where(
-                                                'is_trending',
-                                                isEqualTo: true,
-                                              )
-                                              .orderBy('created_at',
-                                                  descending: true),
-                                      limit: 10,
-                                    ),
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: SpinKitPulse(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            size: 50.0,
-                                          ),
-                                        ),
+                                                    ParamType.Document,
+                                                  ),
+                                                }.withoutNulls,
+                                                extra: <String, dynamic>{
+                                                  'movieDoc':
+                                                      trendingRowMoviesRecord,
+                                                },
+                                              );
+                                            },
+                                            child: MovieCardWidget(
+                                              key: Key(
+                                                  'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
+                                              img: trendingRowMoviesRecord
+                                                  .posterImage,
+                                              movieDoc: trendingRowMoviesRecord,
+                                            ),
+                                          );
+                                        },
                                       );
-                                    }
-                                    List<SeriesRecord>
-                                        trendingRowSeriesRecordList =
-                                        snapshot.data!;
-
-                                    return ListView.separated(
-                                      padding: EdgeInsets.zero,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount:
-                                          trendingRowSeriesRecordList.length,
-                                      separatorBuilder: (_, __) =>
-                                          SizedBox(width: 10.0),
-                                      itemBuilder: (context, trendingRowIndex) {
-                                        final trendingRowSeriesRecord =
-                                            trendingRowSeriesRecordList[
-                                                trendingRowIndex];
-                                        return InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              SeasonPageWidget.routeName,
-                                              queryParameters: {
-                                                'seriesDoc': serializeParam(
-                                                  trendingRowSeriesRecord,
-                                                  ParamType.Document,
-                                                ),
-                                              }.withoutNulls,
-                                              extra: <String, dynamic>{
-                                                'seriesDoc':
-                                                    trendingRowSeriesRecord,
-                                                '__transition_info__':
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                ),
-                                              },
-                                            );
-                                          },
-                                          child: SeasonCardWidget(
-                                            key: Key(
-                                                'Keyxqg_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
-                                            posterImage: trendingRowSeriesRecord
-                                                .backdropImage,
-                                            titleImage: trendingRowSeriesRecord
-                                                .logoImage,
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            wrapWithModel(
+                              model: _model.sectionHeaderModel2,
+                              updateCallback: () => safeSetState(() {}),
+                              child: SectionHeaderWidget(
+                                title: 'Trending Series',
+                                type: 'series',
+                                isTrending: true,
+                                isContinueWatching: false,
+                              ),
+                            ),
+                            Container(
+                              height: 120.0,
+                              decoration: BoxDecoration(),
+                              child: Align(
+                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  child: FutureBuilder<List<SeriesRecord>>(
+                                    future: FFAppState().trendingSeriesCache(
+                                      requestFn: () => querySeriesRecordOnce(
+                                        queryBuilder: (seriesRecord) =>
+                                            seriesRecord
+                                                .where(
+                                                  'is_trending',
+                                                  isEqualTo: true,
+                                                )
+                                                .orderBy('created_at',
+                                                    descending: true),
+                                        limit: 10,
+                                      ),
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: SpinKitPulse(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              size: 50.0,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<SeriesRecord>
+                                          trendingRowSeriesRecordList =
+                                          snapshot.data!;
+
+                                      return ListView.separated(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount:
+                                            trendingRowSeriesRecordList.length,
+                                        separatorBuilder: (_, __) =>
+                                            SizedBox(width: 10.0),
+                                        itemBuilder:
+                                            (context, trendingRowIndex) {
+                                          final trendingRowSeriesRecord =
+                                              trendingRowSeriesRecordList[
+                                                  trendingRowIndex];
+                                          return InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed(
+                                                SeasonPageWidget.routeName,
+                                                queryParameters: {
+                                                  'seriesDoc': serializeParam(
+                                                    trendingRowSeriesRecord,
+                                                    ParamType.Document,
+                                                  ),
+                                                }.withoutNulls,
+                                                extra: <String, dynamic>{
+                                                  'seriesDoc':
+                                                      trendingRowSeriesRecord,
+                                                  '__transition_info__':
+                                                      TransitionInfo(
+                                                    hasTransition: true,
+                                                    transitionType:
+                                                        PageTransitionType.fade,
+                                                  ),
+                                                },
+                                              );
+                                            },
+                                            child: SeasonCardWidget(
+                                              key: Key(
+                                                  'Keyxqg_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
+                                              posterImage:
+                                                  trendingRowSeriesRecord
+                                                      .backdropImage,
+                                              titleImage:
+                                                  trendingRowSeriesRecord
+                                                      .logoImage,
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
@@ -591,12 +605,13 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                           List<CategoriesRecord> moviesCategoriesRecordList =
                               snapshot.data!;
 
-                          return ListView.builder(
+                          return ListView.separated(
                             padding: EdgeInsets.zero,
                             primary: false,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemCount: moviesCategoriesRecordList.length,
+                            separatorBuilder: (_, __) => SizedBox(height: 16.0),
                             itemBuilder: (context, moviesIndex) {
                               final moviesCategoriesRecord =
                                   moviesCategoriesRecordList[moviesIndex];
@@ -740,12 +755,13 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                           List<CategoriesRecord> seasonsCategoriesRecordList =
                               snapshot.data!;
 
-                          return ListView.builder(
+                          return ListView.separated(
                             padding: EdgeInsets.zero,
                             primary: false,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemCount: seasonsCategoriesRecordList.length,
+                            separatorBuilder: (_, __) => SizedBox(height: 16.0),
                             itemBuilder: (context, seasonsIndex) {
                               final seasonsCategoriesRecord =
                                   seasonsCategoriesRecordList[seasonsIndex];
