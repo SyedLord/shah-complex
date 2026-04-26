@@ -67,6 +67,13 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _carouselItems;
     });
+    _safeInit(() {
+      _searchResultMovies = prefs
+              .getStringList('ff_searchResultMovies')
+              ?.map((path) => path.ref)
+              .toList() ??
+          _searchResultMovies;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -240,6 +247,47 @@ class FFAppState extends ChangeNotifier {
   String get tempProfileName => _tempProfileName;
   set tempProfileName(String value) {
     _tempProfileName = value;
+  }
+
+  List<DocumentReference> _searchResultMovies = [];
+  List<DocumentReference> get searchResultMovies => _searchResultMovies;
+  set searchResultMovies(List<DocumentReference> value) {
+    _searchResultMovies = value;
+    prefs.setStringList(
+        'ff_searchResultMovies', value.map((x) => x.path).toList());
+  }
+
+  void addToSearchResultMovies(DocumentReference value) {
+    searchResultMovies.add(value);
+    prefs.setStringList('ff_searchResultMovies',
+        _searchResultMovies.map((x) => x.path).toList());
+  }
+
+  void removeFromSearchResultMovies(DocumentReference value) {
+    searchResultMovies.remove(value);
+    prefs.setStringList('ff_searchResultMovies',
+        _searchResultMovies.map((x) => x.path).toList());
+  }
+
+  void removeAtIndexFromSearchResultMovies(int index) {
+    searchResultMovies.removeAt(index);
+    prefs.setStringList('ff_searchResultMovies',
+        _searchResultMovies.map((x) => x.path).toList());
+  }
+
+  void updateSearchResultMoviesAtIndex(
+    int index,
+    DocumentReference Function(DocumentReference) updateFn,
+  ) {
+    searchResultMovies[index] = updateFn(_searchResultMovies[index]);
+    prefs.setStringList('ff_searchResultMovies',
+        _searchResultMovies.map((x) => x.path).toList());
+  }
+
+  void insertAtIndexInSearchResultMovies(int index, DocumentReference value) {
+    searchResultMovies.insert(index, value);
+    prefs.setStringList('ff_searchResultMovies',
+        _searchResultMovies.map((x) => x.path).toList());
   }
 
   final _profileWatchlistCountManager = FutureRequestManager<int>();
