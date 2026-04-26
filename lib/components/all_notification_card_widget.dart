@@ -84,6 +84,8 @@ class _AllNotificationCardWidgetState extends State<AllNotificationCardWidget> {
                       widget.trailer_img,
                       'https://dimg.dreamflow.cloud/v1/image/Arcane%20Season%202%20Jinx%20Vi%20fight',
                     ),
+                    width: double.infinity,
+                    height: double.infinity,
                     fit: BoxFit.cover,
                     alignment: Alignment(0.0, 0.0),
                   ),
