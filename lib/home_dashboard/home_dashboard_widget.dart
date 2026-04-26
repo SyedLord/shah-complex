@@ -15,7 +15,6 @@ import '/index.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -49,19 +48,6 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
       FFAppState().carouselItems =
           _model.trendingList!.toList().cast<HeroItemStruct>();
       safeSetState(() {});
-      _model.serverUpdateDoc = await queryAppConfigRecordOnce(
-        singleRecord: true,
-      ).then((s) => s.firstOrNull);
-      if ((_model.serverUpdateDoc!.trendingLastUpdated! >
-              FFAppState().localCacheTime!) ||
-          (FFAppState().localCacheTime == null)) {
-        FFAppState().clearTrendingMoviesCacheCache();
-        FFAppState().clearTrendingSeriesCacheCache();
-        FFAppState().clearMoviesCacheCache();
-        FFAppState().clearSeasonsCacheCache();
-        FFAppState().clearMoviesCacheListCache();
-        FFAppState().clearSeasonsCacheListCache();
-      }
     });
   }
 
@@ -76,8 +62,11 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return StreamBuilder<ProfilesRecord>(
-      stream: ProfilesRecord.getDocument(FFAppState().activeProfileRef!),
+    return FutureBuilder<ProfilesRecord>(
+      future: FFAppState().profileCache(
+        requestFn: () =>
+            ProfilesRecord.getDocumentOnce(FFAppState().activeProfileRef!),
+      ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -105,15 +94,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
             children: [
               RefreshIndicator(
                 color: FlutterFlowTheme.of(context).primary,
-                onRefresh: () async {
-                  if (_model.serverUpdateDoc!.trendingLastUpdated! >
-                      FFAppState().localCacheTime!) {
-                    FFAppState().clearTrendingMoviesCacheCache();
-                    FFAppState().clearTrendingSeriesCacheCache();
-                    FFAppState().clearMoviesCacheCache();
-                    FFAppState().clearSeasonsCacheCache();
-                  }
-                },
+                onRefresh: () async {},
                 child: SingleChildScrollView(
                   primary: false,
                   physics: const AlwaysScrollableScrollPhysics(),
@@ -323,9 +304,9 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 0.0, 0.0),
-                                child: StreamBuilder<List<MoviesRecord>>(
-                                  stream: FFAppState().trendingMoviesCache(
-                                    requestFn: () => queryMoviesRecord(
+                                child: FutureBuilder<List<MoviesRecord>>(
+                                  future: FFAppState().trendingMoviesCache(
+                                    requestFn: () => queryMoviesRecordOnce(
                                       queryBuilder: (moviesRecord) =>
                                           moviesRecord
                                               .where(
@@ -426,9 +407,9 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
-                                child: StreamBuilder<List<SeriesRecord>>(
-                                  stream: FFAppState().trendingSeriesCache(
-                                    requestFn: () => querySeriesRecord(
+                                child: FutureBuilder<List<SeriesRecord>>(
+                                  future: FFAppState().trendingSeriesCache(
+                                    requestFn: () => querySeriesRecordOnce(
                                       queryBuilder: (seriesRecord) =>
                                           seriesRecord
                                               .where(
@@ -583,9 +564,9 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                           ),
                         ],
                       ),
-                      StreamBuilder<List<CategoriesRecord>>(
-                        stream: FFAppState().moviesCache(
-                          requestFn: () => queryCategoriesRecord(
+                      FutureBuilder<List<CategoriesRecord>>(
+                        future: FFAppState().moviesCache(
+                          requestFn: () => queryCategoriesRecordOnce(
                             queryBuilder: (categoriesRecord) =>
                                 categoriesRecord.where(
                               'type',
@@ -637,11 +618,12 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
-                                      child: StreamBuilder<List<MoviesRecord>>(
-                                        stream: FFAppState().moviesCacheList(
+                                      child: FutureBuilder<List<MoviesRecord>>(
+                                        future: FFAppState().moviesCacheList(
                                           uniqueQueryKey:
                                               moviesCategoriesRecord.name,
-                                          requestFn: () => queryMoviesRecord(
+                                          requestFn: () =>
+                                              queryMoviesRecordOnce(
                                             queryBuilder: (moviesRecord) =>
                                                 moviesRecord
                                                     .where(
@@ -731,9 +713,9 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                           );
                         },
                       ),
-                      StreamBuilder<List<CategoriesRecord>>(
-                        stream: FFAppState().seasonsCache(
-                          requestFn: () => queryCategoriesRecord(
+                      FutureBuilder<List<CategoriesRecord>>(
+                        future: FFAppState().seasonsCache(
+                          requestFn: () => queryCategoriesRecordOnce(
                             queryBuilder: (categoriesRecord) =>
                                 categoriesRecord.where(
                               'type',
@@ -785,11 +767,12 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
-                                      child: StreamBuilder<List<SeriesRecord>>(
-                                        stream: FFAppState().seasonsCacheList(
+                                      child: FutureBuilder<List<SeriesRecord>>(
+                                        future: FFAppState().seasonsCacheList(
                                           uniqueQueryKey:
                                               seasonsCategoriesRecord.name,
-                                          requestFn: () => querySeriesRecord(
+                                          requestFn: () =>
+                                              querySeriesRecordOnce(
                                             queryBuilder: (seriesRecord) =>
                                                 seriesRecord
                                                     .where(

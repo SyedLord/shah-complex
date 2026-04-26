@@ -560,9 +560,10 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
-                                      child: StreamBuilder<List<MyListRecord>>(
-                                        stream: FFAppState().myListAllItems(
-                                          requestFn: () => queryMyListRecord(
+                                      child: FutureBuilder<List<MyListRecord>>(
+                                        future: FFAppState().myListAllItems(
+                                          requestFn: () =>
+                                              queryMyListRecordOnce(
                                             queryBuilder: (myListRecord) =>
                                                 myListRecord
                                                     .where(
@@ -613,13 +614,13 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                   if (listViewMyListRecord
                                                           .movieRef !=
                                                       null)
-                                                    StreamBuilder<MoviesRecord>(
-                                                      stream: FFAppState()
+                                                    FutureBuilder<MoviesRecord>(
+                                                      future: FFAppState()
                                                           .myListMovieCard(
                                                         uniqueQueryKey:
                                                             '${myProfileProfilesRecord.reference.id}_${listViewMyListRecord.movieRef?.id}',
-                                                        requestFn: () =>
-                                                            MoviesRecord.getDocument(
+                                                        requestFn: () => MoviesRecord
+                                                            .getDocumentOnce(
                                                                 listViewMyListRecord
                                                                     .movieRef!),
                                                       ),
@@ -694,13 +695,13 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                   if (listViewMyListRecord
                                                           .seasonRef !=
                                                       null)
-                                                    StreamBuilder<SeriesRecord>(
-                                                      stream: FFAppState()
+                                                    FutureBuilder<SeriesRecord>(
+                                                      future: FFAppState()
                                                           .myListSeasonCard(
                                                         uniqueQueryKey:
                                                             '${myProfileProfilesRecord.reference.id}_${listViewMyListRecord.seasonRef?.id}',
-                                                        requestFn: () =>
-                                                            SeriesRecord.getDocument(
+                                                        requestFn: () => SeriesRecord
+                                                            .getDocumentOnce(
                                                                 listViewMyListRecord
                                                                     .seasonRef!),
                                                       ),

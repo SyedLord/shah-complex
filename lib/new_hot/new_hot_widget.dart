@@ -44,47 +44,52 @@ class _NewHotWidgetState extends State<NewHotWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-        FocusManager.instance.primaryFocus?.unfocus();
-      },
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: Stack(
-          alignment: AlignmentDirectional(-1.0, -1.0),
-          children: [
-            SingleChildScrollView(
-              primary: false,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 100.0),
-                    child: Container(
-                      child: FutureBuilder<int>(
-                        future: queryNewsFeedRecordCount(),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: SpinKitPulse(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  size: 50.0,
-                                ),
-                              ),
-                            );
-                          }
-                          int columnCount = snapshot.data!;
+    return FutureBuilder<int>(
+      future: FFAppState().newsCountAll(
+        requestFn: () => queryNewsFeedRecordCount(),
+      ),
+      builder: (context, snapshot) {
+        // Customize what your widget looks like when it's loading.
+        if (!snapshot.hasData) {
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 50.0,
+                height: 50.0,
+                child: SpinKitPulse(
+                  color: FlutterFlowTheme.of(context).primary,
+                  size: 50.0,
+                ),
+              ),
+            ),
+          );
+        }
+        int newHotCount = snapshot.data!;
 
-                          return Column(
+        return GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: Scaffold(
+            key: scaffoldKey,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Stack(
+              alignment: AlignmentDirectional(-1.0, -1.0),
+              children: [
+                SingleChildScrollView(
+                  primary: false,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 0.0, 100.0),
+                        child: Container(
+                          child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -102,7 +107,7 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
                                   children: [
-                                    if (columnCount > 0)
+                                    if (newHotCount > 0)
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             24.0, 0.0, 24.0, 0.0),
@@ -144,7 +149,7 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                           ],
                                         ),
                                       ),
-                                    if (columnCount > 0)
+                                    if (newHotCount > 0)
                                       Container(
                                         width: double.infinity,
                                         height: 260.0,
@@ -153,19 +158,26 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   24.0, 0.0, 24.0, 0.0),
-                                          child: StreamBuilder<
+                                          child: FutureBuilder<
                                               List<NewsFeedRecord>>(
-                                            stream: queryNewsFeedRecord(
-                                              queryBuilder: (newsFeedRecord) =>
-                                                  newsFeedRecord
-                                                      .where(
-                                                        'created_at',
-                                                        isGreaterThanOrEqualTo:
-                                                            functions
-                                                                .getStartOfDay(),
-                                                      )
-                                                      .orderBy('created_at',
-                                                          descending: true),
+                                            future:
+                                                FFAppState().newsTrendingCards(
+                                              requestFn: () =>
+                                                  queryNewsFeedRecordOnce(
+                                                queryBuilder:
+                                                    (newsFeedRecord) =>
+                                                        newsFeedRecord
+                                                            .where(
+                                                              'created_at',
+                                                              isGreaterThanOrEqualTo:
+                                                                  functions
+                                                                      .getStartOfDay(),
+                                                            )
+                                                            .orderBy(
+                                                                'created_at',
+                                                                descending:
+                                                                    true),
+                                              ),
                                             ),
                                             builder: (context, snapshot) {
                                               // Customize what your widget looks like when it's loading.
@@ -315,7 +327,7 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                   ].divide(SizedBox(height: 16.0)),
                                 ),
                               ),
-                              if (columnCount > 0)
+                              if (newHotCount > 0)
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       24.0, 16.0, 24.0, 16.0),
@@ -366,11 +378,15 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
-                                    child: StreamBuilder<List<NewsFeedRecord>>(
-                                      stream: queryNewsFeedRecord(
-                                        queryBuilder: (newsFeedRecord) =>
-                                            newsFeedRecord.orderBy('created_at',
-                                                descending: true),
+                                    child: FutureBuilder<List<NewsFeedRecord>>(
+                                      future: FFAppState().newsCardsAll(
+                                        requestFn: () =>
+                                            queryNewsFeedRecordOnce(
+                                          queryBuilder: (newsFeedRecord) =>
+                                              newsFeedRecord.orderBy(
+                                                  'created_at',
+                                                  descending: true),
+                                        ),
                                       ),
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.
@@ -517,112 +533,115 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                 ],
                               ),
                             ],
-                          );
-                        },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(0.0),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 5.0,
+                      sigmaY: 5.0,
+                    ),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 40.0, 24.0, 0.0),
+                      child: Container(
+                        decoration: BoxDecoration(),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/images/Shah_Complex_Logo.png',
+                                  width: 32.0,
+                                  height: 32.0,
+                                  fit: BoxFit.contain,
+                                ),
+                                Text(
+                                  'New & Hot',
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleLarge
+                                      .override(
+                                        font: GoogleFonts.inter(
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleLarge
+                                                  .fontStyle,
+                                        ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .fontStyle,
+                                        lineHeight: 1.2,
+                                      ),
+                                ),
+                              ].divide(SizedBox(width: 16.0)),
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.0,
+                                  fillColor: Colors.transparent,
+                                  icon: Icon(
+                                    Icons.search_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    if (Navigator.of(context).canPop()) {
+                                      context.pop();
+                                    }
+                                    context.pushNamed(
+                                      SearchWidget.routeName,
+                                      extra: <String, dynamic>{
+                                        '__transition_info__': TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                        ),
+                                      },
+                                    );
+                                  },
+                                ),
+                              ].divide(SizedBox(width: 24.0)),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(0.0),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 5.0,
-                  sigmaY: 5.0,
                 ),
-                child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(24.0, 40.0, 24.0, 0.0),
-                  child: Container(
-                    decoration: BoxDecoration(),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/images/Shah_Complex_Logo.png',
-                              width: 32.0,
-                              height: 32.0,
-                              fit: BoxFit.contain,
-                            ),
-                            Text(
-                              'New & Hot',
-                              style: FlutterFlowTheme.of(context)
-                                  .titleLarge
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .fontStyle,
-                                    ),
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleLarge
-                                        .fontStyle,
-                                    lineHeight: 1.2,
-                                  ),
-                            ),
-                          ].divide(SizedBox(width: 16.0)),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            FlutterFlowIconButton(
-                              borderRadius: 8.0,
-                              buttonSize: 40.0,
-                              fillColor: Colors.transparent,
-                              icon: Icon(
-                                Icons.search_rounded,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                size: 24.0,
-                              ),
-                              onPressed: () async {
-                                if (Navigator.of(context).canPop()) {
-                                  context.pop();
-                                }
-                                context.pushNamed(
-                                  SearchWidget.routeName,
-                                  extra: <String, dynamic>{
-                                    '__transition_info__': TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType: PageTransitionType.fade,
-                                    ),
-                                  },
-                                );
-                              },
-                            ),
-                          ].divide(SizedBox(width: 24.0)),
-                        ),
-                      ],
-                    ),
+                wrapWithModel(
+                  model: _model.bottomNavBarModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: BottomNavBarWidget(
+                    activeTab: 'news',
                   ),
                 ),
-              ),
+              ],
             ),
-            wrapWithModel(
-              model: _model.bottomNavBarModel,
-              updateCallback: () => safeSetState(() {}),
-              child: BottomNavBarWidget(
-                activeTab: 'news',
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

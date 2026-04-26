@@ -192,9 +192,9 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
-                  child: StreamBuilder<List<MyListRecord>>(
-                    stream: FFAppState().myListAllItems(
-                      requestFn: () => queryMyListRecord(
+                  child: FutureBuilder<List<MyListRecord>>(
+                    future: FFAppState().myListAllItems(
+                      requestFn: () => queryMyListRecordOnce(
                         queryBuilder: (myListRecord) => myListRecord
                             .where(
                               'profile_ref',
@@ -360,9 +360,9 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
-                  child: StreamBuilder<List<MoviesRecord>>(
-                    stream: FFAppState().moviesCacheList(
-                      requestFn: () => queryMoviesRecord(
+                  child: FutureBuilder<List<MoviesRecord>>(
+                    future: FFAppState().moviesCacheList(
+                      requestFn: () => queryMoviesRecordOnce(
                         queryBuilder: (moviesRecord) => moviesRecord
                             .where(
                               'category',
@@ -446,9 +446,9 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
-                    child: StreamBuilder<List<MoviesRecord>>(
-                      stream: FFAppState().trendingMoviesCache(
-                        requestFn: () => queryMoviesRecord(
+                    child: FutureBuilder<List<MoviesRecord>>(
+                      future: FFAppState().trendingMoviesCache(
+                        requestFn: () => queryMoviesRecordOnce(
                           queryBuilder: (moviesRecord) => moviesRecord
                               .where(
                                 'is_trending',
@@ -532,9 +532,9 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
-                  child: StreamBuilder<List<SeriesRecord>>(
-                    stream: FFAppState().trendingSeriesCache(
-                      requestFn: () => querySeriesRecord(
+                  child: FutureBuilder<List<SeriesRecord>>(
+                    future: FFAppState().trendingSeriesCache(
+                      requestFn: () => querySeriesRecordOnce(
                         queryBuilder: (seriesRecord) => seriesRecord
                             .where(
                               'is_trending',
@@ -616,9 +616,9 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
-                  child: StreamBuilder<List<SeriesRecord>>(
-                    stream: FFAppState().seasonsCacheList(
-                      requestFn: () => querySeriesRecord(
+                  child: FutureBuilder<List<SeriesRecord>>(
+                    future: FFAppState().seasonsCacheList(
+                      requestFn: () => querySeriesRecordOnce(
                         queryBuilder: (seriesRecord) => seriesRecord
                             .where(
                               'category',

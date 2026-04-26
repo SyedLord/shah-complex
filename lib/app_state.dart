@@ -259,11 +259,11 @@ class FFAppState extends ChangeNotifier {
       _profileWatchlistCountManager.clearRequest(uniqueKey);
 
   final _trendingMoviesCacheManager =
-      StreamRequestManager<List<MoviesRecord>>();
-  Stream<List<MoviesRecord>> trendingMoviesCache({
+      FutureRequestManager<List<MoviesRecord>>();
+  Future<List<MoviesRecord>> trendingMoviesCache({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Stream<List<MoviesRecord>> Function() requestFn,
+    required Future<List<MoviesRecord>> Function() requestFn,
   }) =>
       _trendingMoviesCacheManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
@@ -275,11 +275,11 @@ class FFAppState extends ChangeNotifier {
       _trendingMoviesCacheManager.clearRequest(uniqueKey);
 
   final _trendingSeriesCacheManager =
-      StreamRequestManager<List<SeriesRecord>>();
-  Stream<List<SeriesRecord>> trendingSeriesCache({
+      FutureRequestManager<List<SeriesRecord>>();
+  Future<List<SeriesRecord>> trendingSeriesCache({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Stream<List<SeriesRecord>> Function() requestFn,
+    required Future<List<SeriesRecord>> Function() requestFn,
   }) =>
       _trendingSeriesCacheManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
@@ -290,11 +290,11 @@ class FFAppState extends ChangeNotifier {
   void clearTrendingSeriesCacheCacheKey(String? uniqueKey) =>
       _trendingSeriesCacheManager.clearRequest(uniqueKey);
 
-  final _moviesCacheManager = StreamRequestManager<List<CategoriesRecord>>();
-  Stream<List<CategoriesRecord>> moviesCache({
+  final _moviesCacheManager = FutureRequestManager<List<CategoriesRecord>>();
+  Future<List<CategoriesRecord>> moviesCache({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Stream<List<CategoriesRecord>> Function() requestFn,
+    required Future<List<CategoriesRecord>> Function() requestFn,
   }) =>
       _moviesCacheManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
@@ -305,11 +305,11 @@ class FFAppState extends ChangeNotifier {
   void clearMoviesCacheCacheKey(String? uniqueKey) =>
       _moviesCacheManager.clearRequest(uniqueKey);
 
-  final _seasonsCacheManager = StreamRequestManager<List<CategoriesRecord>>();
-  Stream<List<CategoriesRecord>> seasonsCache({
+  final _seasonsCacheManager = FutureRequestManager<List<CategoriesRecord>>();
+  Future<List<CategoriesRecord>> seasonsCache({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Stream<List<CategoriesRecord>> Function() requestFn,
+    required Future<List<CategoriesRecord>> Function() requestFn,
   }) =>
       _seasonsCacheManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
@@ -320,11 +320,11 @@ class FFAppState extends ChangeNotifier {
   void clearSeasonsCacheCacheKey(String? uniqueKey) =>
       _seasonsCacheManager.clearRequest(uniqueKey);
 
-  final _moviesCacheListManager = StreamRequestManager<List<MoviesRecord>>();
-  Stream<List<MoviesRecord>> moviesCacheList({
+  final _moviesCacheListManager = FutureRequestManager<List<MoviesRecord>>();
+  Future<List<MoviesRecord>> moviesCacheList({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Stream<List<MoviesRecord>> Function() requestFn,
+    required Future<List<MoviesRecord>> Function() requestFn,
   }) =>
       _moviesCacheListManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
@@ -335,11 +335,11 @@ class FFAppState extends ChangeNotifier {
   void clearMoviesCacheListCacheKey(String? uniqueKey) =>
       _moviesCacheListManager.clearRequest(uniqueKey);
 
-  final _seasonsCacheListManager = StreamRequestManager<List<SeriesRecord>>();
-  Stream<List<SeriesRecord>> seasonsCacheList({
+  final _seasonsCacheListManager = FutureRequestManager<List<SeriesRecord>>();
+  Future<List<SeriesRecord>> seasonsCacheList({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Stream<List<SeriesRecord>> Function() requestFn,
+    required Future<List<SeriesRecord>> Function() requestFn,
   }) =>
       _seasonsCacheListManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
@@ -350,11 +350,11 @@ class FFAppState extends ChangeNotifier {
   void clearSeasonsCacheListCacheKey(String? uniqueKey) =>
       _seasonsCacheListManager.clearRequest(uniqueKey);
 
-  final _myListAllItemsManager = StreamRequestManager<List<MyListRecord>>();
-  Stream<List<MyListRecord>> myListAllItems({
+  final _myListAllItemsManager = FutureRequestManager<List<MyListRecord>>();
+  Future<List<MyListRecord>> myListAllItems({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Stream<List<MyListRecord>> Function() requestFn,
+    required Future<List<MyListRecord>> Function() requestFn,
   }) =>
       _myListAllItemsManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
@@ -365,11 +365,11 @@ class FFAppState extends ChangeNotifier {
   void clearMyListAllItemsCacheKey(String? uniqueKey) =>
       _myListAllItemsManager.clearRequest(uniqueKey);
 
-  final _myListMovieCardManager = StreamRequestManager<MoviesRecord>();
-  Stream<MoviesRecord> myListMovieCard({
+  final _myListMovieCardManager = FutureRequestManager<MoviesRecord>();
+  Future<MoviesRecord> myListMovieCard({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Stream<MoviesRecord> Function() requestFn,
+    required Future<MoviesRecord> Function() requestFn,
   }) =>
       _myListMovieCardManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
@@ -380,11 +380,11 @@ class FFAppState extends ChangeNotifier {
   void clearMyListMovieCardCacheKey(String? uniqueKey) =>
       _myListMovieCardManager.clearRequest(uniqueKey);
 
-  final _myListSeasonCardManager = StreamRequestManager<SeriesRecord>();
-  Stream<SeriesRecord> myListSeasonCard({
+  final _myListSeasonCardManager = FutureRequestManager<SeriesRecord>();
+  Future<SeriesRecord> myListSeasonCard({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Stream<SeriesRecord> Function() requestFn,
+    required Future<SeriesRecord> Function() requestFn,
   }) =>
       _myListSeasonCardManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
@@ -394,6 +394,82 @@ class FFAppState extends ChangeNotifier {
   void clearMyListSeasonCardCache() => _myListSeasonCardManager.clear();
   void clearMyListSeasonCardCacheKey(String? uniqueKey) =>
       _myListSeasonCardManager.clearRequest(uniqueKey);
+
+  final _profileCacheManager = FutureRequestManager<ProfilesRecord>();
+  Future<ProfilesRecord> profileCache({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<ProfilesRecord> Function() requestFn,
+  }) =>
+      _profileCacheManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearProfileCacheCache() => _profileCacheManager.clear();
+  void clearProfileCacheCacheKey(String? uniqueKey) =>
+      _profileCacheManager.clearRequest(uniqueKey);
+
+  final _newsCountCacheManager = FutureRequestManager<int>();
+  Future<int> newsCountCache({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<int> Function() requestFn,
+  }) =>
+      _newsCountCacheManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearNewsCountCacheCache() => _newsCountCacheManager.clear();
+  void clearNewsCountCacheCacheKey(String? uniqueKey) =>
+      _newsCountCacheManager.clearRequest(uniqueKey);
+
+  final _newsCountAllManager = FutureRequestManager<int>();
+  Future<int> newsCountAll({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<int> Function() requestFn,
+  }) =>
+      _newsCountAllManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearNewsCountAllCache() => _newsCountAllManager.clear();
+  void clearNewsCountAllCacheKey(String? uniqueKey) =>
+      _newsCountAllManager.clearRequest(uniqueKey);
+
+  final _newsTrendingCardsManager =
+      FutureRequestManager<List<NewsFeedRecord>>();
+  Future<List<NewsFeedRecord>> newsTrendingCards({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<List<NewsFeedRecord>> Function() requestFn,
+  }) =>
+      _newsTrendingCardsManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearNewsTrendingCardsCache() => _newsTrendingCardsManager.clear();
+  void clearNewsTrendingCardsCacheKey(String? uniqueKey) =>
+      _newsTrendingCardsManager.clearRequest(uniqueKey);
+
+  final _newsCardsAllManager = FutureRequestManager<List<NewsFeedRecord>>();
+  Future<List<NewsFeedRecord>> newsCardsAll({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<List<NewsFeedRecord>> Function() requestFn,
+  }) =>
+      _newsCardsAllManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearNewsCardsAllCache() => _newsCardsAllManager.clear();
+  void clearNewsCardsAllCacheKey(String? uniqueKey) =>
+      _newsCardsAllManager.clearRequest(uniqueKey);
 }
 
 void _safeInit(Function() initializeField) {

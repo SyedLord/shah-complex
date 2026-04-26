@@ -40,6 +40,11 @@ class ProfilesRecord extends FirestoreRecord {
   DateTime? get createdAt => _createdAt;
   bool hasCreatedAt() => _createdAt != null;
 
+  // "last_seen_news" field.
+  DateTime? _lastSeenNews;
+  DateTime? get lastSeenNews => _lastSeenNews;
+  bool hasLastSeenNews() => _lastSeenNews != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -48,6 +53,7 @@ class ProfilesRecord extends FirestoreRecord {
     _isKids = snapshotData['is_kids'] as bool?;
     _isMainProfile = snapshotData['is_main_profile'] as bool?;
     _createdAt = snapshotData['created_at'] as DateTime?;
+    _lastSeenNews = snapshotData['last_seen_news'] as DateTime?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -95,6 +101,7 @@ Map<String, dynamic> createProfilesRecordData({
   bool? isKids,
   bool? isMainProfile,
   DateTime? createdAt,
+  DateTime? lastSeenNews,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -103,6 +110,7 @@ Map<String, dynamic> createProfilesRecordData({
       'is_kids': isKids,
       'is_main_profile': isMainProfile,
       'created_at': createdAt,
+      'last_seen_news': lastSeenNews,
     }.withoutNulls,
   );
 
@@ -118,7 +126,8 @@ class ProfilesRecordDocumentEquality implements Equality<ProfilesRecord> {
         e1?.profileImage == e2?.profileImage &&
         e1?.isKids == e2?.isKids &&
         e1?.isMainProfile == e2?.isMainProfile &&
-        e1?.createdAt == e2?.createdAt;
+        e1?.createdAt == e2?.createdAt &&
+        e1?.lastSeenNews == e2?.lastSeenNews;
   }
 
   @override
@@ -127,7 +136,8 @@ class ProfilesRecordDocumentEquality implements Equality<ProfilesRecord> {
         e?.profileImage,
         e?.isKids,
         e?.isMainProfile,
-        e?.createdAt
+        e?.createdAt,
+        e?.lastSeenNews
       ]);
 
   @override

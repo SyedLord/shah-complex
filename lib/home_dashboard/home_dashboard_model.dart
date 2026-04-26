@@ -18,8 +18,6 @@ class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
 
   // Stores action output result for [Custom Action - getTrendingCarousel] action in HomeDashboard widget.
   List<HeroItemStruct>? trendingList;
-  // Stores action output result for [Firestore Query - Query a collection] action in HomeDashboard widget.
-  AppConfigRecord? serverUpdateDoc;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController;
   int carouselCurrentIndex = 1;
