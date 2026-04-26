@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// Pubspec dependency mein ye lazmi add karein: better_player: ^0.0.83
-import 'package:better_player/better_player.dart';
+// 🔥 FIX 2: Original better_player ki jagah maintained 'plus' fork use kar rahe hain
+import 'package:better_player_plus/better_player_plus.dart';
 
 class PremiumVideoPlayer extends StatefulWidget {
   const PremiumVideoPlayer({
@@ -60,7 +60,6 @@ class _PremiumVideoPlayerState extends State<PremiumVideoPlayer> {
     BetterPlayerDataSource dataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
       widget.videoUrl,
-      // better_player automatically MKV/MP4 files se embedded audio/subs nikal leta hai
     );
 
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
@@ -78,7 +77,8 @@ class _PremiumVideoPlayerState extends State<PremiumVideoPlayer> {
     return Container(
       width: widget.width ?? double.infinity,
       height: widget.height ?? double.infinity,
-      backgroundColor: Colors.black, // Background hamesha black
+      color: Colors
+          .black, // 🔥 FIX 1: 'backgroundColor' ki jagah sirf 'color' likha hai
       child: BetterPlayer(
         controller: _betterPlayerController,
       ),
