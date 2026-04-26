@@ -912,6 +912,11 @@ class _SearchWidgetState extends State<SearchWidget> {
                         ),
                       ],
                     ),
+                  Container(
+                    width: double.infinity,
+                    height: 120.0,
+                    decoration: BoxDecoration(),
+                  ),
                 ],
               ),
             ),
