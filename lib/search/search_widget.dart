@@ -36,8 +36,12 @@ class _SearchWidgetState extends State<SearchWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.loadedMovies = await queryMoviesRecordOnce();
-      _model.loadedSeries = await querySeriesRecordOnce();
+      _model.loadedMovies = await queryMoviesRecordOnce(
+        queryBuilder: (moviesRecord) => moviesRecord.orderBy('title'),
+      );
+      _model.loadedSeries = await querySeriesRecordOnce(
+        queryBuilder: (seriesRecord) => seriesRecord.orderBy('title'),
+      );
       _model.outMovies1 = await actions.vipSmartSearch(
         '',
         _model.loadedMovies?.toList(),
@@ -87,7 +91,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     alignment: AlignmentDirectional(-1.0, -1.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
+                          EdgeInsetsDirectional.fromSTEB(16.0, 50.0, 0.0, 8.0),
                       child: FlutterFlowIconButton(
                         borderRadius: 8.0,
                         buttonSize: 40.0,
