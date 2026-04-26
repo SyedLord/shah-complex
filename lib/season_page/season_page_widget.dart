@@ -741,73 +741,73 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                   ),
                                 ),
                               ),
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  await _model.pageViewController
-                                      ?.animateToPage(
-                                    2,
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.ease,
-                                  );
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        'TRAILERS',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelLarge
-                                            .override(
-                                              font: GoogleFonts.inter(
+                              if (_model.isVisible)
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {},
+                                  child: Container(
+                                    decoration: BoxDecoration(),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          'TRAILERS',
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                font: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLarge
+                                                          .fontStyle,
+                                                ),
+                                                color: _model.tabIndex == 2
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                fontSize: 14.0,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.bold,
                                                 fontStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .labelLarge
                                                         .fontStyle,
+                                                lineHeight: 1.3,
                                               ),
-                                              color: _model.tabIndex == 2
-                                                  ? FlutterFlowTheme.of(context)
-                                                      .primaryText
-                                                  : FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 14.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelLarge
-                                                      .fontStyle,
-                                              lineHeight: 1.3,
-                                            ),
-                                      ),
-                                      if (_model.tabIndex == 2)
-                                        Container(
-                                          width: 40.0,
-                                          height: 4.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            borderRadius: BorderRadius.circular(
-                                                FlutterFlowTheme.of(context)
-                                                    .designToken
-                                                    .radius
-                                                    .full),
-                                          ),
                                         ),
-                                    ].divide(SizedBox(
-                                        height: FlutterFlowTheme.of(context)
-                                            .designToken
-                                            .spacing
-                                            .xs)),
+                                        if (_model.tabIndex == 2)
+                                          Container(
+                                            width: 40.0,
+                                            height: 4.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .designToken
+                                                          .radius
+                                                          .full),
+                                            ),
+                                          ),
+                                      ].divide(SizedBox(
+                                          height: FlutterFlowTheme.of(context)
+                                              .designToken
+                                              .spacing
+                                              .xs)),
+                                    ),
                                   ),
                                 ),
-                              ),
                             ].divide(SizedBox(
                                 width: FlutterFlowTheme.of(context)
                                     .designToken
@@ -1065,10 +1065,6 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                     ),
                                   ),
                                 ],
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [],
                               ),
                             ],
                           ),

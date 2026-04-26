@@ -947,14 +947,7 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                   focusColor: Colors.transparent,
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    await _model.pageViewController
-                                        ?.animateToPage(
-                                      1,
-                                      duration: Duration(milliseconds: 500),
-                                      curve: Curves.ease,
-                                    );
-                                  },
+                                  onTap: () async {},
                                   child: Container(
                                     decoration: BoxDecoration(),
                                     child: Column(
@@ -1020,14 +1013,7 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                   focusColor: Colors.transparent,
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    await _model.pageViewController
-                                        ?.animateToPage(
-                                      2,
-                                      duration: Duration(milliseconds: 500),
-                                      curve: Curves.ease,
-                                    );
-                                  },
+                                  onTap: () async {},
                                   child: Container(
                                     decoration: BoxDecoration(),
                                     child: Column(
@@ -1103,6 +1089,7 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 40.0),
                             child: PageView(
+                              physics: const NeverScrollableScrollPhysics(),
                               controller: _model.pageViewController ??=
                                   PageController(initialPage: 0),
                               onPageChanged: (_) async {

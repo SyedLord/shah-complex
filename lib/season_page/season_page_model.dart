@@ -15,6 +15,8 @@ class SeasonPageModel extends FlutterFlowModel<SeasonPageWidget> {
 
   int tabIndex = 0;
 
+  bool isVisible = false;
+
   ///  State fields for stateful widgets in this page.
 
   // Model for IMDBRatings component.
