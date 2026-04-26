@@ -157,6 +157,11 @@ final parametersBuilderMap =
       ),
   'MyProfile': ParameterData.none(),
   'NewHot': ParameterData.none(),
+  'InAppPlayer': (data) async => ParameterData(
+        allParams: {
+          'url': getParameter<String>(data, 'url'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

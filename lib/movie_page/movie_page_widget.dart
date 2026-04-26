@@ -342,12 +342,16 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                await actions.launchExternalPlayer(
-                                  widget.movieDoc,
-                                  functions.emptyEpisodeDoc(),
-                                  functions.emptyContinueDoc(),
-                                  FFAppState().activeProfileRef!.id,
-                                  '',
+                                context.pushNamed(
+                                  InAppPlayerWidget.routeName,
+                                  queryParameters: {
+                                    'url': serializeParam(
+                                      functions.getStreamUrl(
+                                          widget.movieDoc!.videoUrl,
+                                          widget.movieDoc!.driveType),
+                                      ParamType.String,
+                                    ),
+                                  }.withoutNulls,
                                 );
                               },
                               child: Container(

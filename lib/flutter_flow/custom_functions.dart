@@ -78,3 +78,21 @@ DateTime getStartOfDay() {
   // Time ko hata kar sirf aaj ki date aur raat 12:00 baje return karna
   return DateTime(now.year, now.month, now.day);
 }
+
+String getStreamUrl(
+  String rawVideoUrl,
+  String driveType,
+) {
+  // Agar URL pehle se hi HTTP wali hai toh direct bhej do
+  if (rawVideoUrl.isEmpty) return '';
+  if (rawVideoUrl.startsWith('http')) return rawVideoUrl;
+
+  // Agar Google Drive ka ID hai
+  if (driveType == 'gdrive') {
+    return 'https://shahcomplex.sa-syedali2000.workers.dev/?id=$rawVideoUrl';
+  }
+  // Agar OneDrive ya koi aur hai
+  else {
+    return 'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&file_id=$rawVideoUrl&key=Pappu@007';
+  }
+}

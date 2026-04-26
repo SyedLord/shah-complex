@@ -222,6 +222,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: NewHotWidget.routeName,
           path: NewHotWidget.routePath,
           builder: (context, params) => NewHotWidget(),
+        ),
+        FFRoute(
+          name: InAppPlayerWidget.routeName,
+          path: InAppPlayerWidget.routePath,
+          builder: (context, params) => InAppPlayerWidget(
+            url: params.getParam(
+              'url',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
