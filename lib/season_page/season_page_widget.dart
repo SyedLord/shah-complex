@@ -65,7 +65,6 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
       body: Stack(
         children: [
           SingleChildScrollView(
-            primary: false,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -142,408 +141,531 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                     ],
                   ),
                 ),
-                Container(
-                  child: Padding(
-                    padding: EdgeInsets.all(
-                        FlutterFlowTheme.of(context).designToken.spacing.lg),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Align(
-                          alignment: AlignmentDirectional(-1.0, 0.0),
-                          child: Stack(
-                            children: [
-                              if (widget.seriesDoc?.logoImage == null ||
-                                  widget.seriesDoc?.logoImage == '')
-                                Text(
-                                  valueOrDefault<String>(
-                                    widget.seriesDoc?.title,
-                                    'Title',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight: FontWeight.w900,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineMedium
-                                                  .fontStyle,
-                                        ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        fontSize: 26.0,
-                                        letterSpacing: 0.0,
+                Padding(
+                  padding: EdgeInsets.all(
+                      FlutterFlowTheme.of(context).designToken.spacing.lg),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional(-1.0, 0.0),
+                        child: Stack(
+                          children: [
+                            if (widget.seriesDoc?.logoImage == null ||
+                                widget.seriesDoc?.logoImage == '')
+                              Text(
+                                valueOrDefault<String>(
+                                  widget.seriesDoc?.title,
+                                  'Title',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineMedium
+                                    .override(
+                                      font: GoogleFonts.inter(
                                         fontWeight: FontWeight.w900,
                                         fontStyle: FlutterFlowTheme.of(context)
                                             .headlineMedium
                                             .fontStyle,
-                                        lineHeight: 1.2,
                                       ),
-                                ),
-                              if (widget.seriesDoc?.logoImage != null &&
-                                  widget.seriesDoc?.logoImage != '')
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: CachedNetworkImage(
-                                    fadeInDuration: Duration(milliseconds: 200),
-                                    fadeOutDuration:
-                                        Duration(milliseconds: 200),
-                                    imageUrl: widget.seriesDoc!.logoImage,
-                                    width: double.infinity,
-                                    height: 120.0,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            wrapWithModel(
-                              model: _model.iMDBRatingsModel,
-                              updateCallback: () => safeSetState(() {}),
-                              child: IMDBRatingsWidget(
-                                rating: widget.seriesDoc!.voteAverage,
-                              ),
-                            ),
-                            Text(
-                              '2022',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 26.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w900,
                                       fontStyle: FlutterFlowTheme.of(context)
-                                          .labelLarge
+                                          .headlineMedium
                                           .fontStyle,
+                                      lineHeight: 1.2,
                                     ),
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
+                              ),
+                            if (widget.seriesDoc?.logoImage != null &&
+                                widget.seriesDoc?.logoImage != '')
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: CachedNetworkImage(
+                                  fadeInDuration: Duration(milliseconds: 200),
+                                  fadeOutDuration: Duration(milliseconds: 200),
+                                  imageUrl: widget.seriesDoc!.logoImage,
+                                  width: double.infinity,
+                                  height: 120.0,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          wrapWithModel(
+                            model: _model.iMDBRatingsModel,
+                            updateCallback: () => safeSetState(() {}),
+                            child: IMDBRatingsWidget(
+                              rating: widget.seriesDoc!.voteAverage,
+                            ),
+                          ),
+                          Text(
+                            '2022',
+                            style: FlutterFlowTheme.of(context)
+                                .labelLarge
+                                .override(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .fontStyle,
-                                    lineHeight: 1.3,
                                   ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                    FlutterFlowTheme.of(context)
-                                        .designToken
-                                        .radius
-                                        .xs),
-                                border: Border.all(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
-                                  width: 1.0,
+                                  fontSize: 14.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontStyle,
+                                  lineHeight: 1.3,
                                 ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                  FlutterFlowTheme.of(context)
+                                      .designToken
+                                      .radius
+                                      .xs),
+                              border: Border.all(
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                width: 1.0,
                               ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    6.0, 2.0, 6.0, 2.0),
-                                child: Text(
-                                  valueOrDefault<String>(
-                                    widget.seriesDoc?.contentRating,
-                                    'NR',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelSmall
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelSmall
-                                                  .fontStyle,
-                                        ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 10.0,
-                                        letterSpacing: 0.0,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  6.0, 2.0, 6.0, 2.0),
+                              child: Text(
+                                valueOrDefault<String>(
+                                  widget.seriesDoc?.contentRating,
+                                  'NR',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .labelSmall
+                                    .override(
+                                      font: GoogleFonts.inter(
                                         fontWeight: FontWeight.bold,
                                         fontStyle: FlutterFlowTheme.of(context)
                                             .labelSmall
                                             .fontStyle,
-                                        lineHeight: 1.2,
                                       ),
-                                ),
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 10.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelSmall
+                                          .fontStyle,
+                                      lineHeight: 1.2,
+                                    ),
                               ),
                             ),
-                            Text(
-                              '${widget.seriesDoc?.totalSeasons.toString()} Seasons',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .labelLarge
-                                          .fontStyle,
-                                    ),
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
+                          ),
+                          Text(
+                            '${widget.seriesDoc?.totalSeasons.toString()} Seasons',
+                            style: FlutterFlowTheme.of(context)
+                                .labelLarge
+                                .override(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .fontStyle,
-                                    lineHeight: 1.3,
                                   ),
-                            ),
-                            Icon(
-                              Icons.hd_outlined,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 20.0,
-                            ),
-                          ].divide(SizedBox(
-                              width: FlutterFlowTheme.of(context)
-                                  .designToken
-                                  .spacing
-                                  .md)),
-                        ),
-                        wrapWithModel(
-                          model: _model.descriptionWidgetModel,
-                          updateCallback: () => safeSetState(() {}),
-                          child: DescriptionWidgetWidget(
-                            description: valueOrDefault<String>(
-                              widget.seriesDoc?.description,
-                              'Description',
-                            ),
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  fontSize: 14.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontStyle,
+                                  lineHeight: 1.3,
+                                ),
+                          ),
+                          Icon(
+                            Icons.hd_outlined,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 20.0,
+                          ),
+                        ].divide(SizedBox(
+                            width: FlutterFlowTheme.of(context)
+                                .designToken
+                                .spacing
+                                .md)),
+                      ),
+                      wrapWithModel(
+                        model: _model.descriptionWidgetModel,
+                        updateCallback: () => safeSetState(() {}),
+                        child: DescriptionWidgetWidget(
+                          description: valueOrDefault<String>(
+                            widget.seriesDoc?.description,
+                            'Description',
                           ),
                         ),
-                        Container(
-                          decoration: BoxDecoration(),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0,
-                                FlutterFlowTheme.of(context)
-                                    .designToken
-                                    .spacing
-                                    .md,
-                                0.0,
-                                FlutterFlowTheme.of(context)
-                                    .designToken
-                                    .spacing
-                                    .md),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: StreamBuilder<List<MyListRecord>>(
-                                    stream: queryMyListRecord(
-                                      queryBuilder: (myListRecord) =>
-                                          myListRecord
-                                              .where(
-                                                'profile_ref',
-                                                isEqualTo: FFAppState()
-                                                    .activeProfileRef,
-                                              )
-                                              .where(
-                                                'season_ref',
-                                                isEqualTo: widget
-                                                    .seriesDoc?.reference,
-                                              ),
-                                      singleRecord: true,
-                                    ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50.0,
-                                            height: 50.0,
-                                            child: SpinKitPulse(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 50.0,
-                                            ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0,
+                              FlutterFlowTheme.of(context)
+                                  .designToken
+                                  .spacing
+                                  .md,
+                              0.0,
+                              FlutterFlowTheme.of(context)
+                                  .designToken
+                                  .spacing
+                                  .md),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: StreamBuilder<List<MyListRecord>>(
+                                  stream: queryMyListRecord(
+                                    queryBuilder: (myListRecord) => myListRecord
+                                        .where(
+                                          'profile_ref',
+                                          isEqualTo:
+                                              FFAppState().activeProfileRef,
+                                        )
+                                        .where(
+                                          'season_ref',
+                                          isEqualTo:
+                                              widget.seriesDoc?.reference,
+                                        ),
+                                    singleRecord: true,
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: SpinKitPulse(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 50.0,
                                           ),
-                                        );
-                                      }
-                                      List<MyListRecord>
-                                          myListContainerMyListRecordList =
-                                          snapshot.data!;
-                                      final myListContainerMyListRecord =
-                                          myListContainerMyListRecordList
-                                                  .isNotEmpty
-                                              ? myListContainerMyListRecordList
-                                                  .first
-                                              : null;
+                                        ),
+                                      );
+                                    }
+                                    List<MyListRecord>
+                                        myListContainerMyListRecordList =
+                                        snapshot.data!;
+                                    final myListContainerMyListRecord =
+                                        myListContainerMyListRecordList
+                                                .isNotEmpty
+                                            ? myListContainerMyListRecordList
+                                                .first
+                                            : null;
 
-                                      return Container(
-                                        decoration: BoxDecoration(),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                if ((myListContainerMyListRecord !=
-                                                        null) ==
-                                                    false)
-                                                  FlutterFlowIconButton(
-                                                    borderRadius: 8.0,
-                                                    buttonSize: 40.0,
-                                                    icon: FaIcon(
-                                                      FontAwesomeIcons.plus,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .info,
-                                                      size: 24.0,
-                                                    ),
-                                                    onPressed: () async {
-                                                      await MyListRecord
-                                                          .collection
-                                                          .doc(
-                                                              '${FFAppState().activeProfileRef?.id}_${widget.seriesDoc?.reference.id}')
-                                                          .set(
-                                                              createMyListRecordData(
-                                                            profileRef: FFAppState()
-                                                                .activeProfileRef,
-                                                            addedAt:
-                                                                getCurrentTimestamp,
-                                                            seasonRef: widget
-                                                                .seriesDoc
-                                                                ?.reference,
-                                                          ));
-                                                      FFAppState()
-                                                          .clearProfileWatchlistCountCache();
-                                                      FFAppState()
-                                                          .clearMyListAllItemsCache();
-                                                      FFAppState()
-                                                          .clearMyListMovieCardCache();
-                                                      FFAppState()
-                                                          .clearMyListSeasonCardCache();
-                                                    },
-                                                  ),
-                                                if ((myListContainerMyListRecord !=
-                                                        null) ==
-                                                    true)
-                                                  FlutterFlowIconButton(
-                                                    borderRadius: 8.0,
-                                                    buttonSize: 40.0,
-                                                    icon: FaIcon(
-                                                      FontAwesomeIcons.check,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      size: 24.0,
-                                                    ),
-                                                    onPressed: () async {
-                                                      await myListContainerMyListRecord!
-                                                          .reference
-                                                          .delete();
-                                                      FFAppState()
-                                                          .clearProfileWatchlistCountCache();
-                                                      FFAppState()
-                                                          .clearMyListAllItemsCache();
-                                                      FFAppState()
-                                                          .clearMyListMovieCardCache();
-                                                      FFAppState()
-                                                          .clearMyListSeasonCardCache();
-                                                    },
-                                                  ),
-                                              ],
-                                            ),
-                                            Text(
-                                              'My List',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .labelSmall
-                                                  .override(
-                                                    font: GoogleFonts.inter(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelSmall
-                                                              .fontStyle,
-                                                    ),
+                                    return Container(
+                                      decoration: BoxDecoration(),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              if ((myListContainerMyListRecord !=
+                                                      null) ==
+                                                  false)
+                                                FlutterFlowIconButton(
+                                                  borderRadius: 8.0,
+                                                  buttonSize: 40.0,
+                                                  icon: FaIcon(
+                                                    FontAwesomeIcons.plus,
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .secondaryText,
-                                                    fontSize: 10.0,
-                                                    letterSpacing: 0.0,
+                                                        .info,
+                                                    size: 24.0,
+                                                  ),
+                                                  onPressed: () async {
+                                                    await MyListRecord
+                                                        .collection
+                                                        .doc(
+                                                            '${FFAppState().activeProfileRef?.id}_${widget.seriesDoc?.reference.id}')
+                                                        .set(
+                                                            createMyListRecordData(
+                                                          profileRef: FFAppState()
+                                                              .activeProfileRef,
+                                                          addedAt:
+                                                              getCurrentTimestamp,
+                                                          seasonRef: widget
+                                                              .seriesDoc
+                                                              ?.reference,
+                                                        ));
+                                                    FFAppState()
+                                                        .clearProfileWatchlistCountCache();
+                                                    FFAppState()
+                                                        .clearMyListAllItemsCache();
+                                                    FFAppState()
+                                                        .clearMyListMovieCardCache();
+                                                    FFAppState()
+                                                        .clearMyListSeasonCardCache();
+                                                  },
+                                                ),
+                                              if ((myListContainerMyListRecord !=
+                                                      null) ==
+                                                  true)
+                                                FlutterFlowIconButton(
+                                                  borderRadius: 8.0,
+                                                  buttonSize: 40.0,
+                                                  icon: FaIcon(
+                                                    FontAwesomeIcons.check,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 24.0,
+                                                  ),
+                                                  onPressed: () async {
+                                                    await myListContainerMyListRecord!
+                                                        .reference
+                                                        .delete();
+                                                    FFAppState()
+                                                        .clearProfileWatchlistCountCache();
+                                                    FFAppState()
+                                                        .clearMyListAllItemsCache();
+                                                    FFAppState()
+                                                        .clearMyListMovieCardCache();
+                                                    FFAppState()
+                                                        .clearMyListSeasonCardCache();
+                                                  },
+                                                ),
+                                            ],
+                                          ),
+                                          Text(
+                                            'My List',
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelSmall
+                                                .override(
+                                                  font: GoogleFonts.inter(
                                                     fontWeight: FontWeight.bold,
                                                     fontStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .labelSmall
                                                             .fontStyle,
-                                                    lineHeight: 1.2,
                                                   ),
-                                            ),
-                                          ].divide(SizedBox(
-                                              height:
-                                                  FlutterFlowTheme.of(context)
-                                                      .designToken
-                                                      .spacing
-                                                      .xs)),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.thumb_up_outlined,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        size: 24.0,
-                                      ),
-                                      Text(
-                                        'Rate',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .override(
-                                              font: GoogleFonts.inter(
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelSmall
-                                                        .fontStyle,
-                                              ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .secondaryText,
-                                              fontSize: 10.0,
-                                              letterSpacing: 0.0,
+                                                  fontSize: 10.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelSmall
+                                                          .fontStyle,
+                                                  lineHeight: 1.2,
+                                                ),
+                                          ),
+                                        ].divide(SizedBox(
+                                            height: FlutterFlowTheme.of(context)
+                                                .designToken
+                                                .spacing
+                                                .xs)),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.thumb_up_outlined,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 24.0,
+                                    ),
+                                    Text(
+                                      'Rate',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelSmall
+                                          .override(
+                                            font: GoogleFonts.inter(
                                               fontWeight: FontWeight.bold,
                                               fontStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .labelSmall
                                                       .fontStyle,
-                                              lineHeight: 1.2,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            fontSize: 10.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelSmall
+                                                    .fontStyle,
+                                            lineHeight: 1.2,
+                                          ),
+                                    ),
+                                  ].divide(SizedBox(
+                                      height: FlutterFlowTheme.of(context)
+                                          .designToken
+                                          .spacing
+                                          .xs)),
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.share_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 24.0,
+                                    ),
+                                    Text(
+                                      'Share',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelSmall
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelSmall
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            fontSize: 10.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelSmall
+                                                    .fontStyle,
+                                            lineHeight: 1.2,
+                                          ),
+                                    ),
+                                  ].divide(SizedBox(
+                                      height: FlutterFlowTheme.of(context)
+                                          .designToken
+                                          .spacing
+                                          .xs)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Divider(
+                        thickness: 1.0,
+                        color: FlutterFlowTheme.of(context).divider,
+                      ),
+                      Container(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0,
+                              0.0,
+                              0.0,
+                              FlutterFlowTheme.of(context)
+                                  .designToken
+                                  .spacing
+                                  .md),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  await _model.pageViewController
+                                      ?.animateToPage(
+                                    0,
+                                    duration: Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                  );
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'EPISODES',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelLarge
+                                                        .fontStyle,
+                                              ),
+                                              color: _model.tabIndex == 0
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .primaryText
+                                                  : FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge
+                                                      .fontStyle,
+                                              lineHeight: 1.3,
                                             ),
                                       ),
+                                      if (_model.tabIndex == 0)
+                                        Container(
+                                          width: 40.0,
+                                          height: 4.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            borderRadius: BorderRadius.circular(
+                                                FlutterFlowTheme.of(context)
+                                                    .designToken
+                                                    .radius
+                                                    .full),
+                                          ),
+                                        ),
                                     ].divide(SizedBox(
                                         height: FlutterFlowTheme.of(context)
                                             .designToken
@@ -551,371 +673,202 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                             .xs)),
                                   ),
                                 ),
-                                Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.share_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        size: 24.0,
-                                      ),
-                                      Text(
-                                        'Share',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .override(
-                                              font: GoogleFonts.inter(
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelSmall
-                                                        .fontStyle,
-                                              ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 10.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelSmall
-                                                      .fontStyle,
-                                              lineHeight: 1.2,
-                                            ),
-                                      ),
-                                    ].divide(SizedBox(
-                                        height: FlutterFlowTheme.of(context)
-                                            .designToken
-                                            .spacing
-                                            .xs)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Divider(
-                          thickness: 1.0,
-                          color: FlutterFlowTheme.of(context).divider,
-                        ),
-                        Container(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0,
-                                0.0,
-                                0.0,
-                                FlutterFlowTheme.of(context)
-                                    .designToken
-                                    .spacing
-                                    .md),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    await _model.pageViewController
-                                        ?.animateToPage(
-                                      0,
-                                      duration: Duration(milliseconds: 500),
-                                      curve: Curves.ease,
-                                    );
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'EPISODES',
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge
-                                              .override(
-                                                font: GoogleFonts.inter(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelLarge
-                                                          .fontStyle,
-                                                ),
-                                                color: _model.tabIndex == 0
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText
-                                                    : FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                fontSize: 14.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .fontStyle,
-                                                lineHeight: 1.3,
-                                              ),
-                                        ),
-                                        if (_model.tabIndex == 0)
-                                          Container(
-                                            width: 40.0,
-                                            height: 4.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .designToken
-                                                          .radius
-                                                          .full),
-                                            ),
-                                          ),
-                                      ].divide(SizedBox(
-                                          height: FlutterFlowTheme.of(context)
-                                              .designToken
-                                              .spacing
-                                              .xs)),
-                                    ),
-                                  ),
-                                ),
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    await _model.pageViewController
-                                        ?.animateToPage(
-                                      1,
-                                      duration: Duration(milliseconds: 500),
-                                      curve: Curves.ease,
-                                    );
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Text(
-                                          'MORE LIKE THIS',
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge
-                                              .override(
-                                                font: GoogleFonts.inter(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelLarge
-                                                          .fontStyle,
-                                                ),
-                                                color: _model.tabIndex == 1
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText
-                                                    : FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                fontSize: 14.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .fontStyle,
-                                                lineHeight: 1.3,
-                                              ),
-                                        ),
-                                        if (_model.tabIndex == 1)
-                                          Container(
-                                            width: 40.0,
-                                            height: 4.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .designToken
-                                                          .radius
-                                                          .full),
-                                            ),
-                                          ),
-                                      ].divide(SizedBox(
-                                          height: FlutterFlowTheme.of(context)
-                                              .designToken
-                                              .spacing
-                                              .xs)),
-                                    ),
-                                  ),
-                                ),
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    await _model.pageViewController
-                                        ?.animateToPage(
-                                      2,
-                                      duration: Duration(milliseconds: 500),
-                                      curve: Curves.ease,
-                                    );
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Text(
-                                          'TRAILERS',
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge
-                                              .override(
-                                                font: GoogleFonts.inter(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelLarge
-                                                          .fontStyle,
-                                                ),
-                                                color: _model.tabIndex == 2
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText
-                                                    : FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                fontSize: 14.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .fontStyle,
-                                                lineHeight: 1.3,
-                                              ),
-                                        ),
-                                        if (_model.tabIndex == 2)
-                                          Container(
-                                            width: 40.0,
-                                            height: 4.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .designToken
-                                                          .radius
-                                                          .full),
-                                            ),
-                                          ),
-                                      ].divide(SizedBox(
-                                          height: FlutterFlowTheme.of(context)
-                                              .designToken
-                                              .spacing
-                                              .xs)),
-                                    ),
-                                  ),
-                                ),
-                              ].divide(SizedBox(
-                                  width: FlutterFlowTheme.of(context)
-                                      .designToken
-                                      .spacing
-                                      .lg)),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 600.0,
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 40.0),
-                            child: PageView(
-                              controller: _model.pageViewController ??=
-                                  PageController(initialPage: 0),
-                              onPageChanged: (_) async {
-                                _model.tabIndex = _model.pageViewCurrentIndex;
-                                safeSetState(() {});
-                              },
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                SingleChildScrollView(
+                              ),
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  await _model.pageViewController
+                                      ?.animateToPage(
+                                    1,
+                                    duration: Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                  );
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 10.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            FlutterFlowDropDown<String>(
-                                              controller: _model
-                                                      .seasonSelectorValueController ??=
-                                                  FormFieldController<String>(
-                                                _model.seasonSelectorValue ??=
-                                                    _model.selectedSeason
-                                                        .toString(),
+                                      Text(
+                                        'MORE LIKE THIS',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelLarge
+                                                        .fontStyle,
                                               ),
-                                              options: functions
-                                                  .generateSeasonList(widget
-                                                      .seriesDoc!.totalSeasons),
-                                              onChanged: (val) async {
-                                                safeSetState(() => _model
-                                                    .seasonSelectorValue = val);
-                                                _model.selectedSeason =
-                                                    functions.stringToInt(_model
-                                                        .seasonSelectorValue!);
-                                                safeSetState(() {});
-                                              },
-                                              width: 200.0,
-                                              height: 40.0,
-                                              textStyle:
+                                              color: _model.tabIndex == 1
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .primaryText
+                                                  : FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        font: GoogleFonts.inter(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
+                                                      .labelLarge
+                                                      .fontStyle,
+                                              lineHeight: 1.3,
+                                            ),
+                                      ),
+                                      if (_model.tabIndex == 1)
+                                        Container(
+                                          width: 40.0,
+                                          height: 4.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            borderRadius: BorderRadius.circular(
+                                                FlutterFlowTheme.of(context)
+                                                    .designToken
+                                                    .radius
+                                                    .full),
+                                          ),
+                                        ),
+                                    ].divide(SizedBox(
+                                        height: FlutterFlowTheme.of(context)
+                                            .designToken
+                                            .spacing
+                                            .xs)),
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  await _model.pageViewController
+                                      ?.animateToPage(
+                                    2,
+                                    duration: Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                  );
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        'TRAILERS',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelLarge
+                                                        .fontStyle,
+                                              ),
+                                              color: _model.tabIndex == 2
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .primaryText
+                                                  : FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge
+                                                      .fontStyle,
+                                              lineHeight: 1.3,
+                                            ),
+                                      ),
+                                      if (_model.tabIndex == 2)
+                                        Container(
+                                          width: 40.0,
+                                          height: 4.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            borderRadius: BorderRadius.circular(
+                                                FlutterFlowTheme.of(context)
+                                                    .designToken
+                                                    .radius
+                                                    .full),
+                                          ),
+                                        ),
+                                    ].divide(SizedBox(
+                                        height: FlutterFlowTheme.of(context)
+                                            .designToken
+                                            .spacing
+                                            .xs)),
+                                  ),
+                                ),
+                              ),
+                            ].divide(SizedBox(
+                                width: FlutterFlowTheme.of(context)
+                                    .designToken
+                                    .spacing
+                                    .lg)),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 600.0,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 40.0),
+                          child: PageView(
+                            controller: _model.pageViewController ??=
+                                PageController(initialPage: 0),
+                            onPageChanged: (_) async {
+                              _model.tabIndex = _model.pageViewCurrentIndex;
+                              safeSetState(() {});
+                            },
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              SingleChildScrollView(
+                                primary: false,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 10.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          FlutterFlowDropDown<String>(
+                                            controller: _model
+                                                    .seasonSelectorValueController ??=
+                                                FormFieldController<String>(
+                                              _model.seasonSelectorValue ??=
+                                                  _model.selectedSeason
+                                                      .toString(),
+                                            ),
+                                            options: functions
+                                                .generateSeasonList(widget
+                                                    .seriesDoc!.totalSeasons),
+                                            onChanged: (val) async {
+                                              safeSetState(() => _model
+                                                  .seasonSelectorValue = val);
+                                              _model.selectedSeason =
+                                                  functions.stringToInt(_model
+                                                      .seasonSelectorValue!);
+                                              safeSetState(() {});
+                                            },
+                                            width: 200.0,
+                                            height: 40.0,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
                                                         fontWeight:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -927,203 +880,210 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                                                 .bodyMedium
                                                                 .fontStyle,
                                                       ),
-                                              hintText: 'Season',
-                                              icon: Icon(
-                                                Icons
-                                                    .keyboard_arrow_down_rounded,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
+                                            hintText: 'Season',
+                                            icon: Icon(
+                                              Icons.keyboard_arrow_down_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24.0,
+                                            ),
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                            elevation: 2.0,
+                                            borderColor: Colors.transparent,
+                                            borderWidth: 0.0,
+                                            borderRadius: 8.0,
+                                            margin:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    12.0, 0.0, 12.0, 0.0),
+                                            hidesUnderline: true,
+                                            isOverButton: false,
+                                            isSearchable: false,
+                                            isMultiSelect: false,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    StreamBuilder<List<EpisodesRecord>>(
+                                      stream: queryEpisodesRecord(
+                                        parent: widget.seriesDoc?.reference,
+                                        queryBuilder: (episodesRecord) =>
+                                            episodesRecord
+                                                .where(
+                                                  'season_number',
+                                                  isEqualTo:
+                                                      _model.selectedSeason,
+                                                )
+                                                .orderBy('episode_number'),
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: SpinKitPulse(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 24.0,
+                                                        .primary,
+                                                size: 50.0,
                                               ),
-                                              fillColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              elevation: 2.0,
-                                              borderColor: Colors.transparent,
-                                              borderWidth: 0.0,
-                                              borderRadius: 8.0,
-                                              margin: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      12.0, 0.0, 12.0, 0.0),
-                                              hidesUnderline: true,
-                                              isOverButton: false,
-                                              isSearchable: false,
-                                              isMultiSelect: false,
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                      StreamBuilder<List<EpisodesRecord>>(
-                                        stream: queryEpisodesRecord(
-                                          parent: widget.seriesDoc?.reference,
-                                          queryBuilder: (episodesRecord) =>
-                                              episodesRecord
-                                                  .where(
-                                                    'season_number',
-                                                    isEqualTo:
-                                                        _model.selectedSeason,
-                                                  )
-                                                  .orderBy('episode_number'),
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child: SpinKitPulse(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  size: 50.0,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<EpisodesRecord>
-                                              listViewEpisodesRecordList =
-                                              snapshot.data!;
-
-                                          return ListView.builder(
-                                            padding: EdgeInsets.zero,
-                                            primary: false,
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount:
-                                                listViewEpisodesRecordList
-                                                    .length,
-                                            itemBuilder:
-                                                (context, listViewIndex) {
-                                              final listViewEpisodesRecord =
-                                                  listViewEpisodesRecordList[
-                                                      listViewIndex];
-                                              return EpisodeItemWidget(
-                                                key: Key(
-                                                    'Keykha_${listViewIndex}_of_${listViewEpisodesRecordList.length}'),
-                                                episodeDoc:
-                                                    listViewEpisodesRecord,
-                                              );
-                                            },
                                           );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Flexible(
-                                      child: StreamBuilder<List<SeriesRecord>>(
-                                        stream: querySeriesRecord(
-                                          queryBuilder: (seriesRecord) =>
-                                              seriesRecord
-                                                  .whereArrayContainsAny(
-                                                      'genres',
-                                                      widget.seriesDoc?.genres)
-                                                  .where(
-                                                    'tmdb_id',
-                                                    isNotEqualTo: widget
-                                                        .seriesDoc?.tmdbId,
-                                                  ),
-                                          limit: 9,
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child: SpinKitPulse(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  size: 50.0,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<SeriesRecord>
-                                              gridViewSeriesRecordList =
-                                              snapshot.data!;
+                                        }
+                                        List<EpisodesRecord>
+                                            listViewEpisodesRecordList =
+                                            snapshot.data!;
 
-                                          return GridView.builder(
-                                            padding: EdgeInsets.zero,
-                                            gridDelegate:
-                                                SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 3,
-                                              crossAxisSpacing: 10.0,
-                                              mainAxisSpacing: 10.0,
-                                              childAspectRatio: 0.6,
-                                            ),
-                                            primary: false,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount:
-                                                gridViewSeriesRecordList.length,
-                                            itemBuilder:
-                                                (context, gridViewIndex) {
-                                              final gridViewSeriesRecord =
-                                                  gridViewSeriesRecordList[
-                                                      gridViewIndex];
-                                              return InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  context.pushNamed(
-                                                    SeasonPageWidget.routeName,
-                                                    queryParameters: {
-                                                      'seriesDoc':
-                                                          serializeParam(
-                                                        gridViewSeriesRecord,
-                                                        ParamType.Document,
-                                                      ),
-                                                    }.withoutNulls,
-                                                    extra: <String, dynamic>{
-                                                      'seriesDoc':
-                                                          gridViewSeriesRecord,
-                                                    },
-                                                  );
-                                                },
-                                                child: MovieCardWidget(
-                                                  key: Key(
-                                                      'Key7lq_${gridViewIndex}_of_${gridViewSeriesRecordList.length}'),
-                                                  img: gridViewSeriesRecord
-                                                      .posterImage,
-                                                  seriesDoc:
-                                                      gridViewSeriesRecord,
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
+                                        return ListView.builder(
+                                          padding: EdgeInsets.zero,
+                                          primary: false,
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount:
+                                              listViewEpisodesRecordList.length,
+                                          itemBuilder:
+                                              (context, listViewIndex) {
+                                            final listViewEpisodesRecord =
+                                                listViewEpisodesRecordList[
+                                                    listViewIndex];
+                                            return EpisodeItemWidget(
+                                              key: Key(
+                                                  'Keydi5_${listViewIndex}_of_${listViewEpisodesRecordList.length}'),
+                                              episodeDoc:
+                                                  listViewEpisodesRecord,
+                                            );
+                                          },
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [],
-                                ),
-                              ],
-                            ),
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Flexible(
+                                    child: StreamBuilder<List<SeriesRecord>>(
+                                      stream: querySeriesRecord(
+                                        queryBuilder: (seriesRecord) =>
+                                            seriesRecord
+                                                .whereArrayContainsAny('genres',
+                                                    widget.seriesDoc?.genres)
+                                                .where(
+                                                  'tmdb_id',
+                                                  isNotEqualTo:
+                                                      widget.seriesDoc?.tmdbId,
+                                                ),
+                                        limit: 9,
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: SpinKitPulse(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                size: 50.0,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<SeriesRecord>
+                                            gridViewSeriesRecordList =
+                                            snapshot.data!;
+
+                                        return GridView.builder(
+                                          padding: EdgeInsets.zero,
+                                          gridDelegate:
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 3,
+                                            crossAxisSpacing: 10.0,
+                                            mainAxisSpacing: 10.0,
+                                            childAspectRatio: 0.6,
+                                          ),
+                                          primary: false,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount:
+                                              gridViewSeriesRecordList.length,
+                                          itemBuilder:
+                                              (context, gridViewIndex) {
+                                            final gridViewSeriesRecord =
+                                                gridViewSeriesRecordList[
+                                                    gridViewIndex];
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  SeasonPageWidget.routeName,
+                                                  queryParameters: {
+                                                    'seriesDoc': serializeParam(
+                                                      gridViewSeriesRecord,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'seriesDoc':
+                                                        gridViewSeriesRecord,
+                                                  },
+                                                );
+                                              },
+                                              child: MovieCardWidget(
+                                                key: Key(
+                                                    'Keyq06_${gridViewIndex}_of_${gridViewSeriesRecordList.length}'),
+                                                img: gridViewSeriesRecord
+                                                    .posterImage,
+                                                seriesDoc: gridViewSeriesRecord,
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [],
+                              ),
+                            ],
                           ),
                         ),
-                      ].divide(SizedBox(
-                          height: FlutterFlowTheme.of(context)
-                              .designToken
-                              .spacing
-                              .md)),
-                    ),
+                      ),
+                    ].divide(SizedBox(
+                        height: FlutterFlowTheme.of(context)
+                            .designToken
+                            .spacing
+                            .md)),
                   ),
                 ),
                 Container(
                   height: 80.0,
+                  decoration: BoxDecoration(),
                 ),
               ],
             ),

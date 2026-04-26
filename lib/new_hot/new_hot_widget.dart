@@ -300,6 +300,9 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                                           .imageUrl,
                                                       tag:
                                                           rowNewsFeedRecord.tag,
+                                                      logoImage:
+                                                          rowNewsFeedRecord
+                                                              .logoImage,
                                                     ),
                                                   );
                                                 },
@@ -399,6 +402,7 @@ class _NewHotWidgetState extends State<NewHotWidget> {
 
                                         return ListView.separated(
                                           padding: EdgeInsets.zero,
+                                          primary: false,
                                           shrinkWrap: true,
                                           scrollDirection: Axis.vertical,
                                           itemCount:

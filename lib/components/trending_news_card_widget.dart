@@ -12,6 +12,7 @@ class TrendingNewsCardWidget extends StatefulWidget {
     String? headline,
     String? img,
     String? tag,
+    required this.logoImage,
   })  : this.headline = headline ??
             'Wednesday Season 2: Production officially begins in Ireland',
         this.img = img ??
@@ -21,6 +22,7 @@ class TrendingNewsCardWidget extends StatefulWidget {
   final String headline;
   final String img;
   final String tag;
+  final String? logoImage;
 
   @override
   State<TrendingNewsCardWidget> createState() => _TrendingNewsCardWidgetState();
@@ -107,32 +109,52 @@ class _TrendingNewsCardWidgetState extends State<TrendingNewsCardWidget> {
                           lineHeight: 1.2,
                         ),
                   ),
-                  Text(
-                    valueOrDefault<String>(
-                      widget.headline,
-                      'Wednesday Season 2: Production officially begins in Ireland',
-                    ),
-                    maxLines: 2,
-                    style: FlutterFlowTheme.of(context).titleMedium.override(
-                          font: GoogleFonts.inter(
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .fontStyle,
+                  Stack(
+                    children: [
+                      if (widget.logoImage == null || widget.logoImage == '')
+                        Text(
+                          valueOrDefault<String>(
+                            widget.headline,
+                            'Wednesday Season 2: Production officially begins in Ireland',
                           ),
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          letterSpacing: 0.0,
-                          fontWeight: FlutterFlowTheme.of(context)
+                          maxLines: 2,
+                          style: FlutterFlowTheme.of(context)
                               .titleMedium
-                              .fontWeight,
-                          fontStyle: FlutterFlowTheme.of(context)
-                              .titleMedium
-                              .fontStyle,
-                          lineHeight: 1.3,
+                              .override(
+                                font: GoogleFonts.inter(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontStyle,
+                                ),
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .titleMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleMedium
+                                    .fontStyle,
+                                lineHeight: 1.3,
+                              ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                    overflow: TextOverflow.ellipsis,
+                      if (widget.logoImage != null && widget.logoImage != '')
+                        Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.network(
+                              widget.logoImage!,
+                              width: 200.0,
+                              height: 50.0,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                 ].divide(SizedBox(height: 4.0)),
               ),
