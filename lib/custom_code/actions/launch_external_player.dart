@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'index.dart'; // Imports other custom actions
-
 import 'package:flutter/services.dart';
 
 Future launchExternalPlayer(
@@ -100,6 +98,11 @@ Future launchExternalPlayer(
 
   // ─── 3. Launch the native player via MethodChannel ──────────────────────────
 
+  // 🔥 THE MAGIC: VLC/MX mein upar dikhne wala VIP title
+  final String displayTitle = contentType == 'episode'
+      ? 'S${seasonNum ?? 0}E${episodeNum ?? 0} · ${title ?? ""}'
+      : title ?? '';
+
   const platform = MethodChannel('com.syedlord.shahcomplex/external_player');
   Map<dynamic, dynamic>? result;
 
@@ -108,6 +111,7 @@ Future launchExternalPlayer(
         await platform.invokeMethod<Map<dynamic, dynamic>>('launchPlayer', {
       'url': finalPlayUrl,
       'startPositionMs': startAtSeconds * 1000,
+      'title': displayTitle, // 🔥 Yahan humne title parameter add kar diya
     });
   } on PlatformException {
     // Player closed without returning data (e.g. user pressed Back immediately)
@@ -133,8 +137,6 @@ Future launchExternalPlayer(
   final bool isFinished = progressPercent > 90.0;
 
   // ─── 5. Build the Firestore document path ───────────────────────────────────
-  // Movies: continue_watching/{profileId}/items/{tmdbId}
-  // Episodes: continue_watching/{profileId}/items/{tmdbId}_{season}_{episode}
 
   final String docId = contentType == 'episode'
       ? '${tmdbId ?? "unknown"}_${seasonNum ?? 0}_${episodeNum ?? 0}'
@@ -161,7 +163,6 @@ Future launchExternalPlayer(
       'series_id': resolvedSeriesId ?? '',
       'image_url': imageUrl ?? '',
       'drive_type': driveType ?? '',
-      // Only store these fields for episodes
       if (contentType == 'episode') 'season': seasonNum ?? 0,
       if (contentType == 'episode') 'episode': episodeNum ?? 0,
       if (contentType == 'episode' && showName != null) 'show_name': showName,
