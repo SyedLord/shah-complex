@@ -415,7 +415,7 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
                   await authManager.signOut();
                   GoRouter.of(context).clearRedirectLocation();
 
-                  Navigator.pop(context);
+                  context.goNamedAuth(LoginWidget.routeName, context.mounted);
                 },
                 child: Container(
                   decoration: BoxDecoration(
