@@ -346,6 +346,8 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                 children: [
                                   FutureBuilder<int>(
                                     future: FFAppState().profileWatchlistCount(
+                                      uniqueQueryKey:
+                                          myProfileProfilesRecord.reference.id,
                                       requestFn: () => queryMyListRecordCount(
                                         queryBuilder: (myListRecord) =>
                                             myListRecord.where(
@@ -562,6 +564,9 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                           24.0, 0.0, 24.0, 0.0),
                                       child: FutureBuilder<List<MyListRecord>>(
                                         future: FFAppState().myListAllItems(
+                                          uniqueQueryKey:
+                                              myProfileProfilesRecord
+                                                  .reference.id,
                                           requestFn: () =>
                                               queryMyListRecordOnce(
                                             queryBuilder: (myListRecord) =>
