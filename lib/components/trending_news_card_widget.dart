@@ -72,8 +72,8 @@ class _TrendingNewsCardWidgetState extends State<TrendingNewsCardWidget> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             CachedNetworkImage(
-              fadeInDuration: Duration(milliseconds: 0),
-              fadeOutDuration: Duration(milliseconds: 0),
+              fadeInDuration: Duration(milliseconds: 100),
+              fadeOutDuration: Duration(milliseconds: 100),
               imageUrl: valueOrDefault<String>(
                 widget.img,
                 'https://dimg.dreamflow.cloud/v1/image/Wednesday%20Addams%20season%202%20production',
@@ -146,8 +146,10 @@ class _TrendingNewsCardWidgetState extends State<TrendingNewsCardWidget> {
                           alignment: AlignmentDirectional(0.0, 0.0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              widget.logoImage!,
+                            child: CachedNetworkImage(
+                              fadeInDuration: Duration(milliseconds: 100),
+                              fadeOutDuration: Duration(milliseconds: 100),
+                              imageUrl: widget.logoImage!,
                               width: 200.0,
                               height: 50.0,
                               fit: BoxFit.contain,

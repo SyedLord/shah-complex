@@ -75,15 +75,49 @@ class _AllNotificationCardWidgetState extends State<AllNotificationCardWidget> {
                 borderRadius: BorderRadius.circular(12.0),
                 shape: BoxShape.rectangle,
               ),
-              child: CachedNetworkImage(
-                fadeInDuration: Duration(milliseconds: 0),
-                fadeOutDuration: Duration(milliseconds: 0),
-                imageUrl: valueOrDefault<String>(
-                  widget.trailer_img,
-                  'https://dimg.dreamflow.cloud/v1/image/Arcane%20Season%202%20Jinx%20Vi%20fight',
-                ),
-                fit: BoxFit.cover,
-                alignment: Alignment(0.0, 0.0),
+              child: Stack(
+                children: [
+                  CachedNetworkImage(
+                    fadeInDuration: Duration(milliseconds: 100),
+                    fadeOutDuration: Duration(milliseconds: 100),
+                    imageUrl: valueOrDefault<String>(
+                      widget.trailer_img,
+                      'https://dimg.dreamflow.cloud/v1/image/Arcane%20Season%202%20Jinx%20Vi%20fight',
+                    ),
+                    fit: BoxFit.cover,
+                    alignment: Alignment(0.0, 0.0),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).primary,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(6.0),
+                        child: Text(
+                          widget.date,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
