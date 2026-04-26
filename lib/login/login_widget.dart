@@ -193,78 +193,61 @@ class _LoginWidgetState extends State<LoginWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0,
-                          FlutterFlowTheme.of(context).designToken.spacing.xl),
-                      child: Container(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
+                    if (_model.isVisible)
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0,
+                            0.0,
+                            0.0,
+                            FlutterFlowTheme.of(context)
+                                .designToken
+                                .spacing
+                                .xl),
+                        child: Container(
+                          child: Visibility(
+                            visible: _model.isVisible,
+                            child: Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Icon(
-                                  Icons.play_circle_filled_rounded,
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  size: 32.0,
-                                ),
-                                Text(
-                                  'CINESTREAM',
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight: FontWeight.w900,
+                                if (_model.isVisible)
+                                  Text(
+                                    'Help',
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelLarge
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .titleLarge
+                                                  .labelLarge
                                                   .fontStyle,
+                                          lineHeight: 1.3,
                                         ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        fontSize: 22.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w900,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleLarge
-                                            .fontStyle,
-                                        lineHeight: 1.0,
-                                      ),
-                                ),
-                              ].divide(SizedBox(
-                                  width: FlutterFlowTheme.of(context)
-                                      .designToken
-                                      .spacing
-                                      .sm)),
-                            ),
-                            Text(
-                              'Help',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .labelLarge
-                                          .fontStyle,
-                                    ),
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .fontStyle,
-                                    lineHeight: 1.3,
                                   ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
+                      ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        'assets/images/login_page_logo.png',
+                        width: 200.0,
+                        height: 160.0,
+                        fit: BoxFit.cover,
                       ),
                     ),
                     Column(
@@ -418,187 +401,193 @@ class _LoginWidgetState extends State<LoginWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        Container(
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0,
-                                FlutterFlowTheme.of(context)
-                                    .designToken
-                                    .spacing
-                                    .sm,
-                                0.0,
-                                FlutterFlowTheme.of(context)
-                                    .designToken
-                                    .spacing
-                                    .sm),
-                            child: Text(
-                              'Forgot password?',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    font: GoogleFonts.inter(
+                        if (_model.isVisible)
+                          Container(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0,
+                                  FlutterFlowTheme.of(context)
+                                      .designToken
+                                      .spacing
+                                      .sm,
+                                  0.0,
+                                  FlutterFlowTheme.of(context)
+                                      .designToken
+                                      .spacing
+                                      .sm),
+                              child: Text(
+                                'Forgot password?',
+                                style: FlutterFlowTheme.of(context)
+                                    .labelLarge
+                                    .override(
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .fontStyle,
+                                      ),
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 14.0,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FlutterFlowTheme.of(context)
                                           .labelLarge
                                           .fontStyle,
+                                      lineHeight: 1.3,
                                     ),
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .fontStyle,
-                                    lineHeight: 1.3,
-                                  ),
+                              ),
                             ),
                           ),
-                        ),
                       ].divide(SizedBox(
                           height: FlutterFlowTheme.of(context)
                               .designToken
                               .spacing
                               .md)),
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'New to CineStream?',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        font: GoogleFonts.inter(
+                    if (_model.isVisible)
+                      Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'New to CineStream?',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.normal,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLarge
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 16.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.normal,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodyLarge
                                                   .fontStyle,
+                                          lineHeight: 1.5,
                                         ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 16.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.normal,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .fontStyle,
-                                        lineHeight: 1.5,
-                                      ),
-                                ),
-                                Text(
-                                  'Sign up now.',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        font: GoogleFonts.inter(
+                                  ),
+                                  Text(
+                                    'Sign up now.',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w800,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLarge
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 16.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.w800,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodyLarge
                                                   .fontStyle,
+                                          lineHeight: 1.5,
                                         ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        fontSize: 16.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w800,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .fontStyle,
-                                        lineHeight: 1.5,
-                                      ),
-                                ),
-                              ].divide(SizedBox(
-                                  width: FlutterFlowTheme.of(context)
-                                      .designToken
-                                      .spacing
-                                      .xs)),
+                                  ),
+                                ].divide(SizedBox(
+                                    width: FlutterFlowTheme.of(context)
+                                        .designToken
+                                        .spacing
+                                        .xs)),
+                              ),
                             ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Sign in is protected by Google reCAPTCHA to ensure you\'re not a bot.',
-                                  textAlign: TextAlign.center,
-                                  maxLines: 2,
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelSmall
-                                      .override(
-                                        font: GoogleFonts.inter(
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Sign in is protected by Google reCAPTCHA to ensure you\'re not a bot.',
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelSmall
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelSmall
+                                                    .fontStyle,
+                                          ),
+                                          color:
+                                              FlutterFlowTheme.of(context).hint,
+                                          fontSize: 10.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelSmall
                                                   .fontStyle,
+                                          lineHeight: 1.2,
                                         ),
-                                        color:
-                                            FlutterFlowTheme.of(context).hint,
-                                        fontSize: 10.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .fontStyle,
-                                        lineHeight: 1.2,
-                                      ),
-                                ),
-                                Text(
-                                  'Learn more.',
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelSmall
-                                      .override(
-                                        font: GoogleFonts.inter(
+                                  ),
+                                  Text(
+                                    'Learn more.',
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelSmall
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelSmall
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 10.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelSmall
                                                   .fontStyle,
+                                          decoration: TextDecoration.underline,
+                                          lineHeight: 1.2,
                                         ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 10.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .fontStyle,
-                                        decoration: TextDecoration.underline,
-                                        lineHeight: 1.2,
-                                      ),
-                                ),
-                              ].divide(SizedBox(
-                                  height: FlutterFlowTheme.of(context)
-                                      .designToken
-                                      .spacing
-                                      .sm)),
+                                  ),
+                                ].divide(SizedBox(
+                                    height: FlutterFlowTheme.of(context)
+                                        .designToken
+                                        .spacing
+                                        .sm)),
+                              ),
                             ),
-                          ),
-                        ].divide(SizedBox(
-                            height: FlutterFlowTheme.of(context)
-                                .designToken
-                                .spacing
-                                .xl)),
+                          ].divide(SizedBox(
+                              height: FlutterFlowTheme.of(context)
+                                  .designToken
+                                  .spacing
+                                  .xl)),
+                        ),
                       ),
-                    ),
                   ].divide(SizedBox(
                       height:
                           FlutterFlowTheme.of(context).designToken.spacing.xl)),
