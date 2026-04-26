@@ -441,84 +441,89 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
             if ((widget.categoryType == 'movie') &&
                 (widget.isTrending == true))
               Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
-                  child: StreamBuilder<List<MoviesRecord>>(
-                    stream: FFAppState().trendingMoviesCache(
-                      requestFn: () => queryMoviesRecord(
-                        queryBuilder: (moviesRecord) => moviesRecord
-                            .where(
-                              'is_trending',
-                              isEqualTo: true,
-                            )
-                            .orderBy('created_at', descending: true),
-                      ),
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
-                            child: SpinKitPulse(
-                              color: FlutterFlowTheme.of(context).primary,
-                              size: 50.0,
-                            ),
-                          ),
-                        );
-                      }
-                      List<MoviesRecord> trendingMoviesMoviesRecordList =
-                          snapshot.data!;
-
-                      return GridView.builder(
-                        padding: EdgeInsets.zero,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 10.0,
-                          mainAxisSpacing: 10.0,
-                          childAspectRatio: 0.6,
+                child: Align(
+                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                    child: StreamBuilder<List<MoviesRecord>>(
+                      stream: FFAppState().trendingMoviesCache(
+                        requestFn: () => queryMoviesRecord(
+                          queryBuilder: (moviesRecord) => moviesRecord
+                              .where(
+                                'is_trending',
+                                isEqualTo: true,
+                              )
+                              .orderBy('created_at', descending: true),
                         ),
-                        primary: false,
-                        scrollDirection: Axis.vertical,
-                        itemCount: trendingMoviesMoviesRecordList.length,
-                        itemBuilder: (context, trendingMoviesIndex) {
-                          final trendingMoviesMoviesRecord =
-                              trendingMoviesMoviesRecordList[
-                                  trendingMoviesIndex];
-                          return InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              context.pushNamed(
-                                MoviePageWidget.routeName,
-                                queryParameters: {
-                                  'movieDoc': serializeParam(
-                                    trendingMoviesMoviesRecord,
-                                    ParamType.Document,
-                                  ),
-                                }.withoutNulls,
-                                extra: <String, dynamic>{
-                                  'movieDoc': trendingMoviesMoviesRecord,
-                                  '__transition_info__': TransitionInfo(
-                                    hasTransition: true,
-                                    transitionType: PageTransitionType.fade,
-                                  ),
-                                },
-                              );
-                            },
-                            child: MovieCardWidget(
-                              key: Key(
-                                  'Key3c9_${trendingMoviesIndex}_of_${trendingMoviesMoviesRecordList.length}'),
-                              img: trendingMoviesMoviesRecord.posterImage,
-                              movieDoc: trendingMoviesMoviesRecord,
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: SpinKitPulse(
+                                color: FlutterFlowTheme.of(context).primary,
+                                size: 50.0,
+                              ),
                             ),
                           );
-                        },
-                      );
-                    },
+                        }
+                        List<MoviesRecord> trendingMoviesMoviesRecordList =
+                            snapshot.data!;
+
+                        return GridView.builder(
+                          padding: EdgeInsets.zero,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 10.0,
+                            mainAxisSpacing: 10.0,
+                            childAspectRatio: 0.6,
+                          ),
+                          primary: false,
+                          scrollDirection: Axis.vertical,
+                          itemCount: trendingMoviesMoviesRecordList.length,
+                          itemBuilder: (context, trendingMoviesIndex) {
+                            final trendingMoviesMoviesRecord =
+                                trendingMoviesMoviesRecordList[
+                                    trendingMoviesIndex];
+                            return InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(
+                                  MoviePageWidget.routeName,
+                                  queryParameters: {
+                                    'movieDoc': serializeParam(
+                                      trendingMoviesMoviesRecord,
+                                      ParamType.Document,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    'movieDoc': trendingMoviesMoviesRecord,
+                                    '__transition_info__': TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType: PageTransitionType.fade,
+                                    ),
+                                  },
+                                );
+                              },
+                              child: MovieCardWidget(
+                                key: Key(
+                                    'Key3c9_${trendingMoviesIndex}_of_${trendingMoviesMoviesRecordList.length}'),
+                                img: trendingMoviesMoviesRecord.posterImage,
+                                movieDoc: trendingMoviesMoviesRecord,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),

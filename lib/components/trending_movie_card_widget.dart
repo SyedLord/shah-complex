@@ -79,7 +79,7 @@ class _TrendingMovieCardWidgetState extends State<TrendingMovieCardWidget> {
                 ),
                 maxLines: 1,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      font: GoogleFonts.poppins(
+                      font: GoogleFonts.inter(
                         fontWeight: FontWeight.w600,
                         fontStyle:
                             FlutterFlowTheme.of(context).bodyMedium.fontStyle,

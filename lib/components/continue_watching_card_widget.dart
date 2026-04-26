@@ -132,7 +132,7 @@ class _ContinueWatchingCardWidgetState
               'Title',
             ),
             style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  font: GoogleFonts.poppins(
+                  font: GoogleFonts.inter(
                     fontWeight: FontWeight.w600,
                     fontStyle:
                         FlutterFlowTheme.of(context).bodyMedium.fontStyle,
@@ -149,7 +149,7 @@ class _ContinueWatchingCardWidgetState
             child: Text(
               'Season ${widget.continueDoc?.season.toString()}, Episode ${widget.continueDoc?.episode.toString()}',
               style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    font: GoogleFonts.poppins(
+                    font: GoogleFonts.inter(
                       fontWeight: FontWeight.w600,
                       fontStyle:
                           FlutterFlowTheme.of(context).bodyMedium.fontStyle,

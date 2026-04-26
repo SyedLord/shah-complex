@@ -71,3 +71,10 @@ EpisodesRecord? emptyEpisodeDoc() {
 ItemsRecord? emptyContinueDoc() {
   return null;
 }
+
+DateTime getStartOfDay() {
+  // Aaj ka current time nikalna
+  final now = DateTime.now();
+  // Time ko hata kar sirf aaj ki date aur raat 12:00 baje return karna
+  return DateTime(now.year, now.month, now.day);
+}

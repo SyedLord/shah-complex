@@ -17,6 +17,7 @@ import 'schema/continue_watching_record.dart';
 import 'schema/items_record.dart';
 import 'schema/my_list_record.dart';
 import 'schema/app_config_record.dart';
+import 'schema/news_feed_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -37,6 +38,7 @@ export 'schema/continue_watching_record.dart';
 export 'schema/items_record.dart';
 export 'schema/my_list_record.dart';
 export 'schema/app_config_record.dart';
+export 'schema/news_feed_record.dart';
 
 /// Functions to query MoviesRecords (as a Stream and as a Future).
 Future<int> queryMoviesRecordCount({
@@ -486,6 +488,43 @@ Future<List<AppConfigRecord>> queryAppConfigRecordOnce({
     queryCollectionOnce(
       AppConfigRecord.collection,
       AppConfigRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query NewsFeedRecords (as a Stream and as a Future).
+Future<int> queryNewsFeedRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      NewsFeedRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<NewsFeedRecord>> queryNewsFeedRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      NewsFeedRecord.collection,
+      NewsFeedRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<NewsFeedRecord>> queryNewsFeedRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      NewsFeedRecord.collection,
+      NewsFeedRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

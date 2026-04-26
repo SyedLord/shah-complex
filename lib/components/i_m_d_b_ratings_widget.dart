@@ -56,7 +56,7 @@ class _IMDBRatingsWidgetState extends State<IMDBRatingsWidget> {
           Text(
             widget.rating.toString(),
             style: FlutterFlowTheme.of(context).labelLarge.override(
-                  font: GoogleFonts.poppins(
+                  font: GoogleFonts.inter(
                     fontWeight: FontWeight.bold,
                     fontStyle:
                         FlutterFlowTheme.of(context).labelLarge.fontStyle,
@@ -70,7 +70,7 @@ class _IMDBRatingsWidgetState extends State<IMDBRatingsWidget> {
           Text(
             'IMDb',
             style: FlutterFlowTheme.of(context).labelSmall.override(
-                  font: GoogleFonts.poppins(
+                  font: GoogleFonts.inter(
                     fontWeight: FontWeight.bold,
                     fontStyle:
                         FlutterFlowTheme.of(context).labelSmall.fontStyle,

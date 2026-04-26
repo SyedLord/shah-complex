@@ -64,6 +64,7 @@ abstract class FlutterFlowTheme {
   late Color onSurface;
   late Color onError;
   late Color transparent;
+  late Color background90;
 
   FFDesignTokens get designToken => FFDesignTokens(this);
 
@@ -178,6 +179,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color onSurface = const Color(0xFFFFFFFF);
   late Color onError = const Color(0xFFFFFFFF);
   late Color transparent = const Color(0x00000000);
+  late Color background90 = const Color(0xE6000000);
 }
 
 abstract class Typography {
@@ -254,17 +256,17 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Poppins';
+  String get headlineLargeFamily => 'Inter';
   bool get headlineLargeIsCustom => false;
-  TextStyle get headlineLarge => GoogleFonts.poppins(
+  TextStyle get headlineLarge => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.w800,
         fontSize: 32.0,
         height: 1.1,
       );
-  String get headlineMediumFamily => 'Poppins';
+  String get headlineMediumFamily => 'Inter';
   bool get headlineMediumIsCustom => false;
-  TextStyle get headlineMedium => GoogleFonts.poppins(
+  TextStyle get headlineMedium => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 26.0,
@@ -277,17 +279,17 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'Poppins';
+  String get titleLargeFamily => 'Inter';
   bool get titleLargeIsCustom => false;
-  TextStyle get titleLarge => GoogleFonts.poppins(
+  TextStyle get titleLarge => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 22.0,
         height: 1.2,
       );
-  String get titleMediumFamily => 'Poppins';
+  String get titleMediumFamily => 'Inter';
   bool get titleMediumIsCustom => false;
-  TextStyle get titleMedium => GoogleFonts.poppins(
+  TextStyle get titleMedium => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 17.0,
@@ -300,49 +302,49 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Poppins';
+  String get labelLargeFamily => 'Inter';
   bool get labelLargeIsCustom => false;
-  TextStyle get labelLarge => GoogleFonts.poppins(
+  TextStyle get labelLarge => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 14.0,
         height: 1.3,
       );
-  String get labelMediumFamily => 'Poppins';
+  String get labelMediumFamily => 'Inter';
   bool get labelMediumIsCustom => false;
-  TextStyle get labelMedium => GoogleFonts.poppins(
+  TextStyle get labelMedium => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 12.0,
         height: 1.3,
       );
-  String get labelSmallFamily => 'Poppins';
+  String get labelSmallFamily => 'Inter';
   bool get labelSmallIsCustom => false;
-  TextStyle get labelSmall => GoogleFonts.poppins(
+  TextStyle get labelSmall => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 10.0,
         height: 1.2,
       );
-  String get bodyLargeFamily => 'Poppins';
+  String get bodyLargeFamily => 'Inter';
   bool get bodyLargeIsCustom => false;
-  TextStyle get bodyLarge => GoogleFonts.poppins(
+  TextStyle get bodyLarge => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
         height: 1.5,
       );
-  String get bodyMediumFamily => 'Poppins';
+  String get bodyMediumFamily => 'Inter';
   bool get bodyMediumIsCustom => false;
-  TextStyle get bodyMedium => GoogleFonts.poppins(
+  TextStyle get bodyMedium => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
         height: 1.4,
       );
-  String get bodySmallFamily => 'Poppins';
+  String get bodySmallFamily => 'Inter';
   bool get bodySmallIsCustom => false;
-  TextStyle get bodySmall => GoogleFonts.poppins(
+  TextStyle get bodySmall => GoogleFonts.inter(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
@@ -383,6 +385,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color onSurface = const Color(0xFFFFFFFF);
   late Color onError = const Color(0xFFFFFFFF);
   late Color transparent = const Color(0x00000000);
+  late Color background90 = const Color(0xE6000000);
 }
 
 class FFDesignTokens {

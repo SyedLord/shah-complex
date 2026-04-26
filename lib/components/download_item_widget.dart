@@ -122,7 +122,7 @@ class _DownloadItemWidgetState extends State<DownloadItemWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                font: GoogleFonts.poppins(
+                                font: GoogleFonts.inter(
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -146,7 +146,7 @@ class _DownloadItemWidgetState extends State<DownloadItemWidget> {
                           style: FlutterFlowTheme.of(context)
                               .labelSmall
                               .override(
-                                font: GoogleFonts.poppins(
+                                font: GoogleFonts.inter(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .labelSmall
                                       .fontWeight,

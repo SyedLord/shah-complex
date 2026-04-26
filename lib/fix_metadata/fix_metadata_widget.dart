@@ -96,7 +96,7 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                         style: FlutterFlowTheme.of(context)
                             .titleMedium
                             .override(
-                              font: GoogleFonts.poppins(
+                              font: GoogleFonts.inter(
                                 fontWeight: FlutterFlowTheme.of(context)
                                     .titleMedium
                                     .fontWeight,
@@ -133,7 +133,7 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                           style: FlutterFlowTheme.of(context)
                               .labelMedium
                               .override(
-                                font: GoogleFonts.poppins(
+                                font: GoogleFonts.inter(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .fontWeight,
@@ -172,7 +172,7 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                               hintStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    font: GoogleFonts.poppins(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .fontWeight,
@@ -224,7 +224,7 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  font: GoogleFonts.poppins(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .fontWeight,
@@ -253,7 +253,7 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodySmall
                               .override(
-                                font: GoogleFonts.poppins(
+                                font: GoogleFonts.inter(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .fontWeight,
@@ -345,7 +345,7 @@ class _FixMetadataWidgetState extends State<FixMetadataWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        font: GoogleFonts.poppins(
+                                        font: GoogleFonts.inter(
                                           fontWeight: FontWeight.w600,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
