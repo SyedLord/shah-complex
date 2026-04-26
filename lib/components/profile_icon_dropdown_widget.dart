@@ -188,7 +188,17 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.pushNamed(ProfileSelectionWidget.routeName);
+                  context.pushNamed(
+                    ProfileSelectionWidget.routeName,
+                    extra: <String, dynamic>{
+                      '__transition_info__': TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                      ),
+                    },
+                  );
+
+                  Navigator.pop(context);
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -328,6 +338,8 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
                           ),
                         }.withoutNulls,
                       );
+
+                      Navigator.pop(context);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -403,7 +415,7 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
                   await authManager.signOut();
                   GoRouter.of(context).clearRedirectLocation();
 
-                  context.goNamedAuth(LoginWidget.routeName, context.mounted);
+                  Navigator.pop(context);
                 },
                 child: Container(
                   decoration: BoxDecoration(
