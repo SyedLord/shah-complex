@@ -165,13 +165,24 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      await actions.launchExternalPlayer(
-                                        widget.movieDoc,
-                                        functions.emptyEpisodeDoc(),
-                                        functions.emptyContinueDoc(),
-                                        FFAppState().activeProfileRef!.id,
-                                        '',
-                                      );
+                                      if ((moviePageItemsRecord != null) !=
+                                          true) {
+                                        await actions.launchExternalPlayer(
+                                          widget.movieDoc,
+                                          functions.emptyEpisodeDoc(),
+                                          functions.emptyContinueDoc(),
+                                          FFAppState().activeProfileRef!.id,
+                                          '',
+                                        );
+                                      } else {
+                                        await actions.launchExternalPlayer(
+                                          functions.emptyMovieDoc(),
+                                          functions.emptyEpisodeDoc(),
+                                          moviePageItemsRecord,
+                                          FFAppState().activeProfileRef!.id,
+                                          '',
+                                        );
+                                      }
                                     },
                                     child: Icon(
                                       Icons.play_arrow_rounded,
@@ -264,7 +275,7 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                             ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 15.0, 24.0, 24.0),
+                                24.0, 10.0, 24.0, 24.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
