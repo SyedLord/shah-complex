@@ -992,6 +992,11 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                                           ?.totalSeasons,
                                                       ParamType.int,
                                                     ),
+                                                    'alreadySelectedSeason':
+                                                        serializeParam(
+                                                      _model.selectedSeason,
+                                                      ParamType.int,
+                                                    ),
                                                   }.withoutNulls,
                                                   extra: <String, dynamic>{
                                                     'episodeDoc':

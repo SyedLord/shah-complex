@@ -749,8 +749,12 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                             episodesRecord
                                                 .where(
                                                   'season_number',
-                                                  isEqualTo:
-                                                      _model.selectedSeason,
+                                                  isEqualTo: widget
+                                                              .alreadySelectedSeason !=
+                                                          null
+                                                      ? widget
+                                                          .alreadySelectedSeason
+                                                      : _model.selectedSeason,
                                                 )
                                                 .orderBy('episode_number'),
                                       ),
