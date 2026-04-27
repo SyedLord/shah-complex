@@ -453,11 +453,11 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                     await actions.launchExternalPlayer(
                                       widget.movieDoc,
                                       functions.emptyEpisodeDoc(),
-                                      moviePageItemsRecord,
+                                      functions.emptyContinueDoc(),
                                       FFAppState().activeProfileRef!.id,
                                       '',
                                     );
-                                  },
+                                                                    },
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color:
