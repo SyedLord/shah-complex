@@ -224,7 +224,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                           crossAxisCount: 2,
                           crossAxisSpacing: 10.0,
                           mainAxisSpacing: 10.0,
-                          childAspectRatio: 0.6,
+                          childAspectRatio: 1.0,
                         ),
                         primary: false,
                         scrollDirection: Axis.vertical,
