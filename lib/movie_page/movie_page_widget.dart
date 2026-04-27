@@ -275,7 +275,7 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                             ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 10.0, 24.0, 24.0),
+                                24.0, 5.0, 24.0, 24.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
