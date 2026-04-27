@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -548,6 +549,13 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                             FFButtonWidget(
                               onPressed: () async {
                                 await widget.profileDoc!.reference.delete();
+                                await actions.deleteContinueWatching(
+                                  widget.profileDoc!.reference.id,
+                                );
+                                await actions.deleteAllProfileItems(
+                                  'my_list',
+                                  widget.profileDoc!.reference,
+                                );
 
                                 context
                                     .goNamed(ProfileSelectionWidget.routeName);
