@@ -309,8 +309,8 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                           Duration(milliseconds: 100),
                                       imageUrl: widget.titleLogoImage!,
                                       width: 100.0,
-                                      height: 100.0,
-                                      fit: BoxFit.contain,
+                                      height: 70.0,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                   Text(
