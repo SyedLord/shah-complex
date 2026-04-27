@@ -793,6 +793,10 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                if (Navigator.of(context)
+                                                    .canPop()) {
+                                                  context.pop();
+                                                }
                                                 context.pushNamed(
                                                   EpisodePageWidget.routeName,
                                                   queryParameters: {
@@ -806,10 +810,22 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                       widget.totalSeasons,
                                                       ParamType.int,
                                                     ),
+                                                    'alreadySelectedSeason':
+                                                        serializeParam(
+                                                      _model.selectedSeason,
+                                                      ParamType.int,
+                                                    ),
                                                   }.withoutNulls,
                                                   extra: <String, dynamic>{
                                                     'episodeDoc':
                                                         listViewEpisodesRecord,
+                                                    '__transition_info__':
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                    ),
                                                   },
                                                 );
                                               },
