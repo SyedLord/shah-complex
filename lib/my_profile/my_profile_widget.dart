@@ -469,7 +469,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                   if ((myProfileProfilesRecord != null) == true)
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
+                                          16.0, 0.0, 16.0, 0.0),
                                       child: FutureBuilder<List<MyListRecord>>(
                                         future: FFAppState().myListAllItems(
                                           uniqueQueryKey:
