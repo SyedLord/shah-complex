@@ -297,7 +297,7 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Column(
-                                mainAxisSize: MainAxisSize.max,
+                                mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ClipRRect(
