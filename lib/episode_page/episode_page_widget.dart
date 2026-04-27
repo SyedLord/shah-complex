@@ -811,7 +811,8 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                     ),
                                                     'alreadySelectedSeason':
                                                         serializeParam(
-                                                      _model.selectedSeason,
+                                                      widget
+                                                          .alreadySelectedSeason,
                                                       ParamType.int,
                                                     ),
                                                   }.withoutNulls,
