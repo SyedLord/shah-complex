@@ -666,13 +666,8 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                     .seasonSelectorValueController ??=
                                                 FormFieldController<String>(
                                               _model.seasonSelectorValue ??=
-                                                  widget.alreadySelectedSeason !=
-                                                          null
-                                                      ? widget
-                                                          .alreadySelectedSeason
-                                                          ?.toString()
-                                                      : _model.selectedSeason
-                                                          .toString(),
+                                                  widget.alreadySelectedSeason
+                                                      ?.toString(),
                                             ),
                                             options:
                                                 functions.generateSeasonList(
