@@ -1049,6 +1049,10 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                if (Navigator.of(context)
+                                                    .canPop()) {
+                                                  context.pop();
+                                                }
                                                 context.pushNamed(
                                                   SeasonPageWidget.routeName,
                                                   queryParameters: {
@@ -1060,6 +1064,13 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                                   extra: <String, dynamic>{
                                                     'seriesDoc':
                                                         gridViewSeriesRecord,
+                                                    '__transition_info__':
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                    ),
                                                   },
                                                 );
                                               },
