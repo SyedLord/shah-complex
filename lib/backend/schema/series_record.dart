@@ -80,6 +80,11 @@ class SeriesRecord extends FirestoreRecord {
   double get voteAverage => _voteAverage ?? 0.0;
   bool hasVoteAverage() => _voteAverage != null;
 
+  // "tmdb_recommendations" field.
+  List<int>? _tmdbRecommendations;
+  List<int> get tmdbRecommendations => _tmdbRecommendations ?? const [];
+  bool hasTmdbRecommendations() => _tmdbRecommendations != null;
+
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _tmdbId = castToType<int>(snapshotData['tmdb_id']);
@@ -94,6 +99,7 @@ class SeriesRecord extends FirestoreRecord {
     _createdAt = snapshotData['created_at'] as DateTime?;
     _contentRating = snapshotData['content_rating'] as String?;
     _voteAverage = castToType<double>(snapshotData['vote_average']);
+    _tmdbRecommendations = getDataList(snapshotData['tmdb_recommendations']);
   }
 
   static CollectionReference get collection =>
@@ -181,7 +187,8 @@ class SeriesRecordDocumentEquality implements Equality<SeriesRecord> {
         e1?.logoImage == e2?.logoImage &&
         e1?.createdAt == e2?.createdAt &&
         e1?.contentRating == e2?.contentRating &&
-        e1?.voteAverage == e2?.voteAverage;
+        e1?.voteAverage == e2?.voteAverage &&
+        listEquality.equals(e1?.tmdbRecommendations, e2?.tmdbRecommendations);
   }
 
   @override
@@ -198,7 +205,8 @@ class SeriesRecordDocumentEquality implements Equality<SeriesRecord> {
         e?.logoImage,
         e?.createdAt,
         e?.contentRating,
-        e?.voteAverage
+        e?.voteAverage,
+        e?.tmdbRecommendations
       ]);
 
   @override

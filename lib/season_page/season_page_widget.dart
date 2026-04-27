@@ -979,18 +979,24 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Flexible(
-                                    child: StreamBuilder<List<SeriesRecord>>(
-                                      stream: querySeriesRecord(
-                                        queryBuilder: (seriesRecord) =>
-                                            seriesRecord
-                                                .whereArrayContainsAny('genres',
-                                                    widget.seriesDoc?.genres)
-                                                .where(
-                                                  'tmdb_id',
-                                                  isNotEqualTo:
-                                                      widget.seriesDoc?.tmdbId,
-                                                ),
-                                        limit: 9,
+                                    child: FutureBuilder<List<SeriesRecord>>(
+                                      future: FFAppState().moreLikeThisSeries(
+                                        uniqueQueryKey:
+                                            'more_like_this_${widget.seriesDoc?.tmdbId.toString()}',
+                                        requestFn: () => querySeriesRecordOnce(
+                                          queryBuilder: (seriesRecord) =>
+                                              seriesRecord
+                                                  .whereIn(
+                                                      'tmdb_id',
+                                                      widget.seriesDoc
+                                                          ?.tmdbRecommendations)
+                                                  .where(
+                                                    'tmdb_id',
+                                                    isNotEqualTo: widget
+                                                        .seriesDoc?.tmdbId,
+                                                  ),
+                                          limit: 9,
+                                        ),
                                       ),
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.

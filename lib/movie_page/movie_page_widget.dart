@@ -1101,18 +1101,24 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                 Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    StreamBuilder<List<MoviesRecord>>(
-                                      stream: queryMoviesRecord(
-                                        queryBuilder: (moviesRecord) =>
-                                            moviesRecord
-                                                .whereArrayContainsAny('genres',
-                                                    widget.movieDoc?.genres)
-                                                .where(
-                                                  'tmdb_id',
-                                                  isNotEqualTo:
-                                                      widget.movieDoc?.tmdbId,
-                                                ),
-                                        limit: 9,
+                                    FutureBuilder<List<MoviesRecord>>(
+                                      future: FFAppState().moreLikeThisMovies(
+                                        uniqueQueryKey:
+                                            'more_like_this_${widget.movieDoc?.tmdbId.toString()}',
+                                        requestFn: () => queryMoviesRecordOnce(
+                                          queryBuilder: (moviesRecord) =>
+                                              moviesRecord
+                                                  .whereIn(
+                                                      'tmdb_id',
+                                                      widget.movieDoc
+                                                          ?.tmdbRecommendations)
+                                                  .where(
+                                                    'tmdb_id',
+                                                    isNotEqualTo: widget
+                                                        .movieDoc?.tmdbId,
+                                                  ),
+                                          limit: 9,
+                                        ),
                                       ),
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.

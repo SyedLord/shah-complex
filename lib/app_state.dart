@@ -518,6 +518,36 @@ class FFAppState extends ChangeNotifier {
   void clearNewsCardsAllCache() => _newsCardsAllManager.clear();
   void clearNewsCardsAllCacheKey(String? uniqueKey) =>
       _newsCardsAllManager.clearRequest(uniqueKey);
+
+  final _moreLikeThisMoviesManager = FutureRequestManager<List<MoviesRecord>>();
+  Future<List<MoviesRecord>> moreLikeThisMovies({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<List<MoviesRecord>> Function() requestFn,
+  }) =>
+      _moreLikeThisMoviesManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearMoreLikeThisMoviesCache() => _moreLikeThisMoviesManager.clear();
+  void clearMoreLikeThisMoviesCacheKey(String? uniqueKey) =>
+      _moreLikeThisMoviesManager.clearRequest(uniqueKey);
+
+  final _moreLikeThisSeriesManager = FutureRequestManager<List<SeriesRecord>>();
+  Future<List<SeriesRecord>> moreLikeThisSeries({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<List<SeriesRecord>> Function() requestFn,
+  }) =>
+      _moreLikeThisSeriesManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearMoreLikeThisSeriesCache() => _moreLikeThisSeriesManager.clear();
+  void clearMoreLikeThisSeriesCacheKey(String? uniqueKey) =>
+      _moreLikeThisSeriesManager.clearRequest(uniqueKey);
 }
 
 void _safeInit(Function() initializeField) {
