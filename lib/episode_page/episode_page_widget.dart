@@ -66,10 +66,19 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
       stream: queryItemsRecord(
         parent:
             functions.getContinueWatchingRef(FFAppState().activeProfileRef!),
-        queryBuilder: (itemsRecord) => itemsRecord.where(
-          'tmdb_id',
-          isEqualTo: widget.episodeDoc?.tmdbId.toString(),
-        ),
+        queryBuilder: (itemsRecord) => itemsRecord
+            .where(
+              'tmdb_id',
+              isEqualTo: widget.episodeDoc?.tmdbId.toString(),
+            )
+            .where(
+              'season',
+              isEqualTo: widget.episodeDoc?.seasonNumber,
+            )
+            .where(
+              'episode',
+              isEqualTo: widget.episodeDoc?.episodeNumber,
+            ),
         singleRecord: true,
       ),
       builder: (context, snapshot) {
