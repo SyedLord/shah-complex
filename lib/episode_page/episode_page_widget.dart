@@ -779,23 +779,53 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                             final listViewEpisodesRecord =
                                                 listViewEpisodesRecordList[
                                                     listViewIndex];
-                                            return EpisodeItemWidget(
-                                              key: Key(
-                                                  'Keylzx_${listViewIndex}_of_${listViewEpisodesRecordList.length}'),
-                                              episodeDoc:
-                                                  listViewEpisodesRecord,
-                                              color: (listViewEpisodesRecord
-                                                              .episodeNumber ==
-                                                          widget.episodeDoc
-                                                              ?.episodeNumber) &&
-                                                      (listViewEpisodesRecord
-                                                              .seasonNumber ==
-                                                          widget.episodeDoc
-                                                              ?.seasonNumber)
-                                                  ? FlutterFlowTheme.of(context)
-                                                      .primary
-                                                  : FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  EpisodePageWidget.routeName,
+                                                  queryParameters: {
+                                                    'episodeDoc':
+                                                        serializeParam(
+                                                      listViewEpisodesRecord,
+                                                      ParamType.Document,
+                                                    ),
+                                                    'totalSeasons':
+                                                        serializeParam(
+                                                      widget.totalSeasons,
+                                                      ParamType.int,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'episodeDoc':
+                                                        listViewEpisodesRecord,
+                                                  },
+                                                );
+                                              },
+                                              child: EpisodeItemWidget(
+                                                key: Key(
+                                                    'Keylzx_${listViewIndex}_of_${listViewEpisodesRecordList.length}'),
+                                                episodeDoc:
+                                                    listViewEpisodesRecord,
+                                                color: (listViewEpisodesRecord
+                                                                .episodeNumber ==
+                                                            widget.episodeDoc
+                                                                ?.episodeNumber) &&
+                                                        (listViewEpisodesRecord
+                                                                .seasonNumber ==
+                                                            widget.episodeDoc
+                                                                ?.seasonNumber)
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryBackground,
+                                              ),
                                             );
                                           },
                                         );
