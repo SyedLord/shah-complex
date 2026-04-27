@@ -86,10 +86,6 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
           );
         }
         List<ItemsRecord> moviePageItemsRecordList = snapshot.data!;
-        // Return an empty Container when the item does not exist.
-        if (snapshot.data!.isEmpty) {
-          return Container();
-        }
         final moviePageItemsRecord = moviePageItemsRecordList.isNotEmpty
             ? moviePageItemsRecordList.first
             : null;
@@ -187,67 +183,70 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               ),
                             ),
                           ),
-                          Container(
-                            decoration: BoxDecoration(),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-1.0, 0.0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 0.0, 5.0),
-                                    child: Text(
-                                      (int? watchedTime, int? totalTime) {
-                                        return (totalTime != null &&
-                                                watchedTime != null &&
-                                                totalTime > watchedTime)
-                                            ? (((totalTime - watchedTime) / 60)
-                                                    .floor()
-                                                    .toString() +
-                                                " min remaining")
-                                            : "";
-                                      }(moviePageItemsRecord?.watchedSeconds,
-                                          moviePageItemsRecord?.totalSeconds),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
+                          if (moviePageItemsRecord != null)
+                            Container(
+                              decoration: BoxDecoration(),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Align(
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 0.0, 0.0, 5.0),
+                                      child: Text(
+                                        (int? watchedTime, int? totalTime) {
+                                          return (totalTime != null &&
+                                                  watchedTime != null &&
+                                                  totalTime > watchedTime)
+                                              ? (((totalTime - watchedTime) /
+                                                          60)
+                                                      .floor()
+                                                      .toString() +
+                                                  " min remaining")
+                                              : "";
+                                        }(moviePageItemsRecord.watchedSeconds,
+                                            moviePageItemsRecord.totalSeconds),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent3,
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.w600,
                                               fontStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .fontStyle,
                                             ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent3,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w600,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                LinearPercentIndicator(
-                                  percent: functions.calculateProgressRatio(
-                                      moviePageItemsRecord?.watchedSeconds,
-                                      moviePageItemsRecord?.totalSeconds),
-                                  lineHeight: 3.0,
-                                  animation: true,
-                                  animateFromLastPercent: true,
-                                  progressColor:
-                                      FlutterFlowTheme.of(context).primary,
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).accent4,
-                                  padding: EdgeInsets.zero,
-                                ),
-                              ],
+                                  LinearPercentIndicator(
+                                    percent: functions.calculateProgressRatio(
+                                        moviePageItemsRecord.watchedSeconds,
+                                        moviePageItemsRecord.totalSeconds),
+                                    lineHeight: 3.0,
+                                    animation: true,
+                                    animateFromLastPercent: true,
+                                    progressColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).accent4,
+                                    padding: EdgeInsets.zero,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
                         ],
                       ),
                     ),
