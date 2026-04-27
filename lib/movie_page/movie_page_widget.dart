@@ -263,10 +263,8 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                               ),
                             ),
                           Padding(
-                            padding: EdgeInsets.all(FlutterFlowTheme.of(context)
-                                .designToken
-                                .spacing
-                                .lg),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 15.0, 24.0, 24.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
