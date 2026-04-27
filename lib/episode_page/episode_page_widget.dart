@@ -184,7 +184,8 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                           widget.episodeDoc,
                                           functions.emptyContinueDoc(),
                                           FFAppState().activeProfileRef!.id,
-                                          '',
+                                          widget
+                                              .episodeDoc?.parentReference.id,
                                         );
                                       } else {
                                         await actions.launchExternalPlayer(
@@ -192,7 +193,8 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                           functions.emptyEpisodeDoc(),
                                           episodePageItemsRecord,
                                           FFAppState().activeProfileRef!.id,
-                                          '',
+                                          widget
+                                              .episodeDoc?.parentReference.id,
                                         );
                                       }
                                     },
