@@ -88,10 +88,6 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
           );
         }
         List<ItemsRecord> episodePageItemsRecordList = snapshot.data!;
-        // Return an empty Container when the item does not exist.
-        if (snapshot.data!.isEmpty) {
-          return Container();
-        }
         final episodePageItemsRecord = episodePageItemsRecordList.isNotEmpty
             ? episodePageItemsRecordList.first
             : null;
