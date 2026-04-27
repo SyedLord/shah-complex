@@ -209,7 +209,10 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                             ),
                           ),
                           Text(
-                            '2022',
+                            valueOrDefault<String>(
+                              widget.seriesDoc?.releaseYear.toString(),
+                              '2000',
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .labelLarge
                                 .override(
@@ -968,11 +971,50 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                             final listViewEpisodesRecord =
                                                 listViewEpisodesRecordList[
                                                     listViewIndex];
-                                            return EpisodeItemWidget(
-                                              key: Key(
-                                                  'Keydi5_${listViewIndex}_of_${listViewEpisodesRecordList.length}'),
-                                              episodeDoc:
-                                                  listViewEpisodesRecord,
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  EpisodePageWidget.routeName,
+                                                  queryParameters: {
+                                                    'episodeDoc':
+                                                        serializeParam(
+                                                      listViewEpisodesRecord,
+                                                      ParamType.Document,
+                                                    ),
+                                                    'totalSeasons':
+                                                        serializeParam(
+                                                      widget.seriesDoc
+                                                          ?.totalSeasons,
+                                                      ParamType.int,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'episodeDoc':
+                                                        listViewEpisodesRecord,
+                                                    '__transition_info__':
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .rightToLeft,
+                                                    ),
+                                                  },
+                                                );
+                                              },
+                                              child: EpisodeItemWidget(
+                                                key: Key(
+                                                    'Keydi5_${listViewIndex}_of_${listViewEpisodesRecordList.length}'),
+                                                episodeDoc:
+                                                    listViewEpisodesRecord,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                              ),
                                             );
                                           },
                                         );

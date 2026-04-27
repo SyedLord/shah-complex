@@ -157,6 +157,13 @@ final parametersBuilderMap =
       ),
   'MyProfile': ParameterData.none(),
   'NewHot': ParameterData.none(),
+  'EpisodePage': (data) async => ParameterData(
+        allParams: {
+          'episodeDoc': await getDocumentParameter<EpisodesRecord>(
+              data, 'episodeDoc', EpisodesRecord.fromSnapshot),
+          'totalSeasons': getParameter<int>(data, 'totalSeasons'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

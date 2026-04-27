@@ -65,6 +65,21 @@ class EpisodesRecord extends FirestoreRecord {
   int get tmdbId => _tmdbId ?? 0;
   bool hasTmdbId() => _tmdbId != null;
 
+  // "vote_average" field.
+  double? _voteAverage;
+  double get voteAverage => _voteAverage ?? 0.0;
+  bool hasVoteAverage() => _voteAverage != null;
+
+  // "release_year" field.
+  int? _releaseYear;
+  int get releaseYear => _releaseYear ?? 0;
+  bool hasReleaseYear() => _releaseYear != null;
+
+  // "content_rating" field.
+  String? _contentRating;
+  String get contentRating => _contentRating ?? '';
+  bool hasContentRating() => _contentRating != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -78,6 +93,9 @@ class EpisodesRecord extends FirestoreRecord {
     _duration = snapshotData['duration'] as String?;
     _thumbnail = snapshotData['thumbnail'] as String?;
     _tmdbId = castToType<int>(snapshotData['tmdb_id']);
+    _voteAverage = castToType<double>(snapshotData['vote_average']);
+    _releaseYear = castToType<int>(snapshotData['release_year']);
+    _contentRating = snapshotData['content_rating'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -130,6 +148,9 @@ Map<String, dynamic> createEpisodesRecordData({
   String? duration,
   String? thumbnail,
   int? tmdbId,
+  double? voteAverage,
+  int? releaseYear,
+  String? contentRating,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -143,6 +164,9 @@ Map<String, dynamic> createEpisodesRecordData({
       'duration': duration,
       'thumbnail': thumbnail,
       'tmdb_id': tmdbId,
+      'vote_average': voteAverage,
+      'release_year': releaseYear,
+      'content_rating': contentRating,
     }.withoutNulls,
   );
 
@@ -163,7 +187,10 @@ class EpisodesRecordDocumentEquality implements Equality<EpisodesRecord> {
         e1?.description == e2?.description &&
         e1?.duration == e2?.duration &&
         e1?.thumbnail == e2?.thumbnail &&
-        e1?.tmdbId == e2?.tmdbId;
+        e1?.tmdbId == e2?.tmdbId &&
+        e1?.voteAverage == e2?.voteAverage &&
+        e1?.releaseYear == e2?.releaseYear &&
+        e1?.contentRating == e2?.contentRating;
   }
 
   @override
@@ -177,7 +204,10 @@ class EpisodesRecordDocumentEquality implements Equality<EpisodesRecord> {
         e?.description,
         e?.duration,
         e?.thumbnail,
-        e?.tmdbId
+        e?.tmdbId,
+        e?.voteAverage,
+        e?.releaseYear,
+        e?.contentRating
       ]);
 
   @override

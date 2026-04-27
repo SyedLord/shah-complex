@@ -222,6 +222,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: NewHotWidget.routeName,
           path: NewHotWidget.routePath,
           builder: (context, params) => NewHotWidget(),
+        ),
+        FFRoute(
+          name: EpisodePageWidget.routeName,
+          path: EpisodePageWidget.routePath,
+          requireAuth: true,
+          asyncParams: {
+            'episodeDoc':
+                getDoc(['series', 'episodes'], EpisodesRecord.fromSnapshot),
+          },
+          builder: (context, params) => EpisodePageWidget(
+            episodeDoc: params.getParam(
+              'episodeDoc',
+              ParamType.Document,
+            ),
+            totalSeasons: params.getParam(
+              'totalSeasons',
+              ParamType.int,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

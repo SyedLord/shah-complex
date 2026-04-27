@@ -15,9 +15,11 @@ class EpisodeItemWidget extends StatefulWidget {
   const EpisodeItemWidget({
     super.key,
     required this.episodeDoc,
+    required this.color,
   });
 
   final EpisodesRecord? episodeDoc;
+  final Color? color;
 
   @override
   State<EpisodeItemWidget> createState() => _EpisodeItemWidgetState();
@@ -54,7 +56,7 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
           0.0, 0.0, 0.0, FlutterFlowTheme.of(context).designToken.spacing.sm),
       child: Container(
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
+          color: widget.color,
           borderRadius: BorderRadius.circular(
               FlutterFlowTheme.of(context).designToken.radius.md),
         ),

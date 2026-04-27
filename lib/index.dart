@@ -15,3 +15,4 @@ export '/search/search_widget.dart' show SearchWidget;
 export '/fix_metadata/fix_metadata_widget.dart' show FixMetadataWidget;
 export '/my_profile/my_profile_widget.dart' show MyProfileWidget;
 export '/new_hot/new_hot_widget.dart' show NewHotWidget;
+export '/episode_page/episode_page_widget.dart' show EpisodePageWidget;
