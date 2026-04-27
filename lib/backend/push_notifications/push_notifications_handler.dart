@@ -164,6 +164,7 @@ final parametersBuilderMap =
           'totalSeasons': getParameter<int>(data, 'totalSeasons'),
           'alreadySelectedSeason':
               getParameter<int>(data, 'alreadySelectedSeason'),
+          'titleLogoImage': getParameter<String>(data, 'titleLogoImage'),
         },
       ),
 };

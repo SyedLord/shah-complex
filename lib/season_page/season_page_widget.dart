@@ -997,6 +997,12 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                                       _model.selectedSeason,
                                                       ParamType.int,
                                                     ),
+                                                    'titleLogoImage':
+                                                        serializeParam(
+                                                      widget
+                                                          .seriesDoc?.logoImage,
+                                                      ParamType.String,
+                                                    ),
                                                   }.withoutNulls,
                                                   extra: <String, dynamic>{
                                                     'episodeDoc':
@@ -1006,7 +1012,7 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                                       hasTransition: true,
                                                       transitionType:
                                                           PageTransitionType
-                                                              .rightToLeft,
+                                                              .fade,
                                                     ),
                                                   },
                                                 );

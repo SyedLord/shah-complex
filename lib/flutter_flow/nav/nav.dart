@@ -244,6 +244,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'alreadySelectedSeason',
               ParamType.int,
             ),
+            titleLogoImage: params.getParam(
+              'titleLogoImage',
+              ParamType.String,
+            ),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

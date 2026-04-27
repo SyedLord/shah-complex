@@ -27,11 +27,13 @@ class EpisodePageWidget extends StatefulWidget {
     required this.episodeDoc,
     int? totalSeasons,
     this.alreadySelectedSeason,
+    required this.titleLogoImage,
   }) : this.totalSeasons = totalSeasons ?? 1;
 
   final EpisodesRecord? episodeDoc;
   final int totalSeasons;
   final int? alreadySelectedSeason;
+  final String? titleLogoImage;
 
   static String routeName = 'EpisodePage';
   static String routePath = '/episodePage';
@@ -292,8 +294,19 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: CachedNetworkImage(
+                                  fadeInDuration: Duration(milliseconds: 100),
+                                  fadeOutDuration: Duration(milliseconds: 100),
+                                  imageUrl: widget.titleLogoImage!,
+                                  width: 50.0,
+                                  height: 50.0,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
                               Text(
                                 valueOrDefault<String>(
                                   widget.episodeDoc?.title,
@@ -822,6 +835,11 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                       functions.stringToInt(_model
                                                           .seasonSelectorValue!),
                                                       ParamType.int,
+                                                    ),
+                                                    'titleLogoImage':
+                                                        serializeParam(
+                                                      widget.titleLogoImage,
+                                                      ParamType.String,
                                                     ),
                                                   }.withoutNulls,
                                                   extra: <String, dynamic>{
