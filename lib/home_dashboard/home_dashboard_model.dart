@@ -14,6 +14,8 @@ class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
 
   bool isHidden = true;
 
+  bool isTopBarBlurred = false;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Custom Action - getTrendingCarousel] action in HomeDashboard widget.

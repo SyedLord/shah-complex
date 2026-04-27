@@ -1,7 +1,9 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'section_header_model.dart';
 export 'section_header_model.dart';
@@ -76,12 +78,8 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
                     lineHeight: 1.3,
                   ),
             ),
-            InkWell(
-              splashColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () async {
+            FFButtonWidget(
+              onPressed: () async {
                 context.goNamed(
                   AllItemsWidget.routeName,
                   queryParameters: {
@@ -104,22 +102,34 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
                   }.withoutNulls,
                 );
               },
-              child: Text(
-                'See All',
-                style: FlutterFlowTheme.of(context).labelMedium.override(
-                      font: GoogleFonts.inter(
-                        fontWeight: FontWeight.w600,
+              text: 'See All',
+              icon: FaIcon(
+                FontAwesomeIcons.angleRight,
+                size: 15.0,
+              ),
+              options: FFButtonOptions(
+                height: 40.0,
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                iconAlignment: IconAlignment.end,
+                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                color: Color(0x00E50914),
+                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                      font: GoogleFonts.poppins(
+                        fontWeight:
+                            FlutterFlowTheme.of(context).titleSmall.fontWeight,
                         fontStyle:
-                            FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                            FlutterFlowTheme.of(context).titleSmall.fontStyle,
                       ),
-                      color: FlutterFlowTheme.of(context).secondaryText,
+                      color: FlutterFlowTheme.of(context).accent3,
                       fontSize: 12.0,
                       letterSpacing: 0.0,
-                      fontWeight: FontWeight.w600,
+                      fontWeight:
+                          FlutterFlowTheme.of(context).titleSmall.fontWeight,
                       fontStyle:
-                          FlutterFlowTheme.of(context).labelMedium.fontStyle,
-                      lineHeight: 1.3,
+                          FlutterFlowTheme.of(context).titleSmall.fontStyle,
                     ),
+                elevation: 0.0,
+                borderRadius: BorderRadius.circular(8.0),
               ),
             ),
           ],

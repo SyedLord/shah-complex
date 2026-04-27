@@ -1,11 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/bottom_nav_bar_widget.dart';
+import '/components/continue_watching_card_widget.dart';
 import '/components/download_item_widget.dart';
 import '/components/movie_card_widget.dart';
+import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -259,14 +261,89 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(24.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            if (_model.isHidden == false)
+                      if (_model.isHidden == false)
+                        Padding(
+                          padding: EdgeInsets.all(24.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              if (_model.isHidden == false)
+                                Container(
+                                  decoration: BoxDecoration(),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '12',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMedium
+                                                        .fontStyle,
+                                              ),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleMedium
+                                                      .fontStyle,
+                                              lineHeight: 1.3,
+                                            ),
+                                      ),
+                                      Text(
+                                        'Downloads',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelSmall
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelSmall
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelSmall
+                                                        .fontStyle,
+                                              ),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelSmall
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelSmall
+                                                      .fontStyle,
+                                              lineHeight: 1.2,
+                                            ),
+                                      ),
+                                    ].divide(SizedBox(height: 4.0)),
+                                  ),
+                                ),
+                              if (_model.isHidden == false)
+                                SizedBox(
+                                  height: 24.0,
+                                  child: VerticalDivider(
+                                    thickness: 1.0,
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                  ),
+                                ),
                               Container(
                                 decoration: BoxDecoration(),
                                 child: Column(
@@ -274,31 +351,67 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      '12',
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleMedium
-                                                      .fontStyle,
-                                            ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleMedium
-                                                    .fontStyle,
-                                            lineHeight: 1.3,
+                                    FutureBuilder<int>(
+                                      future:
+                                          FFAppState().profileWatchlistCount(
+                                        uniqueQueryKey: myProfileProfilesRecord
+                                            .reference.id,
+                                        requestFn: () => queryMyListRecordCount(
+                                          queryBuilder: (myListRecord) =>
+                                              myListRecord.where(
+                                            'profile_ref',
+                                            isEqualTo:
+                                                FFAppState().activeProfileRef,
                                           ),
+                                        ),
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: SpinKitPulse(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                size: 50.0,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        int textCount = snapshot.data!;
+
+                                        return Text(
+                                          textCount.toString(),
+                                          style: FlutterFlowTheme.of(context)
+                                              .titleMedium
+                                              .override(
+                                                font: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleMedium
+                                                          .fontStyle,
+                                                ),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMedium
+                                                        .fontStyle,
+                                                lineHeight: 1.3,
+                                              ),
+                                        );
+                                      },
                                     ),
                                     Text(
-                                      'Downloads',
+                                      'Watchlist',
                                       style: FlutterFlowTheme.of(context)
                                           .labelSmall
                                           .override(
@@ -329,227 +442,22 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                   ].divide(SizedBox(height: 4.0)),
                                 ),
                               ),
-                            if (_model.isHidden == false)
-                              SizedBox(
-                                height: 24.0,
-                                child: VerticalDivider(
-                                  thickness: 1.0,
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                              ),
-                            Container(
-                              decoration: BoxDecoration(),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  FutureBuilder<int>(
-                                    future: FFAppState().profileWatchlistCount(
-                                      uniqueQueryKey:
-                                          myProfileProfilesRecord.reference.id,
-                                      requestFn: () => queryMyListRecordCount(
-                                        queryBuilder: (myListRecord) =>
-                                            myListRecord.where(
-                                          'profile_ref',
-                                          isEqualTo:
-                                              FFAppState().activeProfileRef,
-                                        ),
-                                      ),
-                                    ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50.0,
-                                            height: 50.0,
-                                            child: SpinKitPulse(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 50.0,
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                      int textCount = snapshot.data!;
-
-                                      return Text(
-                                        textCount.toString(),
-                                        style: FlutterFlowTheme.of(context)
-                                            .titleMedium
-                                            .override(
-                                              font: GoogleFonts.inter(
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleMedium
-                                                        .fontStyle,
-                                              ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleMedium
-                                                      .fontStyle,
-                                              lineHeight: 1.3,
-                                            ),
-                                      );
-                                    },
-                                  ),
-                                  Text(
-                                    'Watchlist',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelSmall
-                                        .override(
-                                          font: GoogleFonts.inter(
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelSmall
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelSmall
-                                                    .fontStyle,
-                                          ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelSmall
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelSmall
-                                                  .fontStyle,
-                                          lineHeight: 1.2,
-                                        ),
-                                  ),
-                                ].divide(SizedBox(height: 4.0)),
-                              ),
-                            ),
-                          ].divide(SizedBox(width: 24.0)),
+                            ].divide(SizedBox(width: 24.0)),
+                          ),
                         ),
-                      ),
                       Container(
                         decoration: BoxDecoration(),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 24.0, 24.0, 8.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'My List',
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          font: GoogleFonts.inter(
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleMedium
-                                                    .fontStyle,
-                                          ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMedium
-                                                  .fontStyle,
-                                          lineHeight: 1.3,
-                                        ),
-                                  ),
-                                  FFButtonWidget(
-                                    onPressed: ((myProfileProfilesRecord !=
-                                                null) ==
-                                            false)
-                                        ? null
-                                        : () async {
-                                            context.pushNamed(
-                                              AllItemsWidget.routeName,
-                                              queryParameters: {
-                                                'categoryName': serializeParam(
-                                                  'My List',
-                                                  ParamType.String,
-                                                ),
-                                                'categoryType': serializeParam(
-                                                  'my list',
-                                                  ParamType.String,
-                                                ),
-                                                'isTrending': serializeParam(
-                                                  false,
-                                                  ParamType.bool,
-                                                ),
-                                                'isContinueWatching':
-                                                    serializeParam(
-                                                  false,
-                                                  ParamType.bool,
-                                                ),
-                                              }.withoutNulls,
-                                              extra: <String, dynamic>{
-                                                '__transition_info__':
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                ),
-                                              },
-                                            );
-                                          },
-                                    text: 'See All',
-                                    options: FFButtonOptions(
-                                      height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 0.0, 16.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color: Color(0x00E50914),
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            font: GoogleFonts.poppins(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                            ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent3,
-                                            fontSize: 12.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontStyle,
-                                          ),
-                                      elevation: 0.0,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                  ),
-                                ],
+                            wrapWithModel(
+                              model: _model.sectionHeaderModel1,
+                              updateCallback: () => safeSetState(() {}),
+                              child: SectionHeaderWidget(
+                                title: 'My List',
+                                type: 'my list',
+                                isTrending: false,
+                                isContinueWatching: false,
                               ),
                             ),
                             Container(
@@ -790,6 +698,75 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                             ),
                           ],
                         ),
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          wrapWithModel(
+                            model: _model.sectionHeaderModel2,
+                            updateCallback: () => safeSetState(() {}),
+                            child: SectionHeaderWidget(
+                              title: 'Continue Watching',
+                              type: 'continue watching',
+                              isTrending: false,
+                              isContinueWatching: false,
+                            ),
+                          ),
+                          Container(
+                            height: 180.0,
+                            decoration: BoxDecoration(),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              child: StreamBuilder<List<ItemsRecord>>(
+                                stream: queryItemsRecord(
+                                  parent: functions.getContinueWatchingRef(
+                                      FFAppState().activeProfileRef!),
+                                  queryBuilder: (itemsRecord) => itemsRecord
+                                      .orderBy('updated_at', descending: true),
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: SpinKitPulse(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          size: 50.0,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<ItemsRecord> listViewItemsRecordList =
+                                      snapshot.data!;
+
+                                  return ListView.separated(
+                                    padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: listViewItemsRecordList.length,
+                                    separatorBuilder: (_, __) =>
+                                        SizedBox(width: 10.0),
+                                    itemBuilder: (context, listViewIndex) {
+                                      final listViewItemsRecord =
+                                          listViewItemsRecordList[
+                                              listViewIndex];
+                                      return ContinueWatchingCardWidget(
+                                        key: Key(
+                                            'Key4x8_${listViewIndex}_of_${listViewItemsRecordList.length}'),
+                                        continueDoc: listViewItemsRecord,
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       if (_model.isHidden == false)
                         Container(
