@@ -162,6 +162,8 @@ final parametersBuilderMap =
           'episodeDoc': await getDocumentParameter<EpisodesRecord>(
               data, 'episodeDoc', EpisodesRecord.fromSnapshot),
           'totalSeasons': getParameter<int>(data, 'totalSeasons'),
+          'alreadySelectedSeason':
+              getParameter<int>(data, 'alreadySelectedSeason'),
         },
       ),
 };

@@ -26,10 +26,12 @@ class EpisodePageWidget extends StatefulWidget {
     super.key,
     required this.episodeDoc,
     int? totalSeasons,
+    this.alreadySelectedSeason,
   }) : this.totalSeasons = totalSeasons ?? 1;
 
   final EpisodesRecord? episodeDoc;
   final int totalSeasons;
+  final int? alreadySelectedSeason;
 
   static String routeName = 'EpisodePage';
   static String routePath = '/episodePage';
@@ -664,8 +666,13 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                     .seasonSelectorValueController ??=
                                                 FormFieldController<String>(
                                               _model.seasonSelectorValue ??=
-                                                  _model.selectedSeason
-                                                      .toString(),
+                                                  widget.alreadySelectedSeason !=
+                                                          null
+                                                      ? widget
+                                                          .alreadySelectedSeason
+                                                          ?.toString()
+                                                      : _model.selectedSeason
+                                                          .toString(),
                                             ),
                                             options:
                                                 functions.generateSeasonList(

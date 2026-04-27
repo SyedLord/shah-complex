@@ -240,6 +240,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'totalSeasons',
               ParamType.int,
             ),
+            alreadySelectedSeason: params.getParam(
+              'alreadySelectedSeason',
+              ParamType.int,
+            ),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
