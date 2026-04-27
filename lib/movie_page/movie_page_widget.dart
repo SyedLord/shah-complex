@@ -449,14 +449,25 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    await actions.launchExternalPlayer(
-                                      widget.movieDoc,
-                                      functions.emptyEpisodeDoc(),
-                                      functions.emptyContinueDoc(),
-                                      FFAppState().activeProfileRef!.id,
-                                      '',
-                                    );
-                                                                    },
+                                    if ((moviePageItemsRecord != null) !=
+                                        true) {
+                                      await actions.launchExternalPlayer(
+                                        widget.movieDoc,
+                                        functions.emptyEpisodeDoc(),
+                                        functions.emptyContinueDoc(),
+                                        FFAppState().activeProfileRef!.id,
+                                        '',
+                                      );
+                                    } else {
+                                      await actions.launchExternalPlayer(
+                                        functions.emptyMovieDoc(),
+                                        functions.emptyEpisodeDoc(),
+                                        moviePageItemsRecord,
+                                        FFAppState().activeProfileRef!.id,
+                                        '',
+                                      );
+                                    }
+                                  },
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color:
