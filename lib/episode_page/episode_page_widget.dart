@@ -308,8 +308,8 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                       fadeOutDuration:
                                           Duration(milliseconds: 100),
                                       imageUrl: widget.titleLogoImage!,
-                                      width: 100.0,
-                                      height: 70.0,
+                                      width: 70.0,
+                                      height: 50.0,
                                       fit: BoxFit.contain,
                                     ),
                                   ),
