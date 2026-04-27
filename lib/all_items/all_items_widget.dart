@@ -106,15 +106,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                                   size: 24.0,
                                 ),
                                 onPressed: () async {
-                                  context.goNamed(
-                                    HomeDashboardWidget.routeName,
-                                    extra: <String, dynamic>{
-                                      '__transition_info__': TransitionInfo(
-                                        hasTransition: true,
-                                        transitionType: PageTransitionType.fade,
-                                      ),
-                                    },
-                                  );
+                                  context.pop();
                                 },
                               ),
                               Text(
