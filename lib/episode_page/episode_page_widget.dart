@@ -80,6 +80,10 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
             .where(
               'episode',
               isEqualTo: widget.episodeDoc?.episodeNumber,
+            )
+            .where(
+              'title',
+              isEqualTo: widget.episodeDoc?.title,
             ),
         singleRecord: true,
       ),
