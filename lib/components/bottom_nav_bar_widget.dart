@@ -400,6 +400,8 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                                     lastSeenNews:
                                                         getCurrentTimestamp,
                                                   ));
+                                              FFAppState()
+                                                  .clearNewsCountCacheCache();
                                             },
                                           ),
                                           if (stackCount > 0)
