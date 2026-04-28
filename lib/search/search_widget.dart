@@ -567,7 +567,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                               Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  if ((_model.textController.text != '') &&
+                                  if ((_model.textController.text == '') ||
                                       (_model.searchResultMovies.length > 0))
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -765,8 +765,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                                         ].divide(SizedBox(height: 16.0)),
                                       ),
                                     ),
-                                  if ((_model.searchResultSeries.length > 0) &&
-                                      (_model.textController.text != ''))
+                                  if ((_model.searchResultSeries.length > 0) ||
+                                      (_model.textController.text == ''))
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 16.0, 0.0, 16.0),
