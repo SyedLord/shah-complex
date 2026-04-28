@@ -52,7 +52,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<MoviesRecord>>(
-      future: FFAppState().moviesCacheList(
+      future: FFAppState().moviesCacheListAll(
         requestFn: () => queryMoviesRecordOnce(
           queryBuilder: (moviesRecord) => moviesRecord.orderBy('title'),
         ),
@@ -85,7 +85,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: FutureBuilder<List<SeriesRecord>>(
-              future: FFAppState().seasonsCacheList(
+              future: FFAppState().seriesCacheListAll(
                 requestFn: () => querySeriesRecordOnce(
                   queryBuilder: (seriesRecord) => seriesRecord.orderBy('title'),
                 ),
