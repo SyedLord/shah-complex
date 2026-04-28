@@ -74,6 +74,12 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _searchResultMovies;
     });
+    _safeInit(() {
+      _lastSeenNews = prefs.containsKey('ff_lastSeenNews')
+          ? DateTime.fromMillisecondsSinceEpoch(
+              prefs.getInt('ff_lastSeenNews')!)
+          : _lastSeenNews;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -290,6 +296,15 @@ class FFAppState extends ChangeNotifier {
         _searchResultMovies.map((x) => x.path).toList());
   }
 
+  DateTime? _lastSeenNews;
+  DateTime? get lastSeenNews => _lastSeenNews;
+  set lastSeenNews(DateTime? value) {
+    _lastSeenNews = value;
+    value != null
+        ? prefs.setInt('ff_lastSeenNews', value.millisecondsSinceEpoch)
+        : prefs.remove('ff_lastSeenNews');
+  }
+
   final _profileWatchlistCountManager = FutureRequestManager<int>();
   Future<int> profileWatchlistCount({
     String? uniqueQueryKey,
@@ -457,6 +472,21 @@ class FFAppState extends ChangeNotifier {
   void clearProfileCacheCache() => _profileCacheManager.clear();
   void clearProfileCacheCacheKey(String? uniqueKey) =>
       _profileCacheManager.clearRequest(uniqueKey);
+
+  final _newsCountCacheManager = FutureRequestManager<int>();
+  Future<int> newsCountCache({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<int> Function() requestFn,
+  }) =>
+      _newsCountCacheManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearNewsCountCacheCache() => _newsCountCacheManager.clear();
+  void clearNewsCountCacheCacheKey(String? uniqueKey) =>
+      _newsCountCacheManager.clearRequest(uniqueKey);
 
   final _newsCountAllManager = FutureRequestManager<int>();
   Future<int> newsCountAll({

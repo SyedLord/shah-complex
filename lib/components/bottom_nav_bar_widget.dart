@@ -2,7 +2,6 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
 import 'dart:ui';
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -72,6 +71,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                       bottomNavBarAppConfigRecordList,
                       _model.bottomNavBarPreviousSnapshot)) {
                 () async {
+                  FFAppState().clearNewsCountCacheCache();
                   FFAppState().clearTrendingMoviesCacheCache();
                   FFAppState().clearTrendingSeriesCacheCache();
                   FFAppState().clearMoviesCacheCache();
@@ -333,12 +333,14 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   FutureBuilder<int>(
-                                    future: queryNewsFeedRecordCount(
-                                      queryBuilder: (newsFeedRecord) =>
-                                          newsFeedRecord.where(
-                                        'created_at',
-                                        isGreaterThan: bottomNavProfilesRecord
-                                            .lastSeenNews,
+                                    future: FFAppState().newsCountCache(
+                                      requestFn: () => queryNewsFeedRecordCount(
+                                        queryBuilder: (newsFeedRecord) =>
+                                            newsFeedRecord.where(
+                                          'created_at',
+                                          isGreaterThan:
+                                              FFAppState().lastSeenNews,
+                                        ),
                                       ),
                                     ),
                                     builder: (context, snapshot) {
@@ -386,6 +388,10 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                                   ),
                                                 },
                                               );
+
+                                              FFAppState().lastSeenNews =
+                                                  getCurrentTimestamp;
+                                              safeSetState(() {});
 
                                               await FFAppState()
                                                   .activeProfileRef!
@@ -461,16 +467,11 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                         },
                                       );
 
-                                      unawaited(
-                                        () async {
-                                          await FFAppState()
-                                              .activeProfileRef!
-                                              .update(createProfilesRecordData(
-                                                lastSeenNews:
-                                                    getCurrentTimestamp,
-                                              ));
-                                        }(),
-                                      );
+                                      await FFAppState()
+                                          .activeProfileRef!
+                                          .update(createProfilesRecordData(
+                                            lastSeenNews: getCurrentTimestamp,
+                                          ));
                                     },
                                     child: Text(
                                       'New & Hot',
