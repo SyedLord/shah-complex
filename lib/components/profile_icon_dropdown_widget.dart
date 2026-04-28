@@ -78,6 +78,7 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
                 onTap: () async {
                   FFAppState().isEditMode = true;
                   safeSetState(() {});
+                  Navigator.pop(context);
 
                   context.pushNamed(
                     ProfileSelectionWidget.routeName,
@@ -207,6 +208,9 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  FFAppState().isEditMode = false;
+                  safeSetState(() {});
+
                   context.pushNamed(
                     ProfileSelectionWidget.routeName,
                     extra: <String, dynamic>{
