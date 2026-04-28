@@ -102,6 +102,13 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    Container(
+                      width: double.infinity,
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                    ),
                     Builder(
                       builder: (context) {
                         final currentSlide1 =
@@ -1358,9 +1365,14 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                     end: AlignmentDirectional(0, 1.0),
                   ),
                 ),
-                child: Builder(
-                  builder: (_) {
-                    final child = Padding(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(0.0),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 2.0,
+                      sigmaY: 2.0,
+                    ),
+                    child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 40.0, 16.0, 0.0),
                       child: Row(
@@ -1449,21 +1461,8 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                           ),
                         ],
                       ),
-                    );
-                    if (_model.isHidden == false) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(0.0),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(
-                            sigmaX: 2.0,
-                            sigmaY: 2.0,
-                          ),
-                          child: child,
-                        ),
-                      );
-                    }
-                    return child;
-                  },
+                    ),
+                  ),
                 ),
               ),
               wrapWithModel(

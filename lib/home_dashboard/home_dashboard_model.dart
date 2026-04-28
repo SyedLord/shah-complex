@@ -13,7 +13,7 @@ class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
 
   bool isHidden = true;
 
-  bool isTopBarBlurred = false;
+  bool isScrolled = false;
 
   ///  State fields for stateful widgets in this page.
 

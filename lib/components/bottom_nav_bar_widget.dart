@@ -462,6 +462,21 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
+                                      unawaited(
+                                        () async {
+                                          await FFAppState()
+                                              .activeProfileRef!
+                                              .update(createProfilesRecordData(
+                                                lastSeenNews:
+                                                    getCurrentTimestamp,
+                                              ));
+                                        }(),
+                                      );
+                                      FFAppState().clearNewsCountCacheCache();
+                                      FFAppState().lastSeenNews =
+                                          getCurrentTimestamp;
+                                      safeSetState(() {});
+
                                       context.pushNamed(
                                         NewHotWidget.routeName,
                                         extra: <String, dynamic>{
@@ -472,12 +487,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                           ),
                                         },
                                       );
-
-                                      await FFAppState()
-                                          .activeProfileRef!
-                                          .update(createProfilesRecordData(
-                                            lastSeenNews: getCurrentTimestamp,
-                                          ));
                                     },
                                     child: Text(
                                       'New & Hot',
