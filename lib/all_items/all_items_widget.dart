@@ -406,6 +406,10 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                   child: FutureBuilder<List<MoviesRecord>>(
                     future: FFAppState().moviesCacheList(
+                      uniqueQueryKey: valueOrDefault<String>(
+                        widget.categoryName,
+                        'cache',
+                      ),
                       requestFn: () => queryMoviesRecordOnce(
                         queryBuilder: (moviesRecord) => moviesRecord
                             .where(
@@ -660,6 +664,10 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                   child: FutureBuilder<List<SeriesRecord>>(
                     future: FFAppState().seasonsCacheList(
+                      uniqueQueryKey: valueOrDefault<String>(
+                        widget.categoryName,
+                        'cache',
+                      ),
                       requestFn: () => querySeriesRecordOnce(
                         queryBuilder: (seriesRecord) => seriesRecord
                             .where(
