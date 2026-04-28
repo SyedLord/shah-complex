@@ -405,7 +405,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                   child: FutureBuilder<List<MoviesRecord>>(
-                    future: FFAppState().moviesCacheList(
+                    future: FFAppState().moviesCacheListAll(
                       uniqueQueryKey: valueOrDefault<String>(
                         widget.categoryName,
                         'cache',
@@ -663,7 +663,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                   child: FutureBuilder<List<SeriesRecord>>(
-                    future: FFAppState().seasonsCacheList(
+                    future: FFAppState().seriesCacheListAll(
                       uniqueQueryKey: valueOrDefault<String>(
                         widget.categoryName,
                         'cache',
