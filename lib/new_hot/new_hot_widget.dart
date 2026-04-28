@@ -259,33 +259,85 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                                               .getDocumentOnce(
                                                                   rowNewsFeedRecord
                                                                       .seriesRef!);
-                                                      if (Navigator.of(context)
-                                                          .canPop()) {
-                                                        context.pop();
-                                                      }
-                                                      context.pushNamed(
-                                                        SeasonPageWidget
-                                                            .routeName,
-                                                        queryParameters: {
-                                                          'seriesDoc':
-                                                              serializeParam(
-                                                            _model.seriesRef,
-                                                            ParamType.Document,
-                                                          ),
-                                                        }.withoutNulls,
-                                                        extra: <String,
-                                                            dynamic>{
-                                                          'seriesDoc':
+                                                      if ((rowNewsFeedRecord
+                                                                  .tag ==
+                                                              'NEW SERIES') ||
+                                                          (rowNewsFeedRecord
+                                                                  .tag ==
+                                                              'NEW SEASON')) {
+                                                        if (Navigator.of(
+                                                                context)
+                                                            .canPop()) {
+                                                          context.pop();
+                                                        }
+                                                        context.pushNamed(
+                                                          SeasonPageWidget
+                                                              .routeName,
+                                                          queryParameters: {
+                                                            'seriesDoc':
+                                                                serializeParam(
                                                               _model.seriesRef,
-                                                          '__transition_info__':
-                                                              TransitionInfo(
-                                                            hasTransition: true,
-                                                            transitionType:
-                                                                PageTransitionType
-                                                                    .fade,
-                                                          ),
-                                                        },
-                                                      );
+                                                              ParamType
+                                                                  .Document,
+                                                            ),
+                                                          }.withoutNulls,
+                                                          extra: <String,
+                                                              dynamic>{
+                                                            'seriesDoc': _model
+                                                                .seriesRef,
+                                                            '__transition_info__':
+                                                                TransitionInfo(
+                                                              hasTransition:
+                                                                  true,
+                                                              transitionType:
+                                                                  PageTransitionType
+                                                                      .fade,
+                                                            ),
+                                                          },
+                                                        );
+                                                      } else {
+                                                        _model.episodeDoc =
+                                                            await EpisodesRecord
+                                                                .getDocumentOnce(
+                                                                    rowNewsFeedRecord
+                                                                        .episodeRef!);
+
+                                                        context.pushNamed(
+                                                          EpisodePageWidget
+                                                              .routeName,
+                                                          queryParameters: {
+                                                            'episodeDoc':
+                                                                serializeParam(
+                                                              _model.episodeDoc,
+                                                              ParamType
+                                                                  .Document,
+                                                            ),
+                                                            'totalSeasons':
+                                                                serializeParam(
+                                                              _model.seriesRef
+                                                                  ?.totalSeasons,
+                                                              ParamType.int,
+                                                            ),
+                                                            'alreadySelectedSeason':
+                                                                serializeParam(
+                                                              _model.episodeDoc
+                                                                  ?.seasonNumber,
+                                                              ParamType.int,
+                                                            ),
+                                                            'titleLogoImage':
+                                                                serializeParam(
+                                                              rowNewsFeedRecord
+                                                                  .logoImage,
+                                                              ParamType.String,
+                                                            ),
+                                                          }.withoutNulls,
+                                                          extra: <String,
+                                                              dynamic>{
+                                                            'episodeDoc': _model
+                                                                .episodeDoc,
+                                                          },
+                                                        );
+                                                      }
                                                     }
 
                                                     safeSetState(() {});
@@ -430,10 +482,7 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                                           .getDocumentOnce(
                                                               listViewNewsFeedRecord
                                                                   .movieRef!);
-                                                  if (Navigator.of(context)
-                                                      .canPop()) {
-                                                    context.pop();
-                                                  }
+
                                                   context.pushNamed(
                                                     MoviePageWidget.routeName,
                                                     queryParameters: {
@@ -461,31 +510,75 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                                           .getDocumentOnce(
                                                               listViewNewsFeedRecord
                                                                   .seriesRef!);
-                                                  if (Navigator.of(context)
-                                                      .canPop()) {
-                                                    context.pop();
-                                                  }
-                                                  context.pushNamed(
-                                                    SeasonPageWidget.routeName,
-                                                    queryParameters: {
-                                                      'seriesDoc':
-                                                          serializeParam(
-                                                        _model.seriesRef1,
-                                                        ParamType.Document,
-                                                      ),
-                                                    }.withoutNulls,
-                                                    extra: <String, dynamic>{
-                                                      'seriesDoc':
+                                                  if ((listViewNewsFeedRecord
+                                                              .tag ==
+                                                          'NEW SERIES') ||
+                                                      (listViewNewsFeedRecord
+                                                              .tag ==
+                                                          'NEW SEASON')) {
+                                                    context.pushNamed(
+                                                      SeasonPageWidget
+                                                          .routeName,
+                                                      queryParameters: {
+                                                        'seriesDoc':
+                                                            serializeParam(
                                                           _model.seriesRef1,
-                                                      '__transition_info__':
-                                                          TransitionInfo(
-                                                        hasTransition: true,
-                                                        transitionType:
-                                                            PageTransitionType
-                                                                .fade,
-                                                      ),
-                                                    },
-                                                  );
+                                                          ParamType.Document,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'seriesDoc':
+                                                            _model.seriesRef1,
+                                                        '__transition_info__':
+                                                            TransitionInfo(
+                                                          hasTransition: true,
+                                                          transitionType:
+                                                              PageTransitionType
+                                                                  .fade,
+                                                        ),
+                                                      },
+                                                    );
+                                                  } else {
+                                                    _model.episodeDoc1 =
+                                                        await EpisodesRecord
+                                                            .getDocumentOnce(
+                                                                listViewNewsFeedRecord
+                                                                    .episodeRef!);
+
+                                                    context.pushNamed(
+                                                      EpisodePageWidget
+                                                          .routeName,
+                                                      queryParameters: {
+                                                        'episodeDoc':
+                                                            serializeParam(
+                                                          _model.episodeDoc1,
+                                                          ParamType.Document,
+                                                        ),
+                                                        'totalSeasons':
+                                                            serializeParam(
+                                                          _model.seriesRef1
+                                                              ?.totalSeasons,
+                                                          ParamType.int,
+                                                        ),
+                                                        'alreadySelectedSeason':
+                                                            serializeParam(
+                                                          _model.episodeDoc1
+                                                              ?.seasonNumber,
+                                                          ParamType.int,
+                                                        ),
+                                                        'titleLogoImage':
+                                                            serializeParam(
+                                                          _model.seriesRef1
+                                                              ?.logoImage,
+                                                          ParamType.String,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'episodeDoc':
+                                                            _model.episodeDoc1,
+                                                      },
+                                                    );
+                                                  }
                                                 }
 
                                                 safeSetState(() {});

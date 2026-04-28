@@ -60,6 +60,11 @@ class NewsFeedRecord extends FirestoreRecord {
   DocumentReference? get seriesRef => _seriesRef;
   bool hasSeriesRef() => _seriesRef != null;
 
+  // "episode_ref" field.
+  DocumentReference? _episodeRef;
+  DocumentReference? get episodeRef => _episodeRef;
+  bool hasEpisodeRef() => _episodeRef != null;
+
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _description = snapshotData['description'] as String?;
@@ -70,6 +75,7 @@ class NewsFeedRecord extends FirestoreRecord {
     _createdAt = snapshotData['created_at'] as DateTime?;
     _movieRef = snapshotData['movie_ref'] as DocumentReference?;
     _seriesRef = snapshotData['series_ref'] as DocumentReference?;
+    _episodeRef = snapshotData['episode_ref'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -116,6 +122,7 @@ Map<String, dynamic> createNewsFeedRecordData({
   DateTime? createdAt,
   DocumentReference? movieRef,
   DocumentReference? seriesRef,
+  DocumentReference? episodeRef,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -128,6 +135,7 @@ Map<String, dynamic> createNewsFeedRecordData({
       'created_at': createdAt,
       'movie_ref': movieRef,
       'series_ref': seriesRef,
+      'episode_ref': episodeRef,
     }.withoutNulls,
   );
 
@@ -147,7 +155,8 @@ class NewsFeedRecordDocumentEquality implements Equality<NewsFeedRecord> {
         e1?.genres == e2?.genres &&
         e1?.createdAt == e2?.createdAt &&
         e1?.movieRef == e2?.movieRef &&
-        e1?.seriesRef == e2?.seriesRef;
+        e1?.seriesRef == e2?.seriesRef &&
+        e1?.episodeRef == e2?.episodeRef;
   }
 
   @override
@@ -160,7 +169,8 @@ class NewsFeedRecordDocumentEquality implements Equality<NewsFeedRecord> {
         e?.genres,
         e?.createdAt,
         e?.movieRef,
-        e?.seriesRef
+        e?.seriesRef,
+        e?.episodeRef
       ]);
 
   @override

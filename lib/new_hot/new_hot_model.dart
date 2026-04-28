@@ -12,10 +12,14 @@ class NewHotModel extends FlutterFlowModel<NewHotWidget> {
   MoviesRecord? movieRef;
   // Stores action output result for [Backend Call - Read Document] action in TrendingNewsCard widget.
   SeriesRecord? seriesRef;
+  // Stores action output result for [Backend Call - Read Document] action in TrendingNewsCard widget.
+  EpisodesRecord? episodeDoc;
   // Stores action output result for [Backend Call - Read Document] action in UpcomingItem widget.
   MoviesRecord? movieRef1;
   // Stores action output result for [Backend Call - Read Document] action in UpcomingItem widget.
   SeriesRecord? seriesRef1;
+  // Stores action output result for [Backend Call - Read Document] action in UpcomingItem widget.
+  EpisodesRecord? episodeDoc1;
   // Model for BottomNavBar component.
   late BottomNavBarModel bottomNavBarModel;
 
