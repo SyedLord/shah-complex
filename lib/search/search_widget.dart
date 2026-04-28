@@ -567,34 +567,52 @@ class _SearchWidgetState extends State<SearchWidget> {
                               Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 0.0, 16.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                'Movies',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .titleLarge
-                                                    .override(
-                                                      font: GoogleFonts.inter(
+                                  if (_model.searchResultMovies.length > 0)
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 16.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Movies',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .titleLarge
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontStyle,
+                                                        ),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        letterSpacing: 0.0,
                                                         fontWeight:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -605,42 +623,45 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                                     context)
                                                                 .titleLarge
                                                                 .fontStyle,
+                                                        lineHeight: 1.2,
                                                       ),
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleLarge
-                                                              .fontWeight,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleLarge
-                                                              .fontStyle,
-                                                      lineHeight: 1.2,
-                                                    ),
-                                              ),
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  _model.tabIndex = 1;
-                                                  safeSetState(() {});
-                                                },
-                                                child: Text(
-                                                  'See All',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        font: GoogleFonts.inter(
+                                                ),
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    _model.tabIndex = 1;
+                                                    safeSetState(() {});
+                                                  },
+                                                  child: Text(
+                                                    'See All',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font:
+                                                              GoogleFonts.inter(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent3,
+                                                          letterSpacing: 0.0,
                                                           fontWeight:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -652,140 +673,143 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                                   .bodyMedium
                                                                   .fontStyle,
                                                         ),
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .accent3,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontStyle,
-                                                      ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        Container(
-                                          height: 220.0,
-                                          decoration: BoxDecoration(),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 0.0, 16.0, 0.0),
-                                            child: Builder(
-                                              builder: (context) {
-                                                final searchedMovies = (_model.textController
-                                                                    .text ==
-                                                                ''
-                                                        ? searchMoviesRecordList
-                                                        : _model
-                                                            .searchResultMovies)
-                                                    .toList()
-                                                    .take(10)
-                                                    .toList();
+                                          Container(
+                                            height: 220.0,
+                                            decoration: BoxDecoration(),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 16.0, 0.0),
+                                              child: Builder(
+                                                builder: (context) {
+                                                  final searchedMovies = (_model.textController
+                                                                      .text ==
+                                                                  ''
+                                                          ? searchMoviesRecordList
+                                                          : _model
+                                                              .searchResultMovies)
+                                                      .toList()
+                                                      .take(10)
+                                                      .toList();
 
-                                                return ListView.separated(
-                                                  padding: EdgeInsets.zero,
-                                                  shrinkWrap: true,
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemCount:
-                                                      searchedMovies.length,
-                                                  separatorBuilder: (_, __) =>
-                                                      SizedBox(width: 10.0),
-                                                  itemBuilder: (context,
-                                                      searchedMoviesIndex) {
-                                                    final searchedMoviesItem =
-                                                        searchedMovies[
-                                                            searchedMoviesIndex];
-                                                    return InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        context.pushNamed(
-                                                          MoviePageWidget
-                                                              .routeName,
-                                                          queryParameters: {
-                                                            'movieDoc':
-                                                                serializeParam(
-                                                              searchedMoviesItem,
-                                                              ParamType
-                                                                  .Document,
-                                                            ),
-                                                          }.withoutNulls,
-                                                          extra: <String,
-                                                              dynamic>{
-                                                            'movieDoc':
+                                                  return ListView.separated(
+                                                    padding: EdgeInsets.zero,
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    itemCount:
+                                                        searchedMovies.length,
+                                                    separatorBuilder: (_, __) =>
+                                                        SizedBox(width: 10.0),
+                                                    itemBuilder: (context,
+                                                        searchedMoviesIndex) {
+                                                      final searchedMoviesItem =
+                                                          searchedMovies[
+                                                              searchedMoviesIndex];
+                                                      return InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          context.pushNamed(
+                                                            MoviePageWidget
+                                                                .routeName,
+                                                            queryParameters: {
+                                                              'movieDoc':
+                                                                  serializeParam(
                                                                 searchedMoviesItem,
-                                                            '__transition_info__':
-                                                                TransitionInfo(
-                                                              hasTransition:
-                                                                  true,
-                                                              transitionType:
-                                                                  PageTransitionType
-                                                                      .fade,
-                                                            ),
-                                                          },
-                                                        );
-                                                      },
-                                                      child: MovieCardWidget(
-                                                        key: Key(
-                                                            'Keykjq_${searchedMoviesIndex}_of_${searchedMovies.length}'),
-                                                        img: searchedMoviesItem
-                                                            .posterImage,
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              },
+                                                                ParamType
+                                                                    .Document,
+                                                              ),
+                                                            }.withoutNulls,
+                                                            extra: <String,
+                                                                dynamic>{
+                                                              'movieDoc':
+                                                                  searchedMoviesItem,
+                                                              '__transition_info__':
+                                                                  TransitionInfo(
+                                                                hasTransition:
+                                                                    true,
+                                                                transitionType:
+                                                                    PageTransitionType
+                                                                        .fade,
+                                                              ),
+                                                            },
+                                                          );
+                                                        },
+                                                        child: MovieCardWidget(
+                                                          key: Key(
+                                                              'Keykjq_${searchedMoviesIndex}_of_${searchedMovies.length}'),
+                                                          img:
+                                                              searchedMoviesItem
+                                                                  .posterImage,
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ].divide(SizedBox(height: 16.0)),
+                                        ].divide(SizedBox(height: 16.0)),
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 16.0, 0.0, 16.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 0.0, 16.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                'Seasons',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .titleLarge
-                                                    .override(
-                                                      font: GoogleFonts.inter(
+                                  if (_model.searchResultSeries.length > 0)
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 16.0, 0.0, 16.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Seasons',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .titleLarge
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontStyle,
+                                                        ),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        letterSpacing: 0.0,
                                                         fontWeight:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -796,42 +820,45 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                                     context)
                                                                 .titleLarge
                                                                 .fontStyle,
+                                                        lineHeight: 1.2,
                                                       ),
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleLarge
-                                                              .fontWeight,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleLarge
-                                                              .fontStyle,
-                                                      lineHeight: 1.2,
-                                                    ),
-                                              ),
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  _model.tabIndex = 2;
-                                                  safeSetState(() {});
-                                                },
-                                                child: Text(
-                                                  'See All',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        font: GoogleFonts.inter(
+                                                ),
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    _model.tabIndex = 2;
+                                                    safeSetState(() {});
+                                                  },
+                                                  child: Text(
+                                                    'See All',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font:
+                                                              GoogleFonts.inter(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent3,
+                                                          letterSpacing: 0.0,
                                                           fontWeight:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -843,109 +870,93 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                                   .bodyMedium
                                                                   .fontStyle,
                                                         ),
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .accent3,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontStyle,
-                                                      ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          width: double.infinity,
-                                          height: 120.0,
-                                          decoration: BoxDecoration(),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 0.0, 16.0, 0.0),
-                                            child: Builder(
-                                              builder: (context) {
-                                                final searchedSeries = (_model.textController
-                                                                    .text ==
-                                                                ''
-                                                        ? containerSeriesRecordList
-                                                        : _model
-                                                            .searchResultSeries)
-                                                    .toList()
-                                                    .take(10)
-                                                    .toList();
-
-                                                return ListView.separated(
-                                                  padding: EdgeInsets.zero,
-                                                  shrinkWrap: true,
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemCount:
-                                                      searchedSeries.length,
-                                                  separatorBuilder: (_, __) =>
-                                                      SizedBox(width: 10.0),
-                                                  itemBuilder: (context,
-                                                      searchedSeriesIndex) {
-                                                    final searchedSeriesItem =
-                                                        searchedSeries[
-                                                            searchedSeriesIndex];
-                                                    return InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        context.pushNamed(
-                                                          SeasonPageWidget
-                                                              .routeName,
-                                                          queryParameters: {
-                                                            'seriesDoc':
-                                                                serializeParam(
-                                                              searchedSeriesItem,
-                                                              ParamType
-                                                                  .Document,
-                                                            ),
-                                                          }.withoutNulls,
-                                                          extra: <String,
-                                                              dynamic>{
-                                                            'seriesDoc':
-                                                                searchedSeriesItem,
-                                                          },
-                                                        );
-                                                      },
-                                                      child: SeasonCardWidget(
-                                                        key: Key(
-                                                            'Key6xr_${searchedSeriesIndex}_of_${searchedSeries.length}'),
-                                                        posterImage:
-                                                            searchedSeriesItem
-                                                                .backdropImage,
-                                                        titleImage:
-                                                            searchedSeriesItem
-                                                                .logoImage,
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              },
+                                              ],
                                             ),
                                           ),
-                                        ),
-                                      ].divide(SizedBox(height: 16.0)),
+                                          Container(
+                                            width: double.infinity,
+                                            height: 120.0,
+                                            decoration: BoxDecoration(),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 16.0, 0.0),
+                                              child: Builder(
+                                                builder: (context) {
+                                                  final searchedSeries = (_model.textController
+                                                                      .text ==
+                                                                  ''
+                                                          ? containerSeriesRecordList
+                                                          : _model
+                                                              .searchResultSeries)
+                                                      .toList()
+                                                      .take(10)
+                                                      .toList();
+
+                                                  return ListView.separated(
+                                                    padding: EdgeInsets.zero,
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    itemCount:
+                                                        searchedSeries.length,
+                                                    separatorBuilder: (_, __) =>
+                                                        SizedBox(width: 10.0),
+                                                    itemBuilder: (context,
+                                                        searchedSeriesIndex) {
+                                                      final searchedSeriesItem =
+                                                          searchedSeries[
+                                                              searchedSeriesIndex];
+                                                      return InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          context.pushNamed(
+                                                            SeasonPageWidget
+                                                                .routeName,
+                                                            queryParameters: {
+                                                              'seriesDoc':
+                                                                  serializeParam(
+                                                                searchedSeriesItem,
+                                                                ParamType
+                                                                    .Document,
+                                                              ),
+                                                            }.withoutNulls,
+                                                            extra: <String,
+                                                                dynamic>{
+                                                              'seriesDoc':
+                                                                  searchedSeriesItem,
+                                                            },
+                                                          );
+                                                        },
+                                                        child: SeasonCardWidget(
+                                                          key: Key(
+                                                              'Key6xr_${searchedSeriesIndex}_of_${searchedSeries.length}'),
+                                                          posterImage:
+                                                              searchedSeriesItem
+                                                                  .backdropImage,
+                                                          titleImage:
+                                                              searchedSeriesItem
+                                                                  .logoImage,
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ].divide(SizedBox(height: 16.0)),
+                                      ),
                                     ),
-                                  ),
                                 ],
                               ),
                             if (_model.tabIndex == 1)
