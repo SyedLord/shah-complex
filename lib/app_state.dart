@@ -458,21 +458,6 @@ class FFAppState extends ChangeNotifier {
   void clearProfileCacheCacheKey(String? uniqueKey) =>
       _profileCacheManager.clearRequest(uniqueKey);
 
-  final _newsCountCacheManager = FutureRequestManager<int>();
-  Future<int> newsCountCache({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Future<int> Function() requestFn,
-  }) =>
-      _newsCountCacheManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearNewsCountCacheCache() => _newsCountCacheManager.clear();
-  void clearNewsCountCacheCacheKey(String? uniqueKey) =>
-      _newsCountCacheManager.clearRequest(uniqueKey);
-
   final _newsCountAllManager = FutureRequestManager<int>();
   Future<int> newsCountAll({
     String? uniqueQueryKey,

@@ -72,7 +72,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                       bottomNavBarAppConfigRecordList,
                       _model.bottomNavBarPreviousSnapshot)) {
                 () async {
-                  FFAppState().clearNewsCountCacheCache();
                   FFAppState().clearTrendingMoviesCacheCache();
                   FFAppState().clearTrendingSeriesCacheCache();
                   FFAppState().clearMoviesCacheCache();
@@ -334,14 +333,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   FutureBuilder<int>(
-                                    future: FFAppState().newsCountCache(
-                                      requestFn: () => queryNewsFeedRecordCount(
-                                        queryBuilder: (newsFeedRecord) =>
-                                            newsFeedRecord.where(
-                                          'created_at',
-                                          isGreaterThan: bottomNavProfilesRecord
-                                              .lastSeenNews,
-                                        ),
+                                    future: queryNewsFeedRecordCount(
+                                      queryBuilder: (newsFeedRecord) =>
+                                          newsFeedRecord.where(
+                                        'created_at',
+                                        isGreaterThan: bottomNavProfilesRecord
+                                            .lastSeenNews,
                                       ),
                                     ),
                                     builder: (context, snapshot) {
@@ -397,8 +394,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                                     lastSeenNews:
                                                         getCurrentTimestamp,
                                                   ));
-                                              FFAppState()
-                                                  .clearNewsCountCacheCache();
                                             },
                                           ),
                                           if (stackCount > 0)
