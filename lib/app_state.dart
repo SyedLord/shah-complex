@@ -305,6 +305,12 @@ class FFAppState extends ChangeNotifier {
         : prefs.remove('ff_lastSeenNews');
   }
 
+  bool _isEditMode = false;
+  bool get isEditMode => _isEditMode;
+  set isEditMode(bool value) {
+    _isEditMode = value;
+  }
+
   final _profileWatchlistCountManager = FutureRequestManager<int>();
   Future<int> profileWatchlistCount({
     String? uniqueQueryKey,

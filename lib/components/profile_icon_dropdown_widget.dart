@@ -70,8 +70,26 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              if (_model.isHidden == false)
-                Container(
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  FFAppState().isEditMode = true;
+                  safeSetState(() {});
+
+                  context.pushNamed(
+                    ProfileSelectionWidget.routeName,
+                    extra: <String, dynamic>{
+                      '__transition_info__': TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                      ),
+                    },
+                  );
+                },
+                child: Container(
                   decoration: BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.circular(
@@ -96,7 +114,7 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
                         Expanded(
                           flex: 1,
                           child: Text(
-                            'Manage Profiles',
+                            'Manage Profile',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -126,6 +144,7 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
                     ),
                   ),
                 ),
+              ),
               if (_model.isHidden == false)
                 Container(
                   decoration: BoxDecoration(
@@ -225,7 +244,7 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
                         Expanded(
                           flex: 1,
                           child: Text(
-                            'Change Profile',
+                            'Switch Profile',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(

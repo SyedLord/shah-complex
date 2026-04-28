@@ -10,6 +10,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'profile_selection_model.dart';
 export 'profile_selection_model.dart';
 
@@ -64,6 +65,8 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return StreamBuilder<List<ProfilesRecord>>(
       stream: queryProfilesRecord(
         parent: currentUserReference,
@@ -104,7 +107,10 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                       height: 80.0,
                       decoration: BoxDecoration(),
                       child: Visibility(
-                        visible: _model.isEditMode,
+                        visible: valueOrDefault<bool>(
+                          FFAppState().isEditMode,
+                          false,
+                        ),
                         child: Align(
                           alignment: AlignmentDirectional(1.0, 1.0),
                           child: Padding(
@@ -119,7 +125,8 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                 size: 24.0,
                               ),
                               onPressed: () async {
-                                _model.isEditMode = !_model.isEditMode;
+                                FFAppState().isEditMode =
+                                    !(FFAppState().isEditMode ?? true);
                                 safeSetState(() {});
                               },
                             ),
@@ -190,7 +197,8 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
-                                            if (_model.isEditMode == true) {
+                                            if (FFAppState().isEditMode ==
+                                                true) {
                                               context.pushNamed(
                                                 CreateProfileWidget.routeName,
                                                 queryParameters: {
@@ -230,7 +238,7 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                                 'Keyl55_${profileListIndex}_of_${profileList.length}'),
                                             profileImage:
                                                 profileListItem.profileImage,
-                                            isEditing: _model.isEditMode,
+                                            isEditing: FFAppState().isEditMode,
                                             name: profileListItem.profileName,
                                             isActive: false,
                                           ),
@@ -347,7 +355,7 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                             width: 0.0,
                                             height: 0.0,
                                           ),
-                                          if (_model.isEditMode == false)
+                                          if (FFAppState().isEditMode == false)
                                             InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
