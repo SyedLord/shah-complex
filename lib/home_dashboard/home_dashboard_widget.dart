@@ -991,8 +991,6 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                         16.0, 0.0, 16.0, 0.0),
                                     child: FutureBuilder<List<MoviesRecord>>(
                                       future: FFAppState().moviesCacheList(
-                                        uniqueQueryKey:
-                                            moviesCategoriesRecord.name,
                                         requestFn: () => queryMoviesRecordOnce(
                                           queryBuilder: (moviesRecord) =>
                                               moviesRecord
@@ -1242,8 +1240,6 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                         16.0, 0.0, 16.0, 0.0),
                                     child: FutureBuilder<List<SeriesRecord>>(
                                       future: FFAppState().seasonsCacheList(
-                                        uniqueQueryKey:
-                                            seasonsCategoriesRecord.name,
                                         requestFn: () => querySeriesRecordOnce(
                                           queryBuilder: (seriesRecord) =>
                                               seriesRecord
