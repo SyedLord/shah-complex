@@ -51,6 +51,7 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
         );
       }
       FFAppState().clearProfileCacheCache();
+      FFAppState().clearNewsCountCacheCache();
     });
   }
 
