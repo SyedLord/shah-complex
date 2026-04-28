@@ -82,6 +82,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: FutureBuilder<int>(
               future: FFAppState().profileWatchlistCount(
+                uniqueQueryKey: myProfileProfilesRecord.reference.id,
                 requestFn: () => queryMyListRecordCount(
                   queryBuilder: (myListRecord) => myListRecord.where(
                     'profile_ref',
