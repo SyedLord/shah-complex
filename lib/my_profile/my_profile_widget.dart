@@ -81,10 +81,12 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: FutureBuilder<int>(
-              future: queryMyListRecordCount(
-                queryBuilder: (myListRecord) => myListRecord.where(
-                  'profile_ref',
-                  isEqualTo: FFAppState().activeProfileRef,
+              future: FFAppState().profileWatchlistCount(
+                requestFn: () => queryMyListRecordCount(
+                  queryBuilder: (myListRecord) => myListRecord.where(
+                    'profile_ref',
+                    isEqualTo: FFAppState().activeProfileRef,
+                  ),
                 ),
               ),
               builder: (context, snapshot) {
