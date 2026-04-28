@@ -51,9 +51,6 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
           }.withoutNulls,
         );
       }
-      FFAppState().clearProfileWatchlistCountCache();
-      FFAppState().clearProfileCacheCache();
-      FFAppState().clearNewsCountCacheCache();
     });
   }
 
@@ -233,6 +230,13 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                                 },
                                               );
                                             }
+
+                                            FFAppState()
+                                                .clearProfileWatchlistCountCache();
+                                            FFAppState()
+                                                .clearProfileCacheCache();
+                                            FFAppState()
+                                                .clearNewsCountCacheCache();
                                           },
                                           child: ProfileAvatarWidget(
                                             key: Key(
