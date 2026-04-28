@@ -225,10 +225,20 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                             Colors.transparent,
                                                         onTap: () async {
                                                           context.pushNamed(
-                                                            ProfileSelectionWidget
+                                                            CreateProfileWidget
                                                                 .routeName,
+                                                            queryParameters: {
+                                                              'profileDoc':
+                                                                  serializeParam(
+                                                                myProfileProfilesRecord,
+                                                                ParamType
+                                                                    .Document,
+                                                              ),
+                                                            }.withoutNulls,
                                                             extra: <String,
                                                                 dynamic>{
+                                                              'profileDoc':
+                                                                  myProfileProfilesRecord,
                                                               '__transition_info__':
                                                                   TransitionInfo(
                                                                 hasTransition:
