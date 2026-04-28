@@ -109,6 +109,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'categoryName',
               ParamType.String,
             ),
+            itemType: params.getParam(
+              'itemType',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(

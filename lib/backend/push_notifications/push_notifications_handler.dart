@@ -120,6 +120,7 @@ final parametersBuilderMap =
   'AllItems': (data) async => ParameterData(
         allParams: {
           'categoryName': getParameter<String>(data, 'categoryName'),
+          'itemType': getParameter<String>(data, 'itemType'),
         },
       ),
   'MoviePage': (data) async => ParameterData(

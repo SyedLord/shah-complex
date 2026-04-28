@@ -914,6 +914,10 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                                 moviesCategoriesRecord.name,
                                                 ParamType.String,
                                               ),
+                                              'itemType': serializeParam(
+                                                moviesCategoriesRecord.type,
+                                                ParamType.String,
+                                              ),
                                             }.withoutNulls,
                                             extra: <String, dynamic>{
                                               '__transition_info__':
@@ -1159,6 +1163,10 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                             queryParameters: {
                                               'categoryName': serializeParam(
                                                 seasonsCategoriesRecord.name,
+                                                ParamType.String,
+                                              ),
+                                              'itemType': serializeParam(
+                                                seasonsCategoriesRecord.type,
                                                 ParamType.String,
                                               ),
                                             }.withoutNulls,
