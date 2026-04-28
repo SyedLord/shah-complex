@@ -2,6 +2,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import 'dart:ui';
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -377,6 +378,23 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                               size: 26.0,
                                             ),
                                             onPressed: () async {
+                                              unawaited(
+                                                () async {
+                                                  await FFAppState()
+                                                      .activeProfileRef!
+                                                      .update(
+                                                          createProfilesRecordData(
+                                                        lastSeenNews:
+                                                            getCurrentTimestamp,
+                                                      ));
+                                                }(),
+                                              );
+                                              FFAppState()
+                                                  .clearNewsCountCacheCache();
+                                              FFAppState().lastSeenNews =
+                                                  getCurrentTimestamp;
+                                              safeSetState(() {});
+
                                               context.pushNamed(
                                                 NewHotWidget.routeName,
                                                 extra: <String, dynamic>{
@@ -388,20 +406,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                                   ),
                                                 },
                                               );
-
-                                              FFAppState().lastSeenNews =
-                                                  getCurrentTimestamp;
-                                              safeSetState(() {});
-
-                                              await FFAppState()
-                                                  .activeProfileRef!
-                                                  .update(
-                                                      createProfilesRecordData(
-                                                    lastSeenNews:
-                                                        getCurrentTimestamp,
-                                                  ));
-                                              FFAppState()
-                                                  .clearNewsCountCacheCache();
                                             },
                                           ),
                                           if (stackCount > 0)
