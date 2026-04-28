@@ -84,20 +84,8 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
                   AllItemsWidget.routeName,
                   queryParameters: {
                     'categoryName': serializeParam(
-                      widget.title,
-                      ParamType.String,
-                    ),
-                    'categoryType': serializeParam(
                       widget.type,
                       ParamType.String,
-                    ),
-                    'isTrending': serializeParam(
-                      widget.isTrending,
-                      ParamType.bool,
-                    ),
-                    'isContinueWatching': serializeParam(
-                      widget.isContinueWatching,
-                      ParamType.bool,
                     ),
                   }.withoutNulls,
                 );

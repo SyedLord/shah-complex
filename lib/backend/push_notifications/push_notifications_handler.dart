@@ -120,9 +120,6 @@ final parametersBuilderMap =
   'AllItems': (data) async => ParameterData(
         allParams: {
           'categoryName': getParameter<String>(data, 'categoryName'),
-          'categoryType': getParameter<String>(data, 'categoryType'),
-          'isTrending': getParameter<bool>(data, 'isTrending'),
-          'isContinueWatching': getParameter<bool>(data, 'isContinueWatching'),
         },
       ),
   'MoviePage': (data) async => ParameterData(

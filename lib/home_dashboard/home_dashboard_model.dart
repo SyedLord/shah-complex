@@ -1,6 +1,5 @@
 import '/backend/backend.dart';
 import '/components/bottom_nav_bar_widget.dart';
-import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'home_dashboard_widget.dart' show HomeDashboardWidget;
@@ -28,28 +27,16 @@ class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
   MoviesRecord? loadedMoviesDoc;
   // Stores action output result for [Backend Call - Read Document] action in Stack widget.
   SeriesRecord? loadedSeriesDoc;
-  // Model for section_header component.
-  late SectionHeaderModel sectionHeaderModel1;
-  // Model for section_header component.
-  late SectionHeaderModel sectionHeaderModel2;
-  // Model for section_header component.
-  late SectionHeaderModel sectionHeaderModel3;
   // Model for BottomNavBar component.
   late BottomNavBarModel bottomNavBarModel;
 
   @override
   void initState(BuildContext context) {
-    sectionHeaderModel1 = createModel(context, () => SectionHeaderModel());
-    sectionHeaderModel2 = createModel(context, () => SectionHeaderModel());
-    sectionHeaderModel3 = createModel(context, () => SectionHeaderModel());
     bottomNavBarModel = createModel(context, () => BottomNavBarModel());
   }
 
   @override
   void dispose() {
-    sectionHeaderModel1.dispose();
-    sectionHeaderModel2.dispose();
-    sectionHeaderModel3.dispose();
     bottomNavBarModel.dispose();
   }
 }

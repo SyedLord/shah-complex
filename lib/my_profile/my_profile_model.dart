@@ -1,6 +1,5 @@
 import '/components/bottom_nav_bar_widget.dart';
 import '/components/download_item_widget.dart';
-import '/components/section_header_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'my_profile_widget.dart' show MyProfileWidget;
@@ -13,10 +12,6 @@ class MyProfileModel extends FlutterFlowModel<MyProfileWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Model for section_header component.
-  late SectionHeaderModel sectionHeaderModel1;
-  // Model for section_header component.
-  late SectionHeaderModel sectionHeaderModel2;
   // Model for DownloadItem.
   late DownloadItemModel downloadItemModel1;
   // Model for DownloadItem.
@@ -28,8 +23,6 @@ class MyProfileModel extends FlutterFlowModel<MyProfileWidget> {
 
   @override
   void initState(BuildContext context) {
-    sectionHeaderModel1 = createModel(context, () => SectionHeaderModel());
-    sectionHeaderModel2 = createModel(context, () => SectionHeaderModel());
     downloadItemModel1 = createModel(context, () => DownloadItemModel());
     downloadItemModel2 = createModel(context, () => DownloadItemModel());
     downloadItemModel3 = createModel(context, () => DownloadItemModel());
@@ -38,8 +31,6 @@ class MyProfileModel extends FlutterFlowModel<MyProfileWidget> {
 
   @override
   void dispose() {
-    sectionHeaderModel1.dispose();
-    sectionHeaderModel2.dispose();
     downloadItemModel1.dispose();
     downloadItemModel2.dispose();
     downloadItemModel3.dispose();

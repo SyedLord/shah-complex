@@ -109,18 +109,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'categoryName',
               ParamType.String,
             ),
-            categoryType: params.getParam(
-              'categoryType',
-              ParamType.String,
-            ),
-            isTrending: params.getParam(
-              'isTrending',
-              ParamType.bool,
-            ),
-            isContinueWatching: params.getParam(
-              'isContinueWatching',
-              ParamType.bool,
-            ),
           ),
         ),
         FFRoute(
