@@ -55,6 +55,11 @@ class UsersRecord extends FirestoreRecord {
   String get memberLevel => _memberLevel ?? '';
   bool hasMemberLevel() => _memberLevel != null;
 
+  // "subscription_expiry" field.
+  DateTime? _subscriptionExpiry;
+  DateTime? get subscriptionExpiry => _subscriptionExpiry;
+  bool hasSubscriptionExpiry() => _subscriptionExpiry != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -64,6 +69,7 @@ class UsersRecord extends FirestoreRecord {
     _phoneNumber = snapshotData['phone_number'] as String?;
     _isAdmin = snapshotData['is_Admin'] as bool?;
     _memberLevel = snapshotData['member_Level'] as String?;
+    _subscriptionExpiry = snapshotData['subscription_expiry'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -108,6 +114,7 @@ Map<String, dynamic> createUsersRecordData({
   String? phoneNumber,
   bool? isAdmin,
   String? memberLevel,
+  DateTime? subscriptionExpiry,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -119,6 +126,7 @@ Map<String, dynamic> createUsersRecordData({
       'phone_number': phoneNumber,
       'is_Admin': isAdmin,
       'member_Level': memberLevel,
+      'subscription_expiry': subscriptionExpiry,
     }.withoutNulls,
   );
 
@@ -137,7 +145,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.isAdmin == e2?.isAdmin &&
-        e1?.memberLevel == e2?.memberLevel;
+        e1?.memberLevel == e2?.memberLevel &&
+        e1?.subscriptionExpiry == e2?.subscriptionExpiry;
   }
 
   @override
@@ -149,7 +158,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.createdTime,
         e?.phoneNumber,
         e?.isAdmin,
-        e?.memberLevel
+        e?.memberLevel,
+        e?.subscriptionExpiry
       ]);
 
   @override

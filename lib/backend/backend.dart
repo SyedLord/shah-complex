@@ -18,6 +18,7 @@ import 'schema/items_record.dart';
 import 'schema/my_list_record.dart';
 import 'schema/app_config_record.dart';
 import 'schema/news_feed_record.dart';
+import 'schema/contact_admin_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -39,6 +40,7 @@ export 'schema/items_record.dart';
 export 'schema/my_list_record.dart';
 export 'schema/app_config_record.dart';
 export 'schema/news_feed_record.dart';
+export 'schema/contact_admin_record.dart';
 
 /// Functions to query MoviesRecords (as a Stream and as a Future).
 Future<int> queryMoviesRecordCount({
@@ -525,6 +527,43 @@ Future<List<NewsFeedRecord>> queryNewsFeedRecordOnce({
     queryCollectionOnce(
       NewsFeedRecord.collection,
       NewsFeedRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query ContactAdminRecords (as a Stream and as a Future).
+Future<int> queryContactAdminRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ContactAdminRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ContactAdminRecord>> queryContactAdminRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ContactAdminRecord.collection,
+      ContactAdminRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ContactAdminRecord>> queryContactAdminRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ContactAdminRecord.collection,
+      ContactAdminRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
