@@ -378,6 +378,14 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                               size: 26.0,
                                             ),
                                             onPressed: () async {
+                                              await FFAppState()
+                                                  .activeProfileRef!
+                                                  .update(
+                                                      createProfilesRecordData(
+                                                    lastSeenNews:
+                                                        getCurrentTimestamp,
+                                                  ));
+
                                               context.pushNamed(
                                                 NewHotWidget.routeName,
                                                 extra: <String, dynamic>{
@@ -389,14 +397,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                                   ),
                                                 },
                                               );
-
-                                              await FFAppState()
-                                                  .activeProfileRef!
-                                                  .update(
-                                                      createProfilesRecordData(
-                                                    lastSeenNews:
-                                                        getCurrentTimestamp,
-                                                  ));
                                             },
                                           ),
                                           if (stackCount > 0)
