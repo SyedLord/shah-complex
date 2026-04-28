@@ -390,17 +390,13 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                                                 },
                                               );
 
-                                              unawaited(
-                                                () async {
-                                                  await FFAppState()
-                                                      .activeProfileRef!
-                                                      .update(
-                                                          createProfilesRecordData(
-                                                        lastSeenNews:
-                                                            getCurrentTimestamp,
-                                                      ));
-                                                }(),
-                                              );
+                                              await FFAppState()
+                                                  .activeProfileRef!
+                                                  .update(
+                                                      createProfilesRecordData(
+                                                    lastSeenNews:
+                                                        getCurrentTimestamp,
+                                                  ));
                                             },
                                           ),
                                           if (stackCount > 0)
