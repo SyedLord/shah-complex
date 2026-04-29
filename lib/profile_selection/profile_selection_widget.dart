@@ -104,31 +104,57 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                     child: Container(
                       height: 80.0,
                       decoration: BoxDecoration(),
-                      child: Visibility(
-                        visible: valueOrDefault<bool>(
-                          FFAppState().isEditMode,
-                          false,
-                        ),
-                        child: Align(
-                          alignment: AlignmentDirectional(1.0, 1.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 16.0, 0.0),
-                            child: FlutterFlowIconButton(
-                              borderRadius: 8.0,
-                              buttonSize: 40.0,
-                              icon: FaIcon(
-                                FontAwesomeIcons.check,
-                                color: FlutterFlowTheme.of(context).primary,
-                                size: 24.0,
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            if (FFAppState().isEditMode == false)
+                              Align(
+                                alignment: AlignmentDirectional(-1.0, 1.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.0,
+                                  icon: Icon(
+                                    Icons.logout_rounded,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    GoRouter.of(context).prepareAuthEvent();
+                                    await authManager.signOut();
+                                    GoRouter.of(context)
+                                        .clearRedirectLocation();
+
+                                    context.goNamedAuth(
+                                        LoginWidget.routeName, context.mounted);
+                                  },
+                                ),
                               ),
-                              onPressed: () async {
-                                FFAppState().isEditMode =
-                                    !(FFAppState().isEditMode ?? true);
-                                safeSetState(() {});
-                              },
-                            ),
-                          ),
+                            if (valueOrDefault<bool>(
+                              FFAppState().isEditMode,
+                              false,
+                            ))
+                              Align(
+                                alignment: AlignmentDirectional(1.0, 1.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.0,
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.check,
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    FFAppState().isEditMode =
+                                        !(FFAppState().isEditMode ?? true);
+                                    safeSetState(() {});
+                                  },
+                                ),
+                              ),
+                          ],
                         ),
                       ),
                     ),

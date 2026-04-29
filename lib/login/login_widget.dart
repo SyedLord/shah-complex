@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import '/index.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'login_model.dart';
@@ -52,120 +51,21 @@ class _LoginWidgetState extends State<LoginWidget> {
       body: Stack(
         children: [
           Container(
-            child: GridView(
-              padding: EdgeInsets.zero,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 2.0,
-                mainAxisSpacing: 2.0,
-                childAspectRatio: 1.0,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.asset(
+                'assets/images/what-is-a-movie-poster-collage.webp',
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.cover,
               ),
-              shrinkWrap: true,
-              children: [
-                CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl:
-                      'https://dimg.dreamflow.cloud/v1/image/Stranger%20Things%20movie%20poster',
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-                CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl:
-                      'https://dimg.dreamflow.cloud/v1/image/Alice%20in%20Borderland%20poster',
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-                CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl:
-                      'https://dimg.dreamflow.cloud/v1/image/The%20Witcher%20movie%20poster',
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-                CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl:
-                      'https://dimg.dreamflow.cloud/v1/image/Money%20Heist%20poster',
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-                CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl:
-                      'https://dimg.dreamflow.cloud/v1/image/Dark%20movie%20poster',
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-                CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl:
-                      'https://dimg.dreamflow.cloud/v1/image/Squid%20Game%20poster',
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-                CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl:
-                      'https://dimg.dreamflow.cloud/v1/image/Breaking%20Bad%20poster',
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-                CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl:
-                      'https://dimg.dreamflow.cloud/v1/image/Inception%20movie%20poster',
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-                CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl:
-                      'https://dimg.dreamflow.cloud/v1/image/The%20Crown%20poster',
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-                CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl:
-                      'https://dimg.dreamflow.cloud/v1/image/Mindhunter%20poster',
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-                CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl:
-                      'https://dimg.dreamflow.cloud/v1/image/Ozark%20poster',
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-                CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
-                  imageUrl:
-                      'https://dimg.dreamflow.cloud/v1/image/Narcos%20poster',
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-              ],
             ),
           ),
           ClipRRect(
             child: BackdropFilter(
               filter: ImageFilter.blur(
-                sigmaX: 25.0,
-                sigmaY: 25.0,
+                sigmaX: 5.0,
+                sigmaY: 5.0,
               ),
               child: Container(
                 decoration: BoxDecoration(
