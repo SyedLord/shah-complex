@@ -11,7 +11,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
@@ -123,44 +122,6 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                               stops: [0.0, 1.0],
                               begin: AlignmentDirectional(0.0, 1.0),
                               end: AlignmentDirectional(0, -1.0),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                                FlutterFlowTheme.of(context)
-                                    .designToken
-                                    .radius
-                                    .full),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(
-                                sigmaX: 4.0,
-                                sigmaY: 4.0,
-                              ),
-                              child: Container(
-                                width: 56.0,
-                                height: 56.0,
-                                decoration: BoxDecoration(
-                                  color: Color(0x44000000),
-                                  borderRadius: BorderRadius.circular(
-                                      FlutterFlowTheme.of(context)
-                                          .designToken
-                                          .radius
-                                          .full),
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 2.0,
-                                  ),
-                                ),
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Icon(
-                                  Icons.play_arrow_rounded,
-                                  color: Colors.white,
-                                  size: 40.0,
-                                ),
-                              ),
                             ),
                           ),
                         ),

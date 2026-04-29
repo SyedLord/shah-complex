@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:flutter/services.dart';
+import 'package:http/http.dart'
+    as http; // 🔥 HTTP Import lazmi hai (Pubspec mein http: ^1.2.0 hona chahiye)
 
 Future launchExternalPlayer(
   MoviesRecord? movieDoc,
@@ -33,12 +35,11 @@ Future launchExternalPlayer(
   String? resolvedSeriesId = seriesId;
 
   if (continueDoc != null) {
-    // Resuming from continue_watching item — use its stored fields directly
     rawVideoUrl = continueDoc.videoUrl;
     driveType = continueDoc.driveType;
-    tmdbId = continueDoc.tmdbId; // already a String in this collection
+    tmdbId = continueDoc.tmdbId;
     title = continueDoc.title;
-    showName = continueDoc.showName; // stored from previous session
+    showName = continueDoc.showName;
     contentType = continueDoc.contentType ?? 'movie';
     imageUrl = continueDoc.imageUrl;
     startAtSeconds = continueDoc.watchedSeconds ?? 0;
@@ -48,7 +49,6 @@ Future launchExternalPlayer(
   } else if (episodeDoc != null) {
     rawVideoUrl = episodeDoc.videoUrl;
     driveType = episodeDoc.driveType;
-    // episodes store tmdb_id as Integer — convert to String for continue_watching
     tmdbId = episodeDoc.tmdbId?.toString();
     title = episodeDoc.title;
     contentType = 'episode';
@@ -56,7 +56,6 @@ Future launchExternalPlayer(
     startAtSeconds = 0;
     seasonNum = episodeDoc.seasonNumber;
     episodeNum = episodeDoc.episodeNumber;
-    // Fetch series name from parent series document
     if (resolvedSeriesId != null) {
       try {
         final seriesSnap = await FirebaseFirestore.instance
@@ -83,22 +82,22 @@ Future launchExternalPlayer(
 
   // ─── 2. Build the final playback URL based on drive_type ────────────────────
 
+  // 🔥 THE MAGIC: One-Time Token Generate ho raha hai
+  String uniqueToken = '${DateTime.now().millisecondsSinceEpoch}_$profileId';
   String finalPlayUrl = rawVideoUrl;
 
   if (!rawVideoUrl.startsWith('http')) {
     if (driveType == 'gdrive') {
       finalPlayUrl =
-          'https://shahcomplex.sa-syedali2000.workers.dev/?id=$rawVideoUrl';
+          'https://shahcomplex.sa-syedali2000.workers.dev/?id=$rawVideoUrl&token=$uniqueToken';
     } else {
-      // onedrive or any other non-gdrive source
       finalPlayUrl =
-          'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&file_id=$rawVideoUrl&key=Pappu@007';
+          'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&file_id=$rawVideoUrl&key=Pappu@007&token=$uniqueToken';
     }
   }
 
   // ─── 3. Launch the native player via MethodChannel ──────────────────────────
 
-  // 🔥 THE MAGIC: VLC/MX mein upar dikhne wala VIP title
   final String displayTitle = contentType == 'episode'
       ? 'S${seasonNum ?? 0}E${episodeNum ?? 0} · ${title ?? ""}'
       : title ?? '';
@@ -111,12 +110,16 @@ Future launchExternalPlayer(
         await platform.invokeMethod<Map<dynamic, dynamic>>('launchPlayer', {
       'url': finalPlayUrl,
       'startPositionMs': startAtSeconds * 1000,
-      'title': displayTitle, // 🔥 Yahan humne title parameter add kar diya
+      'title': displayTitle,
     });
   } on PlatformException {
-    // Player closed without returning data (e.g. user pressed Back immediately)
+    // 🔥 Agar VLC crash ho jaye ya foran back dab jaye, tab bhi token kill kardo
+    await _invalidateUrl(uniqueToken);
     return;
   }
+
+  // 🔥 KILL SWITCH: VLC band hotay hi token hamesha ke liye aag mein!
+  await _invalidateUrl(uniqueToken);
 
   if (result == null) return;
 
@@ -127,7 +130,6 @@ Future launchExternalPlayer(
   final int watchedSeconds = (watchedMs / 1000).round();
   final int totalSeconds = totalMs > 0 ? (totalMs / 1000).round() : 0;
 
-  // Ignore if user barely touched it
   if (watchedSeconds < 10) return;
 
   final double progressPercent = totalSeconds > 0
@@ -188,7 +190,6 @@ Future launchExternalPlayer(
       .limit(1)
       .get();
 
-  // If not found, try first episode of next season
   if (nextEpQuery.docs.isEmpty) {
     nextEpQuery = await FirebaseFirestore.instance
         .collection('series')
@@ -213,7 +214,6 @@ Future launchExternalPlayer(
 
   final String nextDocId = '${tmdbId ?? "unknown"}_${nextSeason}_$nextEpisode';
 
-  // Queue next episode with 0 progress — carry over show_name
   await FirebaseFirestore.instance
       .collection('continue_watching')
       .doc(profileId)
@@ -222,7 +222,7 @@ Future launchExternalPlayer(
       .set({
     'tmdb_id': tmdbId ?? '',
     'title': nextTitle,
-    'show_name': showName ?? '', // series naam aglay episode mein bhi jaata hai
+    'show_name': showName ?? '',
     'content_type': 'episode',
     'video_url': nextRawUrl,
     'watched_seconds': 0,
@@ -235,4 +235,22 @@ Future launchExternalPlayer(
     'episode': nextEpisode,
     'drive_type': nextDriveType,
   });
+}
+
+// ─── 🔥 THE KILL SWITCH FUNCTION ─────────────────────────────────────────────
+Future<void> _invalidateUrl(String tokenToKill) async {
+  if (tokenToKill.isEmpty) return;
+
+  try {
+    final uri = Uri.parse(
+        'https://shahcomplex.sa-syedali2000.workers.dev/invalidate?token=$tokenToKill');
+
+    // Ye Cloudflare Worker ko bolega ke is link ka saans nikal do!
+    await http.post(
+      uri,
+      headers: {'X-Shah-App': 'ShahComplexSecret2024'},
+    );
+  } catch (_) {
+    // Network error ignore kar dain, main progress bachana zaroori hai
+  }
 }
