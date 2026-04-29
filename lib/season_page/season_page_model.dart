@@ -23,14 +23,6 @@ class SeasonPageModel extends FlutterFlowModel<SeasonPageWidget> {
   late IMDBRatingsModel iMDBRatingsModel;
   // Model for DescriptionWidget component.
   late DescriptionWidgetModel descriptionWidgetModel;
-  // State field(s) for PageView widget.
-  PageController? pageViewController;
-
-  int get pageViewCurrentIndex => pageViewController != null &&
-          pageViewController!.hasClients &&
-          pageViewController!.page != null
-      ? pageViewController!.page!.round()
-      : 0;
   // State field(s) for SeasonSelector widget.
   String? seasonSelectorValue;
   FormFieldController<String>? seasonSelectorValueController;

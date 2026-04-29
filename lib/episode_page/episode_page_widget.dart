@@ -203,37 +203,106 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                       ),
                                     ),
                                     alignment: AlignmentDirectional(0.0, 0.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        if ((episodePageItemsRecord != null) !=
-                                            true) {
-                                          await actions.launchExternalPlayer(
-                                            functions.emptyMovieDoc(),
-                                            widget.episodeDoc,
-                                            functions.emptyContinueDoc(),
-                                            FFAppState().activeProfileRef!.id,
-                                            widget
-                                                .episodeDoc?.parentReference.id,
-                                          );
-                                        } else {
-                                          await actions.launchExternalPlayer(
-                                            functions.emptyMovieDoc(),
-                                            functions.emptyEpisodeDoc(),
-                                            episodePageItemsRecord,
-                                            FFAppState().activeProfileRef!.id,
-                                            widget
-                                                .episodeDoc?.parentReference.id,
-                                          );
-                                        }
-                                      },
-                                      child: Icon(
-                                        Icons.play_arrow_rounded,
-                                        color: Colors.white,
-                                        size: 40.0,
+                                    child: Builder(
+                                      builder: (context) => InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          if (currentUserDocument!
+                                                  .subscriptionExpiry! >=
+                                              getCurrentTimestamp) {
+                                            if ((episodePageItemsRecord !=
+                                                    null) !=
+                                                true) {
+                                              await actions
+                                                  .launchExternalPlayer(
+                                                functions.emptyMovieDoc(),
+                                                widget.episodeDoc,
+                                                functions.emptyContinueDoc(),
+                                                FFAppState()
+                                                    .activeProfileRef!
+                                                    .id,
+                                                widget.episodeDoc
+                                                    ?.parentReference.id,
+                                              );
+                                            } else {
+                                              await actions
+                                                  .launchExternalPlayer(
+                                                functions.emptyMovieDoc(),
+                                                functions.emptyEpisodeDoc(),
+                                                episodePageItemsRecord,
+                                                FFAppState()
+                                                    .activeProfileRef!
+                                                    .id,
+                                                widget.episodeDoc
+                                                    ?.parentReference.id,
+                                              );
+                                            }
+                                          } else {
+                                            if (valueOrDefault<bool>(
+                                                    currentUserDocument
+                                                        ?.isAdmin,
+                                                    false) ==
+                                                true) {
+                                              if ((episodePageItemsRecord !=
+                                                      null) !=
+                                                  true) {
+                                                await actions
+                                                    .launchExternalPlayer(
+                                                  functions.emptyMovieDoc(),
+                                                  widget.episodeDoc,
+                                                  functions.emptyContinueDoc(),
+                                                  FFAppState()
+                                                      .activeProfileRef!
+                                                      .id,
+                                                  widget.episodeDoc
+                                                      ?.parentReference.id,
+                                                );
+                                              } else {
+                                                await actions
+                                                    .launchExternalPlayer(
+                                                  functions.emptyMovieDoc(),
+                                                  functions.emptyEpisodeDoc(),
+                                                  episodePageItemsRecord,
+                                                  FFAppState()
+                                                      .activeProfileRef!
+                                                      .id,
+                                                  widget.episodeDoc
+                                                      ?.parentReference.id,
+                                                );
+                                              }
+                                            } else {
+                                              await showDialog(
+                                                barrierDismissible: false,
+                                                context: context,
+                                                builder: (dialogContext) {
+                                                  return Dialog(
+                                                    elevation: 0,
+                                                    insetPadding:
+                                                        EdgeInsets.zero,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                                0.0, 0.0)
+                                                            .resolve(
+                                                                Directionality.of(
+                                                                    context)),
+                                                    child:
+                                                        SubscriptionExpiredWidget(),
+                                                  );
+                                                },
+                                              );
+                                            }
+                                          }
+                                        },
+                                        child: Icon(
+                                          Icons.play_arrow_rounded,
+                                          color: Colors.white,
+                                          size: 40.0,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -473,6 +542,192 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                           .designToken
                                           .spacing
                                           .md)),
+                                ),
+                                Builder(
+                                  builder: (context) => InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      if (currentUserDocument!
+                                              .subscriptionExpiry! >=
+                                          getCurrentTimestamp) {
+                                        if ((episodePageItemsRecord != null) !=
+                                            true) {
+                                          await actions.launchExternalPlayer(
+                                            functions.emptyMovieDoc(),
+                                            widget.episodeDoc,
+                                            functions.emptyContinueDoc(),
+                                            FFAppState().activeProfileRef!.id,
+                                            widget
+                                                .episodeDoc?.parentReference.id,
+                                          );
+                                        } else {
+                                          await actions.launchExternalPlayer(
+                                            functions.emptyMovieDoc(),
+                                            functions.emptyEpisodeDoc(),
+                                            episodePageItemsRecord,
+                                            FFAppState().activeProfileRef!.id,
+                                            widget
+                                                .episodeDoc?.parentReference.id,
+                                          );
+                                        }
+                                      } else {
+                                        if (valueOrDefault<bool>(
+                                                currentUserDocument?.isAdmin,
+                                                false) ==
+                                            true) {
+                                          if ((episodePageItemsRecord !=
+                                                  null) !=
+                                              true) {
+                                            await actions.launchExternalPlayer(
+                                              functions.emptyMovieDoc(),
+                                              widget.episodeDoc,
+                                              functions.emptyContinueDoc(),
+                                              FFAppState().activeProfileRef!.id,
+                                              widget.episodeDoc
+                                                  ?.parentReference.id,
+                                            );
+                                          } else {
+                                            await actions.launchExternalPlayer(
+                                              functions.emptyMovieDoc(),
+                                              functions.emptyEpisodeDoc(),
+                                              episodePageItemsRecord,
+                                              FFAppState().activeProfileRef!.id,
+                                              widget.episodeDoc
+                                                  ?.parentReference.id,
+                                            );
+                                          }
+                                        } else {
+                                          await showDialog(
+                                            barrierDismissible: false,
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 0,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment: AlignmentDirectional(
+                                                        0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                                child:
+                                                    SubscriptionExpiredWidget(),
+                                              );
+                                            },
+                                          );
+                                        }
+                                      }
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        borderRadius: BorderRadius.circular(
+                                            FlutterFlowTheme.of(context)
+                                                .designToken
+                                                .radius
+                                                .lg),
+                                      ),
+                                      child: Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Stack(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          children: [
+                                            Container(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .designToken
+                                                            .spacing
+                                                            .xl,
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .designToken
+                                                            .spacing
+                                                            .md,
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .designToken
+                                                            .spacing
+                                                            .xl,
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .designToken
+                                                            .spacing
+                                                            .md),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.play_arrow_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      size: 16.0,
+                                                    ),
+                                                    Text(
+                                                      'Play',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            font: GoogleFonts
+                                                                .inter(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelMedium
+                                                                      .fontStyle,
+                                                            ),
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            fontSize: 12.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMedium
+                                                                    .fontStyle,
+                                                            lineHeight: 1.3,
+                                                          ),
+                                                    ),
+                                                    Container(
+                                                      width: 0.0,
+                                                      height: 0.0,
+                                                    ),
+                                                  ].divide(
+                                                      SizedBox(width: 8.0)),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 0.0,
+                                              height: 0.0,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 wrapWithModel(
                                   model: _model.descriptionWidgetModel,

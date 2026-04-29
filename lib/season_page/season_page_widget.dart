@@ -659,12 +659,8 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    await _model.pageViewController
-                                        ?.animateToPage(
-                                      0,
-                                      duration: Duration(milliseconds: 500),
-                                      curve: Curves.ease,
-                                    );
+                                    _model.tabIndex = 0;
+                                    safeSetState(() {});
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(),
@@ -736,12 +732,8 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    await _model.pageViewController
-                                        ?.animateToPage(
-                                      1,
-                                      duration: Duration(milliseconds: 500),
-                                      curve: Curves.ease,
-                                    );
+                                    _model.tabIndex = 1;
+                                    safeSetState(() {});
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(),
@@ -809,7 +801,10 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                     focusColor: Colors.transparent,
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
-                                    onTap: () async {},
+                                    onTap: () async {
+                                      _model.tabIndex = 2;
+                                      safeSetState(() {});
+                                    },
                                     child: Container(
                                       decoration: BoxDecoration(),
                                       child: Column(
@@ -879,333 +874,264 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                             ),
                           ),
                         ),
-                        Container(
-                          width: double.infinity,
-                          height: 600.0,
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 40.0),
-                            child: PageView(
-                              controller: _model.pageViewController ??=
-                                  PageController(initialPage: 0),
-                              onPageChanged: (_) async {
-                                _model.tabIndex = _model.pageViewCurrentIndex;
-                                safeSetState(() {});
-                              },
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                SingleChildScrollView(
-                                  primary: false,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 10.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            FlutterFlowDropDown<String>(
-                                              controller: _model
-                                                      .seasonSelectorValueController ??=
-                                                  FormFieldController<String>(
-                                                _model.seasonSelectorValue ??=
-                                                    _model.selectedSeason
-                                                        .toString(),
-                                              ),
-                                              options: functions
-                                                  .generateSeasonList(widget
-                                                      .seriesDoc!.totalSeasons),
-                                              onChanged: (val) async {
-                                                safeSetState(() => _model
-                                                    .seasonSelectorValue = val);
-                                                _model.selectedSeason =
-                                                    functions.stringToInt(_model
-                                                        .seasonSelectorValue!);
-                                                safeSetState(() {});
-                                              },
-                                              width: 200.0,
-                                              height: 40.0,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        font: GoogleFonts.inter(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontStyle,
-                                                      ),
-                                              hintText: 'Season',
-                                              icon: Icon(
-                                                Icons
-                                                    .keyboard_arrow_down_rounded,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 24.0,
-                                              ),
-                                              fillColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              elevation: 2.0,
-                                              borderColor: Colors.transparent,
-                                              borderWidth: 0.0,
-                                              borderRadius: 8.0,
-                                              margin: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      12.0, 0.0, 12.0, 0.0),
-                                              hidesUnderline: true,
-                                              isOverButton: false,
-                                              isSearchable: false,
-                                              isMultiSelect: false,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      StreamBuilder<List<EpisodesRecord>>(
-                                        stream: queryEpisodesRecord(
-                                          parent: widget.seriesDoc?.reference,
-                                          queryBuilder: (episodesRecord) =>
-                                              episodesRecord
-                                                  .where(
-                                                    'season_number',
-                                                    isEqualTo:
-                                                        _model.selectedSeason,
-                                                  )
-                                                  .orderBy('episode_number'),
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child: SpinKitPulse(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  size: 50.0,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<EpisodesRecord>
-                                              listViewEpisodesRecordList =
-                                              snapshot.data!;
-
-                                          return ListView.builder(
-                                            padding: EdgeInsets.zero,
-                                            primary: false,
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount:
-                                                listViewEpisodesRecordList
-                                                    .length,
-                                            itemBuilder:
-                                                (context, listViewIndex) {
-                                              final listViewEpisodesRecord =
-                                                  listViewEpisodesRecordList[
-                                                      listViewIndex];
-                                              return InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  context.pushNamed(
-                                                    EpisodePageWidget.routeName,
-                                                    queryParameters: {
-                                                      'episodeDoc':
-                                                          serializeParam(
-                                                        listViewEpisodesRecord,
-                                                        ParamType.Document,
-                                                      ),
-                                                      'totalSeasons':
-                                                          serializeParam(
-                                                        widget.seriesDoc
-                                                            ?.totalSeasons,
-                                                        ParamType.int,
-                                                      ),
-                                                      'alreadySelectedSeason':
-                                                          serializeParam(
-                                                        _model.selectedSeason,
-                                                        ParamType.int,
-                                                      ),
-                                                      'titleLogoImage':
-                                                          serializeParam(
-                                                        widget.seriesDoc
-                                                            ?.logoImage,
-                                                        ParamType.String,
-                                                      ),
-                                                    }.withoutNulls,
-                                                    extra: <String, dynamic>{
-                                                      'episodeDoc':
-                                                          listViewEpisodesRecord,
-                                                      '__transition_info__':
-                                                          TransitionInfo(
-                                                        hasTransition: true,
-                                                        transitionType:
-                                                            PageTransitionType
-                                                                .fade,
-                                                      ),
-                                                    },
-                                                  );
-                                                },
-                                                child: EpisodeItemWidget(
-                                                  key: Key(
-                                                      'Keydi5_${listViewIndex}_of_${listViewEpisodesRecordList.length}'),
-                                                  episodeDoc:
-                                                      listViewEpisodesRecord,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Column(
+                        if (_model.tabIndex == 0)
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 10.0),
+                                child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Flexible(
-                                      child: FutureBuilder<List<SeriesRecord>>(
-                                        future: FFAppState().moreLikeThisSeries(
-                                          uniqueQueryKey:
-                                              'more_like_this_${widget.seriesDoc?.tmdbId.toString()}',
-                                          requestFn: () =>
-                                              querySeriesRecordOnce(
-                                            queryBuilder: (seriesRecord) =>
-                                                seriesRecord
-                                                    .whereIn(
-                                                        'tmdb_id',
-                                                        widget.seriesDoc
-                                                            ?.tmdbRecommendations)
-                                                    .where(
-                                                      'tmdb_id',
-                                                      isNotEqualTo: widget
-                                                          .seriesDoc?.tmdbId,
-                                                    ),
-                                            limit: 9,
-                                          ),
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child: SpinKitPulse(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  size: 50.0,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<SeriesRecord>
-                                              gridViewSeriesRecordList =
-                                              snapshot.data!;
-
-                                          return GridView.builder(
-                                            padding: EdgeInsets.zero,
-                                            gridDelegate:
-                                                SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 3,
-                                              crossAxisSpacing: 10.0,
-                                              mainAxisSpacing: 10.0,
-                                              childAspectRatio: 0.6,
-                                            ),
-                                            primary: false,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount:
-                                                gridViewSeriesRecordList.length,
-                                            itemBuilder:
-                                                (context, gridViewIndex) {
-                                              final gridViewSeriesRecord =
-                                                  gridViewSeriesRecordList[
-                                                      gridViewIndex];
-                                              return InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  if (Navigator.of(context)
-                                                      .canPop()) {
-                                                    context.pop();
-                                                  }
-                                                  context.pushNamed(
-                                                    SeasonPageWidget.routeName,
-                                                    queryParameters: {
-                                                      'seriesDoc':
-                                                          serializeParam(
-                                                        gridViewSeriesRecord,
-                                                        ParamType.Document,
-                                                      ),
-                                                    }.withoutNulls,
-                                                    extra: <String, dynamic>{
-                                                      'seriesDoc':
-                                                          gridViewSeriesRecord,
-                                                      '__transition_info__':
-                                                          TransitionInfo(
-                                                        hasTransition: true,
-                                                        transitionType:
-                                                            PageTransitionType
-                                                                .fade,
-                                                      ),
-                                                    },
-                                                  );
-                                                },
-                                                child: MovieCardWidget(
-                                                  key: Key(
-                                                      'Keyq06_${gridViewIndex}_of_${gridViewSeriesRecordList.length}'),
-                                                  img: gridViewSeriesRecord
-                                                      .posterImage,
-                                                  seriesDoc:
-                                                      gridViewSeriesRecord,
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
+                                    FlutterFlowDropDown<String>(
+                                      controller: _model
+                                              .seasonSelectorValueController ??=
+                                          FormFieldController<String>(
+                                        _model.seasonSelectorValue ??=
+                                            _model.selectedSeason.toString(),
                                       ),
+                                      options: functions.generateSeasonList(
+                                          widget.seriesDoc!.totalSeasons),
+                                      onChanged: (val) async {
+                                        safeSetState(() =>
+                                            _model.seasonSelectorValue = val);
+                                        _model.selectedSeason =
+                                            functions.stringToInt(
+                                                _model.seasonSelectorValue!);
+                                        safeSetState(() {});
+                                      },
+                                      width: 200.0,
+                                      height: 40.0,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                      hintText: 'Season',
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      elevation: 2.0,
+                                      borderColor: Colors.transparent,
+                                      borderWidth: 0.0,
+                                      borderRadius: 8.0,
+                                      margin: EdgeInsetsDirectional.fromSTEB(
+                                          12.0, 0.0, 12.0, 0.0),
+                                      hidesUnderline: true,
+                                      isOverButton: false,
+                                      isSearchable: false,
+                                      isMultiSelect: false,
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
+                              ),
+                              StreamBuilder<List<EpisodesRecord>>(
+                                stream: queryEpisodesRecord(
+                                  parent: widget.seriesDoc?.reference,
+                                  queryBuilder: (episodesRecord) =>
+                                      episodesRecord
+                                          .where(
+                                            'season_number',
+                                            isEqualTo: _model.selectedSeason,
+                                          )
+                                          .orderBy('episode_number'),
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: SpinKitPulse(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          size: 50.0,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<EpisodesRecord>
+                                      listViewEpisodesRecordList =
+                                      snapshot.data!;
+
+                                  return ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    primary: false,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount:
+                                        listViewEpisodesRecordList.length,
+                                    itemBuilder: (context, listViewIndex) {
+                                      final listViewEpisodesRecord =
+                                          listViewEpisodesRecordList[
+                                              listViewIndex];
+                                      return InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                            EpisodePageWidget.routeName,
+                                            queryParameters: {
+                                              'episodeDoc': serializeParam(
+                                                listViewEpisodesRecord,
+                                                ParamType.Document,
+                                              ),
+                                              'totalSeasons': serializeParam(
+                                                widget.seriesDoc?.totalSeasons,
+                                                ParamType.int,
+                                              ),
+                                              'alreadySelectedSeason':
+                                                  serializeParam(
+                                                _model.selectedSeason,
+                                                ParamType.int,
+                                              ),
+                                              'titleLogoImage': serializeParam(
+                                                widget.seriesDoc?.logoImage,
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'episodeDoc':
+                                                  listViewEpisodesRecord,
+                                              '__transition_info__':
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.fade,
+                                              ),
+                                            },
+                                          );
+                                        },
+                                        child: EpisodeItemWidget(
+                                          key: Key(
+                                              'Keydi5_${listViewIndex}_of_${listViewEpisodesRecordList.length}'),
+                                          episodeDoc: listViewEpisodesRecord,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                        ),
+                        if (_model.tabIndex == 1)
+                          FutureBuilder<List<SeriesRecord>>(
+                            future: FFAppState().moreLikeThisSeries(
+                              uniqueQueryKey:
+                                  'more_like_this_${widget.seriesDoc?.tmdbId.toString()}',
+                              requestFn: () => querySeriesRecordOnce(
+                                queryBuilder: (seriesRecord) => seriesRecord
+                                    .whereIn('tmdb_id',
+                                        widget.seriesDoc?.tmdbRecommendations)
+                                    .where(
+                                      'tmdb_id',
+                                      isNotEqualTo: widget.seriesDoc?.tmdbId,
+                                    ),
+                                limit: 9,
+                              ),
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: SpinKitPulse(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      size: 50.0,
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<SeriesRecord> gridViewSeriesRecordList =
+                                  snapshot.data!;
+
+                              return GridView.builder(
+                                padding: EdgeInsets.zero,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 10.0,
+                                  mainAxisSpacing: 10.0,
+                                  childAspectRatio: 0.6,
+                                ),
+                                primary: false,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: gridViewSeriesRecordList.length,
+                                itemBuilder: (context, gridViewIndex) {
+                                  final gridViewSeriesRecord =
+                                      gridViewSeriesRecordList[gridViewIndex];
+                                  return InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      if (Navigator.of(context).canPop()) {
+                                        context.pop();
+                                      }
+                                      context.pushNamed(
+                                        SeasonPageWidget.routeName,
+                                        queryParameters: {
+                                          'seriesDoc': serializeParam(
+                                            gridViewSeriesRecord,
+                                            ParamType.Document,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          'seriesDoc': gridViewSeriesRecord,
+                                          '__transition_info__': TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                          ),
+                                        },
+                                      );
+                                    },
+                                    child: MovieCardWidget(
+                                      key: Key(
+                                          'Keyq06_${gridViewIndex}_of_${gridViewSeriesRecordList.length}'),
+                                      img: gridViewSeriesRecord.posterImage,
+                                      seriesDoc: gridViewSeriesRecord,
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
                       ].divide(SizedBox(
                           height: FlutterFlowTheme.of(context)
                               .designToken

@@ -1,4 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/subscription_expired_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -95,40 +97,74 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                       ),
                       Align(
                         alignment: AlignmentDirectional(0.0, 0.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            await actions.launchExternalPlayer(
-                              functions.emptyMovieDoc(),
-                              widget.episodeDoc,
-                              functions.emptyContinueDoc(),
-                              FFAppState().activeProfileRef!.id,
-                              widget.episodeDoc?.parentReference.id,
-                            );
-                          },
-                          child: Container(
-                            width: 32.0,
-                            height: 32.0,
-                            decoration: BoxDecoration(
-                              color: Color(0x66000000),
-                              borderRadius: BorderRadius.circular(
-                                  FlutterFlowTheme.of(context)
-                                      .designToken
-                                      .radius
-                                      .full),
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 1.0,
+                        child: Builder(
+                          builder: (context) => InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              if (currentUserDocument!.subscriptionExpiry! >=
+                                  getCurrentTimestamp) {
+                                await actions.launchExternalPlayer(
+                                  functions.emptyMovieDoc(),
+                                  widget.episodeDoc,
+                                  functions.emptyContinueDoc(),
+                                  FFAppState().activeProfileRef!.id,
+                                  widget.episodeDoc?.parentReference.id,
+                                );
+                              } else {
+                                if (valueOrDefault<bool>(
+                                        currentUserDocument?.isAdmin, false) ==
+                                    true) {
+                                  await actions.launchExternalPlayer(
+                                    functions.emptyMovieDoc(),
+                                    widget.episodeDoc,
+                                    functions.emptyContinueDoc(),
+                                    FFAppState().activeProfileRef!.id,
+                                    widget.episodeDoc?.parentReference.id,
+                                  );
+                                } else {
+                                  await showDialog(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        insetPadding: EdgeInsets.zero,
+                                        backgroundColor: Colors.transparent,
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                        child: SubscriptionExpiredWidget(),
+                                      );
+                                    },
+                                  );
+                                }
+                              }
+                            },
+                            child: Container(
+                              width: 32.0,
+                              height: 32.0,
+                              decoration: BoxDecoration(
+                                color: Color(0x66000000),
+                                borderRadius: BorderRadius.circular(
+                                    FlutterFlowTheme.of(context)
+                                        .designToken
+                                        .radius
+                                        .full),
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1.0,
+                                ),
                               ),
-                            ),
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Icon(
-                              Icons.play_arrow_rounded,
-                              color: Colors.white,
-                              size: 20.0,
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Icon(
+                                Icons.play_arrow_rounded,
+                                color: Colors.white,
+                                size: 20.0,
+                              ),
                             ),
                           ),
                         ),
