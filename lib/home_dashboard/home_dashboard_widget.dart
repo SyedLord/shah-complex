@@ -315,97 +315,79 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                             );
                           },
                         ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 16.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 10.0, 16.0, 8.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Trending Movies',
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w600,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleMedium
-                                                      .fontStyle,
-                                            ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 17.0,
-                                            letterSpacing: 0.0,
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 10.0, 16.0, 8.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Trending Movies',
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .override(
+                                          font: GoogleFonts.inter(
                                             fontWeight: FontWeight.w600,
                                             fontStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .titleMedium
                                                     .fontStyle,
-                                            lineHeight: 1.3,
                                           ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 17.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleMedium
+                                                  .fontStyle,
+                                          lineHeight: 1.3,
+                                        ),
+                                  ),
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      context.pushNamed(
+                                        AllItemsWidget.routeName,
+                                        queryParameters: {
+                                          'categoryName': serializeParam(
+                                            'Trending Movies',
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          '__transition_info__': TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                          ),
+                                        },
+                                      );
+                                    },
+                                    text: 'See All',
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.angleRight,
+                                      size: 15.0,
                                     ),
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        context.pushNamed(
-                                          AllItemsWidget.routeName,
-                                          queryParameters: {
-                                            'categoryName': serializeParam(
-                                              'Trending Movies',
-                                              ParamType.String,
-                                            ),
-                                          }.withoutNulls,
-                                          extra: <String, dynamic>{
-                                            '__transition_info__':
-                                                TransitionInfo(
-                                              hasTransition: true,
-                                              transitionType:
-                                                  PageTransitionType.fade,
-                                            ),
-                                          },
-                                        );
-                                      },
-                                      text: 'See All',
-                                      icon: FaIcon(
-                                        FontAwesomeIcons.angleRight,
-                                        size: 15.0,
-                                      ),
-                                      options: FFButtonOptions(
-                                        height: 40.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 0.0, 16.0, 0.0),
-                                        iconAlignment: IconAlignment.end,
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: Color(0x00E50914),
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              font: GoogleFonts.poppins(
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .fontStyle,
-                                              ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .accent3,
-                                              fontSize: 12.0,
-                                              letterSpacing: 0.0,
+                                    options: FFButtonOptions(
+                                      height: 40.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 0.0, 16.0, 0.0),
+                                      iconAlignment: IconAlignment.end,
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: Color(0x00E50914),
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            font: GoogleFonts.poppins(
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
@@ -415,200 +397,191 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                                       .titleSmall
                                                       .fontStyle,
                                             ),
-                                        elevation: 0.0,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent3,
+                                            fontSize: 12.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontStyle,
+                                          ),
+                                      elevation: 0.0,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 220.0,
+                              decoration: BoxDecoration(),
+                              child: Align(
+                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 0.0, 0.0),
+                                  child: FutureBuilder<List<MoviesRecord>>(
+                                    future: FFAppState().trendingMoviesCache(
+                                      requestFn: () => queryMoviesRecordOnce(
+                                        queryBuilder: (moviesRecord) =>
+                                            moviesRecord
+                                                .where(
+                                                  'is_trending',
+                                                  isEqualTo: true,
+                                                )
+                                                .orderBy('created_at',
+                                                    descending: true),
+                                        limit: 10,
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height: 220.0,
-                                decoration: BoxDecoration(),
-                                child: Align(
-                                  alignment: AlignmentDirectional(-1.0, 0.0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 0.0, 0.0),
-                                    child: FutureBuilder<List<MoviesRecord>>(
-                                      future: FFAppState().trendingMoviesCache(
-                                        requestFn: () => queryMoviesRecordOnce(
-                                          queryBuilder: (moviesRecord) =>
-                                              moviesRecord
-                                                  .where(
-                                                    'is_trending',
-                                                    isEqualTo: true,
-                                                  )
-                                                  .orderBy('created_at',
-                                                      descending: true),
-                                          limit: 10,
-                                        ),
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50.0,
-                                              height: 50.0,
-                                              child: SpinKitPulse(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                size: 50.0,
-                                              ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: SpinKitPulse(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              size: 50.0,
                                             ),
-                                          );
-                                        }
-                                        List<MoviesRecord>
-                                            trendingRowMoviesRecordList =
-                                            snapshot.data!;
+                                          ),
+                                        );
+                                      }
+                                      List<MoviesRecord>
+                                          trendingRowMoviesRecordList =
+                                          snapshot.data!;
 
-                                        return ListView.separated(
-                                          padding: EdgeInsets.zero,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: trendingRowMoviesRecordList
-                                              .length,
-                                          separatorBuilder: (_, __) =>
-                                              SizedBox(width: 10.0),
-                                          itemBuilder:
-                                              (context, trendingRowIndex) {
-                                            final trendingRowMoviesRecord =
-                                                trendingRowMoviesRecordList[
-                                                    trendingRowIndex];
-                                            return InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                context.pushNamed(
-                                                  MoviePageWidget.routeName,
-                                                  queryParameters: {
-                                                    'movieDoc': serializeParam(
-                                                      trendingRowMoviesRecord,
-                                                      ParamType.Document,
-                                                    ),
-                                                  }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'movieDoc':
-                                                        trendingRowMoviesRecord,
-                                                  },
-                                                );
-                                              },
-                                              child: MovieCardWidget(
-                                                key: Key(
-                                                    'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
-                                                img: trendingRowMoviesRecord
-                                                    .posterImage,
-                                                movieDoc:
+                                      return ListView.separated(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount:
+                                            trendingRowMoviesRecordList.length,
+                                        separatorBuilder: (_, __) =>
+                                            SizedBox(width: 10.0),
+                                        itemBuilder:
+                                            (context, trendingRowIndex) {
+                                          final trendingRowMoviesRecord =
+                                              trendingRowMoviesRecordList[
+                                                  trendingRowIndex];
+                                          return InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed(
+                                                MoviePageWidget.routeName,
+                                                queryParameters: {
+                                                  'movieDoc': serializeParam(
                                                     trendingRowMoviesRecord,
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      },
-                                    ),
+                                                    ParamType.Document,
+                                                  ),
+                                                }.withoutNulls,
+                                                extra: <String, dynamic>{
+                                                  'movieDoc':
+                                                      trendingRowMoviesRecord,
+                                                },
+                                              );
+                                            },
+                                            child: MovieCardWidget(
+                                              key: Key(
+                                                  'Key0g4_${trendingRowIndex}_of_${trendingRowMoviesRecordList.length}'),
+                                              img: trendingRowMoviesRecord
+                                                  .posterImage,
+                                              movieDoc: trendingRowMoviesRecord,
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 16.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 10.0, 16.0, 8.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Trending Series',
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w600,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleMedium
-                                                      .fontStyle,
-                                            ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 17.0,
-                                            letterSpacing: 0.0,
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 10.0, 16.0, 8.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Trending Series',
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .override(
+                                          font: GoogleFonts.inter(
                                             fontWeight: FontWeight.w600,
                                             fontStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .titleMedium
                                                     .fontStyle,
-                                            lineHeight: 1.3,
                                           ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 17.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleMedium
+                                                  .fontStyle,
+                                          lineHeight: 1.3,
+                                        ),
+                                  ),
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      context.pushNamed(
+                                        AllItemsWidget.routeName,
+                                        queryParameters: {
+                                          'categoryName': serializeParam(
+                                            'Trending Series',
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          '__transition_info__': TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                          ),
+                                        },
+                                      );
+                                    },
+                                    text: 'See All',
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.angleRight,
+                                      size: 15.0,
                                     ),
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        context.pushNamed(
-                                          AllItemsWidget.routeName,
-                                          queryParameters: {
-                                            'categoryName': serializeParam(
-                                              'Trending Series',
-                                              ParamType.String,
-                                            ),
-                                          }.withoutNulls,
-                                          extra: <String, dynamic>{
-                                            '__transition_info__':
-                                                TransitionInfo(
-                                              hasTransition: true,
-                                              transitionType:
-                                                  PageTransitionType.fade,
-                                            ),
-                                          },
-                                        );
-                                      },
-                                      text: 'See All',
-                                      icon: FaIcon(
-                                        FontAwesomeIcons.angleRight,
-                                        size: 15.0,
-                                      ),
-                                      options: FFButtonOptions(
-                                        height: 40.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 0.0, 16.0, 0.0),
-                                        iconAlignment: IconAlignment.end,
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: Color(0x00E50914),
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              font: GoogleFonts.poppins(
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .fontStyle,
-                                              ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .accent3,
-                                              fontSize: 12.0,
-                                              letterSpacing: 0.0,
+                                    options: FFButtonOptions(
+                                      height: 40.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 0.0, 16.0, 0.0),
+                                      iconAlignment: IconAlignment.end,
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: Color(0x00E50914),
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            font: GoogleFonts.poppins(
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
@@ -618,119 +591,128 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                                       .titleSmall
                                                       .fontStyle,
                                             ),
-                                        elevation: 0.0,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent3,
+                                            fontSize: 12.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontStyle,
+                                          ),
+                                      elevation: 0.0,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 120.0,
+                              decoration: BoxDecoration(),
+                              child: Align(
+                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  child: FutureBuilder<List<SeriesRecord>>(
+                                    future: FFAppState().trendingSeriesCache(
+                                      requestFn: () => querySeriesRecordOnce(
+                                        queryBuilder: (seriesRecord) =>
+                                            seriesRecord
+                                                .where(
+                                                  'is_trending',
+                                                  isEqualTo: true,
+                                                )
+                                                .orderBy('created_at',
+                                                    descending: true),
+                                        limit: 10,
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height: 120.0,
-                                decoration: BoxDecoration(),
-                                child: Align(
-                                  alignment: AlignmentDirectional(-1.0, 0.0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 0.0),
-                                    child: FutureBuilder<List<SeriesRecord>>(
-                                      future: FFAppState().trendingSeriesCache(
-                                        requestFn: () => querySeriesRecordOnce(
-                                          queryBuilder: (seriesRecord) =>
-                                              seriesRecord
-                                                  .where(
-                                                    'is_trending',
-                                                    isEqualTo: true,
-                                                  )
-                                                  .orderBy('created_at',
-                                                      descending: true),
-                                          limit: 10,
-                                        ),
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50.0,
-                                              height: 50.0,
-                                              child: SpinKitPulse(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                size: 50.0,
-                                              ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: SpinKitPulse(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              size: 50.0,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<SeriesRecord>
+                                          trendingRowSeriesRecordList =
+                                          snapshot.data!;
+
+                                      return ListView.separated(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount:
+                                            trendingRowSeriesRecordList.length,
+                                        separatorBuilder: (_, __) =>
+                                            SizedBox(width: 10.0),
+                                        itemBuilder:
+                                            (context, trendingRowIndex) {
+                                          final trendingRowSeriesRecord =
+                                              trendingRowSeriesRecordList[
+                                                  trendingRowIndex];
+                                          return InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed(
+                                                SeasonPageWidget.routeName,
+                                                queryParameters: {
+                                                  'seriesDoc': serializeParam(
+                                                    trendingRowSeriesRecord,
+                                                    ParamType.Document,
+                                                  ),
+                                                }.withoutNulls,
+                                                extra: <String, dynamic>{
+                                                  'seriesDoc':
+                                                      trendingRowSeriesRecord,
+                                                  '__transition_info__':
+                                                      TransitionInfo(
+                                                    hasTransition: true,
+                                                    transitionType:
+                                                        PageTransitionType.fade,
+                                                  ),
+                                                },
+                                              );
+                                            },
+                                            child: SeasonCardWidget(
+                                              key: Key(
+                                                  'Keyxqg_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
+                                              posterImage:
+                                                  trendingRowSeriesRecord
+                                                      .backdropImage,
+                                              titleImage:
+                                                  trendingRowSeriesRecord
+                                                      .logoImage,
                                             ),
                                           );
-                                        }
-                                        List<SeriesRecord>
-                                            trendingRowSeriesRecordList =
-                                            snapshot.data!;
-
-                                        return ListView.separated(
-                                          padding: EdgeInsets.zero,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: trendingRowSeriesRecordList
-                                              .length,
-                                          separatorBuilder: (_, __) =>
-                                              SizedBox(width: 10.0),
-                                          itemBuilder:
-                                              (context, trendingRowIndex) {
-                                            final trendingRowSeriesRecord =
-                                                trendingRowSeriesRecordList[
-                                                    trendingRowIndex];
-                                            return InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                context.pushNamed(
-                                                  SeasonPageWidget.routeName,
-                                                  queryParameters: {
-                                                    'seriesDoc': serializeParam(
-                                                      trendingRowSeriesRecord,
-                                                      ParamType.Document,
-                                                    ),
-                                                  }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'seriesDoc':
-                                                        trendingRowSeriesRecord,
-                                                    '__transition_info__':
-                                                        TransitionInfo(
-                                                      hasTransition: true,
-                                                      transitionType:
-                                                          PageTransitionType
-                                                              .fade,
-                                                    ),
-                                                  },
-                                                );
-                                              },
-                                              child: SeasonCardWidget(
-                                                key: Key(
-                                                    'Keyxqg_${trendingRowIndex}_of_${trendingRowSeriesRecordList.length}'),
-                                                posterImage:
-                                                    trendingRowSeriesRecord
-                                                        .backdropImage,
-                                                titleImage:
-                                                    trendingRowSeriesRecord
-                                                        .logoImage,
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      },
-                                    ),
+                                        },
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        if (_model.isHidden == false)
+                        if (stackCount > 0)
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -774,7 +756,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                           AllItemsWidget.routeName,
                                           queryParameters: {
                                             'categoryName': serializeParam(
-                                              'Continue Watching',
+                                              'Latest Uploads',
                                               ParamType.String,
                                             ),
                                           }.withoutNulls,
@@ -883,14 +865,128 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                           final listViewNewsFeedRecord =
                                               listViewNewsFeedRecordList[
                                                   listViewIndex];
-                                          return LatestUpdateCardWidget(
-                                            key: Key(
-                                                'Keyrij_${listViewIndex}_of_${listViewNewsFeedRecordList.length}'),
-                                            posterImage:
-                                                listViewNewsFeedRecord.imageUrl,
-                                            titleImage: listViewNewsFeedRecord
-                                                .logoImage,
-                                            tag: listViewNewsFeedRecord.tag,
+                                          return InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              if (listViewNewsFeedRecord
+                                                      .movieRef !=
+                                                  null) {
+                                                _model.movieRef1 =
+                                                    await MoviesRecord
+                                                        .getDocumentOnce(
+                                                            listViewNewsFeedRecord
+                                                                .movieRef!);
+
+                                                context.pushNamed(
+                                                  MoviePageWidget.routeName,
+                                                  queryParameters: {
+                                                    'movieDoc': serializeParam(
+                                                      _model.movieRef1,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'movieDoc':
+                                                        _model.movieRef1,
+                                                    '__transition_info__':
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                    ),
+                                                  },
+                                                );
+                                              } else {
+                                                _model.seriesRef1 =
+                                                    await SeriesRecord
+                                                        .getDocumentOnce(
+                                                            listViewNewsFeedRecord
+                                                                .seriesRef!);
+                                                if ((listViewNewsFeedRecord
+                                                            .tag ==
+                                                        'NEW SERIES') ||
+                                                    (listViewNewsFeedRecord
+                                                            .tag ==
+                                                        'NEW SEASON')) {
+                                                  context.pushNamed(
+                                                    SeasonPageWidget.routeName,
+                                                    queryParameters: {
+                                                      'seriesDoc':
+                                                          serializeParam(
+                                                        _model.seriesRef1,
+                                                        ParamType.Document,
+                                                      ),
+                                                    }.withoutNulls,
+                                                    extra: <String, dynamic>{
+                                                      'seriesDoc':
+                                                          _model.seriesRef1,
+                                                      '__transition_info__':
+                                                          TransitionInfo(
+                                                        hasTransition: true,
+                                                        transitionType:
+                                                            PageTransitionType
+                                                                .fade,
+                                                      ),
+                                                    },
+                                                  );
+                                                } else {
+                                                  _model.episodeDoc1 =
+                                                      await EpisodesRecord
+                                                          .getDocumentOnce(
+                                                              listViewNewsFeedRecord
+                                                                  .episodeRef!);
+
+                                                  context.pushNamed(
+                                                    EpisodePageWidget.routeName,
+                                                    queryParameters: {
+                                                      'episodeDoc':
+                                                          serializeParam(
+                                                        _model.episodeDoc1,
+                                                        ParamType.Document,
+                                                      ),
+                                                      'totalSeasons':
+                                                          serializeParam(
+                                                        _model.seriesRef1
+                                                            ?.totalSeasons,
+                                                        ParamType.int,
+                                                      ),
+                                                      'alreadySelectedSeason':
+                                                          serializeParam(
+                                                        _model.episodeDoc1
+                                                            ?.seasonNumber,
+                                                        ParamType.int,
+                                                      ),
+                                                      'titleLogoImage':
+                                                          serializeParam(
+                                                        _model.seriesRef1
+                                                            ?.logoImage,
+                                                        ParamType.String,
+                                                      ),
+                                                    }.withoutNulls,
+                                                    extra: <String, dynamic>{
+                                                      'episodeDoc':
+                                                          _model.episodeDoc1,
+                                                    },
+                                                  );
+                                                }
+                                              }
+
+                                              safeSetState(() {});
+                                            },
+                                            child: LatestUpdateCardWidget(
+                                              key: Key(
+                                                  'Keyrij_${listViewIndex}_of_${listViewNewsFeedRecordList.length}'),
+                                              posterImage:
+                                                  listViewNewsFeedRecord
+                                                      .imageUrl,
+                                              titleImage: listViewNewsFeedRecord
+                                                  .logoImage,
+                                              tag: listViewNewsFeedRecord.tag,
+                                            ),
                                           );
                                         },
                                       );
@@ -1093,14 +1189,12 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                             List<CategoriesRecord> moviesCategoriesRecordList =
                                 snapshot.data!;
 
-                            return ListView.separated(
+                            return ListView.builder(
                               padding: EdgeInsets.zero,
                               primary: false,
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
                               itemCount: moviesCategoriesRecordList.length,
-                              separatorBuilder: (_, __) =>
-                                  SizedBox(height: 16.0),
                               itemBuilder: (context, moviesIndex) {
                                 final moviesCategoriesRecord =
                                     moviesCategoriesRecordList[moviesIndex];
@@ -1357,14 +1451,12 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                             List<CategoriesRecord> seasonsCategoriesRecordList =
                                 snapshot.data!;
 
-                            return ListView.separated(
+                            return ListView.builder(
                               padding: EdgeInsets.zero,
                               primary: false,
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
                               itemCount: seasonsCategoriesRecordList.length,
-                              separatorBuilder: (_, __) =>
-                                  SizedBox(height: 16.0),
                               itemBuilder: (context, seasonsIndex) {
                                 final seasonsCategoriesRecord =
                                     seasonsCategoriesRecordList[seasonsIndex];

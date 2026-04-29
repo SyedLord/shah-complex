@@ -27,6 +27,12 @@ class HomeDashboardModel extends FlutterFlowModel<HomeDashboardWidget> {
   MoviesRecord? loadedMoviesDoc;
   // Stores action output result for [Backend Call - Read Document] action in Stack widget.
   SeriesRecord? loadedSeriesDoc;
+  // Stores action output result for [Backend Call - Read Document] action in LatestUpdateCard widget.
+  MoviesRecord? movieRef1;
+  // Stores action output result for [Backend Call - Read Document] action in LatestUpdateCard widget.
+  SeriesRecord? seriesRef1;
+  // Stores action output result for [Backend Call - Read Document] action in LatestUpdateCard widget.
+  EpisodesRecord? episodeDoc1;
   // Model for BottomNavBar component.
   late BottomNavBarModel bottomNavBarModel;
 

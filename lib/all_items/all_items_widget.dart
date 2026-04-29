@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/components/continue_watching_card_widget.dart';
+import '/components/latest_update_card_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/components/season_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -574,6 +575,150 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                   ),
                 ),
               ),
+            if (widget.categoryName == 'Latest Uploads')
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                  child: FutureBuilder<List<NewsFeedRecord>>(
+                    future: FFAppState().newsCardsAll(
+                      requestFn: () => queryNewsFeedRecordOnce(
+                        queryBuilder: (newsFeedRecord) => newsFeedRecord
+                            .orderBy('created_at', descending: true),
+                      ),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: SpinKitPulse(
+                              color: FlutterFlowTheme.of(context).primary,
+                              size: 50.0,
+                            ),
+                          ),
+                        );
+                      }
+                      List<NewsFeedRecord> latestUploadsNewsFeedRecordList =
+                          snapshot.data!;
+
+                      return GridView.builder(
+                        padding: EdgeInsets.zero,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          childAspectRatio: 1.5,
+                        ),
+                        primary: false,
+                        scrollDirection: Axis.vertical,
+                        itemCount: latestUploadsNewsFeedRecordList.length,
+                        itemBuilder: (context, latestUploadsIndex) {
+                          final latestUploadsNewsFeedRecord =
+                              latestUploadsNewsFeedRecordList[
+                                  latestUploadsIndex];
+                          return InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              if (latestUploadsNewsFeedRecord.movieRef !=
+                                  null) {
+                                _model.movieRef1 =
+                                    await MoviesRecord.getDocumentOnce(
+                                        latestUploadsNewsFeedRecord.movieRef!);
+
+                                context.pushNamed(
+                                  MoviePageWidget.routeName,
+                                  queryParameters: {
+                                    'movieDoc': serializeParam(
+                                      _model.movieRef1,
+                                      ParamType.Document,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    'movieDoc': _model.movieRef1,
+                                    '__transition_info__': TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType: PageTransitionType.fade,
+                                    ),
+                                  },
+                                );
+                              } else {
+                                _model.seriesRef1 =
+                                    await SeriesRecord.getDocumentOnce(
+                                        latestUploadsNewsFeedRecord.seriesRef!);
+                                if ((latestUploadsNewsFeedRecord.tag ==
+                                        'NEW SERIES') ||
+                                    (latestUploadsNewsFeedRecord.tag ==
+                                        'NEW SEASON')) {
+                                  context.pushNamed(
+                                    SeasonPageWidget.routeName,
+                                    queryParameters: {
+                                      'seriesDoc': serializeParam(
+                                        _model.seriesRef1,
+                                        ParamType.Document,
+                                      ),
+                                    }.withoutNulls,
+                                    extra: <String, dynamic>{
+                                      'seriesDoc': _model.seriesRef1,
+                                      '__transition_info__': TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                      ),
+                                    },
+                                  );
+                                } else {
+                                  _model.episodeDoc1 =
+                                      await EpisodesRecord.getDocumentOnce(
+                                          latestUploadsNewsFeedRecord
+                                              .episodeRef!);
+
+                                  context.pushNamed(
+                                    EpisodePageWidget.routeName,
+                                    queryParameters: {
+                                      'episodeDoc': serializeParam(
+                                        _model.episodeDoc1,
+                                        ParamType.Document,
+                                      ),
+                                      'totalSeasons': serializeParam(
+                                        _model.seriesRef1?.totalSeasons,
+                                        ParamType.int,
+                                      ),
+                                      'alreadySelectedSeason': serializeParam(
+                                        _model.episodeDoc1?.seasonNumber,
+                                        ParamType.int,
+                                      ),
+                                      'titleLogoImage': serializeParam(
+                                        _model.seriesRef1?.logoImage,
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                    extra: <String, dynamic>{
+                                      'episodeDoc': _model.episodeDoc1,
+                                    },
+                                  );
+                                }
+                              }
+
+                              safeSetState(() {});
+                            },
+                            child: LatestUpdateCardWidget(
+                              key: Key(
+                                  'Keyxiq_${latestUploadsIndex}_of_${latestUploadsNewsFeedRecordList.length}'),
+                              posterImage: latestUploadsNewsFeedRecord.imageUrl,
+                              titleImage: latestUploadsNewsFeedRecord.logoImage,
+                              tag: latestUploadsNewsFeedRecord.tag,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
             if (widget.categoryName == 'Trending Series')
               Expanded(
                 child: Padding(
@@ -646,7 +791,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                             },
                             child: SeasonCardWidget(
                               key: Key(
-                                  'Keyrv4_${trendingSeriesIndex}_of_${trendingSeriesSeriesRecordList.length}'),
+                                  'Key7zl_${trendingSeriesIndex}_of_${trendingSeriesSeriesRecordList.length}'),
                               posterImage:
                                   trendingSeriesSeriesRecord.backdropImage,
                               titleImage: trendingSeriesSeriesRecord.logoImage,
