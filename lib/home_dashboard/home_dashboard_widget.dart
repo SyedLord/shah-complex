@@ -212,7 +212,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                             onTap: () async {},
                                             child: ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(8.0),
+                                                  BorderRadius.circular(0.0),
                                               child: CachedNetworkImage(
                                                 fadeInDuration:
                                                     Duration(milliseconds: 100),
