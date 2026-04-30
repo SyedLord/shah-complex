@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart'
     as http; // 🔥 HTTP Import lazmi hai (Pubspec mein http: ^1.2.0 hona chahiye)
+import 'dart:convert'; // JSON decode ke liye
 
 Future launchExternalPlayer(
   MoviesRecord? movieDoc,
@@ -80,20 +81,42 @@ Future launchExternalPlayer(
   // Guard: nothing to play
   if (rawVideoUrl == null || rawVideoUrl.isEmpty) return;
 
-  // ─── 2. Build the final playback URL based on drive_type ────────────────────
+  // ─── 2. Server se One-Time Signed URL lo (HMAC Worker pe banta hai) ──────────
 
-  // 🔥 THE MAGIC: One-Time Token Generate ho raha hai
-  String uniqueToken = '${DateTime.now().millisecondsSinceEpoch}_$profileId';
+  // rawVideoUrl directly http hai to as-is use karo
+  // warna Worker se signed stream URL lo
   String finalPlayUrl = rawVideoUrl;
+  String signedToken = ''; // Kill switch ke liye zaroori
 
   if (!rawVideoUrl.startsWith('http')) {
-    if (driveType == 'gdrive') {
-      finalPlayUrl =
-          'https://shahcomplex.sa-syedali2000.workers.dev/?id=$rawVideoUrl&token=$uniqueToken';
-    } else {
-      finalPlayUrl =
-          'https://shahcomplex.sa-syedali2000.workers.dev/?source=onedrive&file_id=$rawVideoUrl&key=Pappu@007&token=$uniqueToken';
+    final source = driveType == 'gdrive' ? 'gdrive' : 'onedrive';
+
+    try {
+      final tokenUri = Uri.parse(
+        'https://shahcomplex.sa-syedali2000.workers.dev/generate-token'
+        '?file_id=${Uri.encodeComponent(rawVideoUrl)}'
+        '&source=$source'
+        '&profile_id=${Uri.encodeComponent(profileId)}',
+      );
+
+      final tokenResponse = await http.post(
+        tokenUri,
+        headers: {'X-Shah-App': 'ShahComplexSecret2024'},
+      ).timeout(const Duration(seconds: 10));
+
+      if (tokenResponse.statusCode == 200) {
+        final data = jsonDecode(tokenResponse.body) as Map<String, dynamic>;
+        finalPlayUrl = (data['stream_url'] as String?) ?? '';
+        // Signed token extract karo URL se (kill switch ke liye)
+        final parsedUrl = Uri.parse(finalPlayUrl);
+        signedToken = parsedUrl.queryParameters['token'] ?? '';
+      }
+    } catch (_) {
+      // Token generate nahi hua — return karo
+      return;
     }
+
+    if (finalPlayUrl.isEmpty) return;
   }
 
   // ─── 3. Launch the native player via MethodChannel ──────────────────────────
@@ -113,13 +136,13 @@ Future launchExternalPlayer(
       'title': displayTitle,
     });
   } on PlatformException {
-    // 🔥 Agar VLC crash ho jaye ya foran back dab jaye, tab bhi token kill kardo
-    await _invalidateUrl(uniqueToken);
+    // VLC crash ya foran back — signedToken kill karo
+    if (signedToken.isNotEmpty) await _invalidateUrl(signedToken);
     return;
   }
 
-  // 🔥 KILL SWITCH: VLC band hotay hi token hamesha ke liye aag mein!
-  await _invalidateUrl(uniqueToken);
+  // 🔥 KILL SWITCH: VLC band hotay hi signed token permanently kill!
+  if (signedToken.isNotEmpty) await _invalidateUrl(signedToken);
 
   if (result == null) return;
 
