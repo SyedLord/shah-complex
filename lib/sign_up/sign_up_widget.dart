@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'sign_up_model.dart';
 export 'sign_up_model.dart';
@@ -58,7 +59,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        resizeToAvoidBottomInset: false,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Padding(
           padding: EdgeInsets.all(24.0),
@@ -189,6 +189,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                               child: TextFormField(
                                 controller: _model.fullNameTextController,
                                 focusNode: _model.fullNameFocusNode,
+                                textCapitalization: TextCapitalization.words,
+                                textInputAction: TextInputAction.next,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   hintText: 'Full Name',
@@ -204,9 +206,21 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
                                 ),
+                                keyboardType: TextInputType.name,
                                 validator: _model
                                     .fullNameTextControllerValidator
                                     .asValidator(context),
+                                inputFormatters: [
+                                  if (!isAndroid && !isiOS)
+                                    TextInputFormatter.withFunction(
+                                        (oldValue, newValue) {
+                                      return TextEditingValue(
+                                        selection: newValue.selection,
+                                        text: newValue.text.toCapitalization(
+                                            TextCapitalization.words),
+                                      );
+                                    }),
+                                ],
                               ),
                             ),
                           ),
@@ -258,6 +272,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                               child: TextFormField(
                                 controller: _model.emailTextController,
                                 focusNode: _model.emailFocusNode,
+                                textInputAction: TextInputAction.next,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   hintText: 'email@address.com',
@@ -273,6 +288,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
                                 ),
+                                keyboardType: TextInputType.emailAddress,
                                 validator: _model.emailTextControllerValidator
                                     .asValidator(context),
                               ),
@@ -326,6 +342,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                               child: TextFormField(
                                 controller: _model.passwordTextController,
                                 focusNode: _model.passwordFocusNode,
+                                textInputAction: TextInputAction.next,
                                 obscureText: !_model.passwordVisibility,
                                 decoration: InputDecoration(
                                   hintText: 'Password',
@@ -355,6 +372,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
                                 ),
+                                keyboardType: TextInputType.visiblePassword,
                                 validator: _model
                                     .passwordTextControllerValidator
                                     .asValidator(context),
@@ -410,6 +428,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                 controller:
                                     _model.confirmPasswordTextController,
                                 focusNode: _model.confirmPasswordFocusNode,
+                                textInputAction: TextInputAction.done,
                                 obscureText: !_model.confirmPasswordVisibility,
                                 decoration: InputDecoration(
                                   hintText: 'Confirm Password',
@@ -439,6 +458,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
                                 ),
+                                keyboardType: TextInputType.visiblePassword,
                                 validator: _model
                                     .confirmPasswordTextControllerValidator
                                     .asValidator(context),
