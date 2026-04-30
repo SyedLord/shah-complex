@@ -4,6 +4,7 @@ import '/components/bottom_nav_bar_widget.dart';
 import '/components/continue_watching_card_widget.dart';
 import '/components/download_item_widget.dart';
 import '/components/movie_card_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -192,29 +193,58 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                   ),
                                                 ),
                                               ),
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    1.0, 1.0),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            9999.0),
-                                                    shape: BoxShape.rectangle,
-                                                    border: Border.all(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      width: 3.0,
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  FlutterFlowIconButton(
+                                                    borderRadius: 8.0,
+                                                    buttonSize: 40.0,
+                                                    icon: Icon(
+                                                      Icons.logout_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .info,
+                                                      size: 24.0,
                                                     ),
+                                                    onPressed: () async {
+                                                      GoRouter.of(context)
+                                                          .prepareAuthEvent();
+                                                      await authManager
+                                                          .signOut();
+                                                      GoRouter.of(context)
+                                                          .clearRedirectLocation();
+
+                                                      context.goNamedAuth(
+                                                          LoginWidget.routeName,
+                                                          context.mounted);
+                                                    },
                                                   ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.all(4.0),
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            1.0, 1.0),
                                                     child: Container(
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                        shape:
+                                                            BoxShape.rectangle,
+                                                        border: Border.all(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          width: 3.0,
+                                                        ),
+                                                      ),
                                                       child: InkWell(
                                                         splashColor:
                                                             Colors.transparent,
@@ -256,12 +286,12 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .onPrimary,
-                                                          size: 16.0,
+                                                          size: 24.0,
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
+                                                ],
                                               ),
                                             ],
                                           ),
