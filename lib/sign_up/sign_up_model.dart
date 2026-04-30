@@ -31,18 +31,6 @@ class SignUpModel extends FlutterFlowModel<SignUpWidget> {
   FocusNode? emailFocusNode;
   TextEditingController? emailTextController;
   String? Function(BuildContext, String?)? emailTextControllerValidator;
-  String? _emailTextControllerValidator(BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Please enter your email !';
-    }
-
-    if (!RegExp('^\\s*[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\\s*\$')
-        .hasMatch(val)) {
-      return 'Invalid text';
-    }
-    return null;
-  }
-
   // State field(s) for Password widget.
   FocusNode? passwordFocusNode;
   TextEditingController? passwordTextController;
@@ -85,7 +73,6 @@ class SignUpModel extends FlutterFlowModel<SignUpWidget> {
   @override
   void initState(BuildContext context) {
     fullNameTextControllerValidator = _fullNameTextControllerValidator;
-    emailTextControllerValidator = _emailTextControllerValidator;
     passwordVisibility = false;
     passwordTextControllerValidator = _passwordTextControllerValidator;
     confirmPasswordVisibility = false;
