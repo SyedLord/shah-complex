@@ -4,6 +4,7 @@ import '/components/profile_avatar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -36,6 +37,7 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.enableImmersiveMode();
       _model.fetchedProfiles = await queryProfilesRecordOnce(
         parent: currentUserReference,
       );

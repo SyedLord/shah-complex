@@ -7,3 +7,4 @@ export 'fetch_tmdb_metadata.dart' show fetchTmdbMetadata;
 export 'update_metadata_directly.dart' show updateMetadataDirectly;
 export 'delete_all_profile_items.dart' show deleteAllProfileItems;
 export 'delete_continue_watching.dart' show deleteContinueWatching;
+export 'enable_immersive_mode.dart' show enableImmersiveMode;
