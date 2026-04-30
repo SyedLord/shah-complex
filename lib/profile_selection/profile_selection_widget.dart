@@ -53,7 +53,7 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
           }.withoutNulls,
         );
       }
-      if (_model.fetchedProfiles!.length <= 5) {
+      if (_model.fetchedProfiles!.length < 5) {
         _model.showAddProfile = true;
         safeSetState(() {});
       } else {
@@ -120,49 +120,60 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            if (FFAppState().isEditMode == false)
-                              Align(
-                                alignment: AlignmentDirectional(-1.0, 1.0),
-                                child: FlutterFlowIconButton(
-                                  borderRadius: 8.0,
-                                  buttonSize: 40.0,
-                                  icon: Icon(
-                                    Icons.logout_rounded,
-                                    color: FlutterFlowTheme.of(context).info,
-                                    size: 24.0,
-                                  ),
-                                  onPressed: () async {
-                                    GoRouter.of(context).prepareAuthEvent();
-                                    await authManager.signOut();
-                                    GoRouter.of(context)
-                                        .clearRedirectLocation();
+                            Align(
+                              alignment: AlignmentDirectional(-1.0, 1.0),
+                              child: Container(
+                                decoration: BoxDecoration(),
+                                child: Visibility(
+                                  visible: FFAppState().isEditMode == false,
+                                  child: FlutterFlowIconButton(
+                                    borderRadius: 8.0,
+                                    buttonSize: 40.0,
+                                    icon: Icon(
+                                      Icons.logout_rounded,
+                                      color: FlutterFlowTheme.of(context).info,
+                                      size: 24.0,
+                                    ),
+                                    onPressed: () async {
+                                      GoRouter.of(context).prepareAuthEvent();
+                                      await authManager.signOut();
+                                      GoRouter.of(context)
+                                          .clearRedirectLocation();
 
-                                    context.goNamedAuth(
-                                        LoginWidget.routeName, context.mounted);
-                                  },
-                                ),
-                              ),
-                            if (valueOrDefault<bool>(
-                              FFAppState().isEditMode,
-                              false,
-                            ))
-                              Align(
-                                alignment: AlignmentDirectional(1.0, 1.0),
-                                child: FlutterFlowIconButton(
-                                  borderRadius: 8.0,
-                                  buttonSize: 40.0,
-                                  icon: FaIcon(
-                                    FontAwesomeIcons.check,
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    size: 24.0,
+                                      context.goNamedAuth(LoginWidget.routeName,
+                                          context.mounted);
+                                    },
                                   ),
-                                  onPressed: () async {
-                                    FFAppState().isEditMode =
-                                        !(FFAppState().isEditMode ?? true);
-                                    safeSetState(() {});
-                                  },
                                 ),
                               ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(1.0, 1.0),
+                              child: Container(
+                                decoration: BoxDecoration(),
+                                child: Visibility(
+                                  visible: valueOrDefault<bool>(
+                                    FFAppState().isEditMode,
+                                    false,
+                                  ),
+                                  child: FlutterFlowIconButton(
+                                    borderRadius: 8.0,
+                                    buttonSize: 40.0,
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.check,
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      size: 24.0,
+                                    ),
+                                    onPressed: () async {
+                                      FFAppState().isEditMode =
+                                          !(FFAppState().isEditMode ?? true);
+                                      safeSetState(() {});
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -408,6 +419,15 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                                     !(FFAppState().isEditMode ??
                                                         true);
                                                 safeSetState(() {});
+                                                if (profileSelectionProfilesRecordList
+                                                        .length <
+                                                    5) {
+                                                  _model.showAddProfile = true;
+                                                  safeSetState(() {});
+                                                } else {
+                                                  _model.showAddProfile = false;
+                                                  safeSetState(() {});
+                                                }
                                               },
                                               child: Text(
                                                 'Manage Profiles',
