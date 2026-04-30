@@ -78,6 +78,9 @@ class SignUpModel extends FlutterFlowModel<SignUpWidget> {
     return null;
   }
 
+  // Stores action output result for [Validate Form] action in SignupBtn widget.
+  bool? formValidate;
+
   @override
   void initState(BuildContext context) {
     fullNameTextControllerValidator = _fullNameTextControllerValidator;

@@ -471,45 +471,54 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () async {
+                    Function() _navigate = () {};
+                    _model.formValidate = true;
                     if (_model.formKey.currentState == null ||
                         !_model.formKey.currentState!.validate()) {
+                      safeSetState(() => _model.formValidate = false);
                       return;
                     }
-                    GoRouter.of(context).prepareAuthEvent();
-                    if (_model.passwordTextController.text !=
-                        _model.confirmPasswordTextController.text) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Passwords don\'t match!',
+                    if (_model.formValidate!) {
+                      GoRouter.of(context).prepareAuthEvent();
+                      if (_model.passwordTextController.text !=
+                          _model.confirmPasswordTextController.text) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Passwords don\'t match!',
+                            ),
                           ),
-                        ),
+                        );
+                        return;
+                      }
+
+                      final user = await authManager.createAccountWithEmail(
+                        context,
+                        _model.fullNameTextController.text,
+                        _model.passwordTextController.text,
                       );
-                      return;
+                      if (user == null) {
+                        return;
+                      }
+
+                      await UsersRecord.collection
+                          .doc(user.uid)
+                          .update(createUsersRecordData(
+                            email: _model.emailTextController.text,
+                            displayName: _model.fullNameTextController.text,
+                            createdTime: getCurrentTimestamp,
+                            isAdmin: false,
+                            memberLevel: 'Basic',
+                            subscriptionExpiry: getCurrentTimestamp,
+                          ));
+
+                      _navigate = () => context.goNamedAuth(
+                          ProfileSelectionWidget.routeName, context.mounted);
                     }
 
-                    final user = await authManager.createAccountWithEmail(
-                      context,
-                      _model.fullNameTextController.text,
-                      _model.passwordTextController.text,
-                    );
-                    if (user == null) {
-                      return;
-                    }
+                    _navigate();
 
-                    await UsersRecord.collection
-                        .doc(user.uid)
-                        .update(createUsersRecordData(
-                          email: _model.emailTextController.text,
-                          displayName: _model.fullNameTextController.text,
-                          createdTime: getCurrentTimestamp,
-                          isAdmin: false,
-                          memberLevel: 'Basic',
-                          subscriptionExpiry: getCurrentTimestamp,
-                        ));
-
-                    context.goNamedAuth(
-                        ProfileSelectionWidget.routeName, context.mounted);
+                    safeSetState(() {});
                   },
                   text: 'Get Started',
                   options: FFButtonOptions(
