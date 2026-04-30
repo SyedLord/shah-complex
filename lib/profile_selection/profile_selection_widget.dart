@@ -219,9 +219,9 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                 } else if (profileSelectionProfilesRecordList
                                         .length <=
                                     4) {
-                                  return 280.0;
+                                  return 300.0;
                                 } else {
-                                  return 420.0;
+                                  return 440.0;
                                 }
                               }(),
                               decoration: BoxDecoration(),
