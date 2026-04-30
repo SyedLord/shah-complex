@@ -9,6 +9,8 @@ class ProfileSelectionModel extends FlutterFlowModel<ProfileSelectionWidget> {
 
   bool isEditMode = false;
 
+  bool showAddProfile = true;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Firestore Query - Query a collection] action in ProfileSelection widget.

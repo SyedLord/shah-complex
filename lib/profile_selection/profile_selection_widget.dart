@@ -287,72 +287,101 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                       ),
                     ),
                   ),
-                  if (_model.isEditMode == true)
+                  if ((_model.isEditMode == true) && _model.showAddProfile)
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed(
-                            CreateProfileWidget.routeName,
-                            queryParameters: {
-                              'isFirstProfile': serializeParam(
-                                false,
-                                ParamType.bool,
-                              ),
-                            }.withoutNulls,
-                          );
-                        },
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 100.0,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.0),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context).divider,
-                                  width: 2.0,
+                      child: FutureBuilder<int>(
+                        future: queryProfilesRecordCount(
+                          parent: currentUserReference,
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: SpinKitPulse(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  size: 50.0,
                                 ),
                               ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Icon(
-                                Icons.add_rounded,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 48.0,
-                              ),
-                            ),
-                            Text(
-                              'Add Profile',
-                              style: FlutterFlowTheme.of(context)
-                                  .titleMedium
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w500,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleMedium
-                                          .fontStyle,
+                            );
+                          }
+                          int addProfileCount = snapshot.data!;
+
+                          return InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              if (addProfileCount <= 5) {
+                                context.pushNamed(
+                                  CreateProfileWidget.routeName,
+                                  queryParameters: {
+                                    'isFirstProfile': serializeParam(
+                                      false,
+                                      ParamType.bool,
                                     ),
+                                  }.withoutNulls,
+                                );
+                              } else {
+                                _model.showAddProfile = false;
+                                safeSetState(() {});
+                              }
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 100.0,
+                                  height: 100.0,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    border: Border.all(
+                                      color:
+                                          FlutterFlowTheme.of(context).divider,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Icon(
+                                    Icons.add_rounded,
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryText,
-                                    fontSize: 17.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .fontStyle,
-                                    lineHeight: 1.3,
+                                    size: 48.0,
                                   ),
+                                ),
+                                Text(
+                                  'Add Profile',
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .override(
+                                        font: GoogleFonts.inter(
+                                          fontWeight: FontWeight.w500,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleMedium
+                                                  .fontStyle,
+                                        ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        fontSize: 17.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .fontStyle,
+                                        lineHeight: 1.3,
+                                      ),
+                                ),
+                              ].divide(SizedBox(height: 8.0)),
                             ),
-                          ].divide(SizedBox(height: 8.0)),
-                        ),
+                          );
+                        },
                       ),
                     ),
                   Align(
