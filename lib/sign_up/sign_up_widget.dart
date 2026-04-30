@@ -514,7 +514,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 
                       final user = await authManager.createAccountWithEmail(
                         context,
-                        _model.fullNameTextController.text,
+                        _model.emailTextController.text,
                         _model.passwordTextController.text,
                       );
                       if (user == null) {
