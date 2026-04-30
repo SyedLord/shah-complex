@@ -165,6 +165,7 @@ final parametersBuilderMap =
           'titleLogoImage': getParameter<String>(data, 'titleLogoImage'),
         },
       ),
+  'SignUp': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

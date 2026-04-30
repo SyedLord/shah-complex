@@ -354,46 +354,61 @@ class _LoginWidgetState extends State<LoginWidget> {
                               .spacing
                               .md)),
                     ),
-                    if (_model.isVisible)
-                      Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'New to CineStream?',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          font: GoogleFonts.inter(
-                                            fontWeight: FontWeight.normal,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyLarge
-                                                    .fontStyle,
-                                          ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 16.0,
-                                          letterSpacing: 0.0,
+                    Align(
+                      alignment: AlignmentDirectional(0.0, 0.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'New to Shah Complex?',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        font: GoogleFonts.inter(
                                           fontWeight: FontWeight.normal,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodyLarge
                                                   .fontStyle,
-                                          lineHeight: 1.5,
                                         ),
-                                  ),
-                                  Text(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontStyle,
+                                        lineHeight: 1.5,
+                                      ),
+                                ),
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed(
+                                      SignUpWidget.routeName,
+                                      extra: <String, dynamic>{
+                                        '__transition_info__': TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                        ),
+                                      },
+                                    );
+                                  },
+                                  child: Text(
                                     'Sign up now.',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyLarge
@@ -417,13 +432,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           lineHeight: 1.5,
                                         ),
                                   ),
-                                ].divide(SizedBox(
-                                    width: FlutterFlowTheme.of(context)
-                                        .designToken
-                                        .spacing
-                                        .xs)),
-                              ),
+                                ),
+                              ].divide(SizedBox(
+                                  width: FlutterFlowTheme.of(context)
+                                      .designToken
+                                      .spacing
+                                      .xs)),
                             ),
+                          ),
+                          if (_model.isVisible)
                             Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Column(
@@ -489,13 +506,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         .sm)),
                               ),
                             ),
-                          ].divide(SizedBox(
-                              height: FlutterFlowTheme.of(context)
-                                  .designToken
-                                  .spacing
-                                  .xl)),
-                        ),
+                        ].divide(SizedBox(
+                            height: FlutterFlowTheme.of(context)
+                                .designToken
+                                .spacing
+                                .xl)),
                       ),
+                    ),
                   ].divide(SizedBox(
                       height:
                           FlutterFlowTheme.of(context).designToken.spacing.xl)),
