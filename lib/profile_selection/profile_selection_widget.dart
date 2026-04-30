@@ -211,28 +211,42 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                     lineHeight: 1.2,
                                   ),
                             ),
-                            Builder(
-                              builder: (context) {
-                                final profileList =
-                                    profileSelectionProfilesRecordList.toList();
+                            Container(
+                              height: () {
+                                if (profileSelectionProfilesRecordList.length <
+                                    2) {
+                                  return 200.0;
+                                } else if (profileSelectionProfilesRecordList
+                                        .length <
+                                    4) {
+                                  return 400.0;
+                                } else {
+                                  return 550.0;
+                                }
+                              }(),
+                              decoration: BoxDecoration(),
+                              child: Builder(
+                                builder: (context) {
+                                  final profileList =
+                                      profileSelectionProfilesRecordList
+                                          .toList();
 
-                                return Wrap(
-                                  spacing: 0.0,
-                                  runSpacing: 0.0,
-                                  alignment: WrapAlignment.start,
-                                  crossAxisAlignment: WrapCrossAlignment.start,
-                                  direction: Axis.horizontal,
-                                  runAlignment: WrapAlignment.start,
-                                  verticalDirection: VerticalDirection.down,
-                                  clipBehavior: Clip.none,
-                                  children: List.generate(profileList.length,
-                                      (profileListIndex) {
-                                    final profileListItem =
-                                        profileList[profileListIndex];
-                                    return Container(
-                                      height: 200.0,
-                                      decoration: BoxDecoration(),
-                                      child: Align(
+                                  return GridView.builder(
+                                    padding: EdgeInsets.zero,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 10.0,
+                                      mainAxisSpacing: 10.0,
+                                      childAspectRatio: 1.0,
+                                    ),
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: profileList.length,
+                                    itemBuilder: (context, profileListIndex) {
+                                      final profileListItem =
+                                          profileList[profileListIndex];
+                                      return Align(
                                         alignment:
                                             AlignmentDirectional(0.0, 0.0),
                                         child: InkWell(
@@ -286,7 +300,7 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                           },
                                           child: ProfileAvatarWidget(
                                             key: Key(
-                                                'Keyl55_${profileListIndex}_of_${profileList.length}'),
+                                                'Keymh5_${profileListIndex}_of_${profileList.length}'),
                                             profileImage:
                                                 profileListItem.profileImage,
                                             isEditing: FFAppState().isEditMode,
@@ -294,11 +308,11 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                             isActive: false,
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  }),
-                                );
-                              },
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
                             ),
                           ].divide(SizedBox(height: 32.0)),
                         ),
