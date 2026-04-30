@@ -36,8 +36,9 @@ class SignUpModel extends FlutterFlowModel<SignUpWidget> {
       return 'Please enter your email !';
     }
 
-    if (!RegExp(kTextValidatorEmailRegex).hasMatch(val)) {
-      return 'Has to be a valid email address.';
+    if (!RegExp('^\\s*[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\\s*\$')
+        .hasMatch(val)) {
+      return 'Invalid text';
     }
     return null;
   }
