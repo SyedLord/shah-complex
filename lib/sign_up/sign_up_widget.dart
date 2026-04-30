@@ -471,6 +471,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () async {
+                    if (_model.formKey.currentState == null ||
+                        !_model.formKey.currentState!.validate()) {
+                      return;
+                    }
                     GoRouter.of(context).prepareAuthEvent();
                     if (_model.passwordTextController.text !=
                         _model.confirmPasswordTextController.text) {
