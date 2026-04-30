@@ -213,15 +213,15 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                             ),
                             Container(
                               height: () {
-                                if (profileSelectionProfilesRecordList.length <
+                                if (profileSelectionProfilesRecordList.length <=
                                     2) {
-                                  return 200.0;
+                                  return 140.0;
                                 } else if (profileSelectionProfilesRecordList
-                                        .length <
+                                        .length <=
                                     4) {
-                                  return 400.0;
+                                  return 280.0;
                                 } else {
-                                  return 550.0;
+                                  return 420.0;
                                 }
                               }(),
                               decoration: BoxDecoration(),
