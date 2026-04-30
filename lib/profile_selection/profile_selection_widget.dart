@@ -218,7 +218,7 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
 
                                 return Wrap(
                                   spacing: 0.0,
-                                  runSpacing: 0.0,
+                                  runSpacing: 20.0,
                                   alignment: WrapAlignment.start,
                                   crossAxisAlignment: WrapCrossAlignment.start,
                                   direction: Axis.horizontal,
