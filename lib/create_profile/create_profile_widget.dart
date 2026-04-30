@@ -228,10 +228,11 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                       isMainProfile: widget.isFirstProfile,
                                       createdAt: getCurrentTimestamp,
                                     ));
-
-                                    context.goNamed(
-                                        ProfileSelectionWidget.routeName);
                                   }
+
+                                  FFAppState().isEditMode =
+                                      !(FFAppState().isEditMode ?? true);
+                                  safeSetState(() {});
 
                                   context.goNamed(
                                       ProfileSelectionWidget.routeName);
