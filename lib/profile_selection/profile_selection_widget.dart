@@ -326,7 +326,7 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                           ),
                         ),
                       ),
-                      if ((_model.isEditMode == true) &&
+                      if ((FFAppState().isEditMode == true) &&
                           (_model.showAddProfile == true))
                         Align(
                           alignment: AlignmentDirectional(0.0, 0.0),
@@ -443,8 +443,10 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
-                                                    _model.isEditMode =
-                                                        !_model.isEditMode;
+                                                    FFAppState().isEditMode =
+                                                        !(FFAppState()
+                                                                .isEditMode ??
+                                                            true);
                                                     safeSetState(() {});
                                                     if (columnCount <= 5) {
                                                       _model.showAddProfile =
