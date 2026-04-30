@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 class ProfileSelectionModel extends FlutterFlowModel<ProfileSelectionWidget> {
   ///  Local state fields for this page.
 
-  bool isEditMode = false;
-
   bool showAddProfile = true;
 
   ///  State fields for stateful widgets in this page.
