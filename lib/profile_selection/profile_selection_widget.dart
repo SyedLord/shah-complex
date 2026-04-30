@@ -225,94 +225,104 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                 }
                               }(),
                               decoration: BoxDecoration(),
-                              child: Builder(
-                                builder: (context) {
-                                  final profileList =
-                                      profileSelectionProfilesRecordList
-                                          .toList();
+                              child: Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Builder(
+                                  builder: (context) {
+                                    final profileList =
+                                        profileSelectionProfilesRecordList
+                                            .toList();
 
-                                  return GridView.builder(
-                                    padding: EdgeInsets.zero,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 10.0,
-                                      mainAxisSpacing: 10.0,
-                                      childAspectRatio: 1.0,
-                                    ),
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: profileList.length,
-                                    itemBuilder: (context, profileListIndex) {
-                                      final profileListItem =
-                                          profileList[profileListIndex];
-                                      return Align(
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            if (FFAppState().isEditMode ==
-                                                true) {
-                                              context.pushNamed(
-                                                CreateProfileWidget.routeName,
-                                                queryParameters: {
-                                                  'profileDoc': serializeParam(
-                                                    profileListItem,
-                                                    ParamType.Document,
-                                                  ),
-                                                }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  'profileDoc': profileListItem,
-                                                },
-                                              );
-                                            } else {
-                                              FFAppState().activeProfileRef =
-                                                  profileListItem.reference;
-                                              FFAppState().activeProfileImage =
-                                                  profileListItem.profileImage;
-                                              FFAppState().lastSeenNews =
-                                                  profileListItem.lastSeenNews;
-                                              safeSetState(() {});
+                                    return GridView.builder(
+                                      padding: EdgeInsets.zero,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 10.0,
+                                        mainAxisSpacing: 10.0,
+                                        childAspectRatio: 1.0,
+                                      ),
+                                      primary: false,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: profileList.length,
+                                      itemBuilder: (context, profileListIndex) {
+                                        final profileListItem =
+                                            profileList[profileListIndex];
+                                        return Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              if (FFAppState().isEditMode ==
+                                                  true) {
+                                                context.pushNamed(
+                                                  CreateProfileWidget.routeName,
+                                                  queryParameters: {
+                                                    'profileDoc':
+                                                        serializeParam(
+                                                      profileListItem,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'profileDoc':
+                                                        profileListItem,
+                                                  },
+                                                );
+                                              } else {
+                                                FFAppState().activeProfileRef =
+                                                    profileListItem.reference;
+                                                FFAppState()
+                                                        .activeProfileImage =
+                                                    profileListItem
+                                                        .profileImage;
+                                                FFAppState().lastSeenNews =
+                                                    profileListItem
+                                                        .lastSeenNews;
+                                                safeSetState(() {});
 
-                                              context.goNamed(
-                                                HomeDashboardWidget.routeName,
-                                                extra: <String, dynamic>{
-                                                  '__transition_info__':
-                                                      TransitionInfo(
-                                                    hasTransition: true,
-                                                    transitionType:
-                                                        PageTransitionType.fade,
-                                                  ),
-                                                },
-                                              );
-                                            }
+                                                context.goNamed(
+                                                  HomeDashboardWidget.routeName,
+                                                  extra: <String, dynamic>{
+                                                    '__transition_info__':
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                    ),
+                                                  },
+                                                );
+                                              }
 
-                                            FFAppState()
-                                                .clearProfileWatchlistCountCache();
-                                            FFAppState()
-                                                .clearProfileCacheCache();
-                                            FFAppState()
-                                                .clearNewsCountCacheCache();
-                                          },
-                                          child: ProfileAvatarWidget(
-                                            key: Key(
-                                                'Keymh5_${profileListIndex}_of_${profileList.length}'),
-                                            profileImage:
-                                                profileListItem.profileImage,
-                                            isEditing: FFAppState().isEditMode,
-                                            name: profileListItem.profileName,
-                                            isActive: false,
+                                              FFAppState()
+                                                  .clearProfileWatchlistCountCache();
+                                              FFAppState()
+                                                  .clearProfileCacheCache();
+                                              FFAppState()
+                                                  .clearNewsCountCacheCache();
+                                            },
+                                            child: ProfileAvatarWidget(
+                                              key: Key(
+                                                  'Keymh5_${profileListIndex}_of_${profileList.length}'),
+                                              profileImage:
+                                                  profileListItem.profileImage,
+                                              isEditing:
+                                                  FFAppState().isEditMode,
+                                              name: profileListItem.profileName,
+                                              isActive: false,
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ].divide(SizedBox(height: 32.0)),
