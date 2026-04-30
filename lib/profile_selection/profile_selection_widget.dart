@@ -240,6 +240,7 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                       mainAxisSpacing: 10.0,
                                       childAspectRatio: 1.0,
                                     ),
+                                    primary: false,
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
                                     itemCount: profileList.length,
