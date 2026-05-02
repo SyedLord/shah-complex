@@ -38,6 +38,20 @@ class SearchModel extends FlutterFlowModel<SearchWidget> {
 
   bool isHidden = true;
 
+  List<MovieCollectionsRecord> searchResultsCollection = [];
+  void addToSearchResultsCollection(MovieCollectionsRecord item) =>
+      searchResultsCollection.add(item);
+  void removeFromSearchResultsCollection(MovieCollectionsRecord item) =>
+      searchResultsCollection.remove(item);
+  void removeAtIndexFromSearchResultsCollection(int index) =>
+      searchResultsCollection.removeAt(index);
+  void insertAtIndexInSearchResultsCollection(
+          int index, MovieCollectionsRecord item) =>
+      searchResultsCollection.insert(index, item);
+  void updateSearchResultsCollectionAtIndex(
+          int index, Function(MovieCollectionsRecord) updateFn) =>
+      searchResultsCollection[index] = updateFn(searchResultsCollection[index]);
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.
@@ -48,6 +62,8 @@ class SearchModel extends FlutterFlowModel<SearchWidget> {
   List<MoviesRecord>? loadedMovies;
   // Stores action output result for [Custom Action - vipSmartSearchSeries] action in TextField widget.
   List<SeriesRecord>? loadedSeries;
+  // Stores action output result for [Custom Action - vipSmartSearchCollection] action in TextField widget.
+  List<MovieCollectionsRecord>? loadedCollections;
   // Model for BottomNavBar component.
   late BottomNavBarModel bottomNavBarModel;
 
