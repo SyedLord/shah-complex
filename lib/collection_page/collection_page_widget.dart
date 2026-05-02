@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -117,6 +116,7 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                     ),
                   ),
                   Container(
+                    decoration: BoxDecoration(),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -128,9 +128,10 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Row(
+                              Column(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   wrapWithModel(
@@ -140,53 +141,42 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                                       img: widget.collectionDoc?.posterImage,
                                     ),
                                   ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      AutoSizeText(
-                                        valueOrDefault<String>(
-                                          widget.collectionDoc?.name,
-                                          'Title',
+                                  Text(
+                                    valueOrDefault<String>(
+                                      widget.collectionDoc?.name,
+                                      'Title',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .headlineMedium
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w900,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 26.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w900,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineMedium
+                                                  .fontStyle,
+                                          lineHeight: 1.2,
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineMedium
-                                            .override(
-                                              font: GoogleFonts.inter(
-                                                fontWeight: FontWeight.w900,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineMedium
-                                                        .fontStyle,
-                                              ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              fontSize: 26.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w900,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMedium
-                                                      .fontStyle,
-                                              lineHeight: 1.2,
-                                            ),
-                                      ),
-                                      wrapWithModel(
-                                        model: _model.descriptionWidgetModel,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: DescriptionWidgetWidget(
-                                          description:
-                                              widget.collectionDoc?.overview,
-                                        ),
-                                      ),
-                                    ],
                                   ),
-                                ].divide(SizedBox(width: 10.0)),
+                                  wrapWithModel(
+                                    model: _model.descriptionWidgetModel,
+                                    updateCallback: () => safeSetState(() {}),
+                                    child: DescriptionWidgetWidget(
+                                      description:
+                                          widget.collectionDoc?.overview,
+                                    ),
+                                  ),
+                                ],
                               ),
                               Container(
                                 decoration: BoxDecoration(),
