@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/components/collection_card_widget.dart';
 import '/components/continue_watching_card_widget.dart';
 import '/components/latest_update_card_widget.dart';
 import '/components/movie_card_widget.dart';
@@ -809,9 +808,11 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                   child: FutureBuilder<List<MovieCollectionsRecord>>(
-                    future: queryMovieCollectionsRecordOnce(
-                      queryBuilder: (movieCollectionsRecord) =>
-                          movieCollectionsRecord.orderBy('name'),
+                    future: FFAppState().moviesCollectionAllItems(
+                      requestFn: () => queryMovieCollectionsRecordOnce(
+                        queryBuilder: (movieCollectionsRecord) =>
+                            movieCollectionsRecord.orderBy('name'),
+                      ),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -833,10 +834,10 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                       return GridView.builder(
                         padding: EdgeInsets.zero,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
+                          crossAxisCount: 3,
                           crossAxisSpacing: 10.0,
                           mainAxisSpacing: 10.0,
-                          childAspectRatio: 1.5,
+                          childAspectRatio: 0.6,
                         ),
                         primary: false,
                         scrollDirection: Axis.vertical,
@@ -869,11 +870,10 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                                 },
                               );
                             },
-                            child: CollectionCardWidget(
+                            child: MovieCardWidget(
                               key: Key(
-                                  'Keywib_${collectionIndex}_of_${collectionMovieCollectionsRecordList.length}'),
-                              posterImage: collectionMovieCollectionsRecord
-                                  .backdropImage,
+                                  'Keydye_${collectionIndex}_of_${collectionMovieCollectionsRecordList.length}'),
+                              img: collectionMovieCollectionsRecord.posterImage,
                             ),
                           );
                         },

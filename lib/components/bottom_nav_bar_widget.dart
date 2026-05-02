@@ -82,6 +82,9 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                 FFAppState().clearNewsCardsAllCache();
                 FFAppState().clearMoviesCacheListAllCache();
                 FFAppState().clearSeriesCacheListAllCache();
+                FFAppState().clearCollectionHomedashboardCache();
+                FFAppState().clearMoviesCollectionAllCache();
+                FFAppState().clearMoviesCollectionAllItemsCache();
 
                 safeSetState(() {});
               }();

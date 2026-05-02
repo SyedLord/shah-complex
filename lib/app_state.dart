@@ -599,6 +599,56 @@ class FFAppState extends ChangeNotifier {
   void clearSeriesCacheListAllCache() => _seriesCacheListAllManager.clear();
   void clearSeriesCacheListAllCacheKey(String? uniqueKey) =>
       _seriesCacheListAllManager.clearRequest(uniqueKey);
+
+  final _collectionHomedashboardManager =
+      FutureRequestManager<List<MovieCollectionsRecord>>();
+  Future<List<MovieCollectionsRecord>> collectionHomedashboard({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<List<MovieCollectionsRecord>> Function() requestFn,
+  }) =>
+      _collectionHomedashboardManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearCollectionHomedashboardCache() =>
+      _collectionHomedashboardManager.clear();
+  void clearCollectionHomedashboardCacheKey(String? uniqueKey) =>
+      _collectionHomedashboardManager.clearRequest(uniqueKey);
+
+  final _moviesCollectionAllManager =
+      StreamRequestManager<List<MovieCollectionsRecord>>();
+  Stream<List<MovieCollectionsRecord>> moviesCollectionAll({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Stream<List<MovieCollectionsRecord>> Function() requestFn,
+  }) =>
+      _moviesCollectionAllManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearMoviesCollectionAllCache() => _moviesCollectionAllManager.clear();
+  void clearMoviesCollectionAllCacheKey(String? uniqueKey) =>
+      _moviesCollectionAllManager.clearRequest(uniqueKey);
+
+  final _moviesCollectionAllItemsManager =
+      FutureRequestManager<List<MovieCollectionsRecord>>();
+  Future<List<MovieCollectionsRecord>> moviesCollectionAllItems({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<List<MovieCollectionsRecord>> Function() requestFn,
+  }) =>
+      _moviesCollectionAllItemsManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearMoviesCollectionAllItemsCache() =>
+      _moviesCollectionAllItemsManager.clear();
+  void clearMoviesCollectionAllItemsCacheKey(String? uniqueKey) =>
+      _moviesCollectionAllItemsManager.clearRequest(uniqueKey);
 }
 
 void _safeInit(Function() initializeField) {

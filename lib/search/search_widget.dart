@@ -85,9 +85,11 @@ class _SearchWidgetState extends State<SearchWidget> {
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: StreamBuilder<List<MovieCollectionsRecord>>(
-              stream: queryMovieCollectionsRecord(
-                queryBuilder: (movieCollectionsRecord) =>
-                    movieCollectionsRecord.orderBy('name'),
+              stream: FFAppState().moviesCollectionAll(
+                requestFn: () => queryMovieCollectionsRecord(
+                  queryBuilder: (movieCollectionsRecord) =>
+                      movieCollectionsRecord.orderBy('name'),
+                ),
               ),
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.

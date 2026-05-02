@@ -1,6 +1,5 @@
 import '/backend/backend.dart';
 import '/components/bottom_nav_bar_widget.dart';
-import '/components/collection_card_widget.dart';
 import '/components/continue_watching_card_widget.dart';
 import '/components/latest_update_card_widget.dart';
 import '/components/movie_card_widget.dart';
@@ -1100,7 +1099,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                               ),
                             ),
                             Container(
-                              height: 120.0,
+                              height: 220.0,
                               decoration: BoxDecoration(),
                               child: Align(
                                 alignment: AlignmentDirectional(-1.0, 0.0),
@@ -1109,11 +1108,16 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                       16.0, 0.0, 16.0, 0.0),
                                   child: FutureBuilder<
                                       List<MovieCollectionsRecord>>(
-                                    future: queryMovieCollectionsRecordOnce(
-                                      queryBuilder: (movieCollectionsRecord) =>
-                                          movieCollectionsRecord
-                                              .orderBy('name'),
-                                      limit: 10,
+                                    future:
+                                        FFAppState().collectionHomedashboard(
+                                      requestFn: () =>
+                                          queryMovieCollectionsRecordOnce(
+                                        queryBuilder:
+                                            (movieCollectionsRecord) =>
+                                                movieCollectionsRecord
+                                                    .orderBy('name'),
+                                        limit: 10,
+                                      ),
                                     ),
                                     builder: (context, snapshot) {
                                       // Customize what your widget looks like when it's loading.
@@ -1149,40 +1153,12 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                           final collectionRowMovieCollectionsRecord =
                                               collectionRowMovieCollectionsRecordList[
                                                   collectionRowIndex];
-                                          return InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              context.pushNamed(
-                                                CollectionPageWidget.routeName,
-                                                queryParameters: {
-                                                  'collectionDoc':
-                                                      serializeParam(
-                                                    collectionRowMovieCollectionsRecord,
-                                                    ParamType.Document,
-                                                  ),
-                                                }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  'collectionDoc':
-                                                      collectionRowMovieCollectionsRecord,
-                                                  '__transition_info__':
-                                                      TransitionInfo(
-                                                    hasTransition: true,
-                                                    transitionType:
-                                                        PageTransitionType.fade,
-                                                  ),
-                                                },
-                                              );
-                                            },
-                                            child: CollectionCardWidget(
-                                              key: Key(
-                                                  'Keyt9v_${collectionRowIndex}_of_${collectionRowMovieCollectionsRecordList.length}'),
-                                              posterImage:
-                                                  collectionRowMovieCollectionsRecord
-                                                      .backdropImage,
-                                            ),
+                                          return MovieCardWidget(
+                                            key: Key(
+                                                'Keyv7z_${collectionRowIndex}_of_${collectionRowMovieCollectionsRecordList.length}'),
+                                            img:
+                                                collectionRowMovieCollectionsRecord
+                                                    .posterImage,
                                           );
                                         },
                                       );
