@@ -169,7 +169,7 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                                           widget.collectionDoc?.overview,
                                     ),
                                   ),
-                                ],
+                                ].divide(SizedBox(height: 10.0)),
                               ),
                               Container(
                                 decoration: BoxDecoration(),
