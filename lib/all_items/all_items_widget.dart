@@ -803,6 +803,82 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                   ),
                 ),
               ),
+            if (widget.categoryName == 'Collection')
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                  child: FutureBuilder<List<MovieCollectionsRecord>>(
+                    future: queryMovieCollectionsRecordOnce(
+                      queryBuilder: (movieCollectionsRecord) =>
+                          movieCollectionsRecord.orderBy('name'),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: SpinKitPulse(
+                              color: FlutterFlowTheme.of(context).primary,
+                              size: 50.0,
+                            ),
+                          ),
+                        );
+                      }
+                      List<MovieCollectionsRecord>
+                          seriesMovieCollectionsRecordList = snapshot.data!;
+
+                      return GridView.builder(
+                        padding: EdgeInsets.zero,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          childAspectRatio: 1.5,
+                        ),
+                        primary: false,
+                        scrollDirection: Axis.vertical,
+                        itemCount: seriesMovieCollectionsRecordList.length,
+                        itemBuilder: (context, seriesIndex) {
+                          final seriesMovieCollectionsRecord =
+                              seriesMovieCollectionsRecordList[seriesIndex];
+                          return InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                CollectionPageWidget.routeName,
+                                queryParameters: {
+                                  'collectionDoc': serializeParam(
+                                    seriesMovieCollectionsRecord,
+                                    ParamType.Document,
+                                  ),
+                                }.withoutNulls,
+                                extra: <String, dynamic>{
+                                  'collectionDoc': seriesMovieCollectionsRecord,
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
+                                },
+                              );
+                            },
+                            child: SeasonCardWidget(
+                              key: Key(
+                                  'Keywz1_${seriesIndex}_of_${seriesMovieCollectionsRecordList.length}'),
+                              posterImage:
+                                  seriesMovieCollectionsRecord.backdropImage,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
             if (widget.itemType == 'series')
               Expanded(
                 child: Padding(
@@ -878,7 +954,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                             },
                             child: SeasonCardWidget(
                               key: Key(
-                                  'Keywz1_${seriesIndex}_of_${seriesSeriesRecordList.length}'),
+                                  'Keyv5k_${seriesIndex}_of_${seriesSeriesRecordList.length}'),
                               posterImage: seriesSeriesRecord.backdropImage,
                               titleImage: seriesSeriesRecord.logoImage,
                             ),

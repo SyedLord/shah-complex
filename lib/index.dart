@@ -7,8 +7,6 @@ export '/movie_page/movie_page_widget.dart' show MoviePageWidget;
 export '/season_page/season_page_widget.dart' show SeasonPageWidget;
 export '/login/login_widget.dart' show LoginWidget;
 export '/create_profile/create_profile_widget.dart' show CreateProfileWidget;
-export '/profile_selection_copy/profile_selection_copy_widget.dart'
-    show ProfileSelectionCopyWidget;
 export '/choose_profile_icon/choose_profile_icon_widget.dart'
     show ChooseProfileIconWidget;
 export '/search/search_widget.dart' show SearchWidget;
@@ -17,3 +15,4 @@ export '/my_profile/my_profile_widget.dart' show MyProfileWidget;
 export '/new_hot/new_hot_widget.dart' show NewHotWidget;
 export '/episode_page/episode_page_widget.dart' show EpisodePageWidget;
 export '/sign_up/sign_up_widget.dart' show SignUpWidget;
+export '/collection_page/collection_page_widget.dart' show CollectionPageWidget;

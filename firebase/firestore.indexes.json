@@ -111,6 +111,20 @@
           "order": "ASCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "movies",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "collection_ref",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "release_year",
+          "order": "ASCENDING"
+        }
+      ]
     }
   ],
   "fieldOverrides": [

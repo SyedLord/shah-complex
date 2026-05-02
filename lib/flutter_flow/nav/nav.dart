@@ -168,11 +168,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: ProfileSelectionCopyWidget.routeName,
-          path: ProfileSelectionCopyWidget.routePath,
-          builder: (context, params) => ProfileSelectionCopyWidget(),
-        ),
-        FFRoute(
           name: ChooseProfileIconWidget.routeName,
           path: ChooseProfileIconWidget.routePath,
           requireAuth: true,
@@ -246,6 +241,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: SignUpWidget.routeName,
           path: SignUpWidget.routePath,
           builder: (context, params) => SignUpWidget(),
+        ),
+        FFRoute(
+          name: CollectionPageWidget.routeName,
+          path: CollectionPageWidget.routePath,
+          requireAuth: true,
+          asyncParams: {
+            'collectionDoc': getDoc(
+                ['movie_collections'], MovieCollectionsRecord.fromSnapshot),
+          },
+          builder: (context, params) => CollectionPageWidget(
+            collectionDoc: params.getParam(
+              'collectionDoc',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

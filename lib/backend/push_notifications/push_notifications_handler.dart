@@ -143,7 +143,6 @@ final parametersBuilderMap =
           'isFirstProfile': getParameter<bool>(data, 'isFirstProfile'),
         },
       ),
-  'ProfileSelectionCopy': ParameterData.none(),
   'ChooseProfileIcon': ParameterData.none(),
   'Search': ParameterData.none(),
   'FixMetadata': (data) async => ParameterData(
@@ -166,6 +165,12 @@ final parametersBuilderMap =
         },
       ),
   'SignUp': ParameterData.none(),
+  'CollectionPage': (data) async => ParameterData(
+        allParams: {
+          'collectionDoc': await getDocumentParameter<MovieCollectionsRecord>(
+              data, 'collectionDoc', MovieCollectionsRecord.fromSnapshot),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {
