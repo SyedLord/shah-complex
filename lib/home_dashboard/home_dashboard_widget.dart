@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/components/bottom_nav_bar_widget.dart';
+import '/components/collection_card_widget.dart';
 import '/components/continue_watching_card_widget.dart';
 import '/components/latest_update_card_widget.dart';
 import '/components/movie_card_widget.dart';
@@ -1009,7 +1010,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Collection',
+                                    'Collections',
                                     style: FlutterFlowTheme.of(context)
                                         .titleMedium
                                         .override(
@@ -1038,7 +1039,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                         AllItemsWidget.routeName,
                                         queryParameters: {
                                           'categoryName': serializeParam(
-                                            'Collection',
+                                            'Collections',
                                             ParamType.String,
                                           ),
                                         }.withoutNulls,
@@ -1131,7 +1132,7 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                         );
                                       }
                                       List<MovieCollectionsRecord>
-                                          trendingRowMovieCollectionsRecordList =
+                                          collectionRowMovieCollectionsRecordList =
                                           snapshot.data!;
 
                                       return ListView.separated(
@@ -1139,15 +1140,15 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                         shrinkWrap: true,
                                         scrollDirection: Axis.horizontal,
                                         itemCount:
-                                            trendingRowMovieCollectionsRecordList
+                                            collectionRowMovieCollectionsRecordList
                                                 .length,
                                         separatorBuilder: (_, __) =>
                                             SizedBox(width: 10.0),
                                         itemBuilder:
-                                            (context, trendingRowIndex) {
-                                          final trendingRowMovieCollectionsRecord =
-                                              trendingRowMovieCollectionsRecordList[
-                                                  trendingRowIndex];
+                                            (context, collectionRowIndex) {
+                                          final collectionRowMovieCollectionsRecord =
+                                              collectionRowMovieCollectionsRecordList[
+                                                  collectionRowIndex];
                                           return InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
@@ -1159,13 +1160,13 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                                 queryParameters: {
                                                   'collectionDoc':
                                                       serializeParam(
-                                                    trendingRowMovieCollectionsRecord,
+                                                    collectionRowMovieCollectionsRecord,
                                                     ParamType.Document,
                                                   ),
                                                 }.withoutNulls,
                                                 extra: <String, dynamic>{
                                                   'collectionDoc':
-                                                      trendingRowMovieCollectionsRecord,
+                                                      collectionRowMovieCollectionsRecord,
                                                   '__transition_info__':
                                                       TransitionInfo(
                                                     hasTransition: true,
@@ -1175,11 +1176,11 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                                 },
                                               );
                                             },
-                                            child: SeasonCardWidget(
+                                            child: CollectionCardWidget(
                                               key: Key(
-                                                  'Keywgo_${trendingRowIndex}_of_${trendingRowMovieCollectionsRecordList.length}'),
+                                                  'Keyt9v_${collectionRowIndex}_of_${collectionRowMovieCollectionsRecordList.length}'),
                                               posterImage:
-                                                  trendingRowMovieCollectionsRecord
+                                                  collectionRowMovieCollectionsRecord
                                                       .backdropImage,
                                             ),
                                           );

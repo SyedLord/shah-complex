@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/collection_card_widget.dart';
 import '/components/continue_watching_card_widget.dart';
 import '/components/latest_update_card_widget.dart';
 import '/components/movie_card_widget.dart';
@@ -803,7 +804,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                   ),
                 ),
               ),
-            if (widget.categoryName == 'Collection')
+            if (widget.categoryName == 'Collections')
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
@@ -827,7 +828,7 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                         );
                       }
                       List<MovieCollectionsRecord>
-                          seriesMovieCollectionsRecordList = snapshot.data!;
+                          collectionMovieCollectionsRecordList = snapshot.data!;
 
                       return GridView.builder(
                         padding: EdgeInsets.zero,
@@ -839,10 +840,11 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                         ),
                         primary: false,
                         scrollDirection: Axis.vertical,
-                        itemCount: seriesMovieCollectionsRecordList.length,
-                        itemBuilder: (context, seriesIndex) {
-                          final seriesMovieCollectionsRecord =
-                              seriesMovieCollectionsRecordList[seriesIndex];
+                        itemCount: collectionMovieCollectionsRecordList.length,
+                        itemBuilder: (context, collectionIndex) {
+                          final collectionMovieCollectionsRecord =
+                              collectionMovieCollectionsRecordList[
+                                  collectionIndex];
                           return InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
@@ -853,12 +855,13 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                                 CollectionPageWidget.routeName,
                                 queryParameters: {
                                   'collectionDoc': serializeParam(
-                                    seriesMovieCollectionsRecord,
+                                    collectionMovieCollectionsRecord,
                                     ParamType.Document,
                                   ),
                                 }.withoutNulls,
                                 extra: <String, dynamic>{
-                                  'collectionDoc': seriesMovieCollectionsRecord,
+                                  'collectionDoc':
+                                      collectionMovieCollectionsRecord,
                                   '__transition_info__': TransitionInfo(
                                     hasTransition: true,
                                     transitionType: PageTransitionType.fade,
@@ -866,11 +869,11 @@ class _AllItemsWidgetState extends State<AllItemsWidget> {
                                 },
                               );
                             },
-                            child: SeasonCardWidget(
+                            child: CollectionCardWidget(
                               key: Key(
-                                  'Keywz1_${seriesIndex}_of_${seriesMovieCollectionsRecordList.length}'),
-                              posterImage:
-                                  seriesMovieCollectionsRecord.backdropImage,
+                                  'Keywib_${collectionIndex}_of_${collectionMovieCollectionsRecordList.length}'),
+                              posterImage: collectionMovieCollectionsRecord
+                                  .backdropImage,
                             ),
                           );
                         },
