@@ -134,13 +134,6 @@ class _CollectionPageWidgetState extends State<CollectionPageWidget> {
                                     MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  wrapWithModel(
-                                    model: _model.movieCardModel1,
-                                    updateCallback: () => safeSetState(() {}),
-                                    child: MovieCardWidget(
-                                      img: widget.collectionDoc?.posterImage,
-                                    ),
-                                  ),
                                   Text(
                                     valueOrDefault<String>(
                                       widget.collectionDoc?.name,
