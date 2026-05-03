@@ -30,6 +30,8 @@ class _IMDBRatingsWidgetState extends State<IMDBRatingsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => IMDBRatingsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

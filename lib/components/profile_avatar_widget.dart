@@ -37,6 +37,8 @@ class _ProfileAvatarWidgetState extends State<ProfileAvatarWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ProfileAvatarModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -39,6 +39,8 @@ class _DownloadItemWidgetState extends State<DownloadItemWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DownloadItemModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

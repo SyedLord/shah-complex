@@ -31,6 +31,8 @@ class _SubscriptionExpiredWidgetState extends State<SubscriptionExpiredWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SubscriptionExpiredModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

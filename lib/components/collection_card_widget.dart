@@ -30,6 +30,8 @@ class _CollectionCardWidgetState extends State<CollectionCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CollectionCardModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

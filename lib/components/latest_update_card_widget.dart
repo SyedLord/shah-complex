@@ -38,6 +38,8 @@ class _LatestUpdateCardWidgetState extends State<LatestUpdateCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LatestUpdateCardModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

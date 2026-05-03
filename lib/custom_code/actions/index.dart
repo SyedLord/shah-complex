@@ -9,3 +9,4 @@ export 'delete_all_profile_items.dart' show deleteAllProfileItems;
 export 'delete_continue_watching.dart' show deleteContinueWatching;
 export 'enable_immersive_mode.dart' show enableImmersiveMode;
 export 'vip_smart_search_collection.dart' show vipSmartSearchCollection;
+export 'generate_web_stream_url.dart' show generateWebStreamUrl;

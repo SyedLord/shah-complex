@@ -31,6 +31,8 @@ class _DescriptionWidgetWidgetState extends State<DescriptionWidgetWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DescriptionWidgetModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

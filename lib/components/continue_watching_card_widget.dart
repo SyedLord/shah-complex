@@ -40,6 +40,8 @@ class _ContinueWatchingCardWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => ContinueWatchingCardModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

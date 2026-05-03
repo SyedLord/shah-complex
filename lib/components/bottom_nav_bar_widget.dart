@@ -41,6 +41,8 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BottomNavBarModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

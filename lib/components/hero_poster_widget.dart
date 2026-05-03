@@ -35,6 +35,8 @@ class _HeroPosterWidgetState extends State<HeroPosterWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HeroPosterModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

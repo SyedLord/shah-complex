@@ -33,6 +33,8 @@ class _NewHotWidgetState extends State<NewHotWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => NewHotModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -67,108 +69,395 @@ class _NewHotWidgetState extends State<NewHotWidget> {
         }
         int newHotCount = snapshot.data!;
 
-        return GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-            FocusManager.instance.primaryFocus?.unfocus();
-          },
-          child: Scaffold(
-            key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: Stack(
-              alignment: AlignmentDirectional(-1.0, -1.0),
-              children: [
-                SingleChildScrollView(
-                  primary: false,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 0.0, 0.0, 100.0),
-                        child: Container(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Container(
-                                height: 100.0,
-                                decoration: BoxDecoration(),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 24.0, 0.0, 24.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
+        return Title(
+            title: 'NewHot',
+            color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
+            child: GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
+              child: Scaffold(
+                key: scaffoldKey,
+                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+                body: Stack(
+                  alignment: AlignmentDirectional(-1.0, -1.0),
+                  children: [
+                    SingleChildScrollView(
+                      primary: false,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 100.0),
+                            child: Container(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Container(
+                                    height: 100.0,
+                                    decoration: BoxDecoration(),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 24.0, 0.0, 24.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  24.0, 0.0, 24.0, 0.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'Latest Updates',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .titleMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleMedium
+                                                              .fontStyle,
+                                                      lineHeight: 1.3,
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          width: double.infinity,
+                                          height: 260.0,
+                                          decoration: BoxDecoration(),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    24.0, 0.0, 24.0, 0.0),
+                                            child: FutureBuilder<
+                                                List<NewsFeedRecord>>(
+                                              future: FFAppState()
+                                                  .newsTrendingCards(
+                                                requestFn: () =>
+                                                    queryNewsFeedRecordOnce(
+                                                  queryBuilder:
+                                                      (newsFeedRecord) =>
+                                                          newsFeedRecord
+                                                              .where(
+                                                                'created_at',
+                                                                isGreaterThanOrEqualTo:
+                                                                    functions
+                                                                        .getStartOfDay(),
+                                                              )
+                                                              .orderBy(
+                                                                  'created_at',
+                                                                  descending:
+                                                                      true),
+                                                ),
+                                              ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      child: SpinKitPulse(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        size: 50.0,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                List<NewsFeedRecord>
+                                                    rowNewsFeedRecordList =
+                                                    snapshot.data!;
+                                                if (rowNewsFeedRecordList
+                                                    .isEmpty) {
+                                                  return Image.asset(
+                                                    'assets/images/ChatGPT_Image_Apr_26,_2026,_02_17_28_PM.png',
+                                                  );
+                                                }
+
+                                                return ListView.separated(
+                                                  padding: EdgeInsets.zero,
+                                                  shrinkWrap: true,
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemCount:
+                                                      rowNewsFeedRecordList
+                                                          .length,
+                                                  separatorBuilder: (_, __) =>
+                                                      SizedBox(width: 10.0),
+                                                  itemBuilder:
+                                                      (context, rowIndex) {
+                                                    final rowNewsFeedRecord =
+                                                        rowNewsFeedRecordList[
+                                                            rowIndex];
+                                                    return InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        if (rowNewsFeedRecord
+                                                                .movieRef !=
+                                                            null) {
+                                                          _model.movieRef =
+                                                              await MoviesRecord
+                                                                  .getDocumentOnce(
+                                                                      rowNewsFeedRecord
+                                                                          .movieRef!);
+                                                          if (Navigator.of(
+                                                                  context)
+                                                              .canPop()) {
+                                                            context.pop();
+                                                          }
+                                                          context.pushNamed(
+                                                            MoviePageWidget
+                                                                .routeName,
+                                                            queryParameters: {
+                                                              'movieDoc':
+                                                                  serializeParam(
+                                                                _model.movieRef,
+                                                                ParamType
+                                                                    .Document,
+                                                              ),
+                                                            }.withoutNulls,
+                                                            extra: <String,
+                                                                dynamic>{
+                                                              'movieDoc': _model
+                                                                  .movieRef,
+                                                              '__transition_info__':
+                                                                  TransitionInfo(
+                                                                hasTransition:
+                                                                    true,
+                                                                transitionType:
+                                                                    PageTransitionType
+                                                                        .fade,
+                                                              ),
+                                                            },
+                                                          );
+                                                        } else {
+                                                          _model.seriesRef =
+                                                              await SeriesRecord
+                                                                  .getDocumentOnce(
+                                                                      rowNewsFeedRecord
+                                                                          .seriesRef!);
+                                                          if ((rowNewsFeedRecord
+                                                                      .tag ==
+                                                                  'NEW SERIES') ||
+                                                              (rowNewsFeedRecord
+                                                                      .tag ==
+                                                                  'NEW SEASON')) {
+                                                            if (Navigator.of(
+                                                                    context)
+                                                                .canPop()) {
+                                                              context.pop();
+                                                            }
+                                                            context.pushNamed(
+                                                              SeasonPageWidget
+                                                                  .routeName,
+                                                              queryParameters: {
+                                                                'seriesDoc':
+                                                                    serializeParam(
+                                                                  _model
+                                                                      .seriesRef,
+                                                                  ParamType
+                                                                      .Document,
+                                                                ),
+                                                              }.withoutNulls,
+                                                              extra: <String,
+                                                                  dynamic>{
+                                                                'seriesDoc': _model
+                                                                    .seriesRef,
+                                                                '__transition_info__':
+                                                                    TransitionInfo(
+                                                                  hasTransition:
+                                                                      true,
+                                                                  transitionType:
+                                                                      PageTransitionType
+                                                                          .fade,
+                                                                ),
+                                                              },
+                                                            );
+                                                          } else {
+                                                            _model.episodeDoc =
+                                                                await EpisodesRecord
+                                                                    .getDocumentOnce(
+                                                                        rowNewsFeedRecord
+                                                                            .episodeRef!);
+
+                                                            context.pushNamed(
+                                                              EpisodePageWidget
+                                                                  .routeName,
+                                                              queryParameters: {
+                                                                'episodeDoc':
+                                                                    serializeParam(
+                                                                  _model
+                                                                      .episodeDoc,
+                                                                  ParamType
+                                                                      .Document,
+                                                                ),
+                                                                'totalSeasons':
+                                                                    serializeParam(
+                                                                  _model
+                                                                      .seriesRef
+                                                                      ?.totalSeasons,
+                                                                  ParamType.int,
+                                                                ),
+                                                                'alreadySelectedSeason':
+                                                                    serializeParam(
+                                                                  _model
+                                                                      .episodeDoc
+                                                                      ?.seasonNumber,
+                                                                  ParamType.int,
+                                                                ),
+                                                                'titleLogoImage':
+                                                                    serializeParam(
+                                                                  rowNewsFeedRecord
+                                                                      .logoImage,
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                              }.withoutNulls,
+                                                              extra: <String,
+                                                                  dynamic>{
+                                                                'episodeDoc': _model
+                                                                    .episodeDoc,
+                                                              },
+                                                            );
+                                                          }
+                                                        }
+
+                                                        safeSetState(() {});
+                                                      },
+                                                      child:
+                                                          TrendingNewsCardWidget(
+                                                        key: Key(
+                                                            'Key9pd_${rowIndex}_of_${rowNewsFeedRecordList.length}'),
+                                                        headline:
+                                                            rowNewsFeedRecord
+                                                                .title,
+                                                        img: rowNewsFeedRecord
+                                                            .imageUrl,
+                                                        tag: rowNewsFeedRecord
+                                                            .tag,
+                                                        logoImage:
+                                                            rowNewsFeedRecord
+                                                                .logoImage,
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ].divide(SizedBox(height: 16.0)),
+                                    ),
+                                  ),
+                                  if (newHotCount > 0)
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Latest Updates',
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleMedium
-                                                .override(
-                                                  font: GoogleFonts.inter(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .titleMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.bold,
+                                          24.0, 16.0, 24.0, 16.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(),
+                                        child: Divider(
+                                          height: 16.0,
+                                          thickness: 1.0,
+                                          indent: 0.0,
+                                          endIndent: 0.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                        ),
+                                      ),
+                                    ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 0.0, 24.0),
+                                        child: Text(
+                                          'All Notifications',
+                                          style: FlutterFlowTheme.of(context)
+                                              .titleLarge
+                                              .override(
+                                                font: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.w800,
                                                   fontStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .titleMedium
+                                                          .titleLarge
                                                           .fontStyle,
-                                                  lineHeight: 1.3,
                                                 ),
-                                          ),
-                                        ],
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w800,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleLarge
+                                                        .fontStyle,
+                                                lineHeight: 1.2,
+                                              ),
+                                        ),
                                       ),
-                                    ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: 260.0,
-                                      decoration: BoxDecoration(),
-                                      child: Padding(
+                                      Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             24.0, 0.0, 24.0, 0.0),
                                         child:
                                             FutureBuilder<List<NewsFeedRecord>>(
-                                          future:
-                                              FFAppState().newsTrendingCards(
+                                          future: FFAppState().newsCardsAll(
                                             requestFn: () =>
                                                 queryNewsFeedRecordOnce(
                                               queryBuilder: (newsFeedRecord) =>
-                                                  newsFeedRecord
-                                                      .where(
-                                                        'created_at',
-                                                        isGreaterThanOrEqualTo:
-                                                            functions
-                                                                .getStartOfDay(),
-                                                      )
-                                                      .orderBy('created_at',
-                                                          descending: true),
+                                                  newsFeedRecord.orderBy(
+                                                      'created_at',
+                                                      descending: true),
                                             ),
                                           ),
                                           builder: (context, snapshot) {
@@ -188,26 +477,33 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                               );
                                             }
                                             List<NewsFeedRecord>
-                                                rowNewsFeedRecordList =
+                                                listViewNewsFeedRecordList =
                                                 snapshot.data!;
-                                            if (rowNewsFeedRecordList.isEmpty) {
-                                              return Image.asset(
-                                                'assets/images/ChatGPT_Image_Apr_26,_2026,_02_17_28_PM.png',
+                                            if (listViewNewsFeedRecordList
+                                                .isEmpty) {
+                                              return Center(
+                                                child: Image.asset(
+                                                  'assets/images/ChatGPT_Image_Apr_26,_2026,_02_17_28_PM.png',
+                                                  fit: BoxFit.contain,
+                                                ),
                                               );
                                             }
 
                                             return ListView.separated(
                                               padding: EdgeInsets.zero,
+                                              primary: false,
                                               shrinkWrap: true,
-                                              scrollDirection: Axis.horizontal,
+                                              scrollDirection: Axis.vertical,
                                               itemCount:
-                                                  rowNewsFeedRecordList.length,
+                                                  listViewNewsFeedRecordList
+                                                      .length,
                                               separatorBuilder: (_, __) =>
-                                                  SizedBox(width: 10.0),
-                                              itemBuilder: (context, rowIndex) {
-                                                final rowNewsFeedRecord =
-                                                    rowNewsFeedRecordList[
-                                                        rowIndex];
+                                                  SizedBox(height: 24.0),
+                                              itemBuilder:
+                                                  (context, listViewIndex) {
+                                                final listViewNewsFeedRecord =
+                                                    listViewNewsFeedRecordList[
+                                                        listViewIndex];
                                                 return InkWell(
                                                   splashColor:
                                                       Colors.transparent,
@@ -218,32 +514,29 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
-                                                    if (rowNewsFeedRecord
+                                                    if (listViewNewsFeedRecord
                                                             .movieRef !=
                                                         null) {
-                                                      _model.movieRef =
+                                                      _model.movieRef1 =
                                                           await MoviesRecord
                                                               .getDocumentOnce(
-                                                                  rowNewsFeedRecord
+                                                                  listViewNewsFeedRecord
                                                                       .movieRef!);
-                                                      if (Navigator.of(context)
-                                                          .canPop()) {
-                                                        context.pop();
-                                                      }
+
                                                       context.pushNamed(
                                                         MoviePageWidget
                                                             .routeName,
                                                         queryParameters: {
                                                           'movieDoc':
                                                               serializeParam(
-                                                            _model.movieRef,
+                                                            _model.movieRef1,
                                                             ParamType.Document,
                                                           ),
                                                         }.withoutNulls,
                                                         extra: <String,
                                                             dynamic>{
                                                           'movieDoc':
-                                                              _model.movieRef,
+                                                              _model.movieRef1,
                                                           '__transition_info__':
                                                               TransitionInfo(
                                                             hasTransition: true,
@@ -254,29 +547,24 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                                         },
                                                       );
                                                     } else {
-                                                      _model.seriesRef =
+                                                      _model.seriesRef1 =
                                                           await SeriesRecord
                                                               .getDocumentOnce(
-                                                                  rowNewsFeedRecord
+                                                                  listViewNewsFeedRecord
                                                                       .seriesRef!);
-                                                      if ((rowNewsFeedRecord
+                                                      if ((listViewNewsFeedRecord
                                                                   .tag ==
                                                               'NEW SERIES') ||
-                                                          (rowNewsFeedRecord
+                                                          (listViewNewsFeedRecord
                                                                   .tag ==
                                                               'NEW SEASON')) {
-                                                        if (Navigator.of(
-                                                                context)
-                                                            .canPop()) {
-                                                          context.pop();
-                                                        }
                                                         context.pushNamed(
                                                           SeasonPageWidget
                                                               .routeName,
                                                           queryParameters: {
                                                             'seriesDoc':
                                                                 serializeParam(
-                                                              _model.seriesRef,
+                                                              _model.seriesRef1,
                                                               ParamType
                                                                   .Document,
                                                             ),
@@ -284,7 +572,7 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                                           extra: <String,
                                                               dynamic>{
                                                             'seriesDoc': _model
-                                                                .seriesRef,
+                                                                .seriesRef1,
                                                             '__transition_info__':
                                                                 TransitionInfo(
                                                               hasTransition:
@@ -296,10 +584,10 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                                           },
                                                         );
                                                       } else {
-                                                        _model.episodeDoc =
+                                                        _model.episodeDoc1 =
                                                             await EpisodesRecord
                                                                 .getDocumentOnce(
-                                                                    rowNewsFeedRecord
+                                                                    listViewNewsFeedRecord
                                                                         .episodeRef!);
 
                                                         context.pushNamed(
@@ -308,33 +596,34 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                                           queryParameters: {
                                                             'episodeDoc':
                                                                 serializeParam(
-                                                              _model.episodeDoc,
+                                                              _model
+                                                                  .episodeDoc1,
                                                               ParamType
                                                                   .Document,
                                                             ),
                                                             'totalSeasons':
                                                                 serializeParam(
-                                                              _model.seriesRef
+                                                              _model.seriesRef1
                                                                   ?.totalSeasons,
                                                               ParamType.int,
                                                             ),
                                                             'alreadySelectedSeason':
                                                                 serializeParam(
-                                                              _model.episodeDoc
+                                                              _model.episodeDoc1
                                                                   ?.seasonNumber,
                                                               ParamType.int,
                                                             ),
                                                             'titleLogoImage':
                                                                 serializeParam(
-                                                              rowNewsFeedRecord
-                                                                  .logoImage,
+                                                              _model.seriesRef1
+                                                                  ?.logoImage,
                                                               ParamType.String,
                                                             ),
                                                           }.withoutNulls,
                                                           extra: <String,
                                                               dynamic>{
                                                             'episodeDoc': _model
-                                                                .episodeDoc,
+                                                                .episodeDoc1,
                                                           },
                                                         );
                                                       }
@@ -342,16 +631,26 @@ class _NewHotWidgetState extends State<NewHotWidget> {
 
                                                     safeSetState(() {});
                                                   },
-                                                  child: TrendingNewsCardWidget(
+                                                  child:
+                                                      AllNotificationCardWidget(
                                                     key: Key(
-                                                        'Key9pd_${rowIndex}_of_${rowNewsFeedRecordList.length}'),
-                                                    headline:
-                                                        rowNewsFeedRecord.title,
-                                                    img: rowNewsFeedRecord
-                                                        .imageUrl,
-                                                    tag: rowNewsFeedRecord.tag,
-                                                    logoImage: rowNewsFeedRecord
-                                                        .logoImage,
+                                                        'Key84q_${listViewIndex}_of_${listViewNewsFeedRecordList.length}'),
+                                                    date: dateTimeFormat(
+                                                        "MMM dd",
+                                                        listViewNewsFeedRecord
+                                                            .createdAt),
+                                                    description:
+                                                        listViewNewsFeedRecord
+                                                            .description,
+                                                    genres:
+                                                        listViewNewsFeedRecord
+                                                            .genres,
+                                                    title:
+                                                        listViewNewsFeedRecord
+                                                            .title,
+                                                    trailer_img:
+                                                        listViewNewsFeedRecord
+                                                            .imageUrl,
                                                   ),
                                                 );
                                               },
@@ -359,41 +658,50 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                           },
                                         ),
                                       ),
-                                    ),
-                                  ].divide(SizedBox(height: 16.0)),
-                                ),
-                              ),
-                              if (newHotCount > 0)
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      24.0, 16.0, 24.0, 16.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(),
-                                    child: Divider(
-                                      height: 16.0,
-                                      thickness: 1.0,
-                                      indent: 0.0,
-                                      endIndent: 0.0,
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                    ),
+                                    ],
                                   ),
-                                ),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 0.0, 24.0),
-                                    child: Text(
-                                      'All Notifications',
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(0.0),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(
+                          sigmaX: 5.0,
+                          sigmaY: 5.0,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 40.0, 24.0, 0.0),
+                          child: Container(
+                            decoration: BoxDecoration(),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/Shah_Complex_Logo.png',
+                                      width: 32.0,
+                                      height: 32.0,
+                                      fit: BoxFit.contain,
+                                    ),
+                                    Text(
+                                      'New & Hot',
                                       style: FlutterFlowTheme.of(context)
                                           .titleLarge
                                           .override(
                                             font: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w800,
+                                              fontWeight: FontWeight.bold,
                                               fontStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .titleLarge
@@ -402,7 +710,7 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w800,
+                                            fontWeight: FontWeight.bold,
                                             fontStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .titleLarge
@@ -410,314 +718,59 @@ class _NewHotWidgetState extends State<NewHotWidget> {
                                             lineHeight: 1.2,
                                           ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 24.0, 0.0),
-                                    child: FutureBuilder<List<NewsFeedRecord>>(
-                                      future: FFAppState().newsCardsAll(
-                                        requestFn: () =>
-                                            queryNewsFeedRecordOnce(
-                                          queryBuilder: (newsFeedRecord) =>
-                                              newsFeedRecord.orderBy(
-                                                  'created_at',
-                                                  descending: true),
-                                        ),
+                                  ].divide(SizedBox(width: 16.0)),
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    FlutterFlowIconButton(
+                                      borderRadius: 8.0,
+                                      buttonSize: 40.0,
+                                      fillColor: Colors.transparent,
+                                      icon: Icon(
+                                        Icons.search_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 24.0,
                                       ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50.0,
-                                              height: 50.0,
-                                              child: SpinKitPulse(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                size: 50.0,
-                                              ),
-                                            ),
-                                          );
+                                      onPressed: () async {
+                                        if (Navigator.of(context).canPop()) {
+                                          context.pop();
                                         }
-                                        List<NewsFeedRecord>
-                                            listViewNewsFeedRecordList =
-                                            snapshot.data!;
-                                        if (listViewNewsFeedRecordList
-                                            .isEmpty) {
-                                          return Center(
-                                            child: Image.asset(
-                                              'assets/images/ChatGPT_Image_Apr_26,_2026,_02_17_28_PM.png',
-                                              fit: BoxFit.contain,
+                                        context.pushNamed(
+                                          SearchWidget.routeName,
+                                          extra: <String, dynamic>{
+                                            '__transition_info__':
+                                                TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
                                             ),
-                                          );
-                                        }
-
-                                        return ListView.separated(
-                                          padding: EdgeInsets.zero,
-                                          primary: false,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          itemCount:
-                                              listViewNewsFeedRecordList.length,
-                                          separatorBuilder: (_, __) =>
-                                              SizedBox(height: 24.0),
-                                          itemBuilder:
-                                              (context, listViewIndex) {
-                                            final listViewNewsFeedRecord =
-                                                listViewNewsFeedRecordList[
-                                                    listViewIndex];
-                                            return InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                if (listViewNewsFeedRecord
-                                                        .movieRef !=
-                                                    null) {
-                                                  _model.movieRef1 =
-                                                      await MoviesRecord
-                                                          .getDocumentOnce(
-                                                              listViewNewsFeedRecord
-                                                                  .movieRef!);
-
-                                                  context.pushNamed(
-                                                    MoviePageWidget.routeName,
-                                                    queryParameters: {
-                                                      'movieDoc':
-                                                          serializeParam(
-                                                        _model.movieRef1,
-                                                        ParamType.Document,
-                                                      ),
-                                                    }.withoutNulls,
-                                                    extra: <String, dynamic>{
-                                                      'movieDoc':
-                                                          _model.movieRef1,
-                                                      '__transition_info__':
-                                                          TransitionInfo(
-                                                        hasTransition: true,
-                                                        transitionType:
-                                                            PageTransitionType
-                                                                .fade,
-                                                      ),
-                                                    },
-                                                  );
-                                                } else {
-                                                  _model.seriesRef1 =
-                                                      await SeriesRecord
-                                                          .getDocumentOnce(
-                                                              listViewNewsFeedRecord
-                                                                  .seriesRef!);
-                                                  if ((listViewNewsFeedRecord
-                                                              .tag ==
-                                                          'NEW SERIES') ||
-                                                      (listViewNewsFeedRecord
-                                                              .tag ==
-                                                          'NEW SEASON')) {
-                                                    context.pushNamed(
-                                                      SeasonPageWidget
-                                                          .routeName,
-                                                      queryParameters: {
-                                                        'seriesDoc':
-                                                            serializeParam(
-                                                          _model.seriesRef1,
-                                                          ParamType.Document,
-                                                        ),
-                                                      }.withoutNulls,
-                                                      extra: <String, dynamic>{
-                                                        'seriesDoc':
-                                                            _model.seriesRef1,
-                                                        '__transition_info__':
-                                                            TransitionInfo(
-                                                          hasTransition: true,
-                                                          transitionType:
-                                                              PageTransitionType
-                                                                  .fade,
-                                                        ),
-                                                      },
-                                                    );
-                                                  } else {
-                                                    _model.episodeDoc1 =
-                                                        await EpisodesRecord
-                                                            .getDocumentOnce(
-                                                                listViewNewsFeedRecord
-                                                                    .episodeRef!);
-
-                                                    context.pushNamed(
-                                                      EpisodePageWidget
-                                                          .routeName,
-                                                      queryParameters: {
-                                                        'episodeDoc':
-                                                            serializeParam(
-                                                          _model.episodeDoc1,
-                                                          ParamType.Document,
-                                                        ),
-                                                        'totalSeasons':
-                                                            serializeParam(
-                                                          _model.seriesRef1
-                                                              ?.totalSeasons,
-                                                          ParamType.int,
-                                                        ),
-                                                        'alreadySelectedSeason':
-                                                            serializeParam(
-                                                          _model.episodeDoc1
-                                                              ?.seasonNumber,
-                                                          ParamType.int,
-                                                        ),
-                                                        'titleLogoImage':
-                                                            serializeParam(
-                                                          _model.seriesRef1
-                                                              ?.logoImage,
-                                                          ParamType.String,
-                                                        ),
-                                                      }.withoutNulls,
-                                                      extra: <String, dynamic>{
-                                                        'episodeDoc':
-                                                            _model.episodeDoc1,
-                                                      },
-                                                    );
-                                                  }
-                                                }
-
-                                                safeSetState(() {});
-                                              },
-                                              child: AllNotificationCardWidget(
-                                                key: Key(
-                                                    'Key84q_${listViewIndex}_of_${listViewNewsFeedRecordList.length}'),
-                                                date: dateTimeFormat(
-                                                    "MMM dd",
-                                                    listViewNewsFeedRecord
-                                                        .createdAt),
-                                                description:
-                                                    listViewNewsFeedRecord
-                                                        .description,
-                                                genres: listViewNewsFeedRecord
-                                                    .genres,
-                                                title: listViewNewsFeedRecord
-                                                    .title,
-                                                trailer_img:
-                                                    listViewNewsFeedRecord
-                                                        .imageUrl,
-                                              ),
-                                            );
                                           },
                                         );
                                       },
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ].divide(SizedBox(width: 24.0)),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(0.0),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 5.0,
-                      sigmaY: 5.0,
                     ),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 40.0, 24.0, 0.0),
-                      child: Container(
-                        decoration: BoxDecoration(),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/images/Shah_Complex_Logo.png',
-                                  width: 32.0,
-                                  height: 32.0,
-                                  fit: BoxFit.contain,
-                                ),
-                                Text(
-                                  'New & Hot',
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleLarge
-                                                  .fontStyle,
-                                        ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleLarge
-                                            .fontStyle,
-                                        lineHeight: 1.2,
-                                      ),
-                                ),
-                              ].divide(SizedBox(width: 16.0)),
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                FlutterFlowIconButton(
-                                  borderRadius: 8.0,
-                                  buttonSize: 40.0,
-                                  fillColor: Colors.transparent,
-                                  icon: Icon(
-                                    Icons.search_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 24.0,
-                                  ),
-                                  onPressed: () async {
-                                    if (Navigator.of(context).canPop()) {
-                                      context.pop();
-                                    }
-                                    context.pushNamed(
-                                      SearchWidget.routeName,
-                                      extra: <String, dynamic>{
-                                        '__transition_info__': TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.fade,
-                                        ),
-                                      },
-                                    );
-                                  },
-                                ),
-                              ].divide(SizedBox(width: 24.0)),
-                            ),
-                          ],
-                        ),
+                    wrapWithModel(
+                      model: _model.bottomNavBarModel,
+                      updateCallback: () => safeSetState(() {}),
+                      child: BottomNavBarWidget(
+                        activeTab: 'news',
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                wrapWithModel(
-                  model: _model.bottomNavBarModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: BottomNavBarWidget(
-                    activeTab: 'news',
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
+              ),
+            ));
       },
     );
   }

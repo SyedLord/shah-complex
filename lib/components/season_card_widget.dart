@@ -34,6 +34,8 @@ class _SeasonCardWidgetState extends State<SeasonCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SeasonCardModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

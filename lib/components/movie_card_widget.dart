@@ -34,6 +34,8 @@ class _MovieCardWidgetState extends State<MovieCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MovieCardModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

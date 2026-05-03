@@ -18,6 +18,14 @@ class MoviePageModel extends FlutterFlowModel<MoviePageWidget> {
 
   // Model for IMDBRatings component.
   late IMDBRatingsModel iMDBRatingsModel;
+  // Stores action output result for [Custom Action - generateWebStreamUrl] action in PlayBtn widget.
+  String? webPlayLink1;
+  // Stores action output result for [Custom Action - generateWebStreamUrl] action in PlayBtn widget.
+  String? webPlayLink2;
+  // Stores action output result for [Custom Action - generateWebStreamUrl] action in PlayBtn widget.
+  String? webPlayLink;
+  // Stores action output result for [Custom Action - generateWebStreamUrl] action in PlayBtn widget.
+  String? webPlayLink3;
   // Model for DescriptionWidget component.
   late DescriptionWidgetModel descriptionWidgetModel;
   // State field(s) for PageView widget.

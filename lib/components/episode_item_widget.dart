@@ -40,6 +40,8 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EpisodeItemModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

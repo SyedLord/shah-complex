@@ -38,6 +38,8 @@ class _ProfileIconDropdownWidgetState extends State<ProfileIconDropdownWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ProfileIconDropdownModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

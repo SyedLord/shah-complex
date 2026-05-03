@@ -41,6 +41,8 @@ class _TrendingNewsCardWidgetState extends State<TrendingNewsCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TrendingNewsCardModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
