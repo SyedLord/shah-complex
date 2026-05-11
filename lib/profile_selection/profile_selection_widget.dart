@@ -109,336 +109,156 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
               backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
               body: SafeArea(
                 top: true,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Align(
-                        alignment: AlignmentDirectional(0.0, -1.0),
-                        child: Container(
-                          height: 80.0,
-                          decoration: BoxDecoration(),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 16.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-1.0, 1.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(),
-                                    child: Visibility(
-                                      visible: FFAppState().isEditMode == false,
-                                      child: FlutterFlowIconButton(
-                                        borderRadius: 8.0,
-                                        buttonSize: 40.0,
-                                        icon: Icon(
-                                          Icons.logout_rounded,
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
-                                          size: 24.0,
-                                        ),
-                                        onPressed: () async {
-                                          GoRouter.of(context)
-                                              .prepareAuthEvent();
-                                          await authManager.signOut();
-                                          GoRouter.of(context)
-                                              .clearRedirectLocation();
-
-                                          context.goNamedAuth(
-                                              LoginWidget.routeName,
-                                              context.mounted);
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(1.0, 1.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(),
-                                    child: Visibility(
-                                      visible: valueOrDefault<bool>(
-                                        FFAppState().isEditMode,
-                                        false,
-                                      ),
-                                      child: FlutterFlowIconButton(
-                                        borderRadius: 8.0,
-                                        buttonSize: 40.0,
-                                        icon: FaIcon(
-                                          FontAwesomeIcons.check,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 24.0,
-                                        ),
-                                        onPressed: () async {
-                                          FFAppState().isEditMode =
-                                              !(FFAppState().isEditMode ??
-                                                  true);
-                                          safeSetState(() {});
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Padding(
-                            padding: EdgeInsets.all(32.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Who\'s Watching?',
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineMedium
-                                                  .fontStyle,
-                                        ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        fontSize: 26.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineMedium
-                                            .fontStyle,
-                                        lineHeight: 1.2,
-                                      ),
-                                ),
-                                Builder(
-                                  builder: (context) {
-                                    final profileList =
-                                        profileSelectionProfilesRecordList
-                                            .toList();
-
-                                    return Wrap(
-                                      spacing: 0.0,
-                                      runSpacing: 20.0,
-                                      alignment: WrapAlignment.start,
-                                      crossAxisAlignment:
-                                          WrapCrossAlignment.start,
-                                      direction: Axis.horizontal,
-                                      runAlignment: WrapAlignment.start,
-                                      verticalDirection: VerticalDirection.down,
-                                      clipBehavior: Clip.none,
-                                      children:
-                                          List.generate(profileList.length,
-                                              (profileListIndex) {
-                                        final profileListItem =
-                                            profileList[profileListIndex];
-                                        return Container(
-                                          width: 150.0,
-                                          height: 140.0,
-                                          decoration: BoxDecoration(),
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                if (FFAppState().isEditMode ==
-                                                    true) {
-                                                  context.pushNamed(
-                                                    CreateProfileWidget
-                                                        .routeName,
-                                                    queryParameters: {
-                                                      'profileDoc':
-                                                          serializeParam(
-                                                        profileListItem,
-                                                        ParamType.Document,
-                                                      ),
-                                                    }.withoutNulls,
-                                                    extra: <String, dynamic>{
-                                                      'profileDoc':
-                                                          profileListItem,
-                                                    },
-                                                  );
-                                                } else {
-                                                  FFAppState()
-                                                          .activeProfileRef =
-                                                      profileListItem.reference;
-                                                  FFAppState()
-                                                          .activeProfileImage =
-                                                      profileListItem
-                                                          .profileImage;
-                                                  FFAppState().lastSeenNews =
-                                                      profileListItem
-                                                          .lastSeenNews;
-                                                  safeSetState(() {});
-
-                                                  context.goNamed(
-                                                    HomeDashboardWidget
-                                                        .routeName,
-                                                    extra: <String, dynamic>{
-                                                      '__transition_info__':
-                                                          TransitionInfo(
-                                                        hasTransition: true,
-                                                        transitionType:
-                                                            PageTransitionType
-                                                                .fade,
-                                                      ),
-                                                    },
-                                                  );
-                                                }
-
-                                                FFAppState()
-                                                    .clearProfileWatchlistCountCache();
-                                                FFAppState()
-                                                    .clearProfileCacheCache();
-                                                FFAppState()
-                                                    .clearNewsCountCacheCache();
-                                              },
-                                              child: ProfileAvatarWidget(
-                                                key: Key(
-                                                    'Keyl55_${profileListIndex}_of_${profileList.length}'),
-                                                profileImage: profileListItem
-                                                    .profileImage,
-                                                isEditing:
-                                                    FFAppState().isEditMode,
-                                                name:
-                                                    profileListItem.profileName,
-                                                isActive: false,
-                                              ),
+                child: Stack(
+                  children: [
+                    SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(0.0, -1.0),
+                            child: Container(
+                              height: 80.0,
+                              decoration: BoxDecoration(),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(-1.0, 1.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(),
+                                        child: Visibility(
+                                          visible:
+                                              FFAppState().isEditMode == false,
+                                          child: FlutterFlowIconButton(
+                                            borderRadius: 8.0,
+                                            buttonSize: 40.0,
+                                            icon: Icon(
+                                              Icons.logout_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              size: 24.0,
                                             ),
+                                            onPressed: () async {
+                                              GoRouter.of(context)
+                                                  .prepareAuthEvent();
+                                              await authManager.signOut();
+                                              GoRouter.of(context)
+                                                  .clearRedirectLocation();
+
+                                              context.goNamedAuth(
+                                                  LoginWidget.routeName,
+                                                  context.mounted);
+                                            },
                                           ),
-                                        );
-                                      }),
-                                    );
-                                  },
-                                ),
-                              ].divide(SizedBox(height: 32.0)),
-                            ),
-                          ),
-                        ),
-                      ),
-                      if ((FFAppState().isEditMode == true) &&
-                          (_model.showAddProfile == true))
-                        Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              context.pushNamed(
-                                CreateProfileWidget.routeName,
-                                queryParameters: {
-                                  'isFirstProfile': serializeParam(
-                                    false,
-                                    ParamType.bool,
-                                  ),
-                                }.withoutNulls,
-                              );
-                            },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 100.0,
-                                  height: 100.0,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    border: Border.all(
-                                      color:
-                                          FlutterFlowTheme.of(context).divider,
-                                      width: 2.0,
-                                    ),
-                                  ),
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Icon(
-                                    Icons.add_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 48.0,
-                                  ),
-                                ),
-                                Text(
-                                  'Add Profile',
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight: FontWeight.w500,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMedium
-                                                  .fontStyle,
                                         ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 17.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleMedium
-                                            .fontStyle,
-                                        lineHeight: 1.3,
                                       ),
+                                    ),
+                                    Align(
+                                      alignment: AlignmentDirectional(1.0, 1.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(),
+                                        child: Visibility(
+                                          visible: valueOrDefault<bool>(
+                                            FFAppState().isEditMode,
+                                            false,
+                                          ),
+                                          child: FlutterFlowIconButton(
+                                            borderRadius: 8.0,
+                                            buttonSize: 40.0,
+                                            icon: FaIcon(
+                                              FontAwesomeIcons.check,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () async {
+                                              FFAppState().isEditMode =
+                                                  !(FFAppState().isEditMode ??
+                                                      true);
+                                              safeSetState(() {});
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ].divide(SizedBox(height: 8.0)),
+                              ),
                             ),
                           ),
-                        ),
-                      Align(
-                        alignment: AlignmentDirectional(0.0, 0.9),
-                        child: Container(
-                          decoration: BoxDecoration(),
-                          child: Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Padding(
-                              padding: EdgeInsets.all(24.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
+                          Container(
+                            child: Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsets.all(32.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Who\'s Watching?',
+                                      style: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 26.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineMedium
+                                                    .fontStyle,
+                                            lineHeight: 1.2,
+                                          ),
                                     ),
-                                    child: Align(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                      child: Stack(
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                width: 0.0,
-                                                height: 0.0,
-                                              ),
-                                              if (FFAppState().isEditMode ==
-                                                  false)
-                                                InkWell(
+                                    Builder(
+                                      builder: (context) {
+                                        final profileList =
+                                            profileSelectionProfilesRecordList
+                                                .toList();
+
+                                        return Wrap(
+                                          spacing: 0.0,
+                                          runSpacing: 20.0,
+                                          alignment: WrapAlignment.start,
+                                          crossAxisAlignment:
+                                              WrapCrossAlignment.start,
+                                          direction: Axis.horizontal,
+                                          runAlignment: WrapAlignment.start,
+                                          verticalDirection:
+                                              VerticalDirection.down,
+                                          clipBehavior: Clip.none,
+                                          children:
+                                              List.generate(profileList.length,
+                                                  (profileListIndex) {
+                                            final profileListItem =
+                                                profileList[profileListIndex];
+                                            return Container(
+                                              width: 150.0,
+                                              height: 140.0,
+                                              decoration: BoxDecoration(),
+                                              child: Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: InkWell(
                                                   splashColor:
                                                       Colors.transparent,
                                                   focusColor:
@@ -448,77 +268,219 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
-                                                    FFAppState().isEditMode =
-                                                        !(FFAppState()
-                                                                .isEditMode ??
-                                                            true);
-                                                    safeSetState(() {});
-                                                    if (profileSelectionProfilesRecordList
-                                                            .length <
-                                                        5) {
-                                                      _model.showAddProfile =
-                                                          true;
-                                                      safeSetState(() {});
-                                                    } else {
-                                                      _model.showAddProfile =
-                                                          false;
-                                                      safeSetState(() {});
-                                                    }
-                                                  },
-                                                  child: Text(
-                                                    'Manage Profiles',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontStyle,
+                                                    if (FFAppState()
+                                                            .isEditMode ==
+                                                        true) {
+                                                      context.pushNamed(
+                                                        CreateProfileWidget
+                                                            .routeName,
+                                                        queryParameters: {
+                                                          'profileDoc':
+                                                              serializeParam(
+                                                            profileListItem,
+                                                            ParamType.Document,
                                                           ),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                          lineHeight: 1.3,
-                                                        ),
+                                                        }.withoutNulls,
+                                                        extra: <String,
+                                                            dynamic>{
+                                                          'profileDoc':
+                                                              profileListItem,
+                                                        },
+                                                      );
+                                                    } else {
+                                                      FFAppState()
+                                                              .activeProfileRef =
+                                                          profileListItem
+                                                              .reference;
+                                                      FFAppState()
+                                                              .activeProfileImage =
+                                                          profileListItem
+                                                              .profileImage;
+                                                      FFAppState()
+                                                              .lastSeenNews =
+                                                          profileListItem
+                                                              .lastSeenNews;
+                                                      safeSetState(() {});
+
+                                                      context.goNamed(
+                                                        HomeDashboardWidget
+                                                            .routeName,
+                                                        extra: <String,
+                                                            dynamic>{
+                                                          '__transition_info__':
+                                                              TransitionInfo(
+                                                            hasTransition: true,
+                                                            transitionType:
+                                                                PageTransitionType
+                                                                    .fade,
+                                                          ),
+                                                        },
+                                                      );
+                                                    }
+
+                                                    FFAppState()
+                                                        .clearProfileWatchlistCountCache();
+                                                    FFAppState()
+                                                        .clearProfileCacheCache();
+                                                    FFAppState()
+                                                        .clearNewsCountCacheCache();
+                                                  },
+                                                  child: ProfileAvatarWidget(
+                                                    key: Key(
+                                                        'Keyl55_${profileListIndex}_of_${profileList.length}'),
+                                                    profileImage:
+                                                        profileListItem
+                                                            .profileImage,
+                                                    isEditing:
+                                                        FFAppState().isEditMode,
+                                                    name: profileListItem
+                                                        .profileName,
+                                                    isActive: false,
                                                   ),
                                                 ),
-                                              Container(
-                                                width: 0.0,
-                                                height: 0.0,
                                               ),
-                                            ].divide(SizedBox(width: 8.0)),
-                                          ),
-                                          Container(
-                                            width: 0.0,
-                                            height: 0.0,
-                                          ),
-                                        ],
+                                            );
+                                          }),
+                                        );
+                                      },
+                                    ),
+                                  ].divide(SizedBox(height: 32.0)),
+                                ),
+                              ),
+                            ),
+                          ),
+                          if ((FFAppState().isEditMode == true) &&
+                              (_model.showAddProfile == true))
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed(
+                                    CreateProfileWidget.routeName,
+                                    queryParameters: {
+                                      'isFirstProfile': serializeParam(
+                                        false,
+                                        ParamType.bool,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 100.0,
+                                      height: 100.0,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .divider,
+                                          width: 2.0,
+                                        ),
+                                      ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Icon(
+                                        Icons.add_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 48.0,
                                       ),
                                     ),
-                                  ),
-                                ].divide(SizedBox(height: 16.0)),
+                                    Text(
+                                      'Add Profile',
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w500,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            fontSize: 17.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w500,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleMedium
+                                                    .fontStyle,
+                                            lineHeight: 1.3,
+                                          ),
+                                    ),
+                                  ].divide(SizedBox(height: 8.0)),
+                                ),
                               ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0.0, 1.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 80.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          shape: BoxShape.rectangle,
+                        ),
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Visibility(
+                          visible: FFAppState().isEditMode == false,
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              FFAppState().isEditMode =
+                                  !(FFAppState().isEditMode ?? true);
+                              safeSetState(() {});
+                              if (profileSelectionProfilesRecordList.length <
+                                  5) {
+                                _model.showAddProfile = true;
+                                safeSetState(() {});
+                              } else {
+                                _model.showAddProfile = false;
+                                safeSetState(() {});
+                              }
+                            },
+                            child: Text(
+                              'Manage Profiles',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontStyle,
+                                    ),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    fontSize: 12.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
+                                    lineHeight: 1.3,
+                                  ),
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ));

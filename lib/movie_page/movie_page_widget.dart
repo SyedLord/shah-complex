@@ -636,21 +636,40 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                                   if ((moviePageItemsRecord !=
                                                           null) !=
                                                       true) {
-                                                    if (isWeb) {
-                                                      _model.webPlayLink1 =
-                                                          await actions
-                                                              .generateWebStreamUrl(
-                                                        widget
-                                                            .movieDoc?.videoUrl,
-                                                        widget.movieDoc
-                                                            ?.driveType,
-                                                        FFAppState()
-                                                            .activeProfileRef
-                                                            ?.id,
-                                                      );
-                                                      await launchURL(
-                                                          _model.webPlayLink1!);
-                                                    } else {
+                                                    await actions
+                                                        .launchExternalPlayer(
+                                                      widget.movieDoc,
+                                                      functions
+                                                          .emptyEpisodeDoc(),
+                                                      functions
+                                                          .emptyContinueDoc(),
+                                                      FFAppState()
+                                                          .activeProfileRef!
+                                                          .id,
+                                                      '',
+                                                    );
+                                                  } else {
+                                                    await actions
+                                                        .launchExternalPlayer(
+                                                      functions.emptyMovieDoc(),
+                                                      functions
+                                                          .emptyEpisodeDoc(),
+                                                      moviePageItemsRecord,
+                                                      FFAppState()
+                                                          .activeProfileRef!
+                                                          .id,
+                                                      '',
+                                                    );
+                                                  }
+                                                } else {
+                                                  if (valueOrDefault<bool>(
+                                                          currentUserDocument
+                                                              ?.isAdmin,
+                                                          false) ==
+                                                      true) {
+                                                    if ((moviePageItemsRecord !=
+                                                            null) !=
+                                                        true) {
                                                       await actions
                                                           .launchExternalPlayer(
                                                         widget.movieDoc,
@@ -663,22 +682,6 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                                             .id,
                                                         '',
                                                       );
-                                                    }
-                                                  } else {
-                                                    if (isWeb) {
-                                                      _model.webPlayLink2 =
-                                                          await actions
-                                                              .generateWebStreamUrl(
-                                                        widget
-                                                            .movieDoc?.videoUrl,
-                                                        widget.movieDoc
-                                                            ?.driveType,
-                                                        FFAppState()
-                                                            .activeProfileRef
-                                                            ?.id,
-                                                      );
-                                                      await launchURL(
-                                                          _model.webPlayLink2!);
                                                     } else {
                                                       await actions
                                                           .launchExternalPlayer(
@@ -692,74 +695,6 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                                             .id,
                                                         '',
                                                       );
-                                                    }
-                                                  }
-                                                } else {
-                                                  if (valueOrDefault<bool>(
-                                                          currentUserDocument
-                                                              ?.isAdmin,
-                                                          false) ==
-                                                      true) {
-                                                    if ((moviePageItemsRecord !=
-                                                            null) !=
-                                                        true) {
-                                                      if (isWeb) {
-                                                        _model.webPlayLink =
-                                                            await actions
-                                                                .generateWebStreamUrl(
-                                                          widget.movieDoc
-                                                              ?.videoUrl,
-                                                          widget.movieDoc
-                                                              ?.driveType,
-                                                          FFAppState()
-                                                              .activeProfileRef
-                                                              ?.id,
-                                                        );
-                                                        await launchURL(_model
-                                                            .webPlayLink!);
-                                                      } else {
-                                                        await actions
-                                                            .launchExternalPlayer(
-                                                          widget.movieDoc,
-                                                          functions
-                                                              .emptyEpisodeDoc(),
-                                                          functions
-                                                              .emptyContinueDoc(),
-                                                          FFAppState()
-                                                              .activeProfileRef!
-                                                              .id,
-                                                          '',
-                                                        );
-                                                      }
-                                                    } else {
-                                                      if (isWeb) {
-                                                        _model.webPlayLink3 =
-                                                            await actions
-                                                                .generateWebStreamUrl(
-                                                          widget.movieDoc
-                                                              ?.videoUrl,
-                                                          widget.movieDoc
-                                                              ?.driveType,
-                                                          FFAppState()
-                                                              .activeProfileRef
-                                                              ?.id,
-                                                        );
-                                                        await launchURL(_model
-                                                            .webPlayLink3!);
-                                                      } else {
-                                                        await actions
-                                                            .launchExternalPlayer(
-                                                          functions
-                                                              .emptyMovieDoc(),
-                                                          functions
-                                                              .emptyEpisodeDoc(),
-                                                          moviePageItemsRecord,
-                                                          FFAppState()
-                                                              .activeProfileRef!
-                                                              .id,
-                                                          '',
-                                                        );
-                                                      }
                                                     }
                                                   } else {
                                                     await showDialog(
@@ -785,8 +720,6 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                                     );
                                                   }
                                                 }
-
-                                                safeSetState(() {});
                                               },
                                               child: Container(
                                                 decoration: BoxDecoration(
