@@ -36,8 +36,7 @@ Future<void> updateMetadataDirectly(
   }
 
   Map<String, dynamic> updates = {};
-  String apiKey =
-      "c5668e874013b9df2a50fba06875a331"; // TMDB API Key for episodes
+  String apiKey = "c5668e874013b9df2a50fba06875a331"; // TMDB API Key
   String tmdbIdStr = apiFullData['id'].toString();
 
   try {
@@ -120,6 +119,87 @@ Future<void> updateMetadataDirectly(
         }
       }
       updates['content_rating'] = contentRating.isEmpty ? "NR" : contentRating;
+
+      // 🔥 SMART COLLECTION LOGIC (ONLY FOR MOVIES) 🔥
+      if (apiFullData['belongs_to_collection'] != null) {
+        var colInfo = apiFullData['belongs_to_collection'];
+        int colId = colInfo['id'];
+        String colName = colInfo['name'] ?? '';
+        String colPoster = colInfo['poster_path'] != null
+            ? 'https://image.tmdb.org/t/p/w500${colInfo['poster_path']}'
+            : '';
+        String colBackdrop = colInfo['backdrop_path'] != null
+            ? 'https://image.tmdb.org/t/p/w1280${colInfo['backdrop_path']}'
+            : '';
+
+        String colUrl =
+            "https://api.themoviedb.org/3/collection/$colId?api_key=$apiKey";
+
+        try {
+          final colRes = await http.get(Uri.parse(colUrl));
+          if (colRes.statusCode == 200) {
+            var colData = jsonDecode(colRes.body);
+            int releasedCount = 0;
+            DateTime now = DateTime.now();
+
+            if (colData['parts'] != null) {
+              for (var part in colData['parts']) {
+                if (part['release_date'] != null &&
+                    part['release_date'].toString().isNotEmpty) {
+                  try {
+                    DateTime releaseDate = DateTime.parse(part['release_date']);
+                    if (releaseDate.isBefore(now) ||
+                        releaseDate.isAtSameMomentAs(now)) {
+                      releasedCount++;
+                    }
+                  } catch (e) {
+                    // Ignore parsing error for bad dates
+                  }
+                }
+              }
+            }
+
+            if (releasedCount > 1) {
+              // ✅ Collection valid hai, check karein pehle se hai ya nahi
+              QuerySnapshot colSnapshot = await FirebaseFirestore.instance
+                  .collection('movie_collections')
+                  .where('tmdb_id', isEqualTo: colId)
+                  .limit(1)
+                  .get();
+
+              DocumentReference colRef;
+              if (colSnapshot.docs.isEmpty) {
+                // Nayi collection create karein
+                colRef = await FirebaseFirestore.instance
+                    .collection('movie_collections')
+                    .add({
+                  'tmdb_id': colId,
+                  'name': colName,
+                  'overview': colData['overview'] ?? '',
+                  'poster_image': colPoster,
+                  'backdrop_image': colBackdrop,
+                });
+                print("✨ Nayi Smart Collection ban gayi: $colName");
+              } else {
+                colRef = colSnapshot.docs.first.reference;
+              }
+              // Movie ko is collection se link karein
+              updates['collection_ref'] = colRef;
+              print("🔗 Movie linked to Collection: $colName");
+            } else {
+              // ⛔ Collection ignore karein
+              updates['collection_ref'] = FieldValue.delete();
+              print(
+                  "⛔ SMART SKIP: '$colName' has 1 or 0 released parts. Skipped.");
+            }
+          }
+        } catch (e) {
+          print("❌ TMDB Collection check failed: $e");
+        }
+      } else {
+        // Agar pehle kisi collection mein thi lekin ab API mein nahi, toh remove kar do
+        updates['collection_ref'] = FieldValue.delete();
+      }
 
       // --- 5. SERIES SPECIFIC ---
     } else {
