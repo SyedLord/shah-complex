@@ -586,8 +586,6 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                   (widget.profileDoc != null))
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    await widget.profileDoc!.reference
-                                        .delete();
                                     await actions.deleteContinueWatching(
                                       widget.profileDoc!.reference.id,
                                     );
@@ -595,6 +593,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                       'my_list',
                                       widget.profileDoc!.reference,
                                     );
+                                    await widget.profileDoc!.reference
+                                        .delete();
 
                                     context.goNamed(
                                         ProfileSelectionWidget.routeName);
