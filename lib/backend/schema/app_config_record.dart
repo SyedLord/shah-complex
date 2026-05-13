@@ -25,9 +25,27 @@ class AppConfigRecord extends FirestoreRecord {
   DateTime? get homeLastUpdated => _homeLastUpdated;
   bool hasHomeLastUpdated() => _homeLastUpdated != null;
 
+  // "latest_build_number" field.
+  int? _latestBuildNumber;
+  int get latestBuildNumber => _latestBuildNumber ?? 0;
+  bool hasLatestBuildNumber() => _latestBuildNumber != null;
+
+  // "force_update" field.
+  bool? _forceUpdate;
+  bool get forceUpdate => _forceUpdate ?? false;
+  bool hasForceUpdate() => _forceUpdate != null;
+
+  // "update_url" field.
+  String? _updateUrl;
+  String get updateUrl => _updateUrl ?? '';
+  bool hasUpdateUrl() => _updateUrl != null;
+
   void _initializeFields() {
     _trendingLastUpdated = snapshotData['trending_last_updated'] as DateTime?;
     _homeLastUpdated = snapshotData['home_last_updated'] as DateTime?;
+    _latestBuildNumber = castToType<int>(snapshotData['latest_build_number']);
+    _forceUpdate = snapshotData['force_update'] as bool?;
+    _updateUrl = snapshotData['update_url'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -67,11 +85,17 @@ class AppConfigRecord extends FirestoreRecord {
 Map<String, dynamic> createAppConfigRecordData({
   DateTime? trendingLastUpdated,
   DateTime? homeLastUpdated,
+  int? latestBuildNumber,
+  bool? forceUpdate,
+  String? updateUrl,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'trending_last_updated': trendingLastUpdated,
       'home_last_updated': homeLastUpdated,
+      'latest_build_number': latestBuildNumber,
+      'force_update': forceUpdate,
+      'update_url': updateUrl,
     }.withoutNulls,
   );
 
@@ -84,12 +108,20 @@ class AppConfigRecordDocumentEquality implements Equality<AppConfigRecord> {
   @override
   bool equals(AppConfigRecord? e1, AppConfigRecord? e2) {
     return e1?.trendingLastUpdated == e2?.trendingLastUpdated &&
-        e1?.homeLastUpdated == e2?.homeLastUpdated;
+        e1?.homeLastUpdated == e2?.homeLastUpdated &&
+        e1?.latestBuildNumber == e2?.latestBuildNumber &&
+        e1?.forceUpdate == e2?.forceUpdate &&
+        e1?.updateUrl == e2?.updateUrl;
   }
 
   @override
-  int hash(AppConfigRecord? e) =>
-      const ListEquality().hash([e?.trendingLastUpdated, e?.homeLastUpdated]);
+  int hash(AppConfigRecord? e) => const ListEquality().hash([
+        e?.trendingLastUpdated,
+        e?.homeLastUpdated,
+        e?.latestBuildNumber,
+        e?.forceUpdate,
+        e?.updateUrl
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is AppConfigRecord;

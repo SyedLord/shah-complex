@@ -13,6 +13,10 @@ class ProfileSelectionModel extends FlutterFlowModel<ProfileSelectionWidget> {
 
   // Stores action output result for [Firestore Query - Query a collection] action in ProfileSelection widget.
   List<ProfilesRecord>? fetchedProfiles;
+  // Stores action output result for [Custom Action - getAppBuildNumber] action in ProfileSelection widget.
+  int? buildNumber;
+  // Stores action output result for [Firestore Query - Query a collection] action in ProfileSelection widget.
+  AppConfigRecord? updateApp;
 
   @override
   void initState(BuildContext context) {}

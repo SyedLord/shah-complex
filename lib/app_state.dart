@@ -311,6 +311,24 @@ class FFAppState extends ChangeNotifier {
     _isEditMode = value;
   }
 
+  bool _appUpdate = false;
+  bool get appUpdate => _appUpdate;
+  set appUpdate(bool value) {
+    _appUpdate = value;
+  }
+
+  String _updateLink = '';
+  String get updateLink => _updateLink;
+  set updateLink(String value) {
+    _updateLink = value;
+  }
+
+  bool _updateAppNow = false;
+  bool get updateAppNow => _updateAppNow;
+  set updateAppNow(bool value) {
+    _updateAppNow = value;
+  }
+
   final _profileWatchlistCountManager = FutureRequestManager<int>();
   Future<int> profileWatchlistCount({
     String? uniqueQueryKey,

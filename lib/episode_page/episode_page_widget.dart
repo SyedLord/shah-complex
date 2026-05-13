@@ -4,6 +4,7 @@ import '/components/description_widget_widget.dart';
 import '/components/episode_item_widget.dart';
 import '/components/i_m_d_b_ratings_widget.dart';
 import '/components/subscription_expired_widget.dart';
+import '/components/update_app_popup_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -216,43 +217,32 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              if (currentUserDocument!
-                                                      .subscriptionExpiry! >=
-                                                  getCurrentTimestamp) {
-                                                if ((episodePageItemsRecord !=
-                                                        null) !=
-                                                    true) {
-                                                  await actions
-                                                      .launchExternalPlayer(
-                                                    functions.emptyMovieDoc(),
-                                                    widget.episodeDoc,
-                                                    functions
-                                                        .emptyContinueDoc(),
-                                                    FFAppState()
-                                                        .activeProfileRef!
-                                                        .id,
-                                                    widget.episodeDoc
-                                                        ?.parentReference.id,
-                                                  );
-                                                } else {
-                                                  await actions
-                                                      .launchExternalPlayer(
-                                                    functions.emptyMovieDoc(),
-                                                    functions.emptyEpisodeDoc(),
-                                                    episodePageItemsRecord,
-                                                    FFAppState()
-                                                        .activeProfileRef!
-                                                        .id,
-                                                    widget.episodeDoc
-                                                        ?.parentReference.id,
-                                                  );
-                                                }
+                                              if (FFAppState().appUpdate) {
+                                                await showDialog(
+                                                  barrierDismissible: false,
+                                                  context: context,
+                                                  builder: (dialogContext) {
+                                                    return Dialog(
+                                                      elevation: 0,
+                                                      insetPadding:
+                                                          EdgeInsets.zero,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                                  0.0, 0.0)
+                                                              .resolve(
+                                                                  Directionality.of(
+                                                                      context)),
+                                                      child:
+                                                          UpdateAppPopupWidget(),
+                                                    );
+                                                  },
+                                                );
                                               } else {
-                                                if (valueOrDefault<bool>(
-                                                        currentUserDocument
-                                                            ?.isAdmin,
-                                                        false) ==
-                                                    true) {
+                                                if (currentUserDocument!
+                                                        .subscriptionExpiry! >=
+                                                    getCurrentTimestamp) {
                                                   if ((episodePageItemsRecord !=
                                                           null) !=
                                                       true) {
@@ -283,27 +273,69 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                     );
                                                   }
                                                 } else {
-                                                  await showDialog(
-                                                    barrierDismissible: false,
-                                                    context: context,
-                                                    builder: (dialogContext) {
-                                                      return Dialog(
-                                                        elevation: 0,
-                                                        insetPadding:
-                                                            EdgeInsets.zero,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                    0.0, 0.0)
-                                                                .resolve(
-                                                                    Directionality.of(
-                                                                        context)),
-                                                        child:
-                                                            SubscriptionExpiredWidget(),
+                                                  if (valueOrDefault<bool>(
+                                                          currentUserDocument
+                                                              ?.isAdmin,
+                                                          false) ==
+                                                      true) {
+                                                    if ((episodePageItemsRecord !=
+                                                            null) !=
+                                                        true) {
+                                                      await actions
+                                                          .launchExternalPlayer(
+                                                        functions
+                                                            .emptyMovieDoc(),
+                                                        widget.episodeDoc,
+                                                        functions
+                                                            .emptyContinueDoc(),
+                                                        FFAppState()
+                                                            .activeProfileRef!
+                                                            .id,
+                                                        widget
+                                                            .episodeDoc
+                                                            ?.parentReference
+                                                            .id,
                                                       );
-                                                    },
-                                                  );
+                                                    } else {
+                                                      await actions
+                                                          .launchExternalPlayer(
+                                                        functions
+                                                            .emptyMovieDoc(),
+                                                        functions
+                                                            .emptyEpisodeDoc(),
+                                                        episodePageItemsRecord,
+                                                        FFAppState()
+                                                            .activeProfileRef!
+                                                            .id,
+                                                        widget
+                                                            .episodeDoc
+                                                            ?.parentReference
+                                                            .id,
+                                                      );
+                                                    }
+                                                  } else {
+                                                    await showDialog(
+                                                      barrierDismissible: false,
+                                                      context: context,
+                                                      builder: (dialogContext) {
+                                                        return Dialog(
+                                                          elevation: 0,
+                                                          insetPadding:
+                                                              EdgeInsets.zero,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          alignment: AlignmentDirectional(
+                                                                  0.0, 0.0)
+                                                              .resolve(
+                                                                  Directionality.of(
+                                                                      context)),
+                                                          child:
+                                                              SubscriptionExpiredWidget(),
+                                                        );
+                                                      },
+                                                    );
+                                                  }
                                                 }
                                               }
                                             },
@@ -586,42 +618,30 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
-                                          if (currentUserDocument!
-                                                  .subscriptionExpiry! >=
-                                              getCurrentTimestamp) {
-                                            if ((episodePageItemsRecord !=
-                                                    null) !=
-                                                true) {
-                                              await actions
-                                                  .launchExternalPlayer(
-                                                functions.emptyMovieDoc(),
-                                                widget.episodeDoc,
-                                                functions.emptyContinueDoc(),
-                                                FFAppState()
-                                                    .activeProfileRef!
-                                                    .id,
-                                                widget.episodeDoc
-                                                    ?.parentReference.id,
-                                              );
-                                            } else {
-                                              await actions
-                                                  .launchExternalPlayer(
-                                                functions.emptyMovieDoc(),
-                                                functions.emptyEpisodeDoc(),
-                                                episodePageItemsRecord,
-                                                FFAppState()
-                                                    .activeProfileRef!
-                                                    .id,
-                                                widget.episodeDoc
-                                                    ?.parentReference.id,
-                                              );
-                                            }
+                                          if (FFAppState().appUpdate) {
+                                            await showDialog(
+                                              barrierDismissible: false,
+                                              context: context,
+                                              builder: (dialogContext) {
+                                                return Dialog(
+                                                  elevation: 0,
+                                                  insetPadding: EdgeInsets.zero,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                              0.0, 0.0)
+                                                          .resolve(
+                                                              Directionality.of(
+                                                                  context)),
+                                                  child: UpdateAppPopupWidget(),
+                                                );
+                                              },
+                                            );
                                           } else {
-                                            if (valueOrDefault<bool>(
-                                                    currentUserDocument
-                                                        ?.isAdmin,
-                                                    false) ==
-                                                true) {
+                                            if (currentUserDocument!
+                                                    .subscriptionExpiry! >=
+                                                getCurrentTimestamp) {
                                               if ((episodePageItemsRecord !=
                                                       null) !=
                                                   true) {
@@ -650,27 +670,62 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                 );
                                               }
                                             } else {
-                                              await showDialog(
-                                                barrierDismissible: false,
-                                                context: context,
-                                                builder: (dialogContext) {
-                                                  return Dialog(
-                                                    elevation: 0,
-                                                    insetPadding:
-                                                        EdgeInsets.zero,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                                0.0, 0.0)
-                                                            .resolve(
-                                                                Directionality.of(
-                                                                    context)),
-                                                    child:
-                                                        SubscriptionExpiredWidget(),
+                                              if (valueOrDefault<bool>(
+                                                      currentUserDocument
+                                                          ?.isAdmin,
+                                                      false) ==
+                                                  true) {
+                                                if ((episodePageItemsRecord !=
+                                                        null) !=
+                                                    true) {
+                                                  await actions
+                                                      .launchExternalPlayer(
+                                                    functions.emptyMovieDoc(),
+                                                    widget.episodeDoc,
+                                                    functions
+                                                        .emptyContinueDoc(),
+                                                    FFAppState()
+                                                        .activeProfileRef!
+                                                        .id,
+                                                    widget.episodeDoc
+                                                        ?.parentReference.id,
                                                   );
-                                                },
-                                              );
+                                                } else {
+                                                  await actions
+                                                      .launchExternalPlayer(
+                                                    functions.emptyMovieDoc(),
+                                                    functions.emptyEpisodeDoc(),
+                                                    episodePageItemsRecord,
+                                                    FFAppState()
+                                                        .activeProfileRef!
+                                                        .id,
+                                                    widget.episodeDoc
+                                                        ?.parentReference.id,
+                                                  );
+                                                }
+                                              } else {
+                                                await showDialog(
+                                                  barrierDismissible: false,
+                                                  context: context,
+                                                  builder: (dialogContext) {
+                                                    return Dialog(
+                                                      elevation: 0,
+                                                      insetPadding:
+                                                          EdgeInsets.zero,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                                  0.0, 0.0)
+                                                              .resolve(
+                                                                  Directionality.of(
+                                                                      context)),
+                                                      child:
+                                                          SubscriptionExpiredWidget(),
+                                                    );
+                                                  },
+                                                );
+                                              }
                                             }
                                           }
                                         },

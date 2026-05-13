@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/subscription_expired_widget.dart';
+import '/components/update_app_popup_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -106,19 +107,24 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              if (currentUserDocument!.subscriptionExpiry! >=
-                                  getCurrentTimestamp) {
-                                await actions.launchExternalPlayer(
-                                  functions.emptyMovieDoc(),
-                                  widget.episodeDoc,
-                                  functions.emptyContinueDoc(),
-                                  FFAppState().activeProfileRef!.id,
-                                  widget.episodeDoc?.parentReference.id,
+                              if (FFAppState().appUpdate) {
+                                await showDialog(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (dialogContext) {
+                                    return Dialog(
+                                      elevation: 0,
+                                      insetPadding: EdgeInsets.zero,
+                                      backgroundColor: Colors.transparent,
+                                      alignment: AlignmentDirectional(0.0, 0.0)
+                                          .resolve(Directionality.of(context)),
+                                      child: UpdateAppPopupWidget(),
+                                    );
+                                  },
                                 );
                               } else {
-                                if (valueOrDefault<bool>(
-                                        currentUserDocument?.isAdmin, false) ==
-                                    true) {
+                                if (currentUserDocument!.subscriptionExpiry! >=
+                                    getCurrentTimestamp) {
                                   await actions.launchExternalPlayer(
                                     functions.emptyMovieDoc(),
                                     widget.episodeDoc,
@@ -127,22 +133,35 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                                     widget.episodeDoc?.parentReference.id,
                                   );
                                 } else {
-                                  await showDialog(
-                                    barrierDismissible: false,
-                                    context: context,
-                                    builder: (dialogContext) {
-                                      return Dialog(
-                                        elevation: 0,
-                                        insetPadding: EdgeInsets.zero,
-                                        backgroundColor: Colors.transparent,
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0)
-                                                .resolve(
-                                                    Directionality.of(context)),
-                                        child: SubscriptionExpiredWidget(),
-                                      );
-                                    },
-                                  );
+                                  if (valueOrDefault<bool>(
+                                          currentUserDocument?.isAdmin,
+                                          false) ==
+                                      true) {
+                                    await actions.launchExternalPlayer(
+                                      functions.emptyMovieDoc(),
+                                      widget.episodeDoc,
+                                      functions.emptyContinueDoc(),
+                                      FFAppState().activeProfileRef!.id,
+                                      widget.episodeDoc?.parentReference.id,
+                                    );
+                                  } else {
+                                    await showDialog(
+                                      barrierDismissible: false,
+                                      context: context,
+                                      builder: (dialogContext) {
+                                        return Dialog(
+                                          elevation: 0,
+                                          insetPadding: EdgeInsets.zero,
+                                          backgroundColor: Colors.transparent,
+                                          alignment: AlignmentDirectional(
+                                                  0.0, 0.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          child: SubscriptionExpiredWidget(),
+                                        );
+                                      },
+                                    );
+                                  }
                                 }
                               }
                             },

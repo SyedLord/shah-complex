@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -53,6 +54,21 @@ class _ProfileSelectionWidgetState extends State<ProfileSelectionWidget> {
           }.withoutNulls,
         );
       }
+      _model.buildNumber = await actions.getAppBuildNumber();
+      _model.updateApp = await queryAppConfigRecordOnce(
+        singleRecord: true,
+      ).then((s) => s.firstOrNull);
+      if (_model.updateApp!.latestBuildNumber > _model.buildNumber!) {
+        FFAppState().appUpdate = true;
+        FFAppState().updateLink = _model.updateApp!.updateUrl;
+        FFAppState().updateAppNow = true;
+        safeSetState(() {});
+      } else {
+        FFAppState().appUpdate = false;
+        FFAppState().updateAppNow = false;
+        safeSetState(() {});
+      }
+
       if (_model.fetchedProfiles!.length < 5) {
         _model.showAddProfile = true;
         safeSetState(() {});
