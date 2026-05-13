@@ -2145,112 +2145,123 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                             borderRadius: BorderRadius.circular(0.0),
                             child: BackdropFilter(
                               filter: ImageFilter.blur(
-                                sigmaX: 2.0,
-                                sigmaY: 2.0,
+                                sigmaX: 20.0,
+                                sigmaY: 20.0,
                               ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 40.0, 16.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.asset(
-                                        'assets/images/Shah_Complex_Logo.png',
-                                        width: 40.0,
-                                        height: 40.0,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        FlutterFlowIconButton(
-                                          buttonSize: 40.0,
-                                          icon: Icon(
-                                            Icons.search_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 24.0,
-                                          ),
-                                          onPressed: () async {
-                                            context.pushNamed(
-                                                SearchWidget.routeName);
-                                          },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 40.0, 16.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image.asset(
+                                          'assets/images/Shah_Complex_Logo.png',
+                                          width: 40.0,
+                                          height: 40.0,
+                                          fit: BoxFit.cover,
                                         ),
-                                        Builder(
-                                          builder: (context) => InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              await showAlignedDialog(
-                                                context: context,
-                                                isGlobal: false,
-                                                avoidOverflow: true,
-                                                targetAnchor:
-                                                    AlignmentDirectional(
-                                                            1.0, 1.0)
-                                                        .resolve(
-                                                            Directionality.of(
-                                                                context)),
-                                                followerAnchor:
-                                                    AlignmentDirectional(
-                                                            1.0, -1.0)
-                                                        .resolve(
-                                                            Directionality.of(
-                                                                context)),
-                                                builder: (dialogContext) {
-                                                  return Material(
-                                                    color: Colors.transparent,
-                                                    child:
-                                                        ProfileIconDropdownWidget(),
-                                                  );
-                                                },
-                                              );
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          FlutterFlowIconButton(
+                                            buttonSize: 40.0,
+                                            icon: Icon(
+                                              Icons.search_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () async {
+                                              context.pushNamed(
+                                                  SearchWidget.routeName);
                                             },
-                                            child: Container(
-                                              width: 32.0,
-                                              height: 32.0,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                shape: BoxShape.circle,
-                                              ),
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: CachedNetworkImage(
-                                                  fadeInDuration: Duration(
-                                                      milliseconds: 200),
-                                                  fadeOutDuration: Duration(
-                                                      milliseconds: 200),
-                                                  imageUrl:
-                                                      homeDashboardProfilesRecord
-                                                          .profileImage,
-                                                  width: 200.0,
-                                                  height: 200.0,
-                                                  fit: BoxFit.cover,
+                                          ),
+                                          Builder(
+                                            builder: (context) => InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await showAlignedDialog(
+                                                  context: context,
+                                                  isGlobal: false,
+                                                  avoidOverflow: true,
+                                                  targetAnchor:
+                                                      AlignmentDirectional(
+                                                              1.0, 1.0)
+                                                          .resolve(
+                                                              Directionality.of(
+                                                                  context)),
+                                                  followerAnchor:
+                                                      AlignmentDirectional(
+                                                              1.0, -1.0)
+                                                          .resolve(
+                                                              Directionality.of(
+                                                                  context)),
+                                                  builder: (dialogContext) {
+                                                    return Material(
+                                                      color: Colors.transparent,
+                                                      child:
+                                                          ProfileIconDropdownWidget(),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                              child: Container(
+                                                width: 32.0,
+                                                height: 32.0,
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: CachedNetworkImage(
+                                                    fadeInDuration: Duration(
+                                                        milliseconds: 200),
+                                                    fadeOutDuration: Duration(
+                                                        milliseconds: 200),
+                                                    imageUrl:
+                                                        homeDashboardProfilesRecord
+                                                            .profileImage,
+                                                    width: 200.0,
+                                                    height: 200.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ].divide(SizedBox(width: 24.0)),
-                                    ),
-                                  ],
+                                        ].divide(SizedBox(width: 24.0)),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
