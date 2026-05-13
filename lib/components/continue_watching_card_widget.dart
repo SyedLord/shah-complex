@@ -157,28 +157,37 @@ class _ContinueWatchingCardWidgetState
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-          child: Text(
-            valueOrDefault<String>(
-              widget.continueDoc?.contentType == 'movie'
-                  ? widget.continueDoc?.title
-                  : widget.continueDoc?.showName,
-              'Title',
-            ),
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  font: GoogleFonts.inter(
-                    fontWeight: FontWeight.w600,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                  ),
-                  letterSpacing: 0.0,
-                  fontWeight: FontWeight.w600,
-                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+        Align(
+          alignment: AlignmentDirectional(0.0, 0.0),
+          child: Container(
+            width: 190.0,
+            decoration: BoxDecoration(),
+            alignment: AlignmentDirectional(0.0, 0.0),
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+              child: Text(
+                valueOrDefault<String>(
+                  widget.continueDoc?.contentType == 'movie'
+                      ? widget.continueDoc?.title
+                      : widget.continueDoc?.showName,
+                  'Title',
                 ),
-            overflow: TextOverflow.fade,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      font: GoogleFonts.inter(
+                        fontWeight: FontWeight.w600,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                      ),
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w600,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                    ),
+                overflow: TextOverflow.fade,
+              ),
+            ),
           ),
         ),
         if (widget.continueDoc?.contentType != 'movie')
