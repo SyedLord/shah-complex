@@ -166,6 +166,7 @@ class _ContinueWatchingCardWidgetState
                   : widget.continueDoc?.showName,
               'Title',
             ),
+            textAlign: TextAlign.center,
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   font: GoogleFonts.inter(
                     fontWeight: FontWeight.w600,
@@ -176,6 +177,7 @@ class _ContinueWatchingCardWidgetState
                   fontWeight: FontWeight.w600,
                   fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                 ),
+            overflow: TextOverflow.fade,
           ),
         ),
         if (widget.continueDoc?.contentType != 'movie')
