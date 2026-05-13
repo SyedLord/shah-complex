@@ -167,6 +167,7 @@ class _ContinueWatchingCardWidgetState
               'Title',
             ),
             textAlign: TextAlign.center,
+            maxLines: 1,
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   font: GoogleFonts.inter(
                     fontWeight: FontWeight.w600,
