@@ -16,3 +16,4 @@ export '/new_hot/new_hot_widget.dart' show NewHotWidget;
 export '/episode_page/episode_page_widget.dart' show EpisodePageWidget;
 export '/sign_up/sign_up_widget.dart' show SignUpWidget;
 export '/collection_page/collection_page_widget.dart' show CollectionPageWidget;
+export '/password_reset/password_reset_widget.dart' show PasswordResetWidget;

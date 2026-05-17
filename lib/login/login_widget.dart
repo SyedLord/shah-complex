@@ -335,7 +335,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           .designToken
                                           .spacing
                                           .sm),
-                                  child: Text(
+                                  child: SelectionArea(
+                                      child: Text(
                                     'Forgot password?',
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
@@ -358,7 +359,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                   .fontStyle,
                                           lineHeight: 1.3,
                                         ),
-                                  ),
+                                  )),
                                 ),
                               ),
                           ].divide(SizedBox(

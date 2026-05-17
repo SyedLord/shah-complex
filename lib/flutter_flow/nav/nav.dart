@@ -256,6 +256,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: PasswordResetWidget.routeName,
+          path: PasswordResetWidget.routePath,
+          builder: (context, params) => PasswordResetWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
