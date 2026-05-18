@@ -177,7 +177,7 @@ final parametersBuilderMap =
           'nextBillingDate': getParameter<DateTime>(data, 'nextBillingDate'),
         },
       ),
-  'NewScreen6': ParameterData.none(),
+  'SubscriptionPage': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

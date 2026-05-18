@@ -274,9 +274,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: NewScreen6Widget.routeName,
-          path: NewScreen6Widget.routePath,
-          builder: (context, params) => NewScreen6Widget(),
+          name: SubscriptionPageWidget.routeName,
+          path: SubscriptionPageWidget.routePath,
+          builder: (context, params) => SubscriptionPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

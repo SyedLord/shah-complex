@@ -5,28 +5,28 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'new_screen6_model.dart';
-export 'new_screen6_model.dart';
+import 'subscription_page_model.dart';
+export 'subscription_page_model.dart';
 
-class NewScreen6Widget extends StatefulWidget {
-  const NewScreen6Widget({super.key});
+class SubscriptionPageWidget extends StatefulWidget {
+  const SubscriptionPageWidget({super.key});
 
-  static String routeName = 'NewScreen6';
-  static String routePath = '/newScreen6';
+  static String routeName = 'SubscriptionPage';
+  static String routePath = '/subscriptionPage';
 
   @override
-  State<NewScreen6Widget> createState() => _NewScreen6WidgetState();
+  State<SubscriptionPageWidget> createState() => _SubscriptionPageWidgetState();
 }
 
-class _NewScreen6WidgetState extends State<NewScreen6Widget> {
-  late NewScreen6Model _model;
+class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
+  late SubscriptionPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => NewScreen6Model());
+    _model = createModel(context, () => SubscriptionPageModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -41,7 +41,7 @@ class _NewScreen6WidgetState extends State<NewScreen6Widget> {
   @override
   Widget build(BuildContext context) {
     return Title(
-        title: 'NewScreen6',
+        title: 'SubscriptionPage',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
           onTap: () {
