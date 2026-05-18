@@ -24,6 +24,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'home_dashboard_model.dart';
 export 'home_dashboard_model.dart';
 
@@ -64,7 +65,9 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
               backgroundColor: Colors.transparent,
               alignment: AlignmentDirectional(0.0, 0.0)
                   .resolve(Directionality.of(context)),
-              child: UpdateAppPopupWidget(),
+              child: WebViewAware(
+                child: UpdateAppPopupWidget(),
+              ),
             );
           },
         );
@@ -2221,8 +2224,10 @@ class _HomeDashboardWidgetState extends State<HomeDashboardWidget> {
                                                   builder: (dialogContext) {
                                                     return Material(
                                                       color: Colors.transparent,
-                                                      child:
-                                                          ProfileIconDropdownWidget(),
+                                                      child: WebViewAware(
+                                                        child:
+                                                            ProfileIconDropdownWidget(),
+                                                      ),
                                                     );
                                                   },
                                                 );

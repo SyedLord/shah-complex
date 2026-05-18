@@ -178,6 +178,11 @@ final parametersBuilderMap =
         },
       ),
   'SubscriptionPage': ParameterData.none(),
+  'Browser': (data) async => ParameterData(
+        allParams: {
+          'url': getParameter<String>(data, 'url'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

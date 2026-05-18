@@ -22,6 +22,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'movie_page_model.dart';
 export 'movie_page_model.dart';
 
@@ -209,8 +210,10 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                                             .resolve(
                                                                 Directionality.of(
                                                                     context)),
-                                                    child:
-                                                        UpdateAppPopupWidget(),
+                                                    child: WebViewAware(
+                                                      child:
+                                                          UpdateAppPopupWidget(),
+                                                    ),
                                                   );
                                                 },
                                               );
@@ -295,8 +298,10 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                                                 .resolve(
                                                                     Directionality.of(
                                                                         context)),
-                                                        child:
-                                                            SubscriptionExpiredWidget(),
+                                                        child: WebViewAware(
+                                                          child:
+                                                              SubscriptionExpiredWidget(),
+                                                        ),
                                                       );
                                                     },
                                                   );
@@ -649,8 +654,10 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                                               .resolve(
                                                                   Directionality.of(
                                                                       context)),
-                                                      child:
-                                                          UpdateAppPopupWidget(),
+                                                      child: WebViewAware(
+                                                        child:
+                                                            UpdateAppPopupWidget(),
+                                                      ),
                                                     );
                                                   },
                                                 );
@@ -738,8 +745,10 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                                               .resolve(
                                                                   Directionality.of(
                                                                       context)),
-                                                          child:
-                                                              SubscriptionExpiredWidget(),
+                                                          child: WebViewAware(
+                                                            child:
+                                                                SubscriptionExpiredWidget(),
+                                                          ),
                                                         );
                                                       },
                                                     );
@@ -1909,10 +1918,13 @@ class _MoviePageWidgetState extends State<MoviePageWidget> {
                                           builder: (dialogContext) {
                                             return Material(
                                               color: Colors.transparent,
-                                              child: ProfileIconDropdownWidget(
-                                                docRefMovie:
-                                                    widget.movieDoc?.reference,
-                                                mediaType: 'movie',
+                                              child: WebViewAware(
+                                                child:
+                                                    ProfileIconDropdownWidget(
+                                                  docRefMovie: widget
+                                                      .movieDoc?.reference,
+                                                  mediaType: 'movie',
+                                                ),
                                               ),
                                             );
                                           },

@@ -277,6 +277,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: SubscriptionPageWidget.routeName,
           path: SubscriptionPageWidget.routePath,
           builder: (context, params) => SubscriptionPageWidget(),
+        ),
+        FFRoute(
+          name: BrowserWidget.routeName,
+          path: BrowserWidget.routePath,
+          builder: (context, params) => BrowserWidget(
+            url: params.getParam(
+              'url',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

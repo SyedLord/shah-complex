@@ -22,6 +22,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'episode_page_model.dart';
 export 'episode_page_model.dart';
 
@@ -70,7 +71,9 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                 backgroundColor: Colors.transparent,
                 alignment: AlignmentDirectional(0.0, 0.0)
                     .resolve(Directionality.of(context)),
-                child: SubscriptionExpiredWidget(),
+                child: WebViewAware(
+                  child: SubscriptionExpiredWidget(),
+                ),
               );
             },
           );
@@ -234,8 +237,10 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                               .resolve(
                                                                   Directionality.of(
                                                                       context)),
-                                                      child:
-                                                          UpdateAppPopupWidget(),
+                                                      child: WebViewAware(
+                                                        child:
+                                                            UpdateAppPopupWidget(),
+                                                      ),
                                                     );
                                                   },
                                                 );
@@ -330,8 +335,10 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                               .resolve(
                                                                   Directionality.of(
                                                                       context)),
-                                                          child:
-                                                              SubscriptionExpiredWidget(),
+                                                          child: WebViewAware(
+                                                            child:
+                                                                SubscriptionExpiredWidget(),
+                                                          ),
                                                         );
                                                       },
                                                     );
@@ -634,7 +641,10 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                           .resolve(
                                                               Directionality.of(
                                                                   context)),
-                                                  child: UpdateAppPopupWidget(),
+                                                  child: WebViewAware(
+                                                    child:
+                                                        UpdateAppPopupWidget(),
+                                                  ),
                                                 );
                                               },
                                             );
@@ -720,8 +730,10 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                               .resolve(
                                                                   Directionality.of(
                                                                       context)),
-                                                      child:
-                                                          SubscriptionExpiredWidget(),
+                                                      child: WebViewAware(
+                                                        child:
+                                                            SubscriptionExpiredWidget(),
+                                                      ),
                                                     );
                                                   },
                                                 );

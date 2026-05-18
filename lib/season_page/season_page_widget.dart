@@ -21,6 +21,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'season_page_model.dart';
 export 'season_page_model.dart';
 
@@ -63,7 +64,9 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                 backgroundColor: Colors.transparent,
                 alignment: AlignmentDirectional(0.0, 0.0)
                     .resolve(Directionality.of(context)),
-                child: SubscriptionExpiredWidget(),
+                child: WebViewAware(
+                  child: SubscriptionExpiredWidget(),
+                ),
               );
             },
           );
@@ -1283,10 +1286,12 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
                                         builder: (dialogContext) {
                                           return Material(
                                             color: Colors.transparent,
-                                            child: ProfileIconDropdownWidget(
-                                              docRefSeries:
-                                                  widget.seriesDoc?.reference,
-                                              mediaType: 'series',
+                                            child: WebViewAware(
+                                              child: ProfileIconDropdownWidget(
+                                                docRefSeries: widget
+                                                    .seriesDoc?.reference,
+                                                mediaType: 'series',
+                                              ),
                                             ),
                                           );
                                         },

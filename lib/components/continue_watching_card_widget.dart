@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'continue_watching_card_model.dart';
 export 'continue_watching_card_model.dart';
 
@@ -95,7 +96,9 @@ class _ContinueWatchingCardWidgetState
                         backgroundColor: Colors.transparent,
                         alignment: AlignmentDirectional(0.0, 0.0)
                             .resolve(Directionality.of(context)),
-                        child: SubscriptionExpiredWidget(),
+                        child: WebViewAware(
+                          child: SubscriptionExpiredWidget(),
+                        ),
                       );
                     },
                   );

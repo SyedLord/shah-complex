@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'subscription_page_model.dart';
@@ -455,10 +456,23 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                             );
 
                             if ((_model.apiResult?.succeeded ?? true)) {
-                              await launchURL(
-                                  'https://sandbox.api.getsafepay.com/checkout/pay?env=sandbox&source=custom&beacon=${InitSafepayPaymentCall.trackertoken(
-                                (_model.apiResult?.jsonBody ?? ''),
-                              ).toString()}&order_id=${getCurrentTimestamp.millisecondsSinceEpoch.toString()}&client=sec_cf9a9c22-e407-40bf-b8eb-95cc44d53bb6&redirect_url=shahcomplex://shahcomplex.com/paymentSuccess');
+                              context.pushNamed(
+                                BrowserWidget.routeName,
+                                queryParameters: {
+                                  'url': serializeParam(
+                                    'https://sandbox.api.getsafepay.com/checkout/pay?env=sandbox&source=custom&beacon=${InitSafepayPaymentCall.trackertoken(
+                                      (_model.apiResult?.jsonBody ?? ''),
+                                    ).toString()}&order_id=${getCurrentTimestamp.millisecondsSinceEpoch.toString()}&client=sec_cf9a9c22-e407-40bf-b8eb-95cc44d53bb6&redirect_url=shahcomplex://shahcomplex.com/paymentSuccess',
+                                    ParamType.String,
+                                  ),
+                                }.withoutNulls,
+                                extra: <String, dynamic>{
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
+                                },
+                              );
                             }
 
                             safeSetState(() {});
