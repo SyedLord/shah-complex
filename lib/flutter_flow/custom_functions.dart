@@ -78,3 +78,8 @@ DateTime getStartOfDay() {
   // Time ko hata kar sirf aaj ki date aur raat 12:00 baje return karna
   return DateTime(now.year, now.month, now.day);
 }
+
+DateTime getNewExpiryDate() {
+  // Current time mein 30 din add kar ke return kar raha hai
+  return DateTime.now().add(Duration(days: 30));
+}

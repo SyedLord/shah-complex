@@ -66,6 +66,7 @@ abstract class FlutterFlowTheme {
   late Color transparent;
   late Color background90;
   late Color primary50;
+  late Color success10;
 
   FFDesignTokens get designToken => FFDesignTokens(this);
 
@@ -182,6 +183,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color transparent = const Color(0x00000000);
   late Color background90 = const Color(0xE6000000);
   late Color primary50 = const Color(0x80E50914);
+  late Color success10 = const Color(0x1A46D369);
 }
 
 abstract class Typography {
@@ -389,6 +391,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color transparent = const Color(0x00000000);
   late Color background90 = const Color(0xE6000000);
   late Color primary50 = const Color(0x80E50914);
+  late Color success10 = const Color(0x1A46D369);
 }
 
 class FFDesignTokens {

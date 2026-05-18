@@ -261,6 +261,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: PasswordResetWidget.routeName,
           path: PasswordResetWidget.routePath,
           builder: (context, params) => PasswordResetWidget(),
+        ),
+        FFRoute(
+          name: PaymentSuccessWidget.routeName,
+          path: PaymentSuccessWidget.routePath,
+          requireAuth: true,
+          builder: (context, params) => PaymentSuccessWidget(
+            nextBillingDate: params.getParam(
+              'nextBillingDate',
+              ParamType.DateTime,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: NewScreen6Widget.routeName,
+          path: NewScreen6Widget.routePath,
+          builder: (context, params) => NewScreen6Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -172,6 +172,12 @@ final parametersBuilderMap =
         },
       ),
   'PasswordReset': ParameterData.none(),
+  'PaymentSuccess': (data) async => ParameterData(
+        allParams: {
+          'nextBillingDate': getParameter<DateTime>(data, 'nextBillingDate'),
+        },
+      ),
+  'NewScreen6': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {
