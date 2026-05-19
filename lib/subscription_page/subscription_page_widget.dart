@@ -462,7 +462,7 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                   'url': serializeParam(
                                     'https://sandbox.api.getsafepay.com/checkout/pay?env=sandbox&source=custom&beacon=${InitSafepayPaymentCall.trackertoken(
                                       (_model.apiResult?.jsonBody ?? ''),
-                                    ).toString()}&order_id=${getCurrentTimestamp.millisecondsSinceEpoch.toString()}&client=sec_cf9a9c22-e407-40bf-b8eb-95cc44d53bb6&redirect_url=shahcomplex://shahcomplex.com/paymentSuccess',
+                                    ).toString()}&order_id=${getCurrentTimestamp.millisecondsSinceEpoch.toString()}&client=sec_cf9a9c22-e407-40bf-b8eb-95cc44d53bb6&redirect_url=shahcomplex://shahcomplex.com/PaymentSuccess',
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,
