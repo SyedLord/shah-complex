@@ -39,10 +39,11 @@ class InitSafepayPaymentCall {
     );
   }
 
-  static dynamic trackertoken(dynamic response) => getJsonField(
+  static String? trackertoken(dynamic response) =>
+      castToType<String>(getJsonField(
         response,
         r'''$.data.token''',
-      );
+      ));
 }
 
 class ApiPagingParams {
