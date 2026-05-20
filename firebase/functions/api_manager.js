@@ -37,6 +37,27 @@ async function _initSafepayPaymentCall(context, ffVariables) {
     isStreamingApi: false,
   });
 }
+async function _createAuthTokenCall(context, ffVariables) {
+  if (!context.auth) {
+    return _unauthenticatedResponse;
+  }
+
+  var url = `https://sandbox.api.getsafepay.com/client/passport/v1/token`;
+  var headers = {
+    Authorization: `Bearer 35d5b19a7acec1b416d383d850069f1cb8726f038e05ac23e8cf0c8d81dde928`,
+  };
+  var params = {};
+  var ffApiRequestBody = undefined;
+
+  return makeApiRequest({
+    method: "post",
+    url,
+    headers,
+    params,
+    returnBody: true,
+    isStreamingApi: false,
+  });
+}
 
 /// Helper functions to route to the appropriate API Call.
 
@@ -46,6 +67,7 @@ async function makeApiCall(context, data) {
 
   const callMap = {
     InitSafepayPaymentCall: _initSafepayPaymentCall,
+    CreateAuthTokenCall: _createAuthTokenCall,
   };
 
   if (!(callName in callMap)) {

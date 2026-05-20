@@ -35,23 +35,14 @@ class InitSafepayPaymentCall {
 
 class CreateAuthTokenCall {
   static Future<ApiCallResponse> call() async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'CreateAuthToken',
-      apiUrl: 'https://sandbox.api.getsafepay.com/client/passport/v1/token',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization':
-            'Bearer 35d5b19a7acec1b416d383d850069f1cb8726f038e05ac23e8cf0c8d81dde928',
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'CreateAuthTokenCall',
+        'variables': {},
       },
-      params: {},
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
     );
+    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static dynamic tbtToken(dynamic response) => getJsonField(
