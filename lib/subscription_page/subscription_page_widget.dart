@@ -509,35 +509,80 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                         _model.apiTbt =
                                             await CreateAuthTokenCall.call();
 
-                                        await currentUserReference!
-                                            .update(createUsersRecordData(
-                                          currentTracker: InitSafepayPaymentCall
-                                              .sessiontracker(
-                                            (_model.apiTracker?.jsonBody ?? ''),
-                                          ),
-                                        ));
+                                        if ((_model.apiTbt?.succeeded ??
+                                            true)) {
+                                          await currentUserReference!
+                                              .update(createUsersRecordData(
+                                            currentTracker:
+                                                InitSafepayPaymentCall
+                                                    .sessiontracker(
+                                              (_model.apiTracker?.jsonBody ??
+                                                  ''),
+                                            ),
+                                          ));
 
-                                        context.pushNamed(
-                                          BrowserWidget.routeName,
-                                          queryParameters: {
-                                            'url': serializeParam(
-                                              'https://sandbox.api.getsafepay.com/embedded/checkout/v1/activity?env=sandbox&beacon=${InitSafepayPaymentCall.sessiontracker(
-                                                (_model.apiTracker?.jsonBody ??
-                                                    ''),
-                                              )}&tbt=${CreateAuthTokenCall.tbtToken(
-                                                (_model.apiTbt?.jsonBody ?? ''),
-                                              ).toString()}&source=mobile&redirect_url=shahcomplex://shahcomplex.com/subscriptionPage',
-                                              ParamType.String,
+                                          context.pushNamed(
+                                            BrowserWidget.routeName,
+                                            queryParameters: {
+                                              'url': serializeParam(
+                                                'https://sandbox.api.getsafepay.com/embedded/checkout/v1/activity?env=sandbox&beacon=${InitSafepayPaymentCall.sessiontracker(
+                                                  (_model.apiTracker
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                )}&tbt=${CreateAuthTokenCall.tbtToken(
+                                                  (_model.apiTbt?.jsonBody ??
+                                                      ''),
+                                                ).toString()}&source=mobile&redirect_url=shahcomplex://shahcomplex.com/subscriptionPage',
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              '__transition_info__':
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.fade,
+                                              ),
+                                            },
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'error occured in 2nd api',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
                                             ),
-                                          }.withoutNulls,
-                                          extra: <String, dynamic>{
-                                            '__transition_info__':
-                                                TransitionInfo(
-                                              hasTransition: true,
-                                              transitionType:
-                                                  PageTransitionType.fade,
+                                          );
+                                        }
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'error occured in 1st api',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
                                             ),
-                                          },
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
                                         );
                                       }
 
