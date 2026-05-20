@@ -265,6 +265,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: SubscriptionPageWidget.routeName,
           path: SubscriptionPageWidget.routePath,
+          requireAuth: true,
           builder: (context, params) => SubscriptionPageWidget(),
         ),
         FFRoute(
