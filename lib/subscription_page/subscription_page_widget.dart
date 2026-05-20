@@ -518,10 +518,10 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                           BrowserWidget.routeName,
                                           queryParameters: {
                                             'url': serializeParam(
-                                              'https://sandbox.api.getsafepay.com/checkout/pay?env=sandbox&source=custom&beacon=${InitSafepayPaymentCall.trackertoken(
+                                              'https://sandbox.api.getsafepay.com/checkout/pay?env=sandbox&source=custom&tracker=${InitSafepayPaymentCall.trackertoken(
                                                 (_model.apiResult?.jsonBody ??
                                                     ''),
-                                              )}&order_id=${getCurrentTimestamp.millisecondsSinceEpoch.toString()}&client=sec_cf9a9c22-e407-40bf-b8eb-95cc44d53bb6&redirect_url=shahcomplex://shahcomplex.com/subscriptionPage',
+                                              )}&order_id=${getCurrentTimestamp.millisecondsSinceEpoch.toString()}&redirect_url=shahcomplex://shahcomplex.com/subscriptionPage',
                                               ParamType.String,
                                             ),
                                           }.withoutNulls,

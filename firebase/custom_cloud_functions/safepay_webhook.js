@@ -2,37 +2,42 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 exports.safepayWebhook = functions.https.onRequest(async (req, res) => {
   try {
-    const data = req.body.data || req.body;
+    const payload = req.body.data || req.body;
 
-    // JSON mein se exactly "tracker" nikalna jo Firebase mein save hai
-    const trackerToken = data.tracker;
+    console.log("V2 Webhook Received: ", JSON.stringify(payload));
 
-    // ❌ YAHAN SE STATE WALI CONDITION HATA DI HAI ❌
-    // Kyunke V1 API (payment:created) fire hi tab hoti hai jab payment 100% clear ho jaye.
-    // Agar webhook aya hai, iska matlab hi yeh hai ke payment PAID hai!
+    // V2 proper structure use karta hai jisme tracker aur state dono clear hotay hain
+    const trackerToken = payload.tracker;
+    const paymentState = payload.state;
+
+    // V2 ka strict security lock: Agar PAID nahi hai toh wahin reject kar do
+    if (paymentState !== "PAID") {
+      console.log(
+        "Ignored: State is not PAID. Current state is: ",
+        paymentState,
+      );
+      return res.status(200).send("Ignored: Payment not completed");
+    }
 
     if (!trackerToken) {
-      console.log("Error: Missing tracker token in payload");
+      console.log("Error: Missing tracker token.");
       return res.status(400).send("Missing tracker token");
     }
 
-    console.log("Success: Webhook received for tracker: ", trackerToken);
+    console.log("Success: Webhook validated for tracker: ", trackerToken);
 
-    // Firebase mein wo user dhoondo jiske paas yeh current_tracker hai
+    // Firebase mein user ko dhoondna
     const usersRef = admin.firestore().collection("users");
     const snapshot = await usersRef
       .where("current_tracker", "==", trackerToken)
       .get();
 
     if (snapshot.empty) {
-      console.log(
-        "Error: No matching user found in Firebase for tracker:",
-        trackerToken,
-      );
+      console.log("Error: User not found for tracker:", trackerToken);
       return res.status(404).send("User not found");
     }
 
-    // User mil gaya! Ab 30 Days Expiry update karo
+    // Expiry Update Logic
     const batch = admin.firestore().batch();
 
     snapshot.forEach((doc) => {
@@ -43,7 +48,6 @@ exports.safepayWebhook = functions.https.onRequest(async (req, res) => {
       let newExpiryDate;
       const now = new Date();
 
-      // Smart 30-Day Logic
       if (currentExpiry && currentExpiry > now) {
         newExpiryDate = new Date(
           currentExpiry.setDate(currentExpiry.getDate() + 30),
@@ -55,14 +59,13 @@ exports.safepayWebhook = functions.https.onRequest(async (req, res) => {
       batch.update(doc.ref, {
         member_Level: "Premium",
         subscription_expiry: admin.firestore.Timestamp.fromDate(newExpiryDate),
-        current_tracker: admin.firestore.FieldValue.delete(), // Token ko delete kar do
+        current_tracker: admin.firestore.FieldValue.delete(),
       });
     });
 
     await batch.commit();
-    console.log("BOOM! User upgraded successfully to Premium!");
+    console.log("BOOM! User upgraded successfully to Premium via Safepay V2!");
 
-    // Safepay ko 200 OK bhej do
     return res.status(200).send("Webhook Processed Successfully");
   } catch (error) {
     console.error("Error processing webhook:", error);
