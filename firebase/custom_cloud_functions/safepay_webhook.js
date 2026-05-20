@@ -6,13 +6,10 @@ exports.safepayWebhook = functions.https.onRequest(async (req, res) => {
 
     // JSON mein se exactly "tracker" nikalna jo Firebase mein save hai
     const trackerToken = data.tracker;
-    const paymentState = data.state;
 
-    // JSON mein state = "PAID" aa raha hai, isay verify karna zaroori hai
-    if (paymentState !== "PAID") {
-      console.log("Ignored: Payment is not PAID yet.");
-      return res.status(200).send("Ignored: Payment not completed.");
-    }
+    // ❌ YAHAN SE STATE WALI CONDITION HATA DI HAI ❌
+    // Kyunke V1 API (payment:created) fire hi tab hoti hai jab payment 100% clear ho jaye.
+    // Agar webhook aya hai, iska matlab hi yeh hai ke payment PAID hai!
 
     if (!trackerToken) {
       console.log("Error: Missing tracker token in payload");
