@@ -44,7 +44,7 @@ async function _createAuthTokenCall(context, ffVariables) {
 
   var url = `https://sandbox.api.getsafepay.com/client/passport/v1/token`;
   var headers = {
-    Authorization: `Bearer 35d5b19a7acec1b416d383d850069f1cb8726f038e05ac23e8cf0c8d81dde928`,
+    "X-SFPY-MERCHANT-SECRET": `35d5b19a7acec1b416d383d850069f1cb8726f038e05ac23e8cf0c8d81dde928`,
   };
   var params = {};
   var ffApiRequestBody = undefined;
