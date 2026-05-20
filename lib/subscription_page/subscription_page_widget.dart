@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -520,21 +521,23 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                                   ''),
                                             ),
                                           ));
+                                          _model.finalCheckoutLink =
+                                              await actions.buildCheckoutUrl(
+                                            InitSafepayPaymentCall
+                                                .sessiontracker(
+                                              (_model.apiTracker?.jsonBody ??
+                                                  ''),
+                                            )!,
+                                            CreateAuthTokenCall.tbtToken(
+                                              (_model.apiTbt?.jsonBody ?? ''),
+                                            ).toString(),
+                                          );
 
                                           context.pushNamed(
                                             BrowserWidget.routeName,
                                             queryParameters: {
                                               'url': serializeParam(
-                                                'https://sandbox.api.getsafepay.com/embedded/checkout/v1/activity?env=sandbox&beacon=${getJsonField(
-                                                  (_model.apiTracker
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.data.tracker.token''',
-                                                ).toString()}&tbt=${getJsonField(
-                                                  (_model.apiTbt?.jsonBody ??
-                                                      ''),
-                                                  r'''$.data''',
-                                                ).toString()}&source=mobile&redirect_url=shahcomplex://shahcomplex.com/subscriptionPage',
+                                                _model.finalCheckoutLink,
                                                 ParamType.String,
                                               ),
                                             }.withoutNulls,

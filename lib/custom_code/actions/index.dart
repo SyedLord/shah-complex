@@ -11,3 +11,4 @@ export 'enable_immersive_mode.dart' show enableImmersiveMode;
 export 'vip_smart_search_collection.dart' show vipSmartSearchCollection;
 export 'generate_web_stream_url.dart' show generateWebStreamUrl;
 export 'get_app_build_number.dart' show getAppBuildNumber;
+export 'build_checkout_url.dart' show buildCheckoutUrl;

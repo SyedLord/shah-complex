@@ -16,6 +16,8 @@ class SubscriptionPageModel extends FlutterFlowModel<SubscriptionPageWidget> {
   ApiCallResponse? apiTracker;
   // Stores action output result for [Backend Call - API (CreateAuthToken)] action in Button widget.
   ApiCallResponse? apiTbt;
+  // Stores action output result for [Custom Action - buildCheckoutUrl] action in Button widget.
+  String? finalCheckoutLink;
   // Model for Button.
   late Button7Model buttonModel1;
   // Model for Button.
