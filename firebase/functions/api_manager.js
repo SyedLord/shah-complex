@@ -1,13 +1,52 @@
 const axios = require("axios").default;
 const qs = require("qs");
 
+async function _initSafepayPaymentCall(context, ffVariables) {
+  if (!context.auth) {
+    return _unauthenticatedResponse;
+  }
+  var price = ffVariables["price"];
+
+  var url = `https://sandbox.api.getsafepay.com/order/payments/v3/`;
+  var headers = {
+    Authorization: `Bearer 35d5b19a7acec1b416d383d850069f1cb8726f038e05ac23e8cf0c8d81dde928`,
+    "Content-Type": `application/json`,
+  };
+  var params = {};
+  var ffApiRequestBody = `
+{
+  "merchant_api_key": "sec_cf9a9c22-e407-40bf-b8eb-95cc44d53bb6",
+  "intent": "CYBERSOURCE",
+  "mode": "payment",
+  "currency": "PKR",
+  "amount": ${price}
+}`;
+
+  return makeApiRequest({
+    method: "post",
+    url,
+    headers,
+    params,
+    body: createBody({
+      headers,
+      params,
+      body: ffApiRequestBody,
+      bodyType: "JSON",
+    }),
+    returnBody: true,
+    isStreamingApi: false,
+  });
+}
+
 /// Helper functions to route to the appropriate API Call.
 
 async function makeApiCall(context, data) {
   var callName = data["callName"] || "";
   var variables = data["variables"] || {};
 
-  const callMap = {};
+  const callMap = {
+    InitSafepayPaymentCall: _initSafepayPaymentCall,
+  };
 
   if (!(callName in callMap)) {
     return {

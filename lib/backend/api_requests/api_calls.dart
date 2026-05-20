@@ -1,4 +1,5 @@
 import 'dart:convert';
+import '../cloud_functions/cloud_functions.dart';
 
 import 'package:flutter/foundation.dart';
 
@@ -11,35 +12,18 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
 class InitSafepayPaymentCall {
   static Future<ApiCallResponse> call({
-    double? price = 500,
+    int? price,
   }) async {
-    final ffApiRequestBody = '''
-{
-  "merchant_api_key": "sec_cf9a9c22-e407-40bf-b8eb-95cc44d53bb6",
-  "intent": "CYBERSOURCE",
-  "mode": "payment",
-  "currency": "PKR",
-  "amount": ${price}
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'InitSafepayPayment',
-      apiUrl: 'https://sandbox.api.getsafepay.com/order/payments/v3/',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization':
-            'Bearer 35d5b19a7acec1b416d383d850069f1cb8726f038e05ac23e8cf0c8d81dde928',
-        'Content-Type': 'application/json',
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'InitSafepayPaymentCall',
+        'variables': {
+          'price': price,
+        },
       },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
     );
+    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static String? sessiontracker(dynamic response) =>

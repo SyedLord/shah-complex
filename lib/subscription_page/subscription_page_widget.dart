@@ -501,7 +501,7 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                     onPressed: () async {
                                       _model.apiTracker =
                                           await InitSafepayPaymentCall.call(
-                                        price: 50000.0,
+                                        price: 50000,
                                       );
 
                                       if ((_model.apiTracker?.succeeded ??
