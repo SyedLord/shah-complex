@@ -499,18 +499,21 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                 children: [
                                   FFButtonWidget(
                                     onPressed: () async {
-                                      _model.apiResult =
+                                      _model.apiTracker =
                                           await InitSafepayPaymentCall.call(
-                                        price: 500.0,
+                                        price: 50000.0,
                                       );
 
-                                      if ((_model.apiResult?.succeeded ??
+                                      if ((_model.apiTracker?.succeeded ??
                                           true)) {
+                                        _model.apiTbt =
+                                            await CreateAuthTokenCall.call();
+
                                         await currentUserReference!
                                             .update(createUsersRecordData(
                                           currentTracker: InitSafepayPaymentCall
-                                              .trackertoken(
-                                            (_model.apiResult?.jsonBody ?? ''),
+                                              .sessiontracker(
+                                            (_model.apiTracker?.jsonBody ?? ''),
                                           ),
                                         ));
 
@@ -518,10 +521,12 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                           BrowserWidget.routeName,
                                           queryParameters: {
                                             'url': serializeParam(
-                                              'https://sandbox.api.getsafepay.com/checkout/pay?env=sandbox&source=custom&tracker=${InitSafepayPaymentCall.trackertoken(
-                                                (_model.apiResult?.jsonBody ??
+                                              'https://sandbox.api.getsafepay.com/embedded/checkout/v1/activity?env=sandbox&beacon=${InitSafepayPaymentCall.sessiontracker(
+                                                (_model.apiTracker?.jsonBody ??
                                                     ''),
-                                              )}&order_id=${getCurrentTimestamp.millisecondsSinceEpoch.toString()}&client=sec_cf9a9c22-e407-40bf-b8eb-95cc44d53bb6&redirect_url=shahcomplex://shahcomplex.com/subscriptionPage',
+                                              )}&tbt=${CreateAuthTokenCall.tbtToken(
+                                                (_model.apiTbt?.jsonBody ?? ''),
+                                              ).toString()}&source=mobile&redirect_url=shahcomplex://shahcomplex.com/subscriptionPage',
                                               ParamType.String,
                                             ),
                                           }.withoutNulls,

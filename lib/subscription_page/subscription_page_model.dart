@@ -13,7 +13,9 @@ class SubscriptionPageModel extends FlutterFlowModel<SubscriptionPageWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (InitSafepayPayment)] action in Button widget.
-  ApiCallResponse? apiResult;
+  ApiCallResponse? apiTracker;
+  // Stores action output result for [Backend Call - API (CreateAuthToken)] action in Button widget.
+  ApiCallResponse? apiTbt;
   // Model for Button.
   late Button7Model buttonModel1;
   // Model for Button.

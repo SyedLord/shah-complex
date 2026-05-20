@@ -15,16 +15,19 @@ class InitSafepayPaymentCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "client": "sec_cf9a9c22-e407-40bf-b8eb-95cc44d53bb6",
-  "amount": ${price},
+  "merchant_api_key": "sec_cf9a9c22-e407-40bf-b8eb-95cc44d53bb6",
+  "intent": "CYBERSOURCE",
+  "mode": "payment",
   "currency": "PKR",
-  "environment": "sandbox"
+  "amount": ${price}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'InitSafepayPayment',
-      apiUrl: 'https://sandbox.api.getsafepay.com/order/v1/init',
+      apiUrl: 'https://sandbox.api.getsafepay.com/order/payments/v3/',
       callType: ApiCallType.POST,
       headers: {
+        'Authorization':
+            'Bearer 35d5b19a7acec1b416d383d850069f1cb8726f038e05ac23e8cf0c8d81dde928',
         'Content-Type': 'application/json',
       },
       params: {},
@@ -39,11 +42,38 @@ class InitSafepayPaymentCall {
     );
   }
 
-  static String? trackertoken(dynamic response) =>
+  static String? sessiontracker(dynamic response) =>
       castToType<String>(getJsonField(
         response,
-        r'''$.data.token''',
+        r'''$.data.tracker.token''',
       ));
+}
+
+class CreateAuthTokenCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'CreateAuthToken',
+      apiUrl: 'https://sandbox.api.getsafepay.com/client/passport/v1/token',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Bearer 35d5b19a7acec1b416d383d850069f1cb8726f038e05ac23e8cf0c8d81dde928',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static dynamic tbtToken(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
 }
 
 class ApiPagingParams {
