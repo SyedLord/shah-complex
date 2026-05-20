@@ -2,32 +2,40 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 exports.safepayWebhook = functions.https.onRequest(async (req, res) => {
   try {
-    // Safepay webhook ka data fetch karna
     const data = req.body.data || req.body;
+
+    // JSON mein se exactly "tracker" nikalna jo Firebase mein save hai
     const trackerToken = data.tracker;
     const paymentState = data.state;
 
-    // Agar payment "PAID" nahi hai toh kuch na karo
+    // JSON mein state = "PAID" aa raha hai, isay verify karna zaroori hai
     if (paymentState !== "PAID") {
-      return res.status(200).send("Ignored: Payment not completed yet.");
+      console.log("Ignored: Payment is not PAID yet.");
+      return res.status(200).send("Ignored: Payment not completed.");
     }
 
     if (!trackerToken) {
+      console.log("Error: Missing tracker token in payload");
       return res.status(400).send("Missing tracker token");
     }
 
-    // Firebase mein wo user dhoondo jiske paas yeh tracker_token hai
+    console.log("Success: Webhook received for tracker: ", trackerToken);
+
+    // Firebase mein wo user dhoondo jiske paas yeh current_tracker hai
     const usersRef = admin.firestore().collection("users");
     const snapshot = await usersRef
       .where("current_tracker", "==", trackerToken)
       .get();
 
     if (snapshot.empty) {
-      console.log("No matching user found for tracker:", trackerToken);
+      console.log(
+        "Error: No matching user found in Firebase for tracker:",
+        trackerToken,
+      );
       return res.status(404).send("User not found");
     }
 
-    // Snapshot mein jitne docs milen (waise 1 hi hoga), sabko update karo
+    // User mil gaya! Ab 30 Days Expiry update karo
     const batch = admin.firestore().batch();
 
     snapshot.forEach((doc) => {
@@ -40,24 +48,22 @@ exports.safepayWebhook = functions.https.onRequest(async (req, res) => {
 
       // Smart 30-Day Logic
       if (currentExpiry && currentExpiry > now) {
-        // Agar user pehle se Premium hai aur time bacha hai, toh purani date mein 30 din add karo
         newExpiryDate = new Date(
           currentExpiry.setDate(currentExpiry.getDate() + 30),
         );
       } else {
-        // Agar naya user hai ya purana package expire ho chuka hai, toh aaj se 30 din add karo
         newExpiryDate = new Date(now.setDate(now.getDate() + 30));
       }
 
       batch.update(doc.ref, {
-        member_Level: "Premium", // Aapke database ke mutabiq
+        member_Level: "Premium",
         subscription_expiry: admin.firestore.Timestamp.fromDate(newExpiryDate),
-        current_tracker: admin.firestore.FieldValue.delete(), // Token delete kar do taake reuse na ho
+        current_tracker: admin.firestore.FieldValue.delete(), // Token ko delete kar do
       });
     });
 
     await batch.commit();
-    console.log("User upgraded successfully to Premium!");
+    console.log("BOOM! User upgraded successfully to Premium!");
 
     // Safepay ko 200 OK bhej do
     return res.status(200).send("Webhook Processed Successfully");
