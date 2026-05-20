@@ -172,11 +172,6 @@ final parametersBuilderMap =
         },
       ),
   'PasswordReset': ParameterData.none(),
-  'PaymentSuccess': (data) async => ParameterData(
-        allParams: {
-          'nextBillingDate': getParameter<DateTime>(data, 'nextBillingDate'),
-        },
-      ),
   'SubscriptionPage': ParameterData.none(),
   'Browser': (data) async => ParameterData(
         allParams: {

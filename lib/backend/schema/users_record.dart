@@ -60,6 +60,11 @@ class UsersRecord extends FirestoreRecord {
   DateTime? get subscriptionExpiry => _subscriptionExpiry;
   bool hasSubscriptionExpiry() => _subscriptionExpiry != null;
 
+  // "current_tracker" field.
+  String? _currentTracker;
+  String get currentTracker => _currentTracker ?? '';
+  bool hasCurrentTracker() => _currentTracker != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -70,6 +75,7 @@ class UsersRecord extends FirestoreRecord {
     _isAdmin = snapshotData['is_Admin'] as bool?;
     _memberLevel = snapshotData['member_Level'] as String?;
     _subscriptionExpiry = snapshotData['subscription_expiry'] as DateTime?;
+    _currentTracker = snapshotData['current_tracker'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -115,6 +121,7 @@ Map<String, dynamic> createUsersRecordData({
   bool? isAdmin,
   String? memberLevel,
   DateTime? subscriptionExpiry,
+  String? currentTracker,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -127,6 +134,7 @@ Map<String, dynamic> createUsersRecordData({
       'is_Admin': isAdmin,
       'member_Level': memberLevel,
       'subscription_expiry': subscriptionExpiry,
+      'current_tracker': currentTracker,
     }.withoutNulls,
   );
 
@@ -146,7 +154,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.isAdmin == e2?.isAdmin &&
         e1?.memberLevel == e2?.memberLevel &&
-        e1?.subscriptionExpiry == e2?.subscriptionExpiry;
+        e1?.subscriptionExpiry == e2?.subscriptionExpiry &&
+        e1?.currentTracker == e2?.currentTracker;
   }
 
   @override
@@ -159,7 +168,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.phoneNumber,
         e?.isAdmin,
         e?.memberLevel,
-        e?.subscriptionExpiry
+        e?.subscriptionExpiry,
+        e?.currentTracker
       ]);
 
   @override

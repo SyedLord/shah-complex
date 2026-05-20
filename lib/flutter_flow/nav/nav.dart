@@ -263,17 +263,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => PasswordResetWidget(),
         ),
         FFRoute(
-          name: PaymentSuccessWidget.routeName,
-          path: PaymentSuccessWidget.routePath,
-          requireAuth: true,
-          builder: (context, params) => PaymentSuccessWidget(
-            nextBillingDate: params.getParam(
-              'nextBillingDate',
-              ParamType.DateTime,
-            ),
-          ),
-        ),
-        FFRoute(
           name: SubscriptionPageWidget.routeName,
           path: SubscriptionPageWidget.routePath,
           builder: (context, params) => SubscriptionPageWidget(),
