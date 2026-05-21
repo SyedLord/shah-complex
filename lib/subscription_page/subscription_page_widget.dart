@@ -860,7 +860,7 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Payment Receipt',
+                                            'Subscription Details',
                                             style: FlutterFlowTheme.of(context)
                                                 .titleMedium
                                                 .override(
@@ -1357,24 +1357,36 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                   ),
-                                  FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
-                                    },
-                                    text: 'Manage Subscription',
-                                    options: FFButtonOptions(
-                                      height: 50.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 0.0, 16.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            font: GoogleFonts.poppins(
+                                  if (_model.isVisible)
+                                    FFButtonWidget(
+                                      onPressed: () {
+                                        print('Button pressed ...');
+                                      },
+                                      text: 'Manage Subscription',
+                                      options: FFButtonOptions(
+                                        height: 50.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 0.0, 16.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              font: GoogleFonts.poppins(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontStyle,
+                                              ),
+                                              color: Colors.white,
+                                              letterSpacing: 0.0,
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
@@ -1384,21 +1396,11 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                                       .titleSmall
                                                       .fontStyle,
                                             ),
-                                            color: Colors.white,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontStyle,
-                                          ),
-                                      elevation: 0.0,
-                                      borderRadius: BorderRadius.circular(8.0),
+                                        elevation: 0.0,
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
                                     ),
-                                  ),
                                 ].divide(SizedBox(height: 16.0)),
                               ),
                             ),

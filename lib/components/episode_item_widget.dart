@@ -1,12 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/subscription_expired_widget.dart';
 import '/components/update_app_popup_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -148,22 +148,14 @@ class _EpisodeItemWidgetState extends State<EpisodeItemWidget> {
                                       widget.episodeDoc?.parentReference.id,
                                     );
                                   } else {
-                                    await showDialog(
-                                      barrierDismissible: false,
-                                      context: context,
-                                      builder: (dialogContext) {
-                                        return Dialog(
-                                          elevation: 0,
-                                          insetPadding: EdgeInsets.zero,
-                                          backgroundColor: Colors.transparent,
-                                          alignment: AlignmentDirectional(
-                                                  0.0, 0.0)
-                                              .resolve(
-                                                  Directionality.of(context)),
-                                          child: WebViewAware(
-                                            child: SubscriptionExpiredWidget(),
-                                          ),
-                                        );
+                                    context.pushNamed(
+                                      SubscriptionPageWidget.routeName,
+                                      extra: <String, dynamic>{
+                                        '__transition_info__': TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                        ),
                                       },
                                     );
                                   }

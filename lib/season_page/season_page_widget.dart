@@ -5,7 +5,7 @@ import '/components/episode_item_widget.dart';
 import '/components/i_m_d_b_ratings_widget.dart';
 import '/components/movie_card_widget.dart';
 import '/components/profile_icon_dropdown_widget.dart';
-import '/components/subscription_expired_widget.dart';
+import '/components/update_app_popup_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -52,24 +52,37 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (currentUserDocument!.subscriptionExpiry! < getCurrentTimestamp) {
-        if (valueOrDefault<bool>(currentUserDocument?.isAdmin, false) != true) {
-          await showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (dialogContext) {
-              return Dialog(
-                elevation: 0,
-                insetPadding: EdgeInsets.zero,
-                backgroundColor: Colors.transparent,
-                alignment: AlignmentDirectional(0.0, 0.0)
-                    .resolve(Directionality.of(context)),
-                child: WebViewAware(
-                  child: SubscriptionExpiredWidget(),
+      if (FFAppState().appUpdate) {
+        await showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (dialogContext) {
+            return Dialog(
+              elevation: 0,
+              insetPadding: EdgeInsets.zero,
+              backgroundColor: Colors.transparent,
+              alignment: AlignmentDirectional(0.0, 0.0)
+                  .resolve(Directionality.of(context)),
+              child: WebViewAware(
+                child: UpdateAppPopupWidget(),
+              ),
+            );
+          },
+        );
+      } else {
+        if (currentUserDocument!.subscriptionExpiry! < getCurrentTimestamp) {
+          if (valueOrDefault<bool>(currentUserDocument?.isAdmin, false) !=
+              true) {
+            context.pushNamed(
+              SubscriptionPageWidget.routeName,
+              extra: <String, dynamic>{
+                '__transition_info__': TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
                 ),
-              );
-            },
-          );
+              },
+            );
+          }
         }
       }
     });
