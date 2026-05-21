@@ -73,6 +73,9 @@ class _SeasonPageWidgetState extends State<SeasonPageWidget> {
         if (currentUserDocument!.subscriptionExpiry! < getCurrentTimestamp) {
           if (valueOrDefault<bool>(currentUserDocument?.isAdmin, false) !=
               true) {
+            if (Navigator.of(context).canPop()) {
+              context.pop();
+            }
             context.pushNamed(
               SubscriptionPageWidget.routeName,
               extra: <String, dynamic>{

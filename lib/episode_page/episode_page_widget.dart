@@ -3,7 +3,6 @@ import '/backend/backend.dart';
 import '/components/description_widget_widget.dart';
 import '/components/episode_item_widget.dart';
 import '/components/i_m_d_b_ratings_widget.dart';
-import '/components/subscription_expired_widget.dart';
 import '/components/update_app_popup_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -303,6 +302,10 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                     );
                                                   }
                                                 } else {
+                                                  if (Navigator.of(context)
+                                                      .canPop()) {
+                                                    context.pop();
+                                                  }
                                                   context.pushNamed(
                                                     SubscriptionPageWidget
                                                         .routeName,
@@ -674,29 +677,13 @@ class _EpisodePageWidgetState extends State<EpisodePageWidget> {
                                                 );
                                               }
                                             } else {
-                                              await showDialog(
-                                                barrierDismissible: false,
-                                                context: context,
-                                                builder: (dialogContext) {
-                                                  return Dialog(
-                                                    elevation: 0,
-                                                    insetPadding:
-                                                        EdgeInsets.zero,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                                0.0, 0.0)
-                                                            .resolve(
-                                                                Directionality.of(
-                                                                    context)),
-                                                    child: WebViewAware(
-                                                      child:
-                                                          SubscriptionExpiredWidget(),
-                                                    ),
-                                                  );
-                                                },
-                                              );
+                                              if (Navigator.of(context)
+                                                  .canPop()) {
+                                                context.pop();
+                                              }
+                                              context.pushNamed(
+                                                  SubscriptionPageWidget
+                                                      .routeName);
                                             }
                                           }
                                         }
