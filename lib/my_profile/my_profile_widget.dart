@@ -234,6 +234,81 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                               context.mounted);
                                                         },
                                                       ),
+                                                      if (_model.isHidden)
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  1.0, 1.0),
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.0),
+                                                              shape: BoxShape
+                                                                  .rectangle,
+                                                              border:
+                                                                  Border.all(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryBackground,
+                                                                width: 3.0,
+                                                              ),
+                                                            ),
+                                                            child: InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                context
+                                                                    .pushNamed(
+                                                                  CreateProfileWidget
+                                                                      .routeName,
+                                                                  queryParameters:
+                                                                      {
+                                                                    'profileDoc':
+                                                                        serializeParam(
+                                                                      myProfileProfilesRecord,
+                                                                      ParamType
+                                                                          .Document,
+                                                                    ),
+                                                                  }.withoutNulls,
+                                                                  extra: <String,
+                                                                      dynamic>{
+                                                                    'profileDoc':
+                                                                        myProfileProfilesRecord,
+                                                                    '__transition_info__':
+                                                                        TransitionInfo(
+                                                                      hasTransition:
+                                                                          true,
+                                                                      transitionType:
+                                                                          PageTransitionType
+                                                                              .fade,
+                                                                    ),
+                                                                  },
+                                                                );
+                                                              },
+                                                              child: Icon(
+                                                                Icons
+                                                                    .edit_rounded,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .onPrimary,
+                                                                size: 24.0,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
                                                       Align(
                                                         alignment:
                                                             AlignmentDirectional(
@@ -241,9 +316,6 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                         child: Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
@@ -269,21 +341,10 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                                     .transparent,
                                                             onTap: () async {
                                                               context.pushNamed(
-                                                                CreateProfileWidget
+                                                                SettingsWidget
                                                                     .routeName,
-                                                                queryParameters:
-                                                                    {
-                                                                  'profileDoc':
-                                                                      serializeParam(
-                                                                    myProfileProfilesRecord,
-                                                                    ParamType
-                                                                        .Document,
-                                                                  ),
-                                                                }.withoutNulls,
                                                                 extra: <String,
                                                                     dynamic>{
-                                                                  'profileDoc':
-                                                                      myProfileProfilesRecord,
                                                                   '__transition_info__':
                                                                       TransitionInfo(
                                                                     hasTransition:
@@ -296,8 +357,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                               );
                                                             },
                                                             child: Icon(
-                                                              Icons
-                                                                  .edit_rounded,
+                                                              Icons.settings,
                                                               color: FlutterFlowTheme
                                                                       .of(context)
                                                                   .onPrimary,
