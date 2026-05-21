@@ -20,3 +20,4 @@ export '/password_reset/password_reset_widget.dart' show PasswordResetWidget;
 export '/subscription_page/subscription_page_widget.dart'
     show SubscriptionPageWidget;
 export '/browser/browser_widget.dart' show BrowserWidget;
+export '/settings/settings_widget.dart' show SettingsWidget;

@@ -20,13 +20,13 @@ class ButtonWidget extends StatefulWidget {
     bool? fullWidth,
     bool? loading,
     bool? disabled,
-  })  : this.content = content ?? 'Update Now',
+  })  : this.content = content ?? 'Switch',
         this.iconPresent = iconPresent ?? false,
         this.iconEndPresent = iconEndPresent ?? false,
         this.color = color ?? const Color(0x00000000),
-        this.variant = variant ?? 'primary',
-        this.size = size ?? 'large',
-        this.fullWidth = fullWidth ?? true,
+        this.variant = variant ?? 'outline',
+        this.size = size ?? 'small',
+        this.fullWidth = fullWidth ?? false,
         this.loading = loading ?? false,
         this.disabled = disabled ?? false;
 
@@ -215,7 +215,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                     Text(
                       valueOrDefault<String>(
                         widget.content,
-                        'Update Now',
+                        'Switch',
                       ),
                       maxLines: 1,
                       style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -229,15 +229,15 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                             ),
                             color: () {
                               if (widget.variant == 'secondary') {
-                                return Colors.white;
+                                return FlutterFlowTheme.of(context).onSecondary;
                               } else if (widget.variant == 'outline') {
                                 return FlutterFlowTheme.of(context).primaryText;
                               } else if (widget.variant == 'ghost') {
                                 return FlutterFlowTheme.of(context).primary;
                               } else if (widget.variant == 'destructive') {
-                                return Colors.white;
+                                return FlutterFlowTheme.of(context).onError;
                               } else {
-                                return Colors.white;
+                                return FlutterFlowTheme.of(context).onPrimary;
                               }
                             }(),
                             letterSpacing: 0.0,
@@ -269,15 +269,15 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                 animateFromLastPercent: true,
                 progressColor: () {
                   if (widget.variant == 'secondary') {
-                    return Colors.white;
+                    return FlutterFlowTheme.of(context).onSecondary;
                   } else if (widget.variant == 'outline') {
                     return FlutterFlowTheme.of(context).primaryText;
                   } else if (widget.variant == 'ghost') {
                     return FlutterFlowTheme.of(context).primary;
                   } else if (widget.variant == 'destructive') {
-                    return Colors.white;
+                    return FlutterFlowTheme.of(context).onError;
                   } else {
-                    return Colors.white;
+                    return FlutterFlowTheme.of(context).onPrimary;
                   }
                 }(),
                 backgroundColor: FlutterFlowTheme.of(context).alternate,

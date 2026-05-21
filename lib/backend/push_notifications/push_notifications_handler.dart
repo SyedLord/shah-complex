@@ -178,6 +178,7 @@ final parametersBuilderMap =
           'url': getParameter<String>(data, 'url'),
         },
       ),
+  'Settings': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

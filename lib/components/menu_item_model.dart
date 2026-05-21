@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'button6_widget.dart' show Button6Widget;
+import 'menu_item_widget.dart' show MenuItemWidget;
 import 'package:flutter/material.dart';
 
-class Button6Model extends FlutterFlowModel<Button6Widget> {
+class MenuItemModel extends FlutterFlowModel<MenuItemWidget> {
   @override
   void initState(BuildContext context) {}
 

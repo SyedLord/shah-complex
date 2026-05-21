@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/components/button7_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'subscription_page_widget.dart' show SubscriptionPageWidget;
@@ -18,20 +17,10 @@ class SubscriptionPageModel extends FlutterFlowModel<SubscriptionPageWidget> {
   ApiCallResponse? apiTbt;
   // Stores action output result for [Custom Action - buildCheckoutUrl] action in Button widget.
   String? finalCheckoutLink;
-  // Model for Button.
-  late Button7Model buttonModel1;
-  // Model for Button.
-  late Button7Model buttonModel2;
 
   @override
-  void initState(BuildContext context) {
-    buttonModel1 = createModel(context, () => Button7Model());
-    buttonModel2 = createModel(context, () => Button7Model());
-  }
+  void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    buttonModel1.dispose();
-    buttonModel2.dispose();
-  }
+  void dispose() {}
 }
