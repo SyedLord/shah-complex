@@ -135,8 +135,8 @@ class _CodeExpiredPopUpWidgetState extends State<CodeExpiredPopUpWidget> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     FFButtonWidget(
-                      onPressed: () {
-                        print('RetryBtn pressed ...');
+                      onPressed: () async {
+                        Navigator.pop(context);
                       },
                       text: 'Retry',
                       options: FFButtonOptions(
