@@ -21,3 +21,4 @@ export '/subscription_page/subscription_page_widget.dart'
     show SubscriptionPageWidget;
 export '/browser/browser_widget.dart' show BrowserWidget;
 export '/settings/settings_widget.dart' show SettingsWidget;
+export '/component/component_widget.dart' show ComponentWidget;

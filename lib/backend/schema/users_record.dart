@@ -65,6 +65,11 @@ class UsersRecord extends FirestoreRecord {
   String get currentTracker => _currentTracker ?? '';
   bool hasCurrentTracker() => _currentTracker != null;
 
+  // "used_promo_codes" field.
+  List<String>? _usedPromoCodes;
+  List<String> get usedPromoCodes => _usedPromoCodes ?? const [];
+  bool hasUsedPromoCodes() => _usedPromoCodes != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -76,6 +81,7 @@ class UsersRecord extends FirestoreRecord {
     _memberLevel = snapshotData['member_Level'] as String?;
     _subscriptionExpiry = snapshotData['subscription_expiry'] as DateTime?;
     _currentTracker = snapshotData['current_tracker'] as String?;
+    _usedPromoCodes = getDataList(snapshotData['used_promo_codes']);
   }
 
   static CollectionReference get collection =>
@@ -146,6 +152,7 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
 
   @override
   bool equals(UsersRecord? e1, UsersRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.email == e2?.email &&
         e1?.displayName == e2?.displayName &&
         e1?.photoUrl == e2?.photoUrl &&
@@ -155,7 +162,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.isAdmin == e2?.isAdmin &&
         e1?.memberLevel == e2?.memberLevel &&
         e1?.subscriptionExpiry == e2?.subscriptionExpiry &&
-        e1?.currentTracker == e2?.currentTracker;
+        e1?.currentTracker == e2?.currentTracker &&
+        listEquality.equals(e1?.usedPromoCodes, e2?.usedPromoCodes);
   }
 
   @override
@@ -169,7 +177,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.isAdmin,
         e?.memberLevel,
         e?.subscriptionExpiry,
-        e?.currentTracker
+        e?.currentTracker,
+        e?.usedPromoCodes
       ]);
 
   @override

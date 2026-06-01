@@ -179,6 +179,7 @@ final parametersBuilderMap =
         },
       ),
   'Settings': ParameterData.none(),
+  'component': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

@@ -305,8 +305,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                               ),
                                             },
                                           );
-
-                                          Navigator.pop(context);
                                         },
                                         text: 'Switch',
                                         options: FFButtonOptions(

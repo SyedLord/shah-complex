@@ -20,6 +20,7 @@ import 'schema/app_config_record.dart';
 import 'schema/news_feed_record.dart';
 import 'schema/contact_admin_record.dart';
 import 'schema/movie_collections_record.dart';
+import 'schema/redeem_code_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -43,6 +44,7 @@ export 'schema/app_config_record.dart';
 export 'schema/news_feed_record.dart';
 export 'schema/contact_admin_record.dart';
 export 'schema/movie_collections_record.dart';
+export 'schema/redeem_code_record.dart';
 
 /// Functions to query MoviesRecords (as a Stream and as a Future).
 Future<int> queryMoviesRecordCount({
@@ -603,6 +605,43 @@ Future<List<MovieCollectionsRecord>> queryMovieCollectionsRecordOnce({
     queryCollectionOnce(
       MovieCollectionsRecord.collection,
       MovieCollectionsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query RedeemCodeRecords (as a Stream and as a Future).
+Future<int> queryRedeemCodeRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      RedeemCodeRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<RedeemCodeRecord>> queryRedeemCodeRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      RedeemCodeRecord.collection,
+      RedeemCodeRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<RedeemCodeRecord>> queryRedeemCodeRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      RedeemCodeRecord.collection,
+      RedeemCodeRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

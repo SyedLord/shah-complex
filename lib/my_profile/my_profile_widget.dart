@@ -234,7 +234,7 @@ class _MyProfileWidgetState extends State<MyProfileWidget> {
                                                               context.mounted);
                                                         },
                                                       ),
-                                                      if (_model.isHidden)
+                                                      if (!_model.isHidden)
                                                         Align(
                                                           alignment:
                                                               AlignmentDirectional(

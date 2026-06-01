@@ -282,6 +282,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: SettingsWidget.routeName,
           path: SettingsWidget.routePath,
           builder: (context, params) => SettingsWidget(),
+        ),
+        FFRoute(
+          name: ComponentWidget.routeName,
+          path: ComponentWidget.routePath,
+          builder: (context, params) => ComponentWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
