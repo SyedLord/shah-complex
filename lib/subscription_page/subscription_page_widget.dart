@@ -1535,58 +1535,72 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                                   ),
                                                 ],
                                               ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'Amount Paid',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
+                                              if (_model.isVisible)
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      'Amount Paid',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font:
+                                                                    GoogleFonts
+                                                                        .inter(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium
                                                                     .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium
                                                                     .fontStyle,
-                                                          ),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                          lineHeight: 1.4,
-                                                        ),
-                                                  ),
-                                                  Text(
-                                                    'Rs 500/mo',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
+                                                                lineHeight: 1.4,
+                                                              ),
+                                                    ),
+                                                    Text(
+                                                      'Rs 500/mo',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            font: GoogleFonts
+                                                                .inter(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                            ),
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .success,
+                                                            letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             fontStyle:
@@ -1594,23 +1608,11 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                                                         context)
                                                                     .bodyMedium
                                                                     .fontStyle,
+                                                            lineHeight: 1.4,
                                                           ),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .success,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                          lineHeight: 1.4,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
+                                                    ),
+                                                  ],
+                                                ),
                                               Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
